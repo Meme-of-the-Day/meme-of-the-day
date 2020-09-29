@@ -55,13 +55,13 @@ When you start dApp with last command "npm run start", dApp will load and show t
 ```shell
 npm run migrate
 ```
-After successful migration of smart contract to blockchain, you can interact with it using Truffle console. Use truffle from the node_modules bin directory (.\node_modules\.bin\truffle)
+After successful migration of smart contract to blockchain, you can interact with it using Truffle console.
 <br><br>
 
 **Some commands you can use with Truffle console**
 After smart contract deployment to blockchain with migration, you can use Truffle console to interact with smart contracts using CLI. To start Truffle console from command shell type:
 ```shell
-.\node_modules\.bin\truffle console
+truffle console
 ```
 After Truffle console is running you can get contract from blockchain with command:
 ```javascript
