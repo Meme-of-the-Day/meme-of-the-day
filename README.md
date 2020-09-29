@@ -22,7 +22,7 @@ We are hopeful that Meme of the Day and the future voting mechanism would offer 
 > Currently it is possible to use Metamask for testing the dApp.
 
 
-## Installation procedure
+## Installation procedure (local blockchain - ex: ganache-cli)
 ```shell
 git clone https://github.com/Meme-of-the-Day/meme-of-the-day-filecoin
 cd meme-of-the-day-filecoin
