@@ -93,7 +93,7 @@ meme
 
 **To run tests defined in folder /test run from shell command**  
 ```javascript
-.\node_modules\.bin\truffle test
+truffle test
 ```
 Tests will check if contract deployment on blockchain was done correctly, and it will check if get and set methods of smart contract are working correctly. After running the command, you will see output similar to:
 ```shell
