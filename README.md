@@ -44,7 +44,7 @@ https://docs.matic.network/docs/develop/truffle<br>
 git clone https://github.com/Meme-of-the-Day/meme-of-the-day-filecoin
 cd meme-of-the-day-filecoin
 npm install
-.\node_modules\.bin\truffle migrate --reset --network matic
+truffle migrate --reset --network matic
 npm run start
 ```
 The truffle migrate command would require the secret file to be updated with the mnemonic which is the secret to account used to deploy contract on Matic chain.
