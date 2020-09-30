@@ -1,4 +1,3 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 # Meme of the Day dApp -- Filecoin & Matic
 
 Discover, upload, vote, comment, and buy your favorite memes in different categories. Discover top memes and share profits from the sales of upvoted memes with this dApp.
@@ -10,7 +9,7 @@ Beyond this, our vision is for people to upvote, comment, favorite, and buy meme
 We are hopeful that Meme of the Day and the future voting mechanism would offer a unique, gamified social experience for users and encourage more interest in Filecoin, Matic, and Web3 technology.
 
 **Dependencies are:**
-- Node.js 10.1x.x - 12.18.2
+- Node.js at least version 10.1x.x
 > Download from https://nodejs.org and follow installation instructions
 - Truffle
 - Filecoin
