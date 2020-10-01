@@ -4,18 +4,26 @@ import styled from 'styled-components';
 import { getColorWithAlpha } from '../../utils/colors';
 
 const Main = styled.div`
-  height: 100%;
-  width: 100%;
-  
-  &.open {
-    height: 100vh;
-    background-color: ${({ theme }) => getColorWithAlpha(theme.colors.black, 0.6)};
-  }
+  height: 25px;
+  width: 30px;
+`;
+
+const MenuWrapper = styled.div`
+&.open {
+  width: 100vw;
+  height: 100vh;
+  background-color: ${({ theme }) => getColorWithAlpha(theme.colors.black, 0.6)};
+  position: fixed;
+  top: 0;
+}
 `;
 
 const Menu = styled.div`
-  width: 80%;
-  height: 100%;
+  width: 80vw;
+  height: 100vh;
+  position: fixed;
+  top: 0;
+  left: 0;
   background-color: ${({ theme }) => theme.colors.white};
   transform: translateX(-100vw);
   transition: transform 0.5s ease-in;
@@ -26,12 +34,11 @@ const Menu = styled.div`
 `;
 
 const HamburgerIcon = styled.div`
-  height: 40px;
+  height: 30px;
   width: 30px;
   position: absolute;
   z-index: 1;
-  right: calc(100% - 30px);
-  top: 10px;
+  right: calc(100% - 40px);
   transition: right 0.3s ease-in;
   transition-delay: 0.25s;
 
@@ -98,8 +105,11 @@ const HamburgerMenu: React.FC<{}> = () => {
         <span></span>
         <span></span>
       </HamburgerIcon>
-      <Menu className={open ? 'open' : ''}>
-      </Menu>
+      <MenuWrapper className={open ? 'open' : ''}>
+
+        <Menu className={open ? 'open' : ''}>
+        </Menu>
+      </MenuWrapper>
     </Main>
   )
 }
