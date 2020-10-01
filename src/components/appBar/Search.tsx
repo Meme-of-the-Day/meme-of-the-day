@@ -15,7 +15,7 @@ const SearchIcon = styled.img`
   width: 25px;
 
   &.mobile-only {
-    @media screen and (min-width: 1000px) {
+    @media screen and (min-width: 1280px) {
       display: none;
     }
   }
@@ -52,7 +52,7 @@ const SearchForm = styled.form`
     padding: 10px;
   }
 
-  @media screen and (min-width: 1000px) {
+  @media screen and (min-width: 1280px) {
     width: 300px;
     padding: 0 8px;
     border-radius: 20px;
@@ -73,7 +73,7 @@ const Close = styled.div`
   font-size: 18px;
   color: ${({ theme }) => theme.colors.gray};
 
-  @media screen and (min-width: 1000px) {
+  @media screen and (min-width: 1280px) {
     display: none;
   }
 `;
