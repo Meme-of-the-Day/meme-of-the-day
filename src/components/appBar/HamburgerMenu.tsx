@@ -51,7 +51,7 @@ const HamburgerIcon = styled.div`
     position: absolute;
     display: block;
     border-radius: 8px;
-    background-color: ${({ theme }) => theme.colors.black};
+    background-color: ${({ theme }) => theme.colors.blue100};
     height: 4px;
     width: 100%;
     transition: .25s ease-in-out;
@@ -94,11 +94,11 @@ const HamburgerIcon = styled.div`
 `;
 
 
-const HamburgerMenu: React.FC<{}> = () => {
+const HamburgerMenu: React.FC<{ className?: string }> = ({ className }) => {
   const [open, setOpen] = useState(false);
 
   return (
-    <Main className={open ? 'open' : ''}>
+    <Main className={`${className} ${open ? 'open' : ''}`}>
       <HamburgerIcon id="nav-icon3" className={open ? 'open' : ''} onClick={() => setOpen(open => !open)}>
         <span></span>
         <span></span>
