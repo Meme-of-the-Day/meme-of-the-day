@@ -1,8 +1,7 @@
 require('babel-register');
 require('babel-polyfill');
 const HDWalletProvider = require('truffle-hdwallet-provider');
-const fs = require('fs');
-const mnemonic = fs.readFileSync(".secret").toString().trim();
+const mnemonic = process.env.MNEMONIC;
 var networkId = process.env.npm_package_config_ganache_networkId;
 var gasPrice = process.env.npm_package_config_ganache_gasPrice;
 var gasLimit = process.env.npm_package_config_ganache_gasLimit;
