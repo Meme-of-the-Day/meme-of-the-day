@@ -1,9 +1,9 @@
 import React from 'react';
 import styled from 'styled-components';
-import { NavLink } from 'react-router-dom';
+import { Link, NavLink } from 'react-router-dom';
 
 import HamburgerMenu from './HamburgerMenu';
-import search from '../../assets/search.svg';
+import Search from './Search';
 import icon from '../../assets/icon.svg';
 
 const Main = styled.div`
@@ -16,12 +16,11 @@ const Main = styled.div`
   padding: 8px;
 `;
 
-const Icon = styled.div`
+const Icon = styled(Link)`
   display: none;
   background: ${({ theme }) => `linear-gradient(to right, ${theme.colors.blue}, ${theme.colors.indigo})`};
   padding: 8px;
   border-radius: 4px;
-  display: flex;
   align-items: center;
   justify-content: center;
 
@@ -43,12 +42,8 @@ const CustomHamburgerMenu = styled(HamburgerMenu)`
 const Title = styled.span`
   font-size: 28px;
   margin: 0 16px;
-  width: 74%;
+  width: 71%;
   color: ${({ theme }) => theme.colors.blue100};
-`;
-
-const SearchIcon = styled.img`
-  width: 25px;
 `;
 
 const Nav = styled.nav`
@@ -82,11 +77,11 @@ const StyledNavLink = styled(NavLink)`
 const AppBar: React.FC<{}> = () => {
   return <Main>
     <CustomHamburgerMenu />
-    <Icon>
+    <Icon to="/">
       <img src={icon} alt="MoTD" />
     </Icon>
     <Title>Meme of the Day</Title>
-    <SearchIcon src={search} alt="Search" />
+    <Search />
     <Nav>
       <StyledNavLink exact to='/'>Rankings</StyledNavLink>
       <StyledNavLink to='/activity'>Activity</StyledNavLink>
