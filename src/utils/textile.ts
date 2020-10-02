@@ -63,3 +63,24 @@ import { Buckets, KeyInfo, PrivateKey, WithKeyInfoOptions } from '@textile/hub'
 
       return links;
   }
+
+  export async function getIndexAtKey(buckets: Buckets, key: string) {
+    if (!buckets || !key) {
+        throw new Error('No bucket client or root key');
+    }
+
+    try {
+        const metadata = buckets.pullPath(key, 'index.json');
+        const { value } = await metadata.next();
+
+        let str = "";
+        for (var i = 0; i < value.length; i++) {
+            str += String.fromCharCode(parseInt(value[i]));
+        }
+
+        const index = JSON.parse(str);
+        return index;
+    } catch (error) {
+        throw new Error('index does not exist');
+    }
+  }
