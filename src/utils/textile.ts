@@ -35,7 +35,7 @@ import { Buckets, KeyInfo, PrivateKey, WithKeyInfoOptions } from '@textile/hub'
 
   /**
    * getBucketKey will create a new Buckets client with the UserAuth
-   * and then open our custom bucket named, 'io.textile.dropzone'
+   * and then open our custom bucket named, 'meme-of-the-day'
    */
   export async function getBucketKey(keyInfo: KeyInfo, options: WithKeyInfoOptions, identity: PrivateKey) {
     if (!identity) {
@@ -45,11 +45,21 @@ import { Buckets, KeyInfo, PrivateKey, WithKeyInfoOptions } from '@textile/hub'
     // Authorize the user and your insecure keys with getToken
     await buckets.getToken(identity);
 
-    const buck = await buckets.getOrCreate('meme-of-the-day');
+    const buck = await buckets.getOrCreate('memeoftheday');
 
     if (!buck.root) {
       throw new Error('Failed to get or create bucket');
     }
 
     return {buckets: buckets, bucketKey: buck.root.key};
+  }
+
+  export async function getBucketLinks(buckets: Buckets, key: string) {
+      if (!buckets || !key) {
+          throw new Error('No bucket client or root key');
+      }
+
+      const links = await buckets.links(key);
+
+      return links;
   }
