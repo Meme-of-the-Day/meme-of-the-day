@@ -20,13 +20,23 @@ interface Props {
 }
 
 const Main = styled.div`
+  display: flex;
+  flex-direction: column;
+
   & > img {
     width: 100%;
+    max-width: 300px;
     min-height: 300px;
     max-height: 300px;
     object-fit: contain;
     border: 1px solid ${({ theme }) => theme.colors.gray50};
     padding: 30px 20px;
+  }
+
+  @media screen and (min-width: 768px) {
+    flex-direction: row;
+    justify-content: flex-start;
+    padding: 8px;
   }
 `;
 
@@ -34,10 +44,17 @@ const Meta = styled.div`
   display: flex;
   justify-content: space-between;
   flex-direction: column;
+  padding: 8px;
+
+  @media screen and (min-width: 768px) {
+    justify-content: flex-start;
+    max-width: 100px;
+  }
 `;
 
 const VoteCount = styled.span`
   color: ${({ theme }) => theme.colors.black};
+  margin-bottom: 8px;
 `;
 
 const Buttons = styled.div`
@@ -45,6 +62,10 @@ const Buttons = styled.div`
   align-items: center;
   justify-content: space-between;
   flex-wrap: wrap;
+`;
+
+const CustomButton = styled(Button)`
+  margin: 4px 0px;
 `;
 
 const Meme: React.FC<Props> = ({ hash, contract, index, className }) => {
@@ -95,10 +116,9 @@ const Meme: React.FC<Props> = ({ hash, contract, index, className }) => {
       <Meta>
         <VoteCount>Votes: {memeData.votes}</VoteCount>
         <Buttons>
-          <Button text='Vote' icon={voteIcon} onClick={() => vote()} />
-          <Button text='Bid' icon={bidIcon} onClick={() => bid()} />
-          <Button text='Favorite' icon={favoriteIcon} onClick={() => favorite()} />
-
+          <CustomButton text='Vote' icon={voteIcon} onClick={() => vote()} />
+          <CustomButton text='Bid' icon={bidIcon} onClick={() => bid()} />
+          <CustomButton text='Favorite' icon={favoriteIcon} onClick={() => favorite()} />
         </Buttons>
       </Meta>
     </Main>
