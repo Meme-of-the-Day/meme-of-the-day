@@ -10,7 +10,7 @@ import ActivityIcon from '../../assets/svgComponents/activity';
 import UploadIcon from '../../assets/svgComponents/upload';
 import MyMemesIcon from '../../assets/svgComponents/myMemes';
 
-const Main = styled.div`
+const Main = styled.header`
   width: 100%;
   height: 90px;
   display:flex;
