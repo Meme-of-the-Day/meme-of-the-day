@@ -15,6 +15,10 @@ const CustomMeme = styled(Meme)`
   margin: 8px 0;
   width: 100%;
 
+  @media screen and (min-width: 768px) {
+    width: 48%;
+  }
+
   @media screen and (min-width: 1280px) {
     width: 30%;
   }

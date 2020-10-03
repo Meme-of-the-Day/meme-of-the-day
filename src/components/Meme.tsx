@@ -24,13 +24,16 @@ const Main = styled.div`
   flex-direction: column;
 
   & > img {
-    width: 100%;
-    max-width: 300px;
-    min-height: 300px;
+    height: 300px;
     max-height: 300px;
     object-fit: contain;
     border: 1px solid ${({ theme }) => theme.colors.gray50};
     padding: 30px 20px;
+    flex: 1;
+
+    @media screen and (min-width: 768px) {
+      width: calc(100% - 100px);
+    }
   }
 
   @media screen and (min-width: 768px) {
@@ -45,7 +48,7 @@ const Meta = styled.div`
   justify-content: space-between;
   flex-direction: column;
   padding: 8px;
-
+  
   @media screen and (min-width: 768px) {
     justify-content: flex-start;
     max-width: 100px;

@@ -18,6 +18,7 @@ const Main = styled.button`
   justify-content: center;
   height: 30px;
   width: 80px;
+  background-color: ${({ theme }) => theme.colors.white};
 
   & > img {
     width: 15px;
