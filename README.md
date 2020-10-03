@@ -17,7 +17,7 @@ We are hopeful that Meme of the Day and the future voting mechanism would offer 
 - IPFS
 - Textile
 - Fleek
-> Currently it is possible to use local blockchain (Ganache) to run the dApp.
+> Currently it is possible to use local blockchain (Ganache) or Ethereum L2 solution on Matic testnet to run the dApp.<br>
 > Currently it is possible to use Metamask for testing the dApp.
 
 
