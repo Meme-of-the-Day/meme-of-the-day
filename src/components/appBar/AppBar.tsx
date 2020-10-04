@@ -10,7 +10,7 @@ import ActivityIcon from '../../assets/svgComponents/activity';
 import UploadIcon from '../../assets/svgComponents/upload';
 import MyMemesIcon from '../../assets/svgComponents/myMemes';
 
-const Main = styled.div`
+const Main = styled.header`
   width: 100%;
   height: 90px;
   display:flex;
@@ -18,14 +18,14 @@ const Main = styled.div`
   justify-content: space-between;
   flex-wrap: wrap;
   padding: 8px;
+  border-bottom: 10px solid ${({ theme }) => theme.colors.blue};
 
   @media screen and (min-width: 768px) {
-    height: 50px;
+    height: 60px;
   }
 
   @media screen and (min-width: 1280px) {
     height: 70px;
-    border-bottom: 10px solid ${({ theme }) => theme.colors.blue}
   }
 `;
 
