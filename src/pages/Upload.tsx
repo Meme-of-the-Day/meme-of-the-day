@@ -130,7 +130,7 @@ const Upload: React.FC<{}> = () => {
   const changeHandler = async (event: React.ChangeEvent) => {
     event.preventDefault()
     // processing file
-    if (!(event.target as HTMLInputElement).files) {
+    if (!(event.target as HTMLInputElement).files || (event.target as HTMLInputElement).files.length === 0) {
       return;
     }
 
@@ -155,7 +155,7 @@ const Upload: React.FC<{}> = () => {
 
       console.log('Ipfs result', result);
       const memeHash = result[0].hash;
-      setTxDetails(memeHash);
+      setTxDetails({ ipfsHash: memeHash });
 
       console.log("Submitting the form...storing meme on blockchain");
       //storing meme with hash on blockchain
@@ -174,7 +174,7 @@ const Upload: React.FC<{}> = () => {
         const address = networkData.address
         const contract = new web3.eth.Contract(abi, address)
         contract.methods.newMeme(memeHash).send({ from: accounts[0] }).then((err: any, res: AnyARecord) => {
-          console.log('inside of contract function call')
+          console.log('inside of contract function call', res);
           setUploadStatus(UploadStatus.COMPLETED);
         }).catch((error: any) => alert("Something went wrong! Please try again"));
       }

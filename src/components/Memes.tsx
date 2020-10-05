@@ -34,7 +34,7 @@ const Memes: React.FC<{}> = () => {
       const networkId = await web3.eth.net.getId()
       console.log('Metamask is connected to: ' + networkId)
       const networkData = MemesHandler.networks[networkId]
-      console.log(networkData);
+
       if (networkData) {
         //fetching the contract
         const abi = MemesHandler.abi
@@ -51,7 +51,6 @@ const Memes: React.FC<{}> = () => {
         // let ipfsHash = '';
         // let votes = 0;
         let hashes = await contract.methods.getMemesList().call()
-        console.log(hashes);
         setMemeHashes(hashes);
       }
     }
@@ -62,7 +61,7 @@ const Memes: React.FC<{}> = () => {
   return (
     <Main>
       {
-        memeHashes.map((hash, index) => <CustomMeme hash={hash} contract={contract} index={index} />)
+        memeHashes && memeHashes.map((hash, index) => <CustomMeme hash={hash} contract={contract} index={index} />)
       }
     </Main>
   )
