@@ -77,7 +77,6 @@ const Meme: React.FC<Props> = ({ hash, contract, index, className }) => {
     ipfsHash: '',
     votes: 0,
   });
-  console.log(memeData);
   useEffect(() => {
     const getMemeData = async () => {
 
@@ -96,20 +95,17 @@ const Meme: React.FC<Props> = ({ hash, contract, index, className }) => {
 
   const vote = () => {
     if (window.confirm("Owner of this meme is:\n" + memeData.owner + "\n\nWould you like to vote for this Meme?")) {
-      console.log('ok');
       setMemeData({ ...memeData, votes: memeData.votes + 1 });
     }
   }
 
   const bid = () => {
     if (window.confirm("Owner of this meme is:\n" + memeData.owner + "\n\nWould you like to bid for this Meme?")) {
-      console.log('ok');
     }
   }
 
   const favorite = () => {
     if (window.confirm("Owner of this meme is:\n" + memeData.owner + "\n\nWould you like to favorite this Meme?")) {
-      console.log('ok');
     }
   }
 
