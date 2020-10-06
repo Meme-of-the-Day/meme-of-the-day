@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom';
 import App from './App';
 import './index.css';
 import * as serviceWorker from './serviceWorker';
+;(global as any).WebSocket = require('isomorphic-ws');  // Needed to enable web sockets for textile
 
 ReactDOM.render(
   <React.StrictMode>

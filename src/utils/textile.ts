@@ -1,4 +1,5 @@
-import { Buckets, KeyInfo, PrivateKey, WithKeyInfoOptions } from '@textile/hub'
+import { Buckets, KeyInfo, PrivateKey, PushPathResult, WithKeyInfoOptions } from '@textile/hub'
+import { Meme } from './Types'
 
 /**
    * getIdentity uses a basic private key identity.
@@ -81,6 +82,41 @@ import { Buckets, KeyInfo, PrivateKey, WithKeyInfoOptions } from '@textile/hub'
         const index = JSON.parse(str);
         return index;
     } catch (error) {
-        throw new Error('index does not exist');
+        const index = initIndex();
+        await storeIndex(index, buckets, key);
+
+        return index;
     }
+  }
+
+  export async function uploadMeme(buckets: Buckets, key: string, file: File, path: string, name: string, metadata: Meme) {
+    if (!buckets || !key) {
+        throw new Error('No bucket client or root key');
+    }
+
+    const location = `${path}${name}`;
+    const raw = await buckets.pushPath(key, location, file.stream());
+
+    return {
+        ...metadata,
+        cid: raw.path.cid.toString(),
+        name: name,
+        path: location
+    }
+  }
+
+  function initIndex() {
+      const index = {
+          date: (new Date()).getTime(),
+          paths: []
+      };
+
+      return index;
+  }
+
+  async function storeIndex(index: any, buckets: Buckets, key: string) {
+    const buf = Buffer.from(JSON.stringify(index, null, 2));
+    const path = `index.json`;
+
+    await buckets.pushPath(key, path, buf);
   }
