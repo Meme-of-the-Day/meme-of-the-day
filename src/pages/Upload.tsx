@@ -130,7 +130,7 @@ const Upload: React.FC<{}> = () => {
   const changeHandler = async (event: React.ChangeEvent) => {
     event.preventDefault()
     // processing file
-    if (!(event.target as HTMLInputElement).files || (event.target as HTMLInputElement).files.length === 0) {
+    if (!(event.target as HTMLInputElement).files) {
       return;
     }
 
