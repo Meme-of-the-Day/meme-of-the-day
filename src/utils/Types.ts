@@ -1,26 +1,26 @@
 import { Buckets, Identity, UserAuth } from '@textile/hub'
 
-export interface Meme {
-    tokenID: string,
-    cid: string,
-    name: string,
-    txHash: string,
-    date: string,
-    likes: Number,
-    dislikes: Number,
-    owner: string,
-    user: string,
-    tags: Array<string>,
-    price: Number
+export interface MemeMetadata {
+    tokenID?: string,    // NFT tokenID
+    cid: string,    // IPFS CID
+    path: string,   // Bucket path
+    name: string,   // meme Name
+    txHash?: string, // blockchain tx hash
+    date: string,   // created date
+    likes?: Number,
+    dislikes?: Number,
+    owner?: string,  // account address
+    user?: string,   // public key
+    tags?: Array<string>,
+    price?: Number
 }
 
 export interface MemeIndex {
-    user: string,
     paths: Array<string>
 }
 
 export interface AppState {
-    metadata: Array<Meme>,
+    metadata: Array<MemeMetadata>,
     index: MemeIndex,
     identity?: Identity,
     userAuth?: UserAuth,
