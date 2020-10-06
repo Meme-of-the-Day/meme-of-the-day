@@ -26,3 +26,19 @@ a {
   text-decoration: none;
   display: block;
 }
+
+main {
+  margin-top: 90px;
+
+}
+@media screen and (min-width: 768px) {
+  main {
+    margin-top: 60px;
+  }
+}
+
+@media screen and (min-width: 1280px) {
+  main {
+    margin-top: 70px;
+  }
+}

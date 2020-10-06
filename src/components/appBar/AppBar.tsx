@@ -13,12 +13,16 @@ import MyMemesIcon from '../../assets/svgComponents/myMemes';
 const Main = styled.header`
   width: 100%;
   height: 90px;
-  display:flex;
+  display: flex;
   align-items: center;
   justify-content: space-between;
   flex-wrap: wrap;
   padding: 8px;
   border-bottom: 10px solid ${({ theme }) => theme.colors.blue};
+  position: fixed;
+  top: 0;
+  left: 0;
+  background-color: ${({ theme }) => theme.colors.white};
 
   @media screen and (min-width: 768px) {
     height: 60px;

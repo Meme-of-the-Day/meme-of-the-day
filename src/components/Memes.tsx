@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
-import Web3 from 'web3';
 
 import MemesHandler from '../abis/MemesHandler.json';
 import Meme from './Meme';
@@ -28,19 +27,14 @@ const Memes: React.FC<{}> = () => {
   const [memeHashes, setMemeHashes] = useState([]);
   const [contract, setContract] = useState();
 
-  let web3 = (window as any).web3;
-  if (web3) {
-    web3 = new Web3(web3.currentProvider)
-  } else {
-    window.alert('To work correctly, please use metamask!')
-  }
+  let web3 = window.web3;
 
   useEffect(() => {
     const init = async () => {
       const networkId = await web3.eth.net.getId()
       console.log('Metamask is connected to: ' + networkId)
       const networkData = MemesHandler.networks[networkId]
-      console.log(networkData);
+
       if (networkData) {
         //fetching the contract
         const abi = MemesHandler.abi
@@ -57,7 +51,6 @@ const Memes: React.FC<{}> = () => {
         // let ipfsHash = '';
         // let votes = 0;
         let hashes = await contract.methods.getMemesList().call()
-        console.log(hashes);
         setMemeHashes(hashes);
       }
     }
@@ -68,7 +61,7 @@ const Memes: React.FC<{}> = () => {
   return (
     <Main>
       {
-        memeHashes.map((hash, index) => <CustomMeme hash={hash} contract={contract} index={index} />)
+        memeHashes && memeHashes.map((hash, index) => <CustomMeme hash={hash} contract={contract} index={index} />)
       }
     </Main>
   )
