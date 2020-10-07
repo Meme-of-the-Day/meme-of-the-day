@@ -63,7 +63,7 @@ export class Textile {
     this.memeIndex = await this.getIndexAtKey();
   }
 
-  public async getMemesFromIndex() {
+  public async getAllMemes() {
     if (!this.bucketInfo.bucket || !this.bucketInfo.bucketKey) {
       throw new Error('No bucket client or root key');
     }
@@ -116,9 +116,19 @@ export class Textile {
     const path = `metadata/${metaname}`;
     await this.bucketInfo.bucket.pushPath(this.bucketInfo.bucketKey, path, metaBuffer);
 
+    await this.syncDatabase();
     this.memeIndex.paths.push(path);
+    await this.storeIndex(this.memeIndex);
   }
 
+  private async syncDatabase() {
+    if (!this.bucketInfo.bucket || !this.bucketInfo.bucketKey) {
+      throw new Error('No bucket client or root key');
+    }
+
+    this.memeIndex = await this.getIndexAtKey();
+  }
+  
   private getIdentity(key: string): PrivateKey {
     if (key) {
       return PrivateKey.fromString(key);
@@ -166,15 +176,5 @@ export class Textile {
     const path = `index.json`;
 
     await this.bucketInfo.bucket.pushPath(this.bucketInfo.bucketKey, path, buf);
-  }
-
-  private async getBucketLinks() {
-    if (!this.bucketInfo.bucket || !this.bucketInfo.bucketKey) {
-      throw new Error('No bucket client or root key');
-    }
-
-    const links = await this.bucketInfo.bucket.links(this.bucketInfo.bucketKey);
-
-    return links;
   }
 }
