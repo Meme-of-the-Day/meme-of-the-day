@@ -1,0 +1,44 @@
+* {
+  box-sizing: border-box;
+}
+
+html {
+  height: 100vh;
+  width: 100vw;
+}
+
+body {
+  height: 100%;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  font-family: Roboto, Helvetica, sans-serif;
+}
+
+#root {
+  height: 100%;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+a {
+  text-decoration: none;
+  display: block;
+}
+
+main {
+  margin-top: 90px;
+
+}
+@media screen and (min-width: 768px) {
+  main {
+    margin-top: 60px;
+  }
+}
+
+@media screen and (min-width: 1280px) {
+  main {
+    margin-top: 70px;
+  }
+}

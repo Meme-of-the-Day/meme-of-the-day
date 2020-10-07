@@ -1,30 +1,30 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
-# Meme of the Day dApp -- Matic Blockchain
+# Meme of the Day dApp -- Filecoin & Matic
 
-Upload your meme, vote and comment on other memes, discover top memes with this dApp.
+Discover, upload, vote, comment, and buy your favorite memes in different categories. Discover top memes and share profits from the sales of upvoted memes with this dApp.
 
-<img src="/src/content/Meme-of-the-Day-dApp-Meme-Final.png" width=25% height=25% align="right">Meme of the Day is a fun social platform that was created for use with Matic blockchain and Interplanetary File System (IPFS). The dApp interface runs in a web browser, where the user uploads a meme image that is saved in IPFS, which creates a hash that is stored on the Matic blockchain. This is our initial proof of concept functionality. It is possible to get the dApp up and running in a local development environment with local Ethereum blockchain (Ganache).
+<img src="/src/content/Meme-of-the-Day-dApp-Meme-Final.png" width=25% height=25% align="right">Meme of the Day is a fun social platform that was created for use with Matic blockchain and Filecoin for minting and saving meme images as non-fungible tokens (NFTs). The dApp interface runs in a web browser, where the user uploads a meme image that runs through a smart contract to mint an NFT on Matic network. The meme image is then saved in Filecoin via Textile Hub, as well as in IPFS cache for hot storage. The "View Your Memes" page then displays the uploaded image and its associated Matic transaction details. This is our initial proof of concept functionality. It is possible to get the dApp up and running in a local development environment with local Ethereum blockchain (Ganache).
 
-Beyond this, our vision is for people to vote and possibly comment on the memes they like, which would be featured in a list that is updated in real-time. After a user pays for their first vote, they would receive three free votes, paid directly from the transaction fee of the first vote (equal to the required gas for four total vote operations). The smart contract would save that gas in a dedicated Opera account that it would access to implement the three free votes.
+Beyond this, our vision is for people to upvote, comment, favorite, and buy memes they like, which would be featured in categorized ranking lists updated in real-time. Users will have the unique opportunity to share in the profits of memes sold that they upvoted. By paying a small amount for votes, they are incentivized to participate in Meme of the Day for fun and for profit. This dApp can also prove that a user is either the true creator or the first to claim title to a particular meme that they upload.
 
-We are hopeful that Meme of the Day and the future voting mechanism would encourage more user interest and engagement with our dApp. This dApp can prove that a user is the true creator of a meme (or any file they uplod to IPFS).
+We are hopeful that Meme of the Day and the future voting mechanism would offer a unique, gamified social experience for users and encourage more interest in Filecoin, Matic, and Web3 technology.
 
 **Dependencies are:**
-- Node.js 10.1x.x - 12.18.2
-> download from https://nodejs.org and follow installation instructions
+- Node.js at least version 10.1x.x
+> Download from https://nodejs.org and follow installation instructions
 - Truffle
-- Web3.js
-- IPFS 
-> Public open IPFS through Infura is already coded into Meme dApp, find more about IPFS here
-> https://infura.io/
-> Currently it is possible to use local Ethereum blockchain (Ganache) to run the dApp.
+- Filecoin
+- Matic Network
+- IPFS
+- Textile
+- Fleek
+> Currently it is possible to use local blockchain (Ganache) or Ethereum L2 solution on Matic testnet to run the dApp.<br>
 > Currently it is possible to use Metamask for testing the dApp.
 
 
-## Installation procedure
+## Installation procedure (local blockchain - ex: ganache-cli)
 ```shell
-git clone https://github.com/matprime/meme-of-the-day-dApp
-cd meme-of-the-day-dApp
+git clone https://github.com/Meme-of-the-Day/meme-of-the-day-filecoin
+cd meme-of-the-day-filecoin
 npm install
 npm run deployDev (Spins up ganache-cli and deploys contract(s) on the chain)
 npm run start (In another terminal)
@@ -36,17 +36,17 @@ Please follow additional instructions how to setup your Metamask to use Matic Mu
 https://docs.matic.network/docs/develop/metamask/config-matic<br>
 Here is Matic Mumbai testnet Faucet to get some test Matic coins:<br>
 https://faucet.matic.network/<br>
-Here are additional information how to deploy smart contract and dApp on Matic Mumbai testnet. You will need to create .secret file holding seed words from your wallet on Matic testnet Mumbai network:
+Here is additional information on how to deploy smart contract and dApp on Matic Mumbai testnet. You will need to create .secret file holding seed words from your wallet on Matic testnet Mumbai network:
 https://docs.matic.network/docs/develop/truffle<br>
 
 ```shell
-git clone https://github.com/matprime/meme-of-the-day-dApp
-cd meme-of-the-day-dApp
+git clone https://github.com/Meme-of-the-Day/meme-of-the-day-filecoin
+cd meme-of-the-day-filecoin
 npm install
-.\node_modules\.bin\truffle migrate --reset --network matic
+truffle migrate --reset --network matic
 npm run start
 ```
-The truffle migrate command would require the secret file to be updated with the mnemonic which is the secret to account used to deploy contract on matic chain.
+The truffle migrate command would require the secret file to be updated with the mnemonic which is the secret to account used to deploy contract on Matic chain.
 When you start dApp with last command "npm run start", dApp will load and show the latest meme uploaded in browser window.
 <br><br>
 
@@ -54,13 +54,13 @@ When you start dApp with last command "npm run start", dApp will load and show t
 ```shell
 npm run migrate
 ```
-After successful migration of smart contract to blockchain, you can interact with it using Truffle console. Use truffle from the node_modules bin directory (.\node_modules\.bin\truffle)
+After successful migration of smart contract to blockchain, you can interact with it using Truffle console.
 <br><br>
 
 **Some commands you can use with Truffle console**
 After smart contract deployment to blockchain with migration, you can use Truffle console to interact with smart contracts using CLI. To start Truffle console from command shell type:
 ```shell
-.\node_modules\.bin\truffle console
+truffle console
 ```
 After Truffle console is running you can get contract from blockchain with command:
 ```javascript
@@ -92,7 +92,7 @@ meme
 
 **To run tests defined in folder /test run from shell command**  
 ```javascript
-.\node_modules\.bin\truffle test
+truffle test
 ```
 Tests will check if contract deployment on blockchain was done correctly, and it will check if get and set methods of smart contract are working correctly. After running the command, you will see output similar to:
 ```shell
