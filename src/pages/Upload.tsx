@@ -94,6 +94,7 @@ const Image = styled.div`
 const ViewDetails = styled.div`
   width: 100%;
   line-height: 1.5em;
+  cursor: pointer;
   
   .btn {
     font-size: 14px;
@@ -111,6 +112,9 @@ const TxDetails = styled.div`
   height: 0;
   overflow: hidden;
   transition: height 0.5s ease-out;
+  padding: 10px;
+  width: 400px;
+  word-break: break-word;
   
   &.open {
     border: 1px solid ${({ theme }) => theme.colors.gray50};
@@ -125,7 +129,6 @@ const Upload: React.FC<{}> = () => {
   const [txDetails, setTxDetails] = useState({});
   const [uploadStatus, setUploadStatus] = useState(UploadStatus.NOT_STARTED);
   const [viewDetails, setViewDetails] = useState(false);
-  console.log(txDetails);
 
   const changeHandler = async (event: React.ChangeEvent) => {
     event.preventDefault()
@@ -149,6 +152,7 @@ const Upload: React.FC<{}> = () => {
     setUploadStatus(UploadStatus.IN_PROGRESS);
     ipfs.add(imageBuffer, async (error: any, result: any) => {
       if (error) {
+        setUploadStatus(UploadStatus.NOT_STARTED);
         console.error(error)
         return
       }
@@ -176,7 +180,10 @@ const Upload: React.FC<{}> = () => {
         contract.methods.newMeme(memeHash).send({ from: accounts[0] }).then((err: any, res: AnyARecord) => {
           console.log('inside of contract function call', res);
           setUploadStatus(UploadStatus.COMPLETED);
-        }).catch((error: any) => alert("Something went wrong! Please try again"));
+        }).catch((error: any) => {
+          alert("Something went wrong! Please try again")
+          setUploadStatus(UploadStatus.NOT_STARTED);
+        });
       }
     });
   };
@@ -202,10 +209,13 @@ const Upload: React.FC<{}> = () => {
               <span className="btn" onClick={() => setViewDetails(!viewDetails)}>View transaction details</span>
               <TxDetails className={viewDetails ? 'open' : ''}>
                 {
-                  JSON.stringify(txDetails)
+                  Object.keys(txDetails).map((key) => {
+                    return <div>
+                      <strong>{key}:</strong> <br />{txDetails[key]}</div>
+                  })
                 }
               </TxDetails>
-              <CustomLink to="/me">View your memes</CustomLink>
+              <CustomLink to="/">View your memes</CustomLink>
             </ViewDetails>
           }
         </Inputs>
