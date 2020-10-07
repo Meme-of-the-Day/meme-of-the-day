@@ -55,11 +55,8 @@ const Memes: React.FC<{}> = () => {
 
         for (var i = 1; i <= memesCount; i++) {
           hash = await contract.methods.hashes(i - 1).call()
-          console.log(hash)
           hashes.push(hash)
         }
-        console.log(hashes)
-        //let hashes = await contract.methods.getMemesList().call()
         setMemeHashes(hashes);
       }
     }
