@@ -24,7 +24,7 @@ const CustomMeme = styled(Meme)`
 `;
 
 const Memes: React.FC<{}> = () => {
-  const [memeHashes, setMemeHashes] = useState([]);
+  const [memeHashes, setMemeHashes] = useState<Array<string>>([]);
   const [contract, setContract] = useState();
 
   let web3 = window.web3;
