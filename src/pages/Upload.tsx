@@ -177,7 +177,7 @@ const Upload: React.FC<{}> = () => {
         const abi = MemesHandler.abi
         const address = networkData.address
         const contract = new web3.eth.Contract(abi, address)
-        contract.methods.newMeme(memeHash).send({ from: accounts[0] }).then((err: any, res: AnyARecord) => {
+        contract.methods.mint(memeHash).send({ from: accounts[0] }).then((err: any, res: AnyARecord) => {
           console.log('inside of contract function call', res);
           setUploadStatus(UploadStatus.COMPLETED);
         }).catch((error: any) => {
