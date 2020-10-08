@@ -47,7 +47,6 @@ const Meta = styled.div`
   display: flex;
   justify-content: space-between;
   flex-direction: column;
-  padding: 8px;
 
   @media screen and (min-width: 768px) {
     justify-content: flex-start;
