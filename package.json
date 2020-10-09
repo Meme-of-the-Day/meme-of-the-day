@@ -46,13 +46,14 @@
   },
   "scripts": {
     "start": "react-scripts start",
-    "build": "npm run compile && react-scripts build",
+    "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "compile": "truffle compile",
     "ganache": "cross-var ganache-cli --networkId $npm_package_config_ganache_networkId --allowUnlimitedContractSize --gasLimit $npm_package_config_ganache_gasLimit --gasPrice $npm_package_config_ganache_gasPrice --mnemonic \"$MNEMONIC\"",
     "migrate": "rimraf ./src/abis && truffle migrate --reset --compile-all --network development",
-    "deployDev": "concurrently \"npm run ganache\" \"npm run migrate\""
+    "migratematic": "rimraf ./src/abis && truffle migrate --reset --compile-all --network matic",
+    "deploydev": "concurrently \"npm run ganache\" \"npm run migrate\""
   },
   "config": {
     "ganache": {

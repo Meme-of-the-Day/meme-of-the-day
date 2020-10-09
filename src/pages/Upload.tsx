@@ -164,7 +164,6 @@ const Upload: React.FC<{}> = () => {
       console.log("Submitting the form...storing meme on blockchain");
       //storing meme with hash on blockchain
       const web3 = window.web3;
-      window.ethereum.enable();
       const accounts = await web3.eth.getAccounts();
       console.log('Using account in Metamask: ' + accounts[0]);
       console.log('Meme will be stored with account: ' + accounts[0]);

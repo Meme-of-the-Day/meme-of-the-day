@@ -28,7 +28,7 @@ Metamask Web3 wallet may be used to test the dApp.
 git clone https://github.com/Meme-of-the-Day/meme-of-the-day-filecoin
 cd meme-of-the-day-filecoin
 npm install
-npm run deployDev (Spins up ganache-cli and deploys contract(s) on the chain)
+npm run deploydev (Spins up ganache-cli and deploys contract(s) on the chain)
 npm run start (In another terminal)
 ```
 You should see web browser open up, and the dApp will load and show the latest meme uploaded in browser window.
@@ -47,7 +47,7 @@ https://docs.matic.network/docs/develop/truffle<br>
 git clone https://github.com/Meme-of-the-Day/meme-of-the-day-filecoin
 cd meme-of-the-day-filecoin
 npm install
-truffle migrate --reset --network matic
+npm run migratematic
 npm run start
 ```
 The truffle migrate command would require the secret file to be updated with the mnemonic which is the secret to the account used to deploy contract on Matic chain.
