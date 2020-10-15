@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import Web3 from 'web3';
-import MemesHandler from '../abis/MemesHandler.json';
+import MemesHandler from '../abis/MemeOfTheDay.json';
 import ImageUpload from './ImageUpload';
 import ImageGallery from './ImageGallery';
 import Badge from './Badge';
@@ -120,7 +120,7 @@ export default class Content extends Component<{}, IMemeState> {
                 console.error(error)
                 return
             }
-            
+
             console.log('Ipfs result', result)
             const memeHash = result[0].hash
             this.setState({ memeHash })
