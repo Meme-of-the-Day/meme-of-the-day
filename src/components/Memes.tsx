@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 
-import MemesHandler from '../abis/MemesHandler.json';
+import MemesHandler from '../abis/MemeOfTheDay.json';
 import Meme from './Meme';
 
 const Main = styled.div`
@@ -24,7 +24,7 @@ const CustomMeme = styled(Meme)`
 `;
 
 const Memes: React.FC<{}> = () => {
-  const [memeHashes, setMemeHashes] = useState([]);
+  const [memeHashes, setMemeHashes] = useState<Array<string>>([]);
   const [contract, setContract] = useState();
 
   let web3 = window.web3;
@@ -42,15 +42,21 @@ const Memes: React.FC<{}> = () => {
         const contract = new web3.eth.Contract(abi, address)
         setContract(contract);
         console.log('smart contract retrieved')
+        console.log(contract)
 
         //fetching the number of memes stored on blockchain
-        const memesCount = await contract.methods.getMemesCount().call()
+        const memesCount = await contract.methods.totalSupply().call()
         console.log('count of stored memes: ' + memesCount)
 
-        //fetching information about every meme and display it
-        // let ipfsHash = '';
-        // let votes = 0;
-        let hashes = await contract.methods.getMemesList().call()
+        //fetching hash from every meme and display it
+        let hash = "test"
+        let hashes = []
+
+
+        for (var i = 1; i <= memesCount; i++) {
+          hash = await contract.methods.hashes(i - 1).call()
+          hashes.push(hash)
+        }
         setMemeHashes(hashes);
       }
     }

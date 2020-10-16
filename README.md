@@ -17,13 +17,12 @@ We are hopeful that Meme of the Day and the future voting mechanism would offer 
 - IPFS
 - Textile
 - Fleek
+> Currently it is possible to use local blockchain (Ganache) or Matic testnet Ethereum L2 solution to run the dApp.<br>
+> Currently it is possible to use Metamask for testing the dApp.<br><br>
 
-Currently it is possible to use local blockchain (Ganache) or Ethereum L2 solution on Matic testnet to run the dApp.
 
-Metamask Web3 wallet may be used to test the dApp.
-> Metamask download: https://metamask.io/download.html
 
-## Installation procedure  for local blockchain (ex: ganache-cli)
+## Installation procedure for local blockchain (ex: ganache-cli)
 ```shell
 git clone https://github.com/Meme-of-the-Day/meme-of-the-day-filecoin
 cd meme-of-the-day-filecoin
@@ -33,13 +32,11 @@ npm run start (In another terminal)
 ```
 You should see web browser open up, and the dApp will load and show the latest meme uploaded in browser window.
 
-## Installation procedure for Matic Mumbai testnet
-Please follow additional instructions how to setup your Metamask to use Matic Mumbai testnet:
-https://docs.matic.network/docs/develop/metamask/config-matic
-
-Here is Matic Mumbai testnet Faucet to get some test Matic coins:
-https://faucet.matic.network/
-
+## Installation procedure (Matic Mumbai testnet)
+Please follow additional instructions how to setup your Metamask to use Matic Mumbai testnet:<br>
+https://docs.matic.network/docs/develop/metamask/config-matic<br>
+Here is Matic Mumbai testnet Faucet to get some test Matic coins:<br>
+https://faucet.matic.network/<br>
 Here is additional information on how to deploy smart contract and dApp on Matic Mumbai testnet. You will need to create .secret file holding seed words from your wallet on Matic testnet Mumbai network:
 https://docs.matic.network/docs/develop/truffle<br>
 
@@ -59,7 +56,7 @@ When you start dApp with last command "npm run start", dApp will load and show t
 npm run migrate
 ```
 After successful migration of smart contract to blockchain, you can interact with it using Truffle console.
-<br>
+<br><br>
 
 **Some commands that you can use with Truffle console after smart contract is deployed**
 After smart contract deployment to blockchain with migration, you can use Truffle console to interact with smart contracts using CLI. To start Truffle console from command shell type:

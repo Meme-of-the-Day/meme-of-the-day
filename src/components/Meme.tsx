@@ -47,8 +47,7 @@ const Meta = styled.div`
   display: flex;
   justify-content: space-between;
   flex-direction: column;
-  padding: 8px;
-  
+
   @media screen and (min-width: 768px) {
     justify-content: flex-start;
     max-width: 100px;
@@ -80,8 +79,12 @@ const Meme: React.FC<Props> = ({ hash, contract, index, className }) => {
   useEffect(() => {
     const getMemeData = async () => {
 
-      const ipfsHash = await contract.methods.getMemeByIndex(index).call()
-      const votes = await contract.methods.getVotes(hash).call()
+await contract.methods.hashes(index).call()
+      const ipfsHash = await contract.methods.hashes(index).call()
+      //we are planning that number of votes gonna be stored in Textile
+      //they are no more written on blockchain or are part of NFT
+      //const votes = await contract.methods.getVotes(hash).call()
+      const votes = "5"
 
       setMemeData({
         owner: hash,
