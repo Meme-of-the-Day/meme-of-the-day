@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 
-import MemesHandler from '../abis/MemesHandler.json';
+import MemesHandler from '../abis/MemeOfTheDay.json';
 import ipfsClient from 'ipfs-http-client';
 import { AnyARecord } from 'dns';
 // connect to public ipfs daemon API server
@@ -95,7 +95,7 @@ const ViewDetails = styled.div`
   width: 100%;
   line-height: 1.5em;
   cursor: pointer;
-  
+
   .btn {
     font-size: 14px;
     text-decoration: underline;
@@ -115,7 +115,7 @@ const TxDetails = styled.div`
   padding: 10px;
   width: 400px;
   word-break: break-word;
-  
+
   &.open {
     border: 1px solid ${({ theme }) => theme.colors.gray50};
     height: 200px;
@@ -164,7 +164,6 @@ const Upload: React.FC<{}> = () => {
       console.log("Submitting the form...storing meme on blockchain");
       //storing meme with hash on blockchain
       const web3 = window.web3;
-      window.ethereum.enable();
       const accounts = await web3.eth.getAccounts();
       console.log('Using account in Metamask: ' + accounts[0]);
       console.log('Meme will be stored with account: ' + accounts[0]);
@@ -177,7 +176,7 @@ const Upload: React.FC<{}> = () => {
         const abi = MemesHandler.abi
         const address = networkData.address
         const contract = new web3.eth.Contract(abi, address)
-        contract.methods.newMeme(memeHash).send({ from: accounts[0] }).then((err: any, res: AnyARecord) => {
+        contract.methods.mint(memeHash).send({ from: accounts[0] }).then((err: any, res: AnyARecord) => {
           console.log('inside of contract function call', res);
           setUploadStatus(UploadStatus.COMPLETED);
         }).catch((error: any) => {
