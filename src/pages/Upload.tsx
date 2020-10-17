@@ -126,7 +126,8 @@ const Upload: React.FC<{}> = () => {
   const [submitEnabled, setSubmitEnabled] = useState(false);
   const [image, setImage] = useState<string>('');
   const [imageBuffer, setImageBuffer] = useState<ArrayBuffer>();
-  const [txDetails, setTxDetails] = useState({});
+  const [hashDetails, setHashDetails] = useState({});
+  const [txDetails, setTxDetails] = useState<string>('');
   const [uploadStatus, setUploadStatus] = useState(UploadStatus.NOT_STARTED);
   const [viewDetails, setViewDetails] = useState(false);
 
@@ -159,7 +160,7 @@ const Upload: React.FC<{}> = () => {
 
       console.log('Ipfs result', result);
       const memeHash = result[0].hash;
-      setTxDetails({ ipfsHash: memeHash });
+      setHashDetails({ ipfsHash: memeHash });
 
       console.log("Submitting the form...storing meme on blockchain");
       //storing meme with hash on blockchain
@@ -176,12 +177,13 @@ const Upload: React.FC<{}> = () => {
         const abi = MemesHandler.abi
         const address = networkData.address
         const contract = new web3.eth.Contract(abi, address)
-        contract.methods.mint(memeHash).send({ from: accounts[0] }).then((err: any, res: AnyARecord) => {
-          console.log('inside of contract function call', res);
-          setUploadStatus(UploadStatus.COMPLETED);
+        //minting the NFT
+        contract.methods.mint(memeHash).send({ from: accounts[0]},(error: any, txHash: string) => {
+            console.log(txHash)
+            setUploadStatus(UploadStatus.COMPLETED);
         }).catch((error: any) => {
-          alert("Something went wrong! Please try again")
-          setUploadStatus(UploadStatus.NOT_STARTED);
+            alert("Something went wrong! Please try again")
+            setUploadStatus(UploadStatus.NOT_STARTED);
         });
       }
     });
