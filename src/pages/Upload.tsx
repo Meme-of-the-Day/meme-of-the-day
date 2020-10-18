@@ -2,11 +2,10 @@ import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 
+import { Textile } from '../utils/textile';
 import MemesHandler from '../abis/MemeOfTheDay.json';
-import ipfsClient from 'ipfs-http-client';
 import { AnyARecord } from 'dns';
 // connect to public ipfs daemon API server
-const ipfs = ipfsClient({ host: 'ipfs.infura.io', port: 5001, protocol: 'https' })
 
 enum UploadStatus {
   NOT_STARTED = 0,
@@ -125,7 +124,7 @@ const TxDetails = styled.div`
 const Upload: React.FC<{}> = () => {
   const [submitEnabled, setSubmitEnabled] = useState(false);
   const [image, setImage] = useState<string>('');
-  const [imageBuffer, setImageBuffer] = useState<ArrayBuffer>();
+  const [imageFile, setImageFile] = useState<File>();
   const [txDetails, setTxDetails] = useState({});
   const [uploadStatus, setUploadStatus] = useState(UploadStatus.NOT_STARTED);
   const [viewDetails, setViewDetails] = useState(false);
@@ -137,32 +136,29 @@ const Upload: React.FC<{}> = () => {
       return;
     }
 
-    const file = ((event.target as HTMLInputElement).files as FileList)[0]
-    const buffer = await file.arrayBuffer();
-    setImageBuffer(buffer);
+    const file = ((event.target as HTMLInputElement).files as FileList)[0];
+    setImageFile(file);
     const imageUrl = URL.createObjectURL(file);
     setImage(imageUrl);
     setSubmitEnabled(true);
   }
 
-  const uploadMeme = (event: React.FormEvent) => {
+  const uploadMeme = async (event: React.FormEvent) => {
     event.preventDefault();
+
+    const textile = await Textile.getInstance();
 
     setSubmitEnabled(false);
     setUploadStatus(UploadStatus.IN_PROGRESS);
-    ipfs.add(imageBuffer, async (error: any, result: any) => {
-      if (error) {
-        setUploadStatus(UploadStatus.NOT_STARTED);
-        console.error(error)
-        return
-      }
 
-      console.log('Ipfs result', result);
-      const memeHash = result[0].hash;
-      setTxDetails({ ipfsHash: memeHash });
+    const meme = imageFile && await textile.uploadMeme(imageFile);
+
+    if (meme) {
+      console.log(meme.cid);
+      setTxDetails({ ipfsHash: meme.cid });
 
       console.log("Submitting the form...storing meme on blockchain");
-      //storing meme with hash on blockchain
+
       const web3 = window.web3;
       const accounts = await web3.eth.getAccounts();
       console.log('Using account in Metamask: ' + accounts[0]);
@@ -176,15 +172,16 @@ const Upload: React.FC<{}> = () => {
         const abi = MemesHandler.abi
         const address = networkData.address
         const contract = new web3.eth.Contract(abi, address)
-        contract.methods.mint(memeHash).send({ from: accounts[0] }).then((err: any, res: AnyARecord) => {
+        contract.methods.mint(meme.cid).send({ from: accounts[0] }).then((err: any, res: AnyARecord) => {
           console.log('inside of contract function call', res);
+          // TODO: update meme with tx details and call textile.uploadMemeMetadata
           setUploadStatus(UploadStatus.COMPLETED);
         }).catch((error: any) => {
           alert("Something went wrong! Please try again")
           setUploadStatus(UploadStatus.NOT_STARTED);
         });
       }
-    });
+    }
   };
 
   return (

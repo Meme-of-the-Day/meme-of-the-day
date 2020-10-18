@@ -7,12 +7,12 @@ export interface MemeMetadata {
     name: string,   // meme Name
     txHash?: string, // blockchain tx hash
     date: string,   // created date
-    likes?: Number,
-    dislikes?: Number,
+    likes?: number,
+    dislikes?: number,
     owner?: string,  // account address
     user?: string,   // public key
     tags?: Array<string>,
-    price?: Number
+    price?: number
 }
 
 export interface MemeIndex {

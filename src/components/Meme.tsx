@@ -1,10 +1,11 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import styled from 'styled-components';
 
 import Button from './Button';
 import voteIcon from '../assets/vote.svg';
 import bidIcon from '../assets/bid.svg';
 import favoriteIcon from '../assets/favorite.svg';
+import { MemeMetadata } from '../utils/Types';
 
 type IMeme = {
   owner: string,
@@ -13,10 +14,7 @@ type IMeme = {
 }
 
 interface Props {
-  hash: string;
-  contract: any;
-  index: number;
-  className?: string;
+  meme: MemeMetadata
 }
 
 const Main = styled.div`
@@ -70,53 +68,32 @@ const CustomButton = styled(Button)`
   margin: 4px 0px;
 `;
 
-const Meme: React.FC<Props> = ({ hash, contract, index, className }) => {
-  const [memeData, setMemeData] = useState<IMeme>({
-    owner: '',
-    ipfsHash: '',
-    votes: 0,
-  });
-  useEffect(() => {
-    const getMemeData = async () => {
-
-await contract.methods.hashes(index).call()
-      const ipfsHash = await contract.methods.hashes(index).call()
-      //we are planning that number of votes gonna be stored in Textile
-      //they are no more written on blockchain or are part of NFT
-      //const votes = await contract.methods.getVotes(hash).call()
-      const votes = "5"
-
-      setMemeData({
-        owner: hash,
-        ipfsHash,
-        votes: parseInt(votes),
-      });
-    }
-
-    getMemeData();
-  }, []);
-
+const Meme: React.FC<Props> = ({ meme }) => {
   const vote = () => {
-    if (window.confirm("Owner of this meme is:\n" + memeData.owner + "\n\nWould you like to vote for this Meme?")) {
-      setMemeData({ ...memeData, votes: memeData.votes + 1 });
+    if (window.confirm("Owner of this meme is:\n" + meme.owner + "\n\nWould you like to vote for this Meme?")) {
+      if (meme.likes) {
+        meme.likes += 1;
+      } else {
+        meme.likes = 1;
+      }
     }
   }
 
   const bid = () => {
-    if (window.confirm("Owner of this meme is:\n" + memeData.owner + "\n\nWould you like to bid for this Meme?")) {
+    if (window.confirm("Owner of this meme is:\n" + meme.owner + "\n\nWould you like to bid for this Meme?")) {
     }
   }
 
   const favorite = () => {
-    if (window.confirm("Owner of this meme is:\n" + memeData.owner + "\n\nWould you like to favorite this Meme?")) {
+    if (window.confirm("Owner of this meme is:\n" + meme.owner + "\n\nWould you like to favorite this Meme?")) {
     }
   }
 
   return (
-    <Main className={className}>
-      <img src={`https://ipfs.infura.io/ipfs/${memeData.ipfsHash}`} alt="" />
+    <Main className='MemeOfTheDay'>
+      <img src={`https://hub.textile.io/ipfs/${meme.cid}`} alt="" />
       <Meta>
-        <VoteCount>Votes: {memeData.votes}</VoteCount>
+        <VoteCount>Votes: {meme.likes}</VoteCount>
         <Buttons>
           <CustomButton text='Vote' icon={voteIcon} onClick={() => vote()} />
           <CustomButton text='Bid' icon={bidIcon} onClick={() => bid()} />
