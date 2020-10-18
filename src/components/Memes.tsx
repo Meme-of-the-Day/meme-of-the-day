@@ -38,7 +38,7 @@ const Memes: React.FC<{}> = () => {
   return (
     <Main>
       {
-        memeMetadata && memeMetadata.map((meme, index) => <CustomMeme meme={meme} />)
+        memeMetadata && memeMetadata.map((meme) => <CustomMeme meme={meme} />)
       }
     </Main>
   )
