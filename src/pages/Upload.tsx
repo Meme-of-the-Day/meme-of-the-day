@@ -112,15 +112,40 @@ const TxDetails = styled.div`
   height: 0;
   overflow: hidden;
   transition: height 0.5s ease-out;
-  padding: 10px;
   width: 400px;
   word-break: break-word;
 
   &.open {
     border: 1px solid ${({ theme }) => theme.colors.gray50};
     height: 200px;
+    padding: 10px;
   }
 `;
+
+const DetailDiv = styled.div`
+  word-break: break-all;
+  margin: 10px 0;
+`;
+
+type DetailsObject = {
+  isLink?: boolean,
+  link?: string,
+  text?: string,
+};
+
+const renderDetails = (value: string | DetailsObject) => {
+  switch (typeof value) {
+    case 'string':
+      return value;
+    case 'object':
+      if (value.isLink) {
+        return <a target="_blank" rel="noopener noreferrer" href={value.link}>{value.text || value.link}</a>
+      }
+      return null;
+    default:
+      return null;
+  }
+}
 
 const Upload: React.FC<{}> = () => {
   const [submitEnabled, setSubmitEnabled] = useState(false);
@@ -159,7 +184,7 @@ const Upload: React.FC<{}> = () => {
 
       console.log('Ipfs result', result);
       const memeHash = result[0].hash;
-      setTxDetails({ ipfsHash: memeHash });
+      setTxDetails({ ...txDetails, ipfsHash: memeHash });
 
       console.log("Submitting the form...storing meme on blockchain");
       //storing meme with hash on blockchain
@@ -176,8 +201,9 @@ const Upload: React.FC<{}> = () => {
         const abi = MemesHandler.abi
         const address = networkData.address
         const contract = new web3.eth.Contract(abi, address)
-        contract.methods.mint(memeHash).send({ from: accounts[0] }).then((err: any, res: AnyARecord) => {
-          console.log('inside of contract function call', res);
+        //minting the NFT
+        contract.methods.mint(memeHash).send({ from: accounts[0] }, (error: any, txHash: string) => {
+          setTxDetails({ ...txDetails, 'IPFS Hash': memeHash, 'Transaction Hash': { isLink: true, link: `https://mumbai-explorer.matic.today/tx/${txHash}`, text: txHash } });
           setUploadStatus(UploadStatus.COMPLETED);
         }).catch((error: any) => {
           alert("Something went wrong! Please try again")
@@ -209,8 +235,8 @@ const Upload: React.FC<{}> = () => {
               <TxDetails className={viewDetails ? 'open' : ''}>
                 {
                   Object.keys(txDetails).map((key) => {
-                    return <div>
-                      <strong>{key}:</strong> <br />{txDetails[key]}</div>
+                    return <DetailDiv>
+                      <em>{key}</em>: {renderDetails(txDetails[key])}</DetailDiv>
                   })
                 }
               </TxDetails>
