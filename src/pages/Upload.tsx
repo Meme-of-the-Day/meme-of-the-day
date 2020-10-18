@@ -203,7 +203,7 @@ const Upload: React.FC<{}> = () => {
         const contract = new web3.eth.Contract(abi, address)
         //minting the NFT
         contract.methods.mint(memeHash).send({ from: accounts[0] }, (error: any, txHash: string) => {
-          setTxDetails({ ...txDetails, 'IPFS Hash': memeHash, 'Transaction Hash': { isLink: true, link: `https://etherscan.io/tx/${txHash}`, text: txHash } });
+          setTxDetails({ ...txDetails, 'IPFS Hash': memeHash, 'Transaction Hash': { isLink: true, link: `https://mumbai-explorer.matic.today/tx/${txHash}`, text: txHash } });
           setUploadStatus(UploadStatus.COMPLETED);
         }).catch((error: any) => {
           alert("Something went wrong! Please try again")
