@@ -26,6 +26,7 @@ We are hopeful that Meme of the Day and the future voting mechanism would offer 
 ```shell
 git clone https://github.com/Meme-of-the-Day/meme-of-the-day-filecoin
 cd meme-of-the-day-filecoin
+source .env (// Insert the values in the file)
 npm install
 npm run deploydev (Spins up ganache-cli and deploys contract(s) on the chain)
 npm run start (In another terminal)

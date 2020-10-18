@@ -5,6 +5,7 @@ import Web3 from 'web3';
 import App from './App';
 import './index.css';
 import * as serviceWorker from './serviceWorker';
+;(global as any).WebSocket = require('isomorphic-ws');  // Needed to enable web sockets for textile
 
 declare global {
   interface Window {
