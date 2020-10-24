@@ -49,6 +49,7 @@ const Meta = styled.div`
   @media screen and (min-width: 768px) {
     justify-content: flex-start;
     max-width: 100px;
+    padding-left: 5px;
   }
 `;
 

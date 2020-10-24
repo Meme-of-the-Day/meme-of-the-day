@@ -8,6 +8,10 @@ const Main = styled.div`
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
+
+  @media screen and (min-width: 1280px) {
+    justify-content: flex-start;
+  }
 `;
 
 const CustomMeme = styled(Meme)`
@@ -19,7 +23,7 @@ const CustomMeme = styled(Meme)`
   }
 
   @media screen and (min-width: 1280px) {
-    width: 30%;
+    width: 33%;
   }
 `;
 
