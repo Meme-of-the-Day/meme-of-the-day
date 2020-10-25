@@ -105,9 +105,10 @@ export class Textile {
     const now = new Date().getTime();
     const fileName = `${file.name}`;
     const uploadName = `${now}_${fileName}`;
-    const location = `'memes/'${uploadName}`;
+    const location = `memes/${uploadName}`;
 
-    const raw = await this.bucketInfo.bucket.pushPath(this.bucketInfo.bucketKey, location, file.stream());
+    const buf = await file.arrayBuffer();
+    const raw = await this.bucketInfo.bucket.pushPath(this.bucketInfo.bucketKey, location, buf);
 
     return {
       cid: raw.path.cid.toString(),
@@ -140,7 +141,7 @@ export class Textile {
     this.memeIndex = await this.getIndexAtKey();
   }
   
-  private getIdentity(key: string): PrivateKey {
+  private getIdentity(key?: string): PrivateKey {
     if (key) {
       return PrivateKey.fromString(key);
     }

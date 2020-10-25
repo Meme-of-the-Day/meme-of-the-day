@@ -196,8 +196,13 @@ const Upload: React.FC<{}> = () => {
         const address = networkData.address
         const contract = new web3.eth.Contract(abi, address)
         //minting the NFT
-        contract.methods.mint(meme.cid).send({ from: accounts[0] }, (error: any, txHash: string) => {
+        contract.methods.mint(meme.cid).send({ from: accounts[0] }, async (error: any, txHash: string) => {
           setTxDetails({ ...txDetails, 'IPFS Hash': meme.cid, 'Transaction Hash': { isLink: true, link: `https://mumbai-explorer.matic.today/tx/${txHash}`, text: txHash } });
+          await textile.uploadMemeMetadata({
+            ...meme,
+            txHash: txHash,
+            owner: accounts[0]
+          });
           setUploadStatus(UploadStatus.COMPLETED);
         }).catch((error: any) => {
           alert("Something went wrong! Please try again")
