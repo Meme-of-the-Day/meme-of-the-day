@@ -13,7 +13,18 @@ export class Textile {
     bucketKey?: string
   };
 
-  constructor(apiKey?: string, userKey?: string) {
+  private static singletonInstace: Textile;
+
+  public static async getInstance(): Promise<Textile> {
+    if (!Textile.singletonInstace) {
+      Textile.singletonInstace = new Textile();
+      await Textile.singletonInstace.init();
+    }
+
+    return Textile.singletonInstace;
+  }
+
+  private constructor(apiKey?: string, userKey?: string) {
     if (apiKey) {
       this.apiKey = apiKey;
     } else {
@@ -41,7 +52,7 @@ export class Textile {
     };
   }
 
-  public async init() {
+  private async init() {
     if (!this.identity) {
       throw new Error('Identity not set');
     }
@@ -68,7 +79,7 @@ export class Textile {
       throw new Error('No bucket client or root key');
     }
 
-    let memes: Array<MemeMetadata> = new Array();
+    let memes: Array<MemeMetadata> = [];
 
     for (let path of this.memeIndex.paths) {
       const metadata = await this.bucketInfo.bucket.pullPath(this.bucketInfo.bucketKey, path)
@@ -86,7 +97,7 @@ export class Textile {
     return memes;
   }
 
-  public async uploadMeme(file: File, path: string): Promise<MemeMetadata> {
+  public async uploadMeme(file: File): Promise<MemeMetadata> {
     if (!this.bucketInfo.bucket || !this.bucketInfo.bucketKey) {
       throw new Error('No bucket client or root key');
     }
@@ -94,9 +105,10 @@ export class Textile {
     const now = new Date().getTime();
     const fileName = `${file.name}`;
     const uploadName = `${now}_${fileName}`;
-    const location = `${path}${uploadName}`;
+    const location = `memes/${uploadName}`;
 
-    const raw = await this.bucketInfo.bucket.pushPath(this.bucketInfo.bucketKey, location, file.stream());
+    const buf = await file.arrayBuffer();
+    const raw = await this.bucketInfo.bucket.pushPath(this.bucketInfo.bucketKey, location, buf);
 
     return {
       cid: raw.path.cid.toString(),
@@ -129,7 +141,7 @@ export class Textile {
     this.memeIndex = await this.getIndexAtKey();
   }
   
-  private getIdentity(key: string): PrivateKey {
+  private getIdentity(key?: string): PrivateKey {
     if (key) {
       return PrivateKey.fromString(key);
     }
