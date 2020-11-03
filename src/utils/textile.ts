@@ -1,5 +1,5 @@
-import { Buckets, KeyInfo, PrivateKey, WithKeyInfoOptions } from '@textile/hub'
-import { MemeIndex, MemeMetadata } from './Types'
+import { Buckets, Client, KeyInfo, PrivateKey, ThreadID, WithKeyInfoOptions } from '@textile/hub'
+import { MemeMetadata } from './Types'
 
 export class Textile {
   private apiKey: string;
@@ -7,11 +7,16 @@ export class Textile {
   private identity: PrivateKey;
   private keyInfo: KeyInfo;
   private keyInfoOptions: WithKeyInfoOptions;
-  private memeIndex: MemeIndex;
+  private client: Client;
+  private threadID: ThreadID;
   private bucketInfo: {
     bucket?: Buckets,
     bucketKey?: string
   };
+
+  private dbThreadID = 'bafktwlstng3ix7pveabwrnxpg7pn55pw6dxzqyblmlvusyuqf7h4ori';
+  private dbName = 'memeofthedaydb';
+  private memeCollectionName = 'mememetadata';
 
   private static singletonInstace: Textile;
 
@@ -47,9 +52,6 @@ export class Textile {
 
     this.identity = this.getIdentity(this.userKey);
     this.bucketInfo = {};
-    this.memeIndex = {
-      paths: new Array<string>()
-    };
   }
 
   private async init() {
@@ -59,6 +61,9 @@ export class Textile {
     const buckets = await Buckets.withKeyInfo(this.keyInfo, this.keyInfoOptions);
     // Authorize the user and your insecure keys with getToken
     await buckets.getToken(this.identity);
+
+    this.client = await Client.withKeyInfo(this.keyInfo);
+    await this.client.getToken(this.identity);
 
     const buck = await buckets.getOrCreate('memeoftheday');
 
@@ -70,31 +75,17 @@ export class Textile {
       bucket: buckets,
       bucketKey: buck.root.key
     };
-
-    this.memeIndex = await this.getIndexAtKey();
   }
 
   public async getAllMemes() {
-    if (!this.bucketInfo.bucket || !this.bucketInfo.bucketKey) {
-      throw new Error('No bucket client or root key');
+    if (!this.bucketInfo.bucket || !this.bucketInfo.bucketKey || !this.client) {
+      throw new Error('No bucket or client or root key');
     }
 
-    let memes: Array<MemeMetadata> = [];
+    // TODO: Implement a pagination logic to query only liited data.
+    const memeList = await this.client.find<MemeMetadata>(ThreadID.fromString(this.dbThreadID), this.memeCollectionName, {});
 
-    for (let path of this.memeIndex.paths) {
-      const metadata = await this.bucketInfo.bucket.pullPath(this.bucketInfo.bucketKey, path)
-
-      const { value } = await metadata.next();
-      let str = "";
-      for (var i = 0; i < value.length; i++) {
-        str += String.fromCharCode(parseInt(value[i]));
-      }
-
-      const meme: MemeMetadata = JSON.parse(str)
-      memes.push(meme);
-    }
-
-    return memes;
+    return memeList;
   }
 
   public async uploadMeme(file: File): Promise<MemeMetadata> {
@@ -119,28 +110,13 @@ export class Textile {
   }
 
   public async uploadMemeMetadata(metadata: MemeMetadata) {
-    if (!this.bucketInfo.bucket || !this.bucketInfo.bucketKey) {
-      throw new Error('No bucket client or root key');
+    if (!this.bucketInfo.bucket || !this.bucketInfo.bucketKey || !this.client) {
+      throw new Error('No bucket or client or root key');
     }
 
-    const metaBuffer = Buffer.from(JSON.stringify(metadata, null, 2));
-    const metaname = `${metadata.date}_${metadata.name}.json`;
-    const path = `metadata/${metaname}`;
-    await this.bucketInfo.bucket.pushPath(this.bucketInfo.bucketKey, path, metaBuffer);
-
-    await this.syncDatabase();
-    this.memeIndex.paths.push(path);
-    await this.storeIndex(this.memeIndex);
+    await this.client.create(ThreadID.fromString(this.dbThreadID), this.memeCollectionName, [metadata]);
   }
 
-  private async syncDatabase() {
-    if (!this.bucketInfo.bucket || !this.bucketInfo.bucketKey) {
-      throw new Error('No bucket client or root key');
-    }
-
-    this.memeIndex = await this.getIndexAtKey();
-  }
-  
   private getIdentity(key?: string): PrivateKey {
     if (key) {
       return PrivateKey.fromString(key);
@@ -150,43 +126,5 @@ export class Textile {
     this.userKey = identity.toString();
 
     return identity;
-  }
-
-  private async getIndexAtKey() {
-    if (!this.bucketInfo.bucket || !this.bucketInfo.bucketKey) {
-      throw new Error('No bucket client or root key');
-    }
-
-    try {
-      const metadata = this.bucketInfo.bucket.pullPath(this.bucketInfo.bucketKey, 'index.json');
-      const { value } = await metadata.next();
-
-      let str = "";
-      for (var i = 0; i < value.length; i++) {
-        str += String.fromCharCode(parseInt(value[i]));
-      }
-
-      const index: MemeIndex = JSON.parse(str);
-      return index;
-    } catch (error) {
-      const index = {
-        paths: new Array<string>()
-      };
-
-      await this.storeIndex(index);
-
-      return index;
-    }
-  }
-
-  private async storeIndex(index: MemeIndex) {
-    if (!this.bucketInfo.bucket || !this.bucketInfo.bucketKey) {
-      throw new Error('No bucket client or root key');
-    }
-
-    const buf = Buffer.from(JSON.stringify(index, null, 2));
-    const path = `index.json`;
-
-    await this.bucketInfo.bucket.pushPath(this.bucketInfo.bucketKey, path, buf);
   }
 }
