@@ -171,10 +171,14 @@ const Upload: React.FC<{}> = () => {
   const uploadMeme = async (event: React.FormEvent) => {
     event.preventDefault();
 
-    const textile = await Textile.getInstance();
-
     setSubmitEnabled(false);
     setUploadStatus(UploadStatus.IN_PROGRESS);
+
+    (window as any).onbeforeunload = function() {
+      return "Are you sure you want to navigate away?";
+    }
+
+    const textile = await Textile.getInstance();
 
     const meme = imageFile && await textile.uploadMeme(imageFile);
 
