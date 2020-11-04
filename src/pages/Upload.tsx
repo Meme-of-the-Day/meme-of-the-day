@@ -246,7 +246,7 @@ const Upload: React.FC<{}> = () => {
                   })
                 }
               </TxDetails>
-              <CustomLink to="/">View your memes</CustomLink>
+              <CustomLink to="/me">View your memes</CustomLink>
             </ViewDetails>
           }
         </Inputs>
