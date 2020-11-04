@@ -15,6 +15,7 @@ type IMeme = {
 
 interface Props {
   meme: MemeMetadata
+  className?: string
 }
 
 const Main = styled.div`
@@ -69,7 +70,7 @@ const CustomButton = styled(Button)`
   margin: 4px 0px;
 `;
 
-const Meme: React.FC<Props> = ({ meme }) => {
+const Meme: React.FC<Props> = ({ className, meme }) => {
   const vote = () => {
     if (window.confirm("Owner of this meme is:\n" + meme.owner + "\n\nWould you like to vote for this Meme?")) {
       if (meme.likes) {
@@ -91,7 +92,7 @@ const Meme: React.FC<Props> = ({ meme }) => {
   }
 
   return (
-    <Main className='MemeOfTheDay'>
+    <Main className={`${className} MemeOfTheDay`}>
       <img src={`https://hub.textile.io/ipfs/${meme.cid}`} alt="" />
       <Meta>
         <VoteCount>Votes: {meme.likes}</VoteCount>
