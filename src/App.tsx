@@ -18,6 +18,15 @@ const Message = styled.div`
   padding: 8px;
 `;
 
+const Footer = styled.footer`
+  padding: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: ${({ theme }) => theme.colors.blue50};
+  border-top: 1px solid ${({ theme }) => theme.colors.blue};
+`;
+
 const App: React.FC = () => {
   return (
     <ThemeProvider theme={theme}>
@@ -31,6 +40,9 @@ const App: React.FC = () => {
             <Route exact path="/" component={Home} />
           </Switch>
         </AppBody>
+        <Footer>
+          Powered by&nbsp;<strong>Matic</strong>
+        </Footer>
       </Router>
     </ThemeProvider>
   );
