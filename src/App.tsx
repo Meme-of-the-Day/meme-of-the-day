@@ -6,9 +6,12 @@ import theme from './theme';
 import AppBar from './components/appBar/AppBar';
 import Home from './pages/Home';
 import Upload from './pages/Upload';
+import MyMemes from './pages/MyMemes';
 
 const AppBody = styled.main`
   flex: 1;
+  display: flex;
+  flex-direction: column;
 `;
 
 const Message = styled.div`
@@ -24,6 +27,7 @@ const App: React.FC = () => {
           <Message><em>Discover, vote, comment, upload, and own your favorite memes</em></Message>
           <Switch>
             <Route exact path="/upload" component={Upload} />
+            <Route exact path="/me" component={MyMemes} />
             <Route exact path="/" component={Home} />
           </Switch>
         </AppBody>
