@@ -33,6 +33,7 @@
     "babel-preset-stage-3": "6.24.1",
     "babel-register": "^6.26.0",
     "bootstrap": "4.3.1",
+    "dayjs": "^1.9.5",
     "ethers": "^5.0.14",
     "isomorphic-ws": "^4.0.1",
     "react": "^16.13.1",

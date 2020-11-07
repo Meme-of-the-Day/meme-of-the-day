@@ -3,7 +3,8 @@ import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 
 import { Textile } from '../utils/textile';
-import MemesHandler from '../abis/MemeOfTheDay.json';
+import Web3 from 'web3';
+const MemesHandler = require('../abis/MemeOfTheDay.json');
 
 enum UploadStatus {
   NOT_STARTED = 0,
@@ -64,6 +65,7 @@ const Inputs = styled.div`
   flex-direction: column;
   align-items: center;
   padding-top: 20px;
+  margin-right: 20px;
 `;
 
 const Preview = styled.div`
@@ -169,10 +171,14 @@ const Upload: React.FC<{}> = () => {
   const uploadMeme = async (event: React.FormEvent) => {
     event.preventDefault();
 
-    const textile = await Textile.getInstance();
-
     setSubmitEnabled(false);
     setUploadStatus(UploadStatus.IN_PROGRESS);
+
+    (window as any).onbeforeunload = function() {
+      return "Are you sure you want to navigate away?";
+    }
+
+    const textile = await Textile.getInstance();
 
     const meme = imageFile && await textile.uploadMeme(imageFile);
 
@@ -182,17 +188,18 @@ const Upload: React.FC<{}> = () => {
 
       console.log("Submitting the form...storing meme on blockchain");
 
-      const web3 = window.web3;
-      const accounts = await web3.eth.getAccounts();
+      let web3 = new Web3(Web3.givenProvider || "ws://localhost:8545");
+      const accounts = await web3.eth.requestAccounts();
       console.log('Using account in Metamask: ' + accounts[0]);
       console.log('Meme will be stored with account: ' + accounts[0]);
 
       const networkId = await web3.eth.net.getId();
       console.log('Metamask is connected to: ' + networkId);
       const networkData = MemesHandler.networks[networkId];
+
       if (networkData) {
         //fetching the contract
-        const abi = MemesHandler.abi
+        const abi = MemesHandler.abi;
         const address = networkData.address
         const contract = new web3.eth.Contract(abi, address)
         //minting the NFT
@@ -239,7 +246,7 @@ const Upload: React.FC<{}> = () => {
                   })
                 }
               </TxDetails>
-              <CustomLink to="/">View your memes</CustomLink>
+              <CustomLink to="/me">View your memes</CustomLink>
             </ViewDetails>
           }
         </Inputs>

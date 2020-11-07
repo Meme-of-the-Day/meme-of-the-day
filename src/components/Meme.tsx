@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import dayjs from 'dayjs';
 
 import Button from './Button';
 import voteIcon from '../assets/vote.svg';
@@ -15,6 +16,7 @@ type IMeme = {
 
 interface Props {
   meme: MemeMetadata
+  className?: string
 }
 
 const Main = styled.div`
@@ -69,7 +71,16 @@ const CustomButton = styled(Button)`
   margin: 4px 0px;
 `;
 
-const Meme: React.FC<Props> = ({ meme }) => {
+const Date = styled.div`
+  color: ${({theme}) => theme.colors.gray};
+  font-size: 12px;
+
+  strong {
+    font-size: 14px;
+  }
+`;
+
+const Meme: React.FC<Props> = ({ className, meme }) => {
   const vote = () => {
     if (window.confirm("Owner of this meme is:\n" + meme.owner + "\n\nWould you like to vote for this Meme?")) {
       if (meme.likes) {
@@ -91,7 +102,7 @@ const Meme: React.FC<Props> = ({ meme }) => {
   }
 
   return (
-    <Main className='MemeOfTheDay'>
+    <Main className={`${className} MemeOfTheDay`}>
       <img src={`https://hub.textile.io/ipfs/${meme.cid}`} alt="" />
       <Meta>
         <VoteCount>Votes: {meme.likes}</VoteCount>
@@ -99,6 +110,7 @@ const Meme: React.FC<Props> = ({ meme }) => {
           <CustomButton text='Vote' icon={voteIcon} onClick={() => vote()} />
           <CustomButton text='Bid' icon={bidIcon} onClick={() => bid()} />
           <CustomButton text='Favorite' icon={favoriteIcon} onClick={() => favorite()} />
+          <Date>Minted at:<br /><strong>{dayjs(parseInt(meme.date)).format('DD-MM-YYYY')}</strong></Date>
         </Buttons>
       </Meta>
     </Main>
