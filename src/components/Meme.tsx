@@ -110,7 +110,7 @@ const Meme: React.FC<Props> = ({ className, meme }) => {
           <CustomButton text='Vote' icon={voteIcon} onClick={() => vote()} />
           <CustomButton text='Bid' icon={bidIcon} onClick={() => bid()} />
           <CustomButton text='Favorite' icon={favoriteIcon} onClick={() => favorite()} />
-          <Date>Minted at:<br /><strong>{dayjs(parseInt(meme.date)).format('DD-MM-YYYY')}</strong></Date>
+          <Date>Minted on:<br />{dayjs(parseInt(meme.date)).format('DD MMM, YYYY')}</Date>
         </Buttons>
       </Meta>
     </Main>
