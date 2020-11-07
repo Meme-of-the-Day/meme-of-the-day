@@ -81,7 +81,6 @@ const Date = styled.div`
 `;
 
 const Meme: React.FC<Props> = ({ className, meme }) => {
-  console.log(meme);
   const vote = () => {
     if (window.confirm("Owner of this meme is:\n" + meme.owner + "\n\nWould you like to vote for this Meme?")) {
       if (meme.likes) {
