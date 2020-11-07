@@ -1,4 +1,4 @@
-import { Buckets, Client, KeyInfo, PrivateKey, ThreadID, WithKeyInfoOptions } from '@textile/hub'
+import { Buckets, Client, KeyInfo, PrivateKey, ThreadID, Where, WithKeyInfoOptions } from '@textile/hub'
 import { MemeMetadata } from './Types'
 
 export class Textile {
@@ -78,12 +78,23 @@ export class Textile {
   }
 
   public async getAllMemes() {
-    if (!this.bucketInfo.bucket || !this.bucketInfo.bucketKey || !this.client) {
-      throw new Error('No bucket or client or root key');
+    if (!this.client) {
+      throw new Error('No client');
     }
 
     // TODO: Implement a pagination logic to query only liited data.
     const memeList = await this.client.find<MemeMetadata>(ThreadID.fromString(this.dbThreadID), this.memeCollectionName, {});
+
+    return memeList;
+  }
+
+  public async getUserMemes(owner: string) {
+    if (!this.client || !owner) {
+      throw new Error('No client or owner address');
+    }
+
+    const query = new Where('owner').eq(owner);
+    const memeList = await this.client.find<MemeMetadata>(ThreadID.fromString(this.dbThreadID), this.memeCollectionName, query);
 
     return memeList;
   }
