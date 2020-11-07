@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import dayjs from 'dayjs';
 
 import Button from './Button';
 import voteIcon from '../assets/vote.svg';
@@ -70,7 +71,17 @@ const CustomButton = styled(Button)`
   margin: 4px 0px;
 `;
 
+const Date = styled.div`
+  color: ${({theme}) => theme.colors.gray};
+  font-size: 12px;
+
+  strong {
+    font-size: 14px;
+  }
+`;
+
 const Meme: React.FC<Props> = ({ className, meme }) => {
+  console.log(meme);
   const vote = () => {
     if (window.confirm("Owner of this meme is:\n" + meme.owner + "\n\nWould you like to vote for this Meme?")) {
       if (meme.likes) {
@@ -100,6 +111,7 @@ const Meme: React.FC<Props> = ({ className, meme }) => {
           <CustomButton text='Vote' icon={voteIcon} onClick={() => vote()} />
           <CustomButton text='Bid' icon={bidIcon} onClick={() => bid()} />
           <CustomButton text='Favorite' icon={favoriteIcon} onClick={() => favorite()} />
+          <Date>Minted at:<br /><strong>{dayjs(parseInt(meme.date)).format('DD-MM-YYYY')}</strong></Date>
         </Buttons>
       </Meta>
     </Main>
