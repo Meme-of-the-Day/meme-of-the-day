@@ -1,12 +1,12 @@
-# Meme of the Day dApp -- Filecoin & Matic
+# Meme of the Day DApp -- Filecoin & Matic
 
-Discover, upload, vote, comment, and buy your favorite memes in different categories. Discover top memes and share profits from the sales of upvoted memes with this dApp.
+Meme of the Day is a fun social platform featuring memes stored as NFT collectibles, where users may uniquely share profits by voting on their favorite memes. They may also discover, upload, comment, favorite, share, buy, and sell memes in different categories.
 
-<img src="/src/content/Meme-of-the-Day-dApp-Meme-Final.png" width=25% height=25% align="right">Meme of the Day is a fun social platform that was created for use with Matic blockchain and Filecoin for minting and saving meme images as non-fungible tokens (NFTs). The dApp interface runs in a web browser, where the user uploads a meme image that runs through a smart contract to mint an NFT on Matic network. The meme image is then saved in Filecoin via Textile Hub, as well as in IPFS cache for hot storage. The "View Your Memes" page then displays the uploaded image and its associated Matic transaction details. This is our initial proof of concept functionality. It is possible to get the dApp up and running in a local development environment with local Ethereum blockchain (Ganache) or with Matic Mumbai testnet.
+<img src="/src/content/Meme-of-the-Day-dApp-Meme-Final.png" width=25% height=25% align="right">Meme of the Day was created for use with Matic Network and IPFS/Filecoin for minting and saving meme images as non-fungible tokens (NFTs). The dApp interface runs in a web browser, where the user uploads a meme image that runs through a smart contract to mint an NFT on Matic Network. The meme image is then saved in IPFS/Filecoin via Textile Hub, and the user sees the associated hash and the Matic transaction details. The "View Your Memes" page then displays the uploaded image. It is possible to get the dApp up and running in a local development environment with local Ethereum blockchain (Ganache) or with Matic Mumbai testnet.
 
-Beyond this, our vision is for people to upvote, comment, favorite, and buy memes they like, which would be featured in categorized ranking lists updated in real-time. Users will have the unique opportunity to share in the profits of memes sold that they upvoted. By paying a small amount for votes, they are incentivized to participate in Meme of the Day for fun and for profit. This dApp can also prove that a user is either the true creator or the first to claim title to a particular meme that they upload.
+Beyond this, our vision is for people to upvote, comment, favorite, share, buy, and sell memes they like, which would be featured in categorized ranking lists updated in real-time. Users will have the unique opportunity to share in the profits of memes sold that they upvoted. By paying a small amount for votes, they are incentivized to participate in Meme of the Day for fun and for profit. This dApp can also prove that a user is either the true creator or the first to claim title to a particular meme that they upload.
 
-We are hopeful that Meme of the Day and the future voting mechanism would offer a unique, gamified social experience for users and encourage more interest in Filecoin, Matic, and Web3 technology.
+We are hopeful that Meme of the Day and the voting mechanism would offer a unique, gamified social experience for users and encourage more interest in Matic, Filecoin, and Web3 technology.
 
 **Dependencies are:**
 - Node.js at least version 10.1x.x
