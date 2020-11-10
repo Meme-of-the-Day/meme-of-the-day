@@ -211,9 +211,15 @@ const Upload: React.FC<{}> = () => {
             owner: accounts[0]
           });
           setUploadStatus(UploadStatus.COMPLETED);
+          (window as any).onbeforeunload = function() {
+            return "Are you sure you want to navigate away?";
+          }
         }).catch((error: any) => {
           alert("Something went wrong! Please try again")
           setUploadStatus(UploadStatus.NOT_STARTED);
+          (window as any).onbeforeunload = function() {
+            return "Are you sure you want to navigate away?";
+          }
         });
       }
     }
