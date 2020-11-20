@@ -1,5 +1,5 @@
 import { Buckets, Client, KeyInfo, PrivateKey, ThreadID, Where, WithKeyInfoOptions } from '@textile/hub'
-import { MemeMetadata } from './Types'
+import { MemeMetadata, TokenMetadata } from './Types'
 
 export class Textile {
   private apiKey: string;
@@ -17,6 +17,7 @@ export class Textile {
   private dbThreadID = 'bafktwlstng3ix7pveabwrnxpg7pn55pw6dxzqyblmlvusyuqf7h4ori';
   private dbName = 'memeofthedaydb';
   private memeCollectionName = 'mememetadata';
+  private ipfsGateway = 'https://hub.textile.io';
 
   private static singletonInstace: Textile;
 
@@ -126,6 +127,22 @@ export class Textile {
     }
 
     await this.client.create(ThreadID.fromString(this.dbThreadID), this.memeCollectionName, [metadata]);
+  }
+
+  public async uploadTokenMetadata(metadata: TokenMetadata) {
+    if (!this.bucketInfo.bucket || !this.bucketInfo.bucketKey) {
+      throw new Error('No bucket client or root key');
+    }
+
+    const now = new Date().getTime();
+    const fileName = `${metadata.name}`;
+    const uploadName = `${now}_${fileName}`;
+    const location = `tokenmetadata/${uploadName}`;
+
+    const buf = Buffer.from(JSON.stringify(metadata, null, 2))
+    const raw = await this.bucketInfo.bucket.pushPath(this.bucketInfo.bucketKey, location, buf);
+
+    return `${this.ipfsGateway}/ipfs/${raw.path.cid.toString()}`;
   }
 
   private getIdentity(key?: string): PrivateKey {
