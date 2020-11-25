@@ -173,8 +173,6 @@ export class Textile {
     const identity = PrivateKey.fromRandom();
     this.userKey = identity.toString();
 
-    console.log(this.userKey);
-
     return identity;
   }
 }
