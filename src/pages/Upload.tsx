@@ -195,27 +195,23 @@ const Upload: React.FC<{}> = () => {
 
       const networkId = await web3.eth.net.getId();
       console.log('Metamask is connected to: ' + networkId);
-      const networkData = MemesHandler.networks[networkId];
+      const contractAddress = "0x1d19c3B1F75F3855471c6917354EB3f0D58E9A24";
+      const abi = MemesHandler.abi;
 
-      if (networkData) {
-        //fetching the contract
-        const abi = MemesHandler.abi;
-        const address = networkData.address
-        const contract = new web3.eth.Contract(abi, address)
-        //minting the NFT
-        contract.methods.mint(meme.cid).send({ from: accounts[0] }, async (error: any, txHash: string) => {
-          setTxDetails({ ...txDetails, 'IPFS Hash': meme.cid, 'Transaction Hash': { isLink: true, link: `https://mumbai-explorer.matic.today/tx/${txHash}`, text: txHash } });
-          await textile.uploadMemeMetadata({
-            ...meme,
-            txHash: txHash,
-            owner: accounts[0]
-          });
-          setUploadStatus(UploadStatus.COMPLETED);
-        }).catch((error: any) => {
-          alert("Something went wrong! Please try again")
-          setUploadStatus(UploadStatus.NOT_STARTED);
+      const contract = new web3.eth.Contract(abi, contractAddress);
+
+      contract.methods.mint(meme.cid).send({ from: accounts[0] }, async (error: any, txHash: string) => {
+        setTxDetails({ ...txDetails, 'IPFS Hash': meme.cid, 'Transaction Hash': { isLink: true, link: `https://mumbai-explorer.matic.today/tx/${txHash}`, text: txHash } });
+        await textile.uploadMemeMetadata({
+          ...meme,
+          txHash: txHash,
+          owner: accounts[0]
         });
-      }
+        setUploadStatus(UploadStatus.COMPLETED);
+      }).catch((error: any) => {
+        alert("Something went wrong! Please try again")
+        setUploadStatus(UploadStatus.NOT_STARTED);
+      });
     }
   };
 
