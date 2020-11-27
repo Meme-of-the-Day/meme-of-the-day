@@ -145,6 +145,26 @@ export class Textile {
     return `${this.ipfsGateway}/ipfs/${raw.path.cid.toString()}`;
   }
 
+  public async updateMemeVotes(userId: string, tokenID: string, isLiked: boolean, isAdd: boolean) {
+    if (!this.client) {
+      throw new Error('No client');
+    }
+
+    // Ideally we need not query the instance here to update.
+    // TODO, use collections write-validator to run validations on writes.
+    const query = new Where('tokenID').eq(tokenID);
+    const memeList = await this.client.find<MemeMetadata>(ThreadID.fromString(this.dbThreadID), this.memeCollectionName, query);
+    let voteList = isLiked ? memeList[0].likedBy : memeList[0].dislikedBy;
+
+    if (isAdd) {
+      voteList?.add(userId);
+    } else {
+      voteList?.delete(userId);
+    }
+
+    await this.client.save(ThreadID.fromString(this.dbThreadID), this.memeCollectionName, memeList);
+  }
+
   private getIdentity(key?: string): PrivateKey {
     if (key) {
       return PrivateKey.fromString(key);

@@ -11,7 +11,9 @@ export interface MemeMetadata {
     owner?: string,  // account address
     user?: string,   // public key
     tags?: Array<string>,
-    price?: number
+    price?: number,
+    likedBy?: Set<string>,  // set of user ids who liked this meme.
+    dislikedBy?: Set<string>    // set of user ids who disliked this meme.
 }
 
 export interface TokenMetadata {
@@ -117,6 +119,20 @@ export const Schema = {
                 "price": {
                     "type": "number",
                     "description": "Selling price set by the owner."
+                },
+                "likedBy": {
+                    "type": "array",
+                    "description": "List of users who liked the meme.",
+                    "items": {
+                        "type": "string"
+                    }
+                },
+                "dislikedBy": {
+                    "type": "array",
+                    "description": "List of users who dis-liked the meme.",
+                    "items": {
+                        "type": "string"
+                    }
                 }
             },
             "required": [
