@@ -1,18 +1,17 @@
-# Meme of the Day DApp -- Filecoin & Matic
+# Meme of the Day DApp -- Matic & IPFS
 
 Meme of the Day is a fun social platform featuring memes stored as NFT collectibles, where users may uniquely share profits by voting on their favorite memes. They may also discover, upload, comment, favorite, share, buy, and sell memes in different categories.
 
-<img src="/src/content/Meme-of-the-Day-dApp-Meme-Final.png" width=25% height=25% align="right">Meme of the Day was created for use with Matic Network and IPFS/Filecoin for minting and saving meme images as non-fungible tokens (NFTs). The dApp interface runs in a web browser, where the user uploads a meme image that runs through a smart contract to mint an NFT on Matic Network. The meme image is then saved in IPFS/Filecoin via Textile Hub, and the user sees the associated hash and the Matic transaction details. The "View Your Memes" page then displays the uploaded image. It is possible to get the dApp up and running in a local development environment with local Ethereum blockchain (Ganache) or with Matic Mumbai testnet.
+<img src="/src/content/Meme-of-the-Day-dApp-Meme-Final.png" width=25% height=25% align="right">Meme of the Day was created for use with Matic Network and IPFS for minting and saving meme images as non-fungible tokens (NFTs). The dApp interface runs in a web browser, where the user uploads a meme image that runs through a smart contract to mint an NFT on Matic Network. The meme image is then saved in IPFS via Textile Hub, and the user sees the associated hash and the Matic transaction details. The "View Your Memes" page then displays the uploaded image. It is possible to get the dApp up and running in a local development environment with local Ethereum blockchain (Ganache) or with Matic Mumbai testnet.
 
 Beyond this, our vision is for people to upvote, comment, favorite, share, buy, and sell memes they like, which would be featured in categorized ranking lists updated in real-time. Users will have the unique opportunity to share in the profits of memes sold that they upvoted. By paying a small amount for votes, they are incentivized to participate in Meme of the Day for fun and for profit. This dApp can also prove that a user is either the true creator or the first to claim title to a particular meme that they upload.
 
-We are hopeful that Meme of the Day and the voting mechanism would offer a unique, gamified social experience for users and encourage more interest in Matic, Filecoin, and Web3 technology.
+We are hopeful that Meme of the Day and the voting mechanism would offer a unique, gamified social experience for users and encourage more interest in Matic, IPFS, and Web3 technology.
 
 **Dependencies are:**
 - Node.js at least version 10.1x.x
 > Download from https://nodejs.org and follow installation instructions
 - Truffle
-- Filecoin
 - Matic Network
 - IPFS
 - Textile
@@ -24,8 +23,8 @@ We are hopeful that Meme of the Day and the voting mechanism would offer a uniqu
 
 ## Installation procedure for local blockchain (ex: ganache-cli)
 ```shell
-git clone https://github.com/Meme-of-the-Day/meme-of-the-day-filecoin
-cd meme-of-the-day-filecoin
+git clone https://github.com/Meme-of-the-Day/meme-of-the-day-ipfs
+cd meme-of-the-day-ipfs
 source .env (// Insert the values in the file)
 npm install
 npm run deploydev (Spins up ganache-cli and deploys contract(s) on the chain)
@@ -42,8 +41,8 @@ Here is additional information on how to deploy smart contract and dApp on Matic
 https://docs.matic.network/docs/develop/truffle<br>
 
 ```shell
-git clone https://github.com/Meme-of-the-Day/meme-of-the-day-filecoin
-cd meme-of-the-day-filecoin
+git clone https://github.com/Meme-of-the-Day/meme-of-the-day-ipfs
+cd meme-of-the-day-ipfs
 npm install
 npm run migratematic
 npm run start
