@@ -1,12 +1,9 @@
-import { Buckets, Client, KeyInfo, PrivateKey, ThreadID, Where, WithKeyInfoOptions } from '@textile/hub'
+import { Buckets, Client, PrivateKey, ThreadID, Where, UserAuth } from '@textile/hub'
 import { MemeMetadata, TokenMetadata } from './Types'
 
 export class Textile {
-  private apiKey: string;
-  private userKey: string;
   private identity: PrivateKey;
-  private keyInfo: KeyInfo;
-  private keyInfoOptions: WithKeyInfoOptions;
+  private userAuth: UserAuth;
   private client: Client;
   private threadID: ThreadID;
   private bucketInfo: {
@@ -30,40 +27,14 @@ export class Textile {
     return Textile.singletonInstace;
   }
 
-  private constructor(apiKey?: string, userKey?: string) {
-    if (apiKey) {
-      this.apiKey = apiKey;
-    } else {
-      this.apiKey = process.env.REACT_APP_API_KEY as string;
-    }
-
-    if (userKey) {
-      this.userKey = userKey;
-    } else {
-      this.userKey = process.env.REACT_APP_USER_KEY as string;
-    }
-
-    this.keyInfo = {
-      key: this.apiKey
-    };
-
-    this.keyInfoOptions = {
-      debug: false
-    };
-
-    this.identity = this.getIdentity(this.userKey);
-    this.bucketInfo = {};
-  }
-
   private async init() {
-    if (!this.identity) {
-      throw new Error('Identity not set');
-    }
-    const buckets = await Buckets.withKeyInfo(this.keyInfo, this.keyInfoOptions);
-    // Authorize the user and your insecure keys with getToken
+    this.identity = await this.getIdentity();
+    this.userAuth = await this.getUserAuth();
+
+    const buckets = await Buckets.withUserAuth(this.userAuth);
     await buckets.getToken(this.identity);
 
-    this.client = await Client.withKeyInfo(this.keyInfo);
+    this.client = await Client.withUserAuth(this.userAuth);
     await this.client.getToken(this.identity);
 
     const buck = await buckets.getOrCreate('memeoftheday');
@@ -165,13 +136,26 @@ export class Textile {
     await this.client.save(ThreadID.fromString(this.dbThreadID), this.memeCollectionName, memeList);
   }
 
-  private getIdentity(key?: string): PrivateKey {
-    if (key) {
-      return PrivateKey.fromString(key);
-    }
+  private async getUserAuth(): Promise<UserAuth> {
+    const hubAuthURL = `${process.env.REACT_APP_HUB_BROWSER_AUTH_URL as string}/userauth`;
 
-    const identity = PrivateKey.fromRandom();
-    this.userKey = identity.toString();
+    const response = await fetch(hubAuthURL, {
+      method: 'GET'
+    });
+
+    const auth: UserAuth = await response.json();
+
+    return auth;
+  }
+
+  private async getIdentity(): Promise<PrivateKey> {
+    const hubIdentityURL = `${process.env.REACT_APP_HUB_BROWSER_AUTH_URL as string}/identity`;
+
+    const response = await fetch(hubIdentityURL, {
+      method: 'GET'
+    });
+
+    const identity: PrivateKey = await response.json();
 
     return identity;
   }
