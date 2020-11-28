@@ -10,8 +10,9 @@
     "lint:all": "yarn lint && yarn tscCheck",
     "lint:fx": "eslint src/**/*.ts --fix",
     "lint": "eslint src/**/*.ts",
-    "dev": "ts-node-dev --respawn ./src/index.ts",
-    "prod": "ts-node src/index.ts",
+    "dev:watch": "ts-node-dev --respawn ./src/index.ts",
+    "dev": "ts-node src/index.ts",
+    "start": "tsc && node dist/index.js",
     "tscCheck": "tsc --noEmit"
   },
   "keywords": [],
