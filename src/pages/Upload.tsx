@@ -1,20 +1,19 @@
-import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
-import styled from 'styled-components';
+import React, { useState } from "react";
+import { Link } from "react-router-dom";
+import styled from "styled-components";
 
-import { Textile } from '../utils/textile';
-import Web3 from 'web3';
-const MemesHandler = require('../abis/MemeOfTheDay.json');
+import { Textile } from "../utils/textile";
+import Web3 from "web3";
+const MemesHandler = require("../abis/MemeOfTheDay.json");
 
 enum UploadStatus {
   NOT_STARTED = 0,
   IN_PROGRESS = 1,
-  COMPLETED = 2,
+  COMPLETED = 2
 }
 
 const Main = styled.div`
-  max-width: 900px;
-  margin: 0 auto;
+  padding: 20px;
 `;
 
 const Title = styled.p`
@@ -24,39 +23,40 @@ const Title = styled.p`
 const UploadForm = styled.form`
   margin-top: 50px;
   display: flex;
-  justify-content: space-around;
   flex-direction: column;
   align-items: center;
 
   @media screen and (min-width: 768px) {
     flex-direction: row;
     align-items: flex-start;
+    padding: 0 30px;
   }
 `;
 
 const Label = styled.label`
   border: 1px solid ${({ theme }) => theme.colors.black};
-  padding: 15px 30px;
+  padding: 15px;
   color: ${({ theme }) => theme.colors.black};
-  width: 220px;
+  width: 170px;
   text-align: center;
-  border-radius: 4px;
+  border-radius: 8px;
 `;
 
 const SubmitButton = styled.button`
   border: 1px solid ${({ theme }) => theme.colors.black};
-  padding: 15px 30px;
+  padding: 20px 30px;
   color: ${({ theme }) => theme.colors.black};
-  width: 220px;
+  width: 250px;
   text-align: center;
   margin: 24px 0;
-  border-radius: 4px;
+  border-radius: 8px;
   background-color: ${({ theme }) => theme.colors.white};
-  font-size: 16px;
+  font-size: 18px;
 
   &:disabled {
-    border: 1px solid ${({ theme }) => theme.colors.gray100};
-    color: ${({ theme }) => theme.colors.gray100};
+    border: 1px solid ${({ theme }) => theme.colors.black};
+    background-color: ${({ theme }) => theme.colors.gray100};
+    color: ${({ theme }) => theme.colors.white};
   }
 `;
 
@@ -66,6 +66,11 @@ const Inputs = styled.div`
   align-items: center;
   padding-top: 20px;
   margin-right: 20px;
+  width: 100%;
+
+  @media screen and (min-width: 768px) {
+    width: 30%;
+  }
 `;
 
 const Preview = styled.div`
@@ -126,47 +131,170 @@ const DetailDiv = styled.div`
   margin: 10px 0;
 `;
 
+const Message = styled.div`
+  font-size: 12px;
+  color: ${({ theme }) => theme.colors.gray50};
+  margin-top: 4px;
+`;
+
+const Field = styled.div`
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  margin: 20px 0;
+
+  label {
+    font-size: 16px;
+    color: ${({ theme }) => theme.colors.black};
+    margin-bottom: 5px;
+  }
+
+  input {
+    appearance: none;
+    border: none;
+    border-bottom: 1px solid ${({ theme }) => theme.colors.black};
+    font-size: 14px;
+    background: none;
+  }
+
+  textarea {
+    border: 1px solid ${({ theme }) => theme.colors.black};
+    padding: 10px;
+  }
+
+  textarea,
+  input {
+    &::placeholder {
+      color: ${({ theme }) => theme.colors.gray50};
+    }
+    &.dark-placeholder {
+      &::placeholder {
+        color: ${({ theme }) => theme.colors.black};
+      }
+    }
+  }
+
+  .input-container {
+    width: 100%;
+    input {
+      width: 80%;
+    }
+  }
+`;
+
+const Switch = styled.div`
+  display: flex;
+  align-items: center;
+  width: 100%;
+
+  /* The switch - the box around the slider */
+  .switch {
+    margin-left: 4px;
+    position: relative;
+    display: inline-block;
+    width: 30px;
+    height: 15px;
+  }
+
+  /* Hide default HTML checkbox */
+  .switch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+  }
+
+  /* The slider */
+  .slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #dde9fd;
+    -webkit-transition: 0.4s;
+    transition: 0.4s;
+  }
+
+  .slider:before {
+    position: absolute;
+    content: "";
+    height: 10px;
+    width: 10px;
+    left: 4px;
+    bottom: 3px;
+    background-color: ${({ theme }) => theme.colors.blue};
+    -webkit-transition: 0.4s;
+    transition: 0.4s;
+  }
+
+  input:focus + .slider {
+    box-shadow: 0 0 1px #2196f3;
+  }
+
+  input:checked + .slider:before {
+    transform: translateX(12px);
+  }
+
+  /* Rounded sliders */
+  .slider.round {
+    border-radius: 34px;
+  }
+
+  .slider.round:before {
+    border-radius: 50%;
+  }
+`;
+
 type DetailsObject = {
-  isLink?: boolean,
-  link?: string,
-  text?: string,
+  isLink?: boolean;
+  link?: string;
+  text?: string;
 };
 
 const renderDetails = (value: string | DetailsObject) => {
   switch (typeof value) {
-    case 'string':
+    case "string":
       return value;
-    case 'object':
+    case "object":
       if (value.isLink) {
-        return <a target="_blank" rel="noopener noreferrer" href={value.link}>{value.text || value.link}</a>
+        return (
+          <a target="_blank" rel="noopener noreferrer" href={value.link}>
+            {value.text || value.link}
+          </a>
+        );
       }
       return null;
     default:
       return null;
   }
-}
+};
 
 const Upload: React.FC<{}> = () => {
   const [submitEnabled, setSubmitEnabled] = useState(false);
-  const [image, setImage] = useState<string>('');
+  const [image, setImage] = useState<string>("");
   const [imageFile, setImageFile] = useState<File>();
   const [txDetails, setTxDetails] = useState({});
   const [uploadStatus, setUploadStatus] = useState(UploadStatus.NOT_STARTED);
   const [viewDetails, setViewDetails] = useState(false);
 
   const changeHandler = async (event: React.ChangeEvent) => {
-    event.preventDefault()
+    event.preventDefault();
     // processing file
     if (!(event.target as HTMLInputElement).files) {
       return;
     }
 
     const file = ((event.target as HTMLInputElement).files as FileList)[0];
+    if (file.size > 3072000) {
+      alert("Please upload an image that has a max size of 3 MB");
+      return;
+    }
     setImageFile(file);
     const imageUrl = URL.createObjectURL(file);
     setImage(imageUrl);
     setSubmitEnabled(true);
-  }
+  };
 
   const uploadMeme = async (event: React.FormEvent) => {
     event.preventDefault();
@@ -176,11 +304,33 @@ const Upload: React.FC<{}> = () => {
 
     (window as any).onbeforeunload = function() {
       return "Are you sure you want to navigate away?";
+    };
+
+    const {
+      memeName: { value: memeName },
+      description: { value: description },
+      onSale: { checked: onSale },
+      price: { value: price }
+    } = event.target as HTMLFormElement;
+
+    if (!memeName) {
+      alert("Please enter a name for your meme");
+      setUploadStatus(UploadStatus.NOT_STARTED);
+      setSubmitEnabled(true);
+      return;
     }
+
+    if (onSale && !price) {
+      alert("Please enter a price for your meme");
+      setUploadStatus(UploadStatus.NOT_STARTED);
+      setSubmitEnabled(true);
+      return;
+    }
+    debugger;
 
     const textile = await Textile.getInstance();
 
-    const meme = imageFile && await textile.uploadMeme(imageFile);
+    const meme = imageFile && (await textile.uploadMeme(imageFile));
 
     if (meme) {
       console.log(meme.cid);
@@ -190,74 +340,128 @@ const Upload: React.FC<{}> = () => {
 
       let web3 = new Web3(Web3.givenProvider || "ws://localhost:8545");
       const accounts = await web3.eth.requestAccounts();
-      console.log('Using account in Metamask: ' + accounts[0]);
-      console.log('Meme will be stored with account: ' + accounts[0]);
+      console.log("Using account in Metamask: " + accounts[0]);
+      console.log("Meme will be stored with account: " + accounts[0]);
 
       const networkId = await web3.eth.net.getId();
-      console.log('Metamask is connected to: ' + networkId);
+      console.log("Metamask is connected to: " + networkId);
       const contractAddress = "0x1d19c3B1F75F3855471c6917354EB3f0D58E9A24";
       const abi = MemesHandler.abi;
 
       const contract = new web3.eth.Contract(abi, contractAddress);
 
-      contract.methods.mint(meme.cid).send({ from: accounts[0] }, async (error: any, txHash: string) => {
-        setTxDetails({ ...txDetails, 'IPFS Hash': meme.cid, 'Transaction Hash': { isLink: true, link: `https://mumbai-explorer.matic.today/tx/${txHash}`, text: txHash } });
-        await textile.uploadMemeMetadata({
-          ...meme,
-          txHash: txHash,
-          owner: accounts[0]
+      contract.methods
+        .mint(meme.cid)
+        .send({ from: accounts[0] }, async (error: any, txHash: string) => {
+          setTxDetails({
+            ...txDetails,
+            "IPFS Hash": meme.cid,
+            "Transaction Hash": {
+              isLink: true,
+              link: `https://mumbai-explorer.matic.today/tx/${txHash}`,
+              text: txHash
+            }
+          });
+          await textile.uploadMemeMetadata({
+            ...meme,
+            txHash: txHash,
+            owner: accounts[0],
+            name: memeName,
+            description,
+            onSale,
+            price
+          });
+          setUploadStatus(UploadStatus.COMPLETED);
+        })
+        .catch((error: any) => {
+          alert("Something went wrong! Please try again");
+          setUploadStatus(UploadStatus.NOT_STARTED);
         });
-        setUploadStatus(UploadStatus.COMPLETED);
-      }).catch((error: any) => {
-        alert("Something went wrong! Please try again")
-        setUploadStatus(UploadStatus.NOT_STARTED);
-      });
     }
   };
 
   return (
     <Main>
-      <Title>Upload a Meme</Title>
+      <Title>Upload Your Meme Collectible</Title>
 
       <UploadForm onSubmit={uploadMeme}>
         <Inputs>
-          <input type="file" name="meme" id="meme" hidden onChange={changeHandler} />
+          <input
+            type="file"
+            name="meme"
+            id="meme"
+            hidden
+            onChange={changeHandler}
+            accept=".png,.jpg,.jpeg,.gif,.svg"
+          />
           <Label htmlFor="meme">Select Image File</Label>
-          <SubmitButton disabled={!submitEnabled} type="submit">Upload and Mint NFT</SubmitButton>
-          {
-            uploadStatus === UploadStatus.IN_PROGRESS && <em>Uploading...</em>
-          }
-          {
-            uploadStatus === UploadStatus.COMPLETED && <em>Uploaded Successfully!</em>
-          }
-          {
-            uploadStatus === UploadStatus.COMPLETED &&
+          <Message>JPG, PNG, GIF or SVG. 3 MB max</Message>
+          <Field>
+            <label htmlFor="memeName">Name</label>
+            <input name="memeName" type="text" placeholder="Your meme's name" />
+          </Field>
+          <Field>
+            <label htmlFor="description">Description</label>
+            <textarea
+              name="description"
+              placeholder="More details (optional)"
+              rows={5}
+            />
+          </Field>
+          <Switch>
+            Put on sale?
+            <label className="switch">
+              <input name="onSale" type="checkbox" />
+              <span className="slider round"></span>
+            </label>
+          </Switch>
+          <Field>
+            <label htmlFor="price">Sale Price</label>
+            <div className="input-container">
+              <input
+                name="price"
+                placeholder="0"
+                className="dark-placeholder"
+                type="number"
+              />
+              MATIC
+            </div>
+          </Field>
+          <SubmitButton disabled={!submitEnabled} type="submit">
+            Upload and Mint NFT
+          </SubmitButton>
+          {uploadStatus === UploadStatus.IN_PROGRESS && <em>Uploading...</em>}
+          {uploadStatus === UploadStatus.COMPLETED && (
+            <em>Uploaded Successfully!</em>
+          )}
+          {uploadStatus === UploadStatus.COMPLETED && (
             <ViewDetails>
-              <span className="btn" onClick={() => setViewDetails(!viewDetails)}>View transaction details</span>
-              <TxDetails className={viewDetails ? 'open' : ''}>
-                {
-                  Object.keys(txDetails).map((key) => {
-                    return <DetailDiv>
-                      <em>{key}</em>: {renderDetails(txDetails[key])}</DetailDiv>
-                  })
-                }
+              <span
+                className="btn"
+                onClick={() => setViewDetails(!viewDetails)}
+              >
+                View transaction details
+              </span>
+              <TxDetails className={viewDetails ? "open" : ""}>
+                {Object.keys(txDetails).map(key => {
+                  return (
+                    <DetailDiv>
+                      <em>{key}</em>: {renderDetails(txDetails[key])}
+                    </DetailDiv>
+                  );
+                })}
               </TxDetails>
               <CustomLink to="/me">View your memes</CustomLink>
             </ViewDetails>
-          }
+          )}
         </Inputs>
         <Preview>
           Preview
-          <Image>
-            {
-              image && <img src={image} alt="" />
-            }
-          </Image>
+          <Image>{image && <img src={image} alt="" />}</Image>
         </Preview>
       </UploadForm>
-
     </Main>
   );
-}
+};
 
 export default Upload;
