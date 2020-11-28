@@ -59,6 +59,13 @@ const OutbountLinks = styled.a`
   ${links}
 `;
 
+const Login = styled.button`
+  background: none;
+  border: none;
+  font-size: 16px;
+  ${links}
+`;
+
 const Footer = styled.div`
   width: 100%;
   height: 50px;
@@ -71,6 +78,8 @@ const Footer = styled.div`
 
 const Navigation: React.FC<{ className?: string }> = ({ className }) => {
   const uiContext = useContext(UIContext);
+
+  const login = () => {};
 
   return (
     <Main className={className} onClick={uiContext.toggleHamburger}>
@@ -90,6 +99,7 @@ const Navigation: React.FC<{ className?: string }> = ({ className }) => {
         </CustomNavLink>
       </MainLinks>
       <OtherLinks>
+        <Login onClick={login}>Login</Login>
         <OutbountLinks href="https://twitter.com">Twitter</OutbountLinks>
       </OtherLinks>
       <Footer>Powered By Matic</Footer>
