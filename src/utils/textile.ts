@@ -199,7 +199,6 @@ export class Textile {
       userKey = PrivateKey.fromRandom().toString();
     }
 
-    console.log(userKey);
     const key: PrivateKey = PrivateKey.fromString(userKey);
 
     return key;
