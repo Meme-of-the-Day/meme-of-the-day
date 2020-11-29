@@ -18,7 +18,7 @@ import api from "./api";
 
 dotenv.config();
 
-if (!process.env.USER_API_KEY || !process.env.USER_API_SECRET) {
+if (!process.env.APP_PROD_API_KEY || !process.env.APP_PROD_API_SECRET) {
   process.exit(1);
 }
 
@@ -30,7 +30,7 @@ const app = websockify(new koa());
 app.use( json() );
 app.use( logger() );
 app.use( bodyParser() );
-app.use(cors());
+app.use( cors() );
 
 /**
  * Start HTTP Routes

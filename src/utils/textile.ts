@@ -1,9 +1,10 @@
-import { Buckets, Client, PrivateKey, ThreadID, Where, UserAuth } from '@textile/hub'
+import { Buckets, Client, PrivateKey, ThreadID, Where, UserAuth, KeyInfo } from '@textile/hub'
 import { MemeMetadata, TokenMetadata } from './Types'
 
 export class Textile {
   private identity: PrivateKey;
   private userAuth: UserAuth;
+  private keyInfo: KeyInfo;
   private client: Client;
   private threadID: ThreadID;
   private bucketInfo: {
@@ -11,11 +12,12 @@ export class Textile {
     bucketKey?: string
   };
 
-  private dbThreadID = 'bafktwlstng3ix7pveabwrnxpg7pn55pw6dxzqyblmlvusyuqf7h4ori';
+  private dbThreadID: string;
+  private hubAuthURL: string;
   private dbName = 'memeofthedaydb';
   private memeCollectionName = 'mememetadata';
   private ipfsGateway = 'https://hub.textile.io';
-
+ 
   private static singletonInstace: Textile;
 
   public static async getInstance(): Promise<Textile> {
@@ -28,13 +30,27 @@ export class Textile {
   }
 
   private async init() {
+    const env = process.env.NODE_ENV;
+    this.hubAuthURL = env !== 'production' ? process.env.REACT_APP_TEST_HUB_BROWSER_AUTH_URL as string
+     : process.env.REACT_APP_TEST_HUB_BROWSER_AUTH_URL as string;
+
     this.identity = await this.getIdentity();
-    this.userAuth = await this.getUserAuth();
+    let buckets: Buckets;
 
-    const buckets = await Buckets.withUserAuth(this.userAuth);
+    if (env !== "production") {
+      this.dbThreadID = process.env.REACT_APP_TEST_THREADID as string;
+      this.keyInfo = await this.getKeyInfo();
+      buckets = await Buckets.withKeyInfo(this.keyInfo);
+      this.client = await Client.withKeyInfo(this.keyInfo);
+    } else {
+      this.dbThreadID = process.env.REACT_APP_PROD_THREADID as string;
+      this.userAuth = await this.getUserAuth();
+
+      buckets = await Buckets.withUserAuth(this.userAuth);
+      this.client = await Client.withUserAuth(this.userAuth);
+    }
+
     await buckets.getToken(this.identity);
-
-    this.client = await Client.withUserAuth(this.userAuth);
     await this.client.getToken(this.identity);
 
     const buck = await buckets.getOrCreate('memeoftheday');
@@ -54,7 +70,7 @@ export class Textile {
       throw new Error('No client');
     }
 
-    // TODO: Implement a pagination logic to query only liited data.
+    // TODO: Implement a pagination logic to query only limited data.
     const memeList = await this.client.find<MemeMetadata>(ThreadID.fromString(this.dbThreadID), this.memeCollectionName, {});
 
     return memeList;
@@ -69,6 +85,17 @@ export class Textile {
     const memeList = await this.client.find<MemeMetadata>(ThreadID.fromString(this.dbThreadID), this.memeCollectionName, query);
 
     return memeList;
+  }
+
+  public async getMemeMetadata(tokenID: string) {
+    if (!this.client) {
+      throw new Error('No client');
+    }
+
+    const query = new Where('tokenID').eq(tokenID);
+    const memeList = await this.client.find<MemeMetadata>(ThreadID.fromString(this.dbThreadID), this.memeCollectionName, query);
+
+    return memeList[0];
   }
 
   public async uploadMeme(file: File): Promise<MemeMetadata> {
@@ -136,8 +163,20 @@ export class Textile {
     await this.client.save(ThreadID.fromString(this.dbThreadID), this.memeCollectionName, memeList);
   }
 
+  private async getKeyInfo(): Promise<KeyInfo> {
+    const hubKeyURL = `${this.hubAuthURL}/keyinfo`;
+
+    const response = await fetch(hubKeyURL, {
+      method: 'GET'
+    });
+
+    const auth: KeyInfo = await response.json();
+
+    return auth;
+  }
+
   private async getUserAuth(): Promise<UserAuth> {
-    const hubAuthURL = `${process.env.REACT_APP_HUB_BROWSER_AUTH_URL as string}/userauth`;
+    const hubAuthURL = `${this.hubAuthURL}/userauth`;
 
     const response = await fetch(hubAuthURL, {
       method: 'GET'
@@ -149,14 +188,20 @@ export class Textile {
   }
 
   private async getIdentity(): Promise<PrivateKey> {
-    const hubIdentityURL = `${process.env.REACT_APP_HUB_BROWSER_AUTH_URL as string}/identity`;
+    const hubIdentityURL = `${this.hubAuthURL}/identity`;
 
     const response = await fetch(hubIdentityURL, {
       method: 'GET'
     });
 
-    const identity: PrivateKey = await response.json();
+    let userKey = await response.text();
+    if (!userKey) {
+      userKey = PrivateKey.fromRandom().toString();
+    }
 
-    return identity;
+    console.log(userKey);
+    const key: PrivateKey = PrivateKey.fromString(userKey);
+
+    return key;
   }
 }

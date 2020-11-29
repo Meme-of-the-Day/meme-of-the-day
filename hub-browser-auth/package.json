@@ -13,7 +13,8 @@
     "dev:watch": "ts-node-dev --respawn ./src/index.ts",
     "dev": "ts-node src/index.ts",
     "start": "tsc && node dist/index.js",
-    "tscCheck": "tsc --noEmit"
+    "tscCheck": "tsc --noEmit",
+    "tsc": "tsc"
   },
   "keywords": [],
   "devDependencies": {
@@ -37,7 +38,8 @@
   },
   "dependencies": {
     "@koa/cors": "^3.1.0",
-    "@textile/hub": "^2.0.0",
+    "@textile/hub": "^2.0.2",
+    "@textile/security": "^0.6.2",
     "dotenv": "^8.2.0",
     "emittery": "^0.7.0",
     "isomorphic-ws": "^4.0.1",

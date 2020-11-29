@@ -1,8 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 /** Import our server libraries */
 import Router from "koa-router";
-import { PrivateKey, UserAuth } from "@textile/hub";
-import { getAPISig } from './hub-helpers';
+import { createUserAuth, KeyInfo } from '@textile/security';
 
 /**
  * Start API Routes
@@ -19,25 +18,34 @@ const api = new Router({
  */
 api.get( '/userauth', async (ctx, next: () => Promise<any>) => {
   /** Get API authorization for the user */
-  const auth = await getAPISig()
-
-  /** Include the token in the auth payload */
-  const credentials: UserAuth = {
-    ...auth,
-    key: process.env.USER_API_KEY as string,
-  };
+  const auth = await createUserAuth(
+    process.env.APP_PROD_API_KEY as string, // User group key
+    process.env.APP_PROD_API_SECRET as string  // User group key secret
+  );
 
   /** Return the auth in a JSON object */
-  ctx.body = credentials
+  ctx.body = auth
+
+  await next();
+});
+
+api.get( '/keyinfo', async (ctx, next: () => Promise<any>) => {
+  const keyInfo: KeyInfo = {
+    key: process.env.APP_TEST_API_KEY as string
+  }
+
+  /** Return the auth in a JSON object */
+  ctx.body = keyInfo
 
   await next();
 });
 
 api.get('/identity', async (ctx, next: () => Promise<any>) => {
   /** Get API authorization for the user */
-  const userKey = process.env.APP_USER_KEY as string;
+  const userKey = process.env.NODE_ENV === "production" ? process.env.APP_PROD_USER_KEY as string
+    : process.env.APP_TEST_USER_KEY as string;
 
-  ctx.body = PrivateKey.fromString(userKey);
+  ctx.body = userKey;
 
   await next();
 });
