@@ -1,0 +1,202 @@
+{
+  "contractName": "EIP712Domain",
+  "abi": [
+    {
+      "inputs": [],
+      "name": "DOMAIN_SEPARATOR",
+      "outputs": [
+        {
+          "internalType": "bytes32",
+          "name": "",
+          "type": "bytes32"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    }
+  ],
+  "metadata": "{\"compiler\":{\"version\":\"0.6.12+commit.27d51765\"},\"language\":\"Solidity\",\"output\":{\"abi\":[{\"inputs\":[],\"name\":\"DOMAIN_SEPARATOR\",\"outputs\":[{\"internalType\":\"bytes32\",\"name\":\"\",\"type\":\"bytes32\"}],\"stateMutability\":\"view\",\"type\":\"function\"}],\"devdoc\":{\"kind\":\"dev\",\"methods\":{},\"stateVariables\":{\"DOMAIN_SEPARATOR\":{\"details\":\"EIP712 Domain Separator\"}},\"version\":1},\"userdoc\":{\"kind\":\"user\",\"methods\":{},\"version\":1}},\"settings\":{\"compilationTarget\":{\"/mnt/c/Users/lorenzo/desktop/Personale/meme-of-the-day-ipfs/src/contracts/src/EIP712Domain.sol\":\"EIP712Domain\"},\"evmVersion\":\"istanbul\",\"libraries\":{},\"metadata\":{\"bytecodeHash\":\"ipfs\"},\"optimizer\":{\"enabled\":false,\"runs\":200},\"remappings\":[]},\"sources\":{\"/mnt/c/Users/lorenzo/desktop/Personale/meme-of-the-day-ipfs/src/contracts/src/EIP712Domain.sol\":{\"keccak256\":\"0xb230050cd3a2b051c70460fa0520894313e713b78005ab7153a7738aa61af676\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://20ff34cd18de1a008ee53762c1720983a93a96dffc078f099e6dc8ebec2d848a\",\"dweb:/ipfs/QmfAETpFyGaaBJMuBZhfjxv4kXqxiXeGHgfJ5WiRRA62QV\"]}},\"version\":1}",
+  "bytecode": "0x",
+  "deployedBytecode": "0x",
+  "immutableReferences": {},
+  "sourceMap": "",
+  "deployedSourceMap": "",
+  "source": "// SPDX-License-Identifier: MIT\r\n\r\npragma solidity 0.6.12;\r\n\r\nabstract contract EIP712Domain {\r\n    /**\r\n     * @dev EIP712 Domain Separator\r\n     */\r\n    bytes32 public DOMAIN_SEPARATOR;\r\n}\r\n",
+  "sourcePath": "/mnt/c/Users/lorenzo/desktop/Personale/meme-of-the-day-ipfs/src/contracts/src/EIP712Domain.sol",
+  "ast": {
+    "absolutePath": "/mnt/c/Users/lorenzo/desktop/Personale/meme-of-the-day-ipfs/src/contracts/src/EIP712Domain.sol",
+    "exportedSymbols": {
+      "EIP712Domain": [
+        159
+      ]
+    },
+    "id": 160,
+    "license": "MIT",
+    "nodeType": "SourceUnit",
+    "nodes": [
+      {
+        "id": 155,
+        "literals": [
+          "solidity",
+          "0.6",
+          ".12"
+        ],
+        "nodeType": "PragmaDirective",
+        "src": "35:23:2"
+      },
+      {
+        "abstract": true,
+        "baseContracts": [],
+        "contractDependencies": [],
+        "contractKind": "contract",
+        "documentation": null,
+        "fullyImplemented": true,
+        "id": 159,
+        "linearizedBaseContracts": [
+          159
+        ],
+        "name": "EIP712Domain",
+        "nodeType": "ContractDefinition",
+        "nodes": [
+          {
+            "constant": false,
+            "documentation": {
+              "id": 156,
+              "nodeType": "StructuredDocumentation",
+              "src": "100:49:2",
+              "text": " @dev EIP712 Domain Separator"
+            },
+            "functionSelector": "3644e515",
+            "id": 158,
+            "mutability": "mutable",
+            "name": "DOMAIN_SEPARATOR",
+            "nodeType": "VariableDeclaration",
+            "overrides": null,
+            "scope": 159,
+            "src": "155:31:2",
+            "stateVariable": true,
+            "storageLocation": "default",
+            "typeDescriptions": {
+              "typeIdentifier": "t_bytes32",
+              "typeString": "bytes32"
+            },
+            "typeName": {
+              "id": 157,
+              "name": "bytes32",
+              "nodeType": "ElementaryTypeName",
+              "src": "155:7:2",
+              "typeDescriptions": {
+                "typeIdentifier": "t_bytes32",
+                "typeString": "bytes32"
+              }
+            },
+            "value": null,
+            "visibility": "public"
+          }
+        ],
+        "scope": 160,
+        "src": "62:128:2"
+      }
+    ],
+    "src": "35:157:2"
+  },
+  "legacyAST": {
+    "absolutePath": "/mnt/c/Users/lorenzo/desktop/Personale/meme-of-the-day-ipfs/src/contracts/src/EIP712Domain.sol",
+    "exportedSymbols": {
+      "EIP712Domain": [
+        159
+      ]
+    },
+    "id": 160,
+    "license": "MIT",
+    "nodeType": "SourceUnit",
+    "nodes": [
+      {
+        "id": 155,
+        "literals": [
+          "solidity",
+          "0.6",
+          ".12"
+        ],
+        "nodeType": "PragmaDirective",
+        "src": "35:23:2"
+      },
+      {
+        "abstract": true,
+        "baseContracts": [],
+        "contractDependencies": [],
+        "contractKind": "contract",
+        "documentation": null,
+        "fullyImplemented": true,
+        "id": 159,
+        "linearizedBaseContracts": [
+          159
+        ],
+        "name": "EIP712Domain",
+        "nodeType": "ContractDefinition",
+        "nodes": [
+          {
+            "constant": false,
+            "documentation": {
+              "id": 156,
+              "nodeType": "StructuredDocumentation",
+              "src": "100:49:2",
+              "text": " @dev EIP712 Domain Separator"
+            },
+            "functionSelector": "3644e515",
+            "id": 158,
+            "mutability": "mutable",
+            "name": "DOMAIN_SEPARATOR",
+            "nodeType": "VariableDeclaration",
+            "overrides": null,
+            "scope": 159,
+            "src": "155:31:2",
+            "stateVariable": true,
+            "storageLocation": "default",
+            "typeDescriptions": {
+              "typeIdentifier": "t_bytes32",
+              "typeString": "bytes32"
+            },
+            "typeName": {
+              "id": 157,
+              "name": "bytes32",
+              "nodeType": "ElementaryTypeName",
+              "src": "155:7:2",
+              "typeDescriptions": {
+                "typeIdentifier": "t_bytes32",
+                "typeString": "bytes32"
+              }
+            },
+            "value": null,
+            "visibility": "public"
+          }
+        ],
+        "scope": 160,
+        "src": "62:128:2"
+      }
+    ],
+    "src": "35:157:2"
+  },
+  "compiler": {
+    "name": "solc",
+    "version": "0.6.12+commit.27d51765.Emscripten.clang"
+  },
+  "networks": {},
+  "schemaVersion": "3.3.2",
+  "updatedAt": "2020-11-29T16:59:37.366Z",
+  "devdoc": {
+    "kind": "dev",
+    "methods": {},
+    "stateVariables": {
+      "DOMAIN_SEPARATOR": {
+        "details": "EIP712 Domain Separator"
+      }
+    },
+    "version": 1
+  },
+  "userdoc": {
+    "kind": "user",
+    "methods": {},
+    "version": 1
+  }
+}
