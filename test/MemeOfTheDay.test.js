@@ -70,4 +70,14 @@ contract('Meme', (accounts) => {
     })
   })
 
+  describe('retrieving TokenID', async () => {
+    it('returns tokenID on behalf of hash', async () => {
+      // fetch TokenID form NFT stored with picture hash FFF567EAB5FFF
+      const TokenId = await contract.getTokenId('FFF567EAB5FFF')
+
+      //third NFT generated need to have TokenId = 3
+      assert.equal(TokenId, 3)
+    })
+  })
+
 })
