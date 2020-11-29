@@ -1,166 +1,90 @@
-import React from 'react';
-import styled from 'styled-components';
-import { Link, NavLink, useLocation } from 'react-router-dom';
+import React, { useContext } from "react";
+import styled from "styled-components";
+import { Link, useLocation } from "react-router-dom";
 
-import HamburgerMenu from './HamburgerMenu';
-import Search from './Search';
-import icon from '../../assets/icon.svg';
-import RankingIcon from '../../assets/svgComponents/ranking';
-import ActivityIcon from '../../assets/svgComponents/activity';
-import UploadIcon from '../../assets/svgComponents/upload';
-import MyMemesIcon from '../../assets/svgComponents/myMemes';
+import { UIContext, UIContextType } from "../../App";
+import Search from "./Search";
 
 const Main = styled.header`
   width: 100%;
-  height: 90px;
+  height: 56px;
   display: flex;
   align-items: center;
   justify-content: space-between;
   flex-wrap: wrap;
   padding: 8px;
-  border-bottom: 10px solid ${({ theme }) => theme.colors.blue};
-  position: fixed;
-  top: 0;
-  left: 0;
   background-color: ${({ theme }) => theme.colors.white};
 
   @media screen and (min-width: 768px) {
-    height: 60px;
-  }
-
-  @media screen and (min-width: 1280px) {
-    height: 70px;
-  }
-`;
-
-const Icon = styled(Link)`
-  display: none;
-  background: ${({ theme }) => `linear-gradient(to right, ${theme.colors.blue}, ${theme.colors.indigo})`};
-  padding: 8px;
-  border-radius: 4px;
-  align-items: center;
-  justify-content: center;
-
-  img {
-    width: 80%;
-  }
-
-  @media screen and (min-width: 768px) {
-    display: flex;
-  }
-`;
-
-const CustomHamburgerMenu = styled(HamburgerMenu)`
-  @media screen and (min-width: 768px) {
-    display: none;
+    height: 80px;
   }
 `;
 
 const Title = styled.span`
-  font-size: 28px;
-  margin: 0 16px;
-  width: 71%;
-  color: ${({ theme }) => theme.colors.blue100};
-
-  @media screen and (min-width: 768px) {
-    width: 30%;
-  }
+  font-size: 18px;
+  flex: 1;
+  color: ${({ theme }) => theme.colors.purple500};
+  padding-left: 10px;
+  font-weight: 500;
 
   @media screen and (min-width: 1280px) {
-    width: 20%;
-    max-width: 250px;
-  }
-`;
-
-const Nav = styled.nav`
-  width: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding-top: 16px;
-  overflow-x: auto;
-  
-  & > div {
-    margin: 0 16px;
-    font-size: 22px;
-    white-space: nowrap;
-    text-align: center;
-
-    &:first-of-type {
-      margin-left: 0;
-    }
-  }
-
-  @media screen and (min-width: 768px) {
-    width: 50%;
-    padding-top: 0;
-  }
-
-  @media screen and (min-width: 1280px) {
-    justify-content: flex-start;
-  }
-`;
-
-const StyledNavLink = styled(NavLink)`
-  color: ${({ theme }) => theme.colors.gray};
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-
-  .icon {
-    display: none;
-  }
-
-  &.active {
-    color: ${({ theme }) => theme.colors.blue};
-  }
-
-  @media screen and (min-width: 1280px) {
-    justify-content: space-between;
-    height: 45px;
-    margin: 0 16px;
-
-    .icon {
-      display: block;
-    }
+    font-size: 24px;
   }
 `;
 
 const CustomSearch = styled(Search)`
+  background-color: ${({ theme }) => theme.colors.purple100};
+  flex: 1;
+
   @media screen and (min-width: 768px) {
-    order: 1
+    order: 1;
+    max-width: 300px;
+  }
+`;
+
+const HamburgerIcon = styled.button`
+  height: 15px;
+  width: 20px;
+  background: none;
+  border: none;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0;
+
+  & > div {
+    width: 100%;
+    height: 3px;
+    background-color: ${({ theme }) => theme.colors.purple500};
+  }
+
+  @media screen and (min-width: 768px) {
+    display: none;
   }
 `;
 
 const AppBar: React.FC<{}> = () => {
   const location = useLocation();
-  return <Main>
-    <CustomHamburgerMenu />
-    <Icon to="/">
-      <img src={icon} alt="MoTD" />
-    </Icon>
-    <Title>Meme of the Day</Title>
-    <CustomSearch />
-    <Nav>
-      <StyledNavLink exact to='/'>
-        <RankingIcon className='icon' active={location.pathname === '/'} />
-        Rankings
-      </StyledNavLink>
-      <StyledNavLink to='/activity'>
-        <ActivityIcon className='icon' active={location.pathname === '/activity'} />
-        Activity
-      </StyledNavLink>
-      <StyledNavLink to='/upload'>
-        <UploadIcon className='icon' active={location.pathname === '/upload'} />
-        Upload
-      </StyledNavLink>
-      <StyledNavLink to='/me'>
-        <MyMemesIcon className='icon' active={location.pathname === '/me'} />
-        My Memes
-      </StyledNavLink>
-    </Nav>
-  </Main>;
-}
+  const uiContext = useContext<UIContextType>(UIContext);
+  const pageTitleFromRoute = {
+    "/": "Activity",
+    "/rankings": "Rankings",
+    "/upload": "Upload",
+    "/my-memes": "My Memes"
+  };
+
+  return (
+    <Main>
+      <HamburgerIcon onClick={uiContext.toggleHamburger}>
+        <div></div>
+        <div></div>
+        <div></div>
+      </HamburgerIcon>
+      <Title>{pageTitleFromRoute[location.pathname]}</Title>
+      <CustomSearch />
+    </Main>
+  );
+};
 
 export default AppBar;

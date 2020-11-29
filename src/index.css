@@ -12,7 +12,8 @@ body {
   width: 100%;
   margin: 0;
   padding: 0;
-  font-family: Roboto, Helvetica, sans-serif;
+  font-family: "Space Grotesk", Roboto, Helvetica, sans-serif;
+  background-color: #f2f7ff;
 }
 
 #root {
@@ -27,9 +28,8 @@ a {
   display: block;
 }
 
-main {
+/* main {
   margin-top: 90px;
-
 }
 @media screen and (min-width: 768px) {
   main {
@@ -41,4 +41,4 @@ main {
   main {
     margin-top: 70px;
   }
-}
+} */
