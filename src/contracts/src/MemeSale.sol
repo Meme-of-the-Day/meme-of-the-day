@@ -41,8 +41,19 @@ contract MemeSale is EIP712Domain {
             memeOfTheDay.ownerOf(tokenId) == msg.sender,
             "Only owner of token can put on sale"
         );
+        require(!isOnSale[tokenId], "Token is already on sale!");
 
         isOnSale[tokenId] = true;
+    }
+
+    function removeFromSale(uint256 tokenId) external {
+        require(
+            memeOfTheDay.ownerOf(tokenId) == msg.sender,
+            "Only owner of token can remove the token from sale"
+        );
+        require(isOnSale[tokenId], "Token is not on sale already!");
+
+        isOnSale[tokenId] = false;
     }
 
     function buy(

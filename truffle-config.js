@@ -2,13 +2,18 @@ require("babel-register");
 require("babel-polyfill");
 const HDWalletProvider = require("truffle-hdwallet-provider");
 const mnemonic = process.env.MNEMONIC;
+var networkId = process.env.npm_package_config_ganache_networkId;
+var gasPrice = process.env.npm_package_config_ganache_gasPrice;
+var gasLimit = process.env.npm_package_config_ganache_gasLimit;
 
 module.exports = {
   networks: {
     development: {
       host: "127.0.0.1",
       port: 8545,
-      network_id: "*",
+      network_id: networkId,
+      gas: gasLimit,
+      gasPrice: gasPrice,
     },
     matic: {
       provider: () =>

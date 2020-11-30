@@ -34,8 +34,6 @@ contract("MOTDTreasury", ([owner, ...accounts]) => {
   });
 
   it("withdraws correctly if it's owner to withdraw", async () => {
-    const owner = await this.wallet.owner();
-
     await this.wallet.withdraw(web3.utils.toWei("1", "ether"), {
       from: owner,
     });
@@ -47,8 +45,6 @@ contract("MOTDTreasury", ([owner, ...accounts]) => {
 
   it("doesn't withdraw if requested amount is higher than currently deposited value", async () => {
     try {
-      const owner = await this.wallet.owner();
-
       await this.wallet.withdraw(web3.utils.toWei("2", "ether"), {
         from: owner,
       });
