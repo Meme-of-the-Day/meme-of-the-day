@@ -26,20 +26,22 @@ const CustomMeme = styled(Meme)`
 
 const Memes: React.FC<{}> = () => {
   const [memeMetadata, setMemeMetadata] = useState<Array<MemeMetadata>>([]);
+  const [textileInstance, setTextile] = useState<Textile>();
 
   useEffect(() => {
     const init = async () => {
       const textile = await Textile.getInstance();
       const memes = await textile.getAllMemes();
       setMemeMetadata(memes);
+      setTextile(textile);
     };
     init();
   }, []);
 
   return (
     <Main>
-      {memeMetadata &&
-        memeMetadata.map(meme => <CustomMeme meme={meme} key={meme.cid} />)}
+      {memeMetadata && textileInstance &&
+        memeMetadata.map(meme => <CustomMeme meme={meme} textileInstance={textileInstance} key={meme.cid} />)}
     </Main>
   );
 };

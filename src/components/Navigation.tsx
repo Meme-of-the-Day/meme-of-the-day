@@ -3,7 +3,7 @@ import { NavLink } from "react-router-dom";
 import styled, { css } from "styled-components";
 
 import motd from "../assets/MOTD.svg";
-import { UIContext } from "../App";
+import { AuthContext, UIContext } from "../App";
 
 const Main = styled.nav`
   display: flex;
@@ -77,9 +77,12 @@ const Footer = styled.div`
 `;
 
 const Navigation: React.FC<{ className?: string }> = ({ className }) => {
+  const authContext = useContext(AuthContext);
   const uiContext = useContext(UIContext);
 
-  const login = () => {};
+  const login = async () => {
+    await authContext.authenticate();
+  };
 
   return (
     <Main className={className} onClick={uiContext.toggleHamburger}>
@@ -99,7 +102,7 @@ const Navigation: React.FC<{ className?: string }> = ({ className }) => {
         </CustomNavLink>
       </MainLinks>
       <OtherLinks>
-        <Login onClick={login}>Login</Login>
+        <Login onClick={async () => await login()}>Login</Login>
         <OutbountLinks href="https://twitter.com">Twitter</OutbountLinks>
       </OtherLinks>
       <Footer>Powered By Matic</Footer>

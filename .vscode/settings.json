@@ -1,3 +1,9 @@
 {
-    "solidity.compileUsingRemoteVersion": "v0.5.0+commit.1d4f565a"
+    "solidity.compileUsingRemoteVersion": "v0.5.0+commit.1d4f565a",
+    "appService.zipIgnorePattern": [
+        "node_modules{,/**}",
+        ".vscode{,/**}"
+    ],
+    "appService.defaultWebAppToDeploy": "/subscriptions/17f82692-00a9-48da-9983-0d0240e7c928/resourceGroups/MemeOfTheDayHubAuth/providers/Microsoft.Web/sites/MemeOfTheDayHubAuth",
+    "appService.deploySubpath": "hub-browser-auth"
 }

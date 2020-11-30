@@ -52,6 +52,7 @@ const CustomLink = styled(Link)`
 
 const MyMemes: React.FC<{}> = () => {
   const [memeMetadata, setMemeMetadata] = useState<Array<MemeMetadata>>([]);
+  const [textileInstance, setTextile] = useState<Textile>();
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
@@ -66,6 +67,7 @@ const MyMemes: React.FC<{}> = () => {
       console.log(connectedAccount);
       const memes = await textile.getUserMemes(connectedAccount[0]);
       setMemeMetadata(memes);
+      setTextile(textile);
       setLoading(false);
     }
     init();
@@ -76,7 +78,7 @@ const MyMemes: React.FC<{}> = () => {
       {
         loading ? 
         <Loader /> :
-        memeMetadata.length > 0 ? memeMetadata.map((meme) => <CustomMeme meme={meme} key={meme.cid} />) :
+        memeMetadata.length > 0 && textileInstance ? memeMetadata.map((meme) => <CustomMeme meme={meme} textileInstance={textileInstance} key={meme.cid} />) :
         <NoMemesMsg>
           <span>You haven't uploaded any memes.</span>
           <CustomLink to="/upload">Upload a meme</CustomLink>

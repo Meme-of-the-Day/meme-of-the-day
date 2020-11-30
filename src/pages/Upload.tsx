@@ -1,9 +1,11 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 
+import { UIContext, AuthContext } from "../App";
 import { Textile } from "../utils/textile";
-import Web3 from "web3";
+import { NetworkIDToAddress } from "../utils/Contracts";
+
 const MemesHandler = require("../abis/MemeOfTheDay.json");
 
 enum UploadStatus {
@@ -271,6 +273,8 @@ const renderDetails = (value: string | DetailsObject) => {
 };
 
 const Upload: React.FC<{}> = () => {
+  let authContext = useContext(AuthContext);
+
   const [submitEnabled, setSubmitEnabled] = useState(false);
   const [image, setImage] = useState<string>("");
   const [imageFile, setImageFile] = useState<File>();
@@ -297,6 +301,11 @@ const Upload: React.FC<{}> = () => {
   };
 
   const uploadMeme = async (event: React.FormEvent) => {
+    if (!authContext.authProvider) {
+      window.alert("Please login before uploading");
+      return;
+    }
+
     event.preventDefault();
 
     setSubmitEnabled(false);
@@ -312,6 +321,12 @@ const Upload: React.FC<{}> = () => {
       onSale: { checked: onSale },
       price: { value: price }
     } = event.target as HTMLFormElement;
+
+    let memePrice: number = parseInt(price);
+
+    if (isNaN(memePrice)) {
+      memePrice = 0;
+    }
 
     if (!memeName) {
       alert("Please enter a name for your meme");
@@ -332,27 +347,37 @@ const Upload: React.FC<{}> = () => {
 
     const meme = imageFile && (await textile.uploadMeme(imageFile));
 
-    if (meme) {
+    if (meme && authContext.authProvider) {
       console.log(meme.cid);
       setTxDetails({ ipfsHash: meme.cid });
 
       console.log("Submitting the form...storing meme on blockchain");
 
-      let web3 = new Web3(Web3.givenProvider || "ws://localhost:8545");
-      const accounts = await web3.eth.requestAccounts();
-      console.log("Using account in Metamask: " + accounts[0]);
-      console.log("Meme will be stored with account: " + accounts[0]);
+      //let web3 = new Web3(Web3.givenProvider || "ws://localhost:8545");
+      //const accounts = await uiContext.authProvider.web3.eth.requestAccounts();
+      console.log("Using account in Metamask: " + authContext.authProvider?.account);
+      console.log("Meme will be stored with account: " + authContext.authProvider?.account);
 
-      const networkId = await web3.eth.net.getId();
+      const networkId = await authContext.authProvider?.web3.eth.net.getId();
       console.log("Metamask is connected to: " + networkId);
-      const contractAddress = "0x1d19c3B1F75F3855471c6917354EB3f0D58E9A24";
+
+      let contractAddress: string;
+
+      if (networkId === 137) {
+        contractAddress = NetworkIDToAddress[137];
+      } else if (networkId === 80001) {
+        contractAddress = NetworkIDToAddress[80001];
+      } else {
+        throw new Error("chain not supported");
+      }
+
       const abi = MemesHandler.abi;
 
-      const contract = new web3.eth.Contract(abi, contractAddress);
+      const contract = new authContext.authProvider.web3.eth.Contract(abi, contractAddress);
 
       contract.methods
         .mint(meme.cid)
-        .send({ from: accounts[0] }, async (error: any, txHash: string) => {
+        .send({ from: authContext.authProvider?.account }, async (error: any, txHash: string) => {
           setTxDetails({
             ...txDetails,
             "IPFS Hash": meme.cid,
@@ -365,11 +390,11 @@ const Upload: React.FC<{}> = () => {
           await textile.uploadMemeMetadata({
             ...meme,
             txHash: txHash,
-            owner: accounts[0],
+            owner: authContext.authProvider?.account,
             name: memeName,
-            description,
-            onSale,
-            price
+            description: description,
+            onSale: onSale,
+            price: memePrice
           });
           setUploadStatus(UploadStatus.COMPLETED);
         })

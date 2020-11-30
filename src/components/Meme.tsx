@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 import styled from "styled-components";
 import dayjs from "dayjs";
 
@@ -6,6 +6,8 @@ import voteIcon from "../assets/vote.svg";
 import bidIcon from "../assets/bid.svg";
 import favoriteIcon from "../assets/favorite.svg";
 import { MemeMetadata } from "../utils/Types";
+import { Textile } from "../utils/textile";
+import { AuthContext } from "../App";
 
 type IMeme = {
   owner: string;
@@ -16,6 +18,7 @@ type IMeme = {
 interface Props {
   meme: MemeMetadata;
   className?: string;
+  textileInstance: Textile;
 }
 
 const Main = styled.div`
@@ -113,19 +116,33 @@ const Count = styled.span`
   font-weight: bold;
 `;
 
-const Meme: React.FC<Props> = ({ className, meme }) => {
-  const vote = () => {
-    if (
-      window.confirm(
-        "Owner of this meme is:\n" +
+const Meme: React.FC<Props> = ({ className, meme, textileInstance }) => {
+  const authContext = useContext(AuthContext);
+
+  const vote = async () => {
+
+    if (!authContext.authProvider) {
+      window.alert("Please login to vote");
+    }
+
+    if (authContext.authProvider) {
+      if (
+        window.confirm(
+          "Owner of this meme is:\n" +
           meme.owner +
           "\n\nWould you like to vote for this Meme?"
-      )
-    ) {
-      if (meme.likes) {
-        meme.likes += 1;
-      } else {
-        meme.likes = 1;
+        )
+      ) {
+        const isValid = await textileInstance.updateMemeVotes(authContext.authProvider.account, meme.cid, true, true);
+        if (isValid) {
+          if (meme.likes) {
+            meme.likes += 1;
+          } else {
+            meme.likes = 1;
+          }
+        } else {
+          window.alert("Vote cannot be added twice");
+        }
       }
     }
   };
@@ -175,7 +192,7 @@ const Meme: React.FC<Props> = ({ className, meme }) => {
       <img src={`https://hub.textile.io/ipfs/${meme.cid}`} alt="" />
       <Meta>
         <Buttons>
-          <Button onClick={() => vote()}>
+          <Button onClick={async () => await vote()}>
             <img src={voteIcon} alt="Vote" />
             <Count>{meme.likes}</Count>
           </Button>

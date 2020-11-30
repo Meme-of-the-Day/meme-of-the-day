@@ -1,12 +1,10 @@
-import { Buckets, Client, KeyInfo, PrivateKey, ThreadID, Where, WithKeyInfoOptions } from '@textile/hub'
+import { Buckets, Client, PrivateKey, ThreadID, Where, UserAuth, KeyInfo } from '@textile/hub'
 import { MemeMetadata, TokenMetadata } from './Types'
 
 export class Textile {
-  private apiKey: string;
-  private userKey: string;
   private identity: PrivateKey;
+  private userAuth: UserAuth;
   private keyInfo: KeyInfo;
-  private keyInfoOptions: WithKeyInfoOptions;
   private client: Client;
   private threadID: ThreadID;
   private bucketInfo: {
@@ -14,11 +12,12 @@ export class Textile {
     bucketKey?: string
   };
 
-  private dbThreadID = 'bafktwlstng3ix7pveabwrnxpg7pn55pw6dxzqyblmlvusyuqf7h4ori';
+  private dbThreadID: string;
+  private hubAuthURL: string;
   private dbName = 'memeofthedaydb';
   private memeCollectionName = 'mememetadata';
   private ipfsGateway = 'https://hub.textile.io';
-
+ 
   private static singletonInstace: Textile;
 
   public static async getInstance(): Promise<Textile> {
@@ -30,44 +29,32 @@ export class Textile {
     return Textile.singletonInstace;
   }
 
-  private constructor(apiKey?: string, userKey?: string) {
-    if (apiKey) {
-      this.apiKey = apiKey;
-    } else {
-      this.apiKey = process.env.REACT_APP_API_KEY as string;
-    }
-
-    if (userKey) {
-      this.userKey = userKey;
-    } else {
-      this.userKey = process.env.REACT_APP_USER_KEY as string;
-    }
-
-    this.keyInfo = {
-      key: this.apiKey
-    };
-
-    this.keyInfoOptions = {
-      debug: false
-    };
-
-    this.identity = this.getIdentity(this.userKey);
-    this.bucketInfo = {};
-  }
-
   private async init() {
-    if (!this.identity) {
-      throw new Error('Identity not set');
-    }
-    const buckets = await Buckets.withKeyInfo(this.keyInfo, this.keyInfoOptions);
-    // Authorize the user and your insecure keys with getToken
-    await buckets.getToken(this.identity);
+    const env = process.env.NODE_ENV;
+    this.hubAuthURL = env !== 'production' ? process.env.REACT_APP_TEST_HUB_BROWSER_AUTH_URL as string
+     : process.env.REACT_APP_TEST_HUB_BROWSER_AUTH_URL as string;
 
-    this.client = await Client.withKeyInfo(this.keyInfo);
+    this.identity = await this.getIdentity();
+    let buckets: Buckets;
+
+    if (env !== "production") {
+      this.dbThreadID = process.env.REACT_APP_TEST_THREADID as string;
+      this.keyInfo = await this.getKeyInfo();
+      buckets = await Buckets.withKeyInfo(this.keyInfo);
+      this.client = await Client.withKeyInfo(this.keyInfo);
+    } else {
+      this.dbThreadID = process.env.REACT_APP_PROD_THREADID as string;
+      this.userAuth = await this.getUserAuth();
+
+      buckets = await Buckets.withUserAuth(this.userAuth);
+      this.client = await Client.withUserAuth(this.userAuth);
+    }
+
+    await buckets.getToken(this.identity);
     await this.client.getToken(this.identity);
 
     const buck = await buckets.getOrCreate('memeoftheday');
-
+    //await this.client.updateCollection(ThreadID.fromString(this.dbThreadID), {name: this.memeCollectionName, schema: Schema});
     if (!buck.root) {
       throw new Error('Failed to get or create bucket');
     }
@@ -83,7 +70,7 @@ export class Textile {
       throw new Error('No client');
     }
 
-    // TODO: Implement a pagination logic to query only liited data.
+    // TODO: Implement a pagination logic to query only limited data.
     const memeList = await this.client.find<MemeMetadata>(ThreadID.fromString(this.dbThreadID), this.memeCollectionName, {});
 
     return memeList;
@@ -98,6 +85,17 @@ export class Textile {
     const memeList = await this.client.find<MemeMetadata>(ThreadID.fromString(this.dbThreadID), this.memeCollectionName, query);
 
     return memeList;
+  }
+
+  public async getMemeMetadata(cid: string) {
+    if (!this.client) {
+      throw new Error('No client');
+    }
+
+    const query = new Where('cid').eq(cid);
+    const memeList = await this.client.find<MemeMetadata>(ThreadID.fromString(this.dbThreadID), this.memeCollectionName, query);
+
+    return memeList[0];
   }
 
   public async uploadMeme(file: File): Promise<MemeMetadata> {
@@ -117,7 +115,14 @@ export class Textile {
       cid: raw.path.cid.toString(),
       name: fileName,
       path: location,
-      date: now.toString()
+      date: now.toString(),
+      txHash: "",
+      likes: 0,
+      dislikes: 0,
+      likedBy: new Array<string>(),
+      dislikedBy: new Array<string>(),
+      owner: "",
+      tags: new Array<string>()
     };
   }
 
@@ -145,34 +150,84 @@ export class Textile {
     return `${this.ipfsGateway}/ipfs/${raw.path.cid.toString()}`;
   }
 
-  public async updateMemeVotes(userId: string, tokenID: string, isLiked: boolean, isAdd: boolean) {
+  public async updateMemeVotes(userId: string, cid: string, isLiked: boolean, isAdd: boolean): Promise<boolean> {
     if (!this.client) {
       throw new Error('No client');
     }
 
     // Ideally we need not query the instance here to update.
     // TODO, use collections write-validator to run validations on writes.
-    const query = new Where('tokenID').eq(tokenID);
+    const query = new Where('cid').eq(cid);
     const memeList = await this.client.find<MemeMetadata>(ThreadID.fromString(this.dbThreadID), this.memeCollectionName, query);
     let voteList = isLiked ? memeList[0].likedBy : memeList[0].dislikedBy;
 
-    if (isAdd) {
-      voteList?.add(userId);
-    } else {
-      voteList?.delete(userId);
+    if (!voteList) {
+      memeList[0].likedBy = new Array<string>();
+      memeList[0].dislikedBy = new Array<string>();
+
+      voteList = isLiked ? memeList[0].likedBy : memeList[0].dislikedBy;
     }
+
+    if (isAdd) {
+      if (voteList.includes(userId)) {
+        return false;
+      } else {
+        voteList.push(userId);
+      }
+    } else {
+      const index = voteList.indexOf(userId);
+      if (index > -1) {
+        voteList.splice(index, 1);
+      } else {
+        return false;
+      }
+    }
+
+    memeList[0].likes = memeList[0].likedBy.length;
+    memeList[0].dislikes = memeList[0].dislikedBy.length;
 
     await this.client.save(ThreadID.fromString(this.dbThreadID), this.memeCollectionName, memeList);
+    return true;
   }
 
-  private getIdentity(key?: string): PrivateKey {
-    if (key) {
-      return PrivateKey.fromString(key);
+  private async getKeyInfo(): Promise<KeyInfo> {
+    const hubKeyURL = `${this.hubAuthURL}/keyinfo`;
+
+    const response = await fetch(hubKeyURL, {
+      method: 'GET'
+    });
+
+    const auth: KeyInfo = await response.json();
+
+    return auth;
+  }
+
+  private async getUserAuth(): Promise<UserAuth> {
+    const hubAuthURL = `${this.hubAuthURL}/userauth`;
+
+    const response = await fetch(hubAuthURL, {
+      method: 'GET'
+    });
+
+    const auth: UserAuth = await response.json();
+
+    return auth;
+  }
+
+  private async getIdentity(): Promise<PrivateKey> {
+    const hubIdentityURL = `${this.hubAuthURL}/identity`;
+
+    const response = await fetch(hubIdentityURL, {
+      method: 'GET'
+    });
+
+    let userKey = await response.text();
+    if (!userKey) {
+      userKey = PrivateKey.fromRandom().toString();
     }
 
-    const identity = PrivateKey.fromRandom();
-    this.userKey = identity.toString();
+    const key: PrivateKey = PrivateKey.fromString(userKey);
 
-    return identity;
+    return key;
   }
 }

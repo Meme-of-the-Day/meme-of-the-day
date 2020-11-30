@@ -1,19 +1,20 @@
 export interface MemeMetadata {
   _id?: string;
+  _mod?: number;
   tokenID?: string; // NFT tokenID
   cid: string; // IPFS CID
   path: string; // Bucket path
   name: string; // meme Name
-  txHash?: string; // blockchain tx hash
+  txHash: string; // blockchain tx hash
   date: string; // created date
-  likes?: number;
-  dislikes?: number;
+  likes: number;
+  dislikes: number;
   owner?: string; // account address
   user?: string; // public key
-  tags?: Array<string>;
+  tags: Array<string>;
   price?: number;
-  likedBy?: Set<string>; // set of user ids who liked this meme.
-  dislikedBy?: Set<string>; // set of user ids who disliked this meme.
+  likedBy: Array<string>; // set of user ids who liked this meme.
+  dislikedBy: Array<string>; // set of user ids who disliked this meme.
   onSale?: boolean;
   description?: string;
 }
@@ -70,6 +71,10 @@ export const Schema = {
         _id: {
           type: "string",
           description: "The instance's id."
+        },
+        _mod: {
+          type: "number",
+          description: "unknown"
         },
         tokenID: {
           type: "string",
@@ -135,6 +140,14 @@ export const Schema = {
           items: {
             type: "string"
           }
+        },
+        description: {
+          type: "string",
+          description: "Description for the meme"
+        },
+        onSale: {
+          type: "boolean",
+          description: "Is the meme on sale"
         }
       },
       required: ["cid", "path", "name", "date"],

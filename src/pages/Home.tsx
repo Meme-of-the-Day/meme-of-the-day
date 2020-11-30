@@ -33,6 +33,7 @@ const CustomMeme = styled(Meme)`
 
 const Home: React.FC<{}> = () => {
   const [memeMetadata, setMemeMetadata] = useState<Array<MemeMetadata>>([]);
+  const [textileInstance, setTextile] = useState<Textile>();
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
@@ -40,6 +41,7 @@ const Home: React.FC<{}> = () => {
       const textile = await Textile.getInstance();
       const memes = await textile.getAllMemes();
       setMemeMetadata(memes);
+      setTextile(textile);
       setLoading(false);
     }
     init();
@@ -52,7 +54,7 @@ const Home: React.FC<{}> = () => {
         <Loader />
       }
       {
-        memeMetadata && memeMetadata.map((meme) => <CustomMeme meme={meme} key={meme.cid} />)
+        memeMetadata && textileInstance && memeMetadata.map((meme) => <CustomMeme meme={meme} textileInstance={textileInstance} key={meme.cid} />)
       }
     </Main>
   )
