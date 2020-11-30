@@ -3,8 +3,7 @@ import { NavLink } from "react-router-dom";
 import styled, { css } from "styled-components";
 
 import motd from "../assets/MOTD.svg";
-import { UIContext } from "../App";
-import { AuthProvider, authenticate } from "../utils/UserAuth"
+import { AuthContext, UIContext } from "../App";
 
 const Main = styled.nav`
   display: flex;
@@ -78,11 +77,11 @@ const Footer = styled.div`
 `;
 
 const Navigation: React.FC<{ className?: string }> = ({ className }) => {
+  const authContext = useContext(AuthContext);
   const uiContext = useContext(UIContext);
 
   const login = async () => {
-    const authProvider: AuthProvider = await authenticate();
-    uiContext.authProvider = authProvider;
+    await authContext.authenticate();
   };
 
   return (

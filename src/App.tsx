@@ -8,7 +8,7 @@ import Navigation from "./components/Navigation";
 import Home from "./pages/Home";
 import Upload from "./pages/Upload";
 import MyMemes from "./pages/MyMemes";
-import { AuthProvider } from "./utils/UserAuth";
+import { AuthProvider, authenticate } from "./utils/UserAuth"
 
 const Main = styled.main`
   display: flex;
@@ -55,10 +55,18 @@ const CustomNavigation = styled(Navigation)<{ open: boolean }>`
   }
 `;
 
+export type AuthContextType = {
+  authProvider?: AuthProvider;
+  authenticate: () => void;
+};
+
+export const AuthContext = React.createContext<AuthContextType>({
+  authenticate: () => { }
+})
+
 export type UIContextType = {
   showHamburger: boolean;
   toggleHamburger: () => void;
-  authProvider?: AuthProvider;
 };
 
 export const UIContext = React.createContext<UIContextType>({
@@ -68,6 +76,7 @@ export const UIContext = React.createContext<UIContextType>({
 
 const App: React.FC = () => {
   const [showHamburger, setShowHamburger] = useState(false);
+  const [authProvider, setAuthProvider] = useState<AuthProvider | undefined>(undefined);
 
   const windowClickHandler = () => {
     if (showHamburger) {
@@ -82,6 +91,11 @@ const App: React.FC = () => {
     };
   }, [showHamburger]);
 
+  async function login() {
+    const authProvider: AuthProvider = await authenticate();
+    setAuthProvider(authProvider);
+  }
+
   return (
     <UIContext.Provider
       value={{
@@ -89,29 +103,35 @@ const App: React.FC = () => {
         toggleHamburger: () => setShowHamburger(showHamburger => !showHamburger)
       }}
     >
-      <ThemeProvider theme={theme}>
-        <Router>
-          <Main>
-            <CustomNavigation open={showHamburger} />
-            <AppBody>
-              <AppBar />
-              {/* <Message>
+      <AuthContext.Provider value={{
+        authProvider,
+        authenticate: login
+      }}
+      >
+        <ThemeProvider theme={theme}>
+          <Router>
+            <Main>
+              <CustomNavigation open={showHamburger} />
+              <AppBody>
+                <AppBar />
+                {/* <Message>
                 <em>
                   Discover, vote, comment, upload, and own your favorite memes
                 </em>
               </Message> */}
-              <Switch>
-                <Route exact path="/upload" component={Upload} />
-                <Route exact path="/me" component={MyMemes} />
-                <Route exact path="/" component={Home} />
-              </Switch>
-            </AppBody>
-            {/* <Footer>
+                <Switch>
+                  <Route exact path="/upload" component={Upload} />
+                  <Route exact path="/me" component={MyMemes} />
+                  <Route exact path="/" component={Home} />
+                </Switch>
+              </AppBody>
+              {/* <Footer>
               Powered by&nbsp;<strong>Matic</strong>
             </Footer> */}
-          </Main>
-        </Router>
-      </ThemeProvider>
+            </Main>
+          </Router>
+        </ThemeProvider>
+      </AuthContext.Provider>
     </UIContext.Provider>
   );
 };

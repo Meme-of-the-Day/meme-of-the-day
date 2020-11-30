@@ -54,7 +54,7 @@ export class Textile {
     await this.client.getToken(this.identity);
 
     const buck = await buckets.getOrCreate('memeoftheday');
-
+    //await this.client.updateCollection(ThreadID.fromString(this.dbThreadID), {name: this.memeCollectionName, schema: Schema});
     if (!buck.root) {
       throw new Error('Failed to get or create bucket');
     }
@@ -115,7 +115,14 @@ export class Textile {
       cid: raw.path.cid.toString(),
       name: fileName,
       path: location,
-      date: now.toString()
+      date: now.toString(),
+      txHash: "",
+      likes: 0,
+      dislikes: 0,
+      likedBy: new Array<string>(),
+      dislikedBy: new Array<string>(),
+      owner: "",
+      tags: new Array<string>()
     };
   }
 
@@ -143,7 +150,7 @@ export class Textile {
     return `${this.ipfsGateway}/ipfs/${raw.path.cid.toString()}`;
   }
 
-  public async updateMemeVotes(userId: string, cid: string, isLiked: boolean, isAdd: boolean) {
+  public async updateMemeVotes(userId: string, cid: string, isLiked: boolean, isAdd: boolean): Promise<boolean> {
     if (!this.client) {
       throw new Error('No client');
     }
@@ -154,13 +161,33 @@ export class Textile {
     const memeList = await this.client.find<MemeMetadata>(ThreadID.fromString(this.dbThreadID), this.memeCollectionName, query);
     let voteList = isLiked ? memeList[0].likedBy : memeList[0].dislikedBy;
 
-    if (isAdd) {
-      voteList?.add(userId);
-    } else {
-      voteList?.delete(userId);
+    if (!voteList) {
+      memeList[0].likedBy = new Array<string>();
+      memeList[0].dislikedBy = new Array<string>();
+
+      voteList = isLiked ? memeList[0].likedBy : memeList[0].dislikedBy;
     }
 
+    if (isAdd) {
+      if (voteList.includes(userId)) {
+        return false;
+      } else {
+        voteList.push(userId);
+      }
+    } else {
+      const index = voteList.indexOf(userId);
+      if (index > -1) {
+        voteList.splice(index, 1);
+      } else {
+        return false;
+      }
+    }
+
+    memeList[0].likes = memeList[0].likedBy.length;
+    memeList[0].dislikes = memeList[0].dislikedBy.length;
+
     await this.client.save(ThreadID.fromString(this.dbThreadID), this.memeCollectionName, memeList);
+    return true;
   }
 
   private async getKeyInfo(): Promise<KeyInfo> {
