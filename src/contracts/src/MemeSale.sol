@@ -20,6 +20,8 @@ contract MemeSale is EIP712Domain {
     MemeOfTheDay public memeOfTheDay;
     MOTDTreasury public memeOfTheDayTreasury;
 
+    mapping(uint256 => bool) public isOnSale;
+
     constructor(
         address memeOfTheDayAddress,
         address payable motdTreasuryAddress,
@@ -34,6 +36,15 @@ contract MemeSale is EIP712Domain {
         );
     }
 
+    function putOnSale(uint256 tokenId) external {
+        require(
+            memeOfTheDay.ownerOf(tokenId) == msg.sender,
+            "Only owner of token can put on sale"
+        );
+
+        isOnSale[tokenId] = true;
+    }
+
     function buy(
         uint256 tokenId,
         uint256 price,
@@ -43,6 +54,7 @@ contract MemeSale is EIP712Domain {
         bytes32 r,
         bytes32 s
     ) external payable {
+        require(isOnSale[tokenId], "Given token is not on sale");
         require(msg.value == price, "Sent value should be equal to set price");
 
         bytes memory data = abi.encode(VERIFY_PRICE_TYPEHASH, tokenId, price);
@@ -70,5 +82,7 @@ contract MemeSale is EIP712Domain {
             1,
             ""
         );
+
+        isOnSale[tokenId] = false;
     }
 }

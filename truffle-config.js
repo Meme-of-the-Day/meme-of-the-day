@@ -19,8 +19,9 @@ module.exports = {
       skipDryRun: true,
     },
   },
-  contracts_directory: "./src/",
-  contracts_build_directory: "./abis/",
+  contracts_directory: "./src/contracts/src/",
+  contracts_build_directory: "./src/contracts/abis/",
+  migrations_directory: "./src/contracts/migrations/",
   compilers: {
     solc: {
       version: "0.6.12",

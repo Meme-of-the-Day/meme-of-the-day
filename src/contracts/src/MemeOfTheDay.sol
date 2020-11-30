@@ -17,6 +17,8 @@ contract MemeOfTheDay is ERC1155, Ownable {
     // Mapping from hash to NFT token ID
     mapping(string => address) private _hashToken;
 
+    event MemeMinted(address creator, uint256 tokenId);
+
     constructor() public ERC1155("https://game.example/api/item/{id}.json") {}
 
     function mint(string memory _hash) public {
@@ -27,6 +29,11 @@ contract MemeOfTheDay is ERC1155, Ownable {
         _mint(msg.sender, _id, 1, "");
 
         _hashExists[_hash] = true;
+
+        creatorOf[_id] = msg.sender;
+        ownerOf[_id] = msg.sender;
+
+        emit MemeMinted(msg.sender, _id);
     }
 
     function getMemesCount() public view returns (uint256 count) {

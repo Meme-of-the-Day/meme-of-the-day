@@ -58,6 +58,7 @@
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "compile": "truffle compile",
+    "test-contracts": "truffle test ./src/contracts/test/*",
     "ganache": "cross-var ganache-cli --networkId $npm_package_config_ganache_networkId --allowUnlimitedContractSize --gasLimit $npm_package_config_ganache_gasLimit --gasPrice $npm_package_config_ganache_gasPrice --mnemonic \"$MNEMONIC\"",
     "migrate": "rimraf ./src/abis && truffle migrate --reset --compile-all --network development",
     "migratematic": "rimraf ./src/abis && truffle migrate --reset --compile-all --network matic",
