@@ -273,7 +273,7 @@ const renderDetails = (value: string | DetailsObject) => {
 };
 
 const Upload: React.FC<{}> = () => {
-  const authContext = useContext(AuthContext);
+  let authContext = useContext(AuthContext);
 
   const [submitEnabled, setSubmitEnabled] = useState(false);
   const [image, setImage] = useState<string>("");
@@ -301,6 +301,11 @@ const Upload: React.FC<{}> = () => {
   };
 
   const uploadMeme = async (event: React.FormEvent) => {
+    if (!authContext.authProvider) {
+      window.alert("Please login before uploading");
+      return;
+    }
+
     event.preventDefault();
 
     setSubmitEnabled(false);
@@ -317,6 +322,12 @@ const Upload: React.FC<{}> = () => {
       price: { value: price }
     } = event.target as HTMLFormElement;
 
+    let memePrice: number = parseInt(price);
+
+    if (isNaN(memePrice)) {
+      memePrice = 0;
+    }
+
     if (!memeName) {
       alert("Please enter a name for your meme");
       setUploadStatus(UploadStatus.NOT_STARTED);
@@ -331,10 +342,6 @@ const Upload: React.FC<{}> = () => {
       return;
     }
     debugger;
-
-    if (!authContext.authProvider) {
-      await authContext.authenticate();
-    }
 
     const textile = await Textile.getInstance();
 
@@ -385,9 +392,9 @@ const Upload: React.FC<{}> = () => {
             txHash: txHash,
             owner: authContext.authProvider?.account,
             name: memeName,
-            description,
-            onSale,
-            price
+            description: description,
+            onSale: onSale,
+            price: memePrice
           });
           setUploadStatus(UploadStatus.COMPLETED);
         })

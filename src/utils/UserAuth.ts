@@ -7,7 +7,7 @@ import Web3Modal from 'web3modal'
 import Web3 from "web3";
 
 // const CERAMIC_URL = 'https://ceramic.3boxlabs.com' // 'http://localhost:7007'
-const web3Modal = new Web3Modal({ network: 'mainnet', cacheProvider: true })
+const web3Modal = new Web3Modal({ network: 'mainnet' })
 
 export type AuthProvider = {
     web3: Web3,
@@ -19,6 +19,7 @@ export type AuthProvider = {
 export async function authenticate(): Promise<AuthProvider> {
     // const ceramic = new Ceramic(CERAMIC_URL);
     // const idx = new IDXWeb({ ceramic, definitions });
+
     const ethereumProvider = await web3Modal.connect();
     const web3 = new Web3(ethereumProvider);
 
