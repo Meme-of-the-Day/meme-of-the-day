@@ -6,6 +6,7 @@ import voteIcon from "../assets/vote.svg";
 import bidIcon from "../assets/bid.svg";
 import favoriteIcon from "../assets/favorite.svg";
 import { MemeMetadata } from "../utils/Types";
+import { Textile } from "../utils/textile";
 
 type IMeme = {
   owner: string;
@@ -16,6 +17,7 @@ type IMeme = {
 interface Props {
   meme: MemeMetadata;
   className?: string;
+  textileInstance: Textile;
 }
 
 const Main = styled.div`
@@ -113,8 +115,8 @@ const Count = styled.span`
   font-weight: bold;
 `;
 
-const Meme: React.FC<Props> = ({ className, meme }) => {
-  const vote = () => {
+const Meme: React.FC<Props> = ({ className, meme, textileInstance }) => {
+  const vote = async () => {
     if (
       window.confirm(
         "Owner of this meme is:\n" +
@@ -127,6 +129,8 @@ const Meme: React.FC<Props> = ({ className, meme }) => {
       } else {
         meme.likes = 1;
       }
+
+      await textileInstance.updateMemeVotes("", meme.cid, true, true);
     }
   };
 
@@ -175,7 +179,7 @@ const Meme: React.FC<Props> = ({ className, meme }) => {
       <img src={`https://hub.textile.io/ipfs/${meme.cid}`} alt="" />
       <Meta>
         <Buttons>
-          <Button onClick={() => vote()}>
+          <Button onClick={async () => await vote()}>
             <img src={voteIcon} alt="Vote" />
             <Count>{meme.likes}</Count>
           </Button>

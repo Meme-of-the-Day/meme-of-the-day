@@ -8,6 +8,7 @@ import Navigation from "./components/Navigation";
 import Home from "./pages/Home";
 import Upload from "./pages/Upload";
 import MyMemes from "./pages/MyMemes";
+import { AuthProvider } from "./utils/UserAuth";
 
 const Main = styled.main`
   display: flex;
@@ -57,6 +58,7 @@ const CustomNavigation = styled(Navigation)<{ open: boolean }>`
 export type UIContextType = {
   showHamburger: boolean;
   toggleHamburger: () => void;
+  authProvider?: AuthProvider;
 };
 
 export const UIContext = React.createContext<UIContextType>({

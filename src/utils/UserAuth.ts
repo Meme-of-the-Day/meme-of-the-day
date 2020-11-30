@@ -3,9 +3,10 @@ import { IDXWeb } from '@ceramicstudio/idx-web';
 import { definitions } from '@ceramicstudio/idx-constants'
 // @ts-ignore no type definitions for 3ID Connect yet
 import { EthereumAuthProvider } from '3id-connect';
-import web3Modal from './Providers';
+import Web3Modal from 'web3modal'
 
 const CERAMIC_URL = 'https://ceramic.3boxlabs.com' // 'http://localhost:7007'
+const web3Modal = new Web3Modal({ network: 'mainnet', cacheProvider: true })
 
 export type AuthProvider = {
     ethProvider: any,

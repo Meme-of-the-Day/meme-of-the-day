@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import styled from "styled-components";
 
 import { Textile } from "../utils/textile";
+import { NetworkIDToAddress } from "../utils/Contracts";
 import Web3 from "web3";
 const MemesHandler = require("../abis/MemeOfTheDay.json");
 
@@ -345,7 +346,17 @@ const Upload: React.FC<{}> = () => {
 
       const networkId = await web3.eth.net.getId();
       console.log("Metamask is connected to: " + networkId);
-      const contractAddress = "0x1d19c3B1F75F3855471c6917354EB3f0D58E9A24";
+
+      let contractAddress: string;
+
+      if (networkId === 137) {
+        contractAddress = NetworkIDToAddress[137];
+      } else if (networkId === 80001) {
+        contractAddress = NetworkIDToAddress[80001];
+      } else {
+        throw new Error("chain not supported");
+      }
+
       const abi = MemesHandler.abi;
 
       const contract = new web3.eth.Contract(abi, contractAddress);

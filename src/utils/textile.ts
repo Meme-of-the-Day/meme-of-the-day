@@ -87,12 +87,12 @@ export class Textile {
     return memeList;
   }
 
-  public async getMemeMetadata(tokenID: string) {
+  public async getMemeMetadata(cid: string) {
     if (!this.client) {
       throw new Error('No client');
     }
 
-    const query = new Where('tokenID').eq(tokenID);
+    const query = new Where('cid').eq(cid);
     const memeList = await this.client.find<MemeMetadata>(ThreadID.fromString(this.dbThreadID), this.memeCollectionName, query);
 
     return memeList[0];
@@ -143,14 +143,14 @@ export class Textile {
     return `${this.ipfsGateway}/ipfs/${raw.path.cid.toString()}`;
   }
 
-  public async updateMemeVotes(userId: string, tokenID: string, isLiked: boolean, isAdd: boolean) {
+  public async updateMemeVotes(userId: string, cid: string, isLiked: boolean, isAdd: boolean) {
     if (!this.client) {
       throw new Error('No client');
     }
 
     // Ideally we need not query the instance here to update.
     // TODO, use collections write-validator to run validations on writes.
-    const query = new Where('tokenID').eq(tokenID);
+    const query = new Where('cid').eq(cid);
     const memeList = await this.client.find<MemeMetadata>(ThreadID.fromString(this.dbThreadID), this.memeCollectionName, query);
     let voteList = isLiked ? memeList[0].likedBy : memeList[0].dislikedBy;
 

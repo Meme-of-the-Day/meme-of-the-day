@@ -4,6 +4,7 @@ import styled, { css } from "styled-components";
 
 import motd from "../assets/MOTD.svg";
 import { UIContext } from "../App";
+import { AuthProvider, authenticate } from "../utils/UserAuth"
 
 const Main = styled.nav`
   display: flex;
@@ -79,7 +80,10 @@ const Footer = styled.div`
 const Navigation: React.FC<{ className?: string }> = ({ className }) => {
   const uiContext = useContext(UIContext);
 
-  const login = () => {};
+  const login = async () => {
+    const authProvider: AuthProvider = await authenticate();
+    uiContext.authProvider = authProvider;
+  };
 
   return (
     <Main className={className} onClick={uiContext.toggleHamburger}>
@@ -99,7 +103,7 @@ const Navigation: React.FC<{ className?: string }> = ({ className }) => {
         </CustomNavLink>
       </MainLinks>
       <OtherLinks>
-        <Login onClick={login}>Login</Login>
+        <Login onClick={async () => await login()}>Login</Login>
         <OutbountLinks href="https://twitter.com">Twitter</OutbountLinks>
       </OtherLinks>
       <Footer>Powered By Matic</Footer>
