@@ -7,6 +7,9 @@ let web3 = new Web3(new Web3.providers.HttpProvider("http://localhost:8545"));
 
 const MemeOfTheDay = artifacts.require("MemeOfTheDay.sol");
 const MOTDTreasury = artifacts.require("MOTDTreasury.sol");
+const MOTDSaleParamsProvider = artifacts.require(
+  "MOTDSaleParametersProvider.sol"
+);
 const MemeSale = artifacts.require("MemeSale.sol");
 
 contract("MemeSale", ([owner, ...accounts]) => {
@@ -19,17 +22,19 @@ contract("MemeSale", ([owner, ...accounts]) => {
 
     this.motd = await MemeOfTheDay.new();
     this.motdTreasury = await MOTDTreasury.new();
+    this.motdSaleParamsProvider = await MOTDSaleParamsProvider.new();
 
     this.memeSale = await MemeSale.new(
       this.motd.address,
       this.motdTreasury.address,
+      this.motdSaleParamsProvider.address,
       version
     );
 
     seller = accounts[0];
     buyer = accounts[1];
 
-    const tokenMintedRes = await this.motd.mint("testhash", {
+    const tokenMintedRes = await this.motd.mint("testhash", -1, {
       from: seller,
     });
 
@@ -104,6 +109,7 @@ contract("MemeSale", ([owner, ...accounts]) => {
     const provider = new ethers.providers.JsonRpcProvider(
       "http://localhost:8545"
     );
+
     let sellerWallet = sellerWalletMnemonic.connect(provider);
 
     const price = web3.utils.toWei("1", "ether");
@@ -114,7 +120,7 @@ contract("MemeSale", ([owner, ...accounts]) => {
       this.memeSale.address
     );
 
-    await this.memeSale.buy(tokenId, price, [], false, v, r, s, {
+    await this.memeSale.buy(tokenId, price, [], [], false, v, r, s, {
       from: buyer,
       value: price,
     });
@@ -150,7 +156,7 @@ contract("MemeSale", ([owner, ...accounts]) => {
     );
 
     try {
-      await this.memeSale.buy(tokenId, price, [], false, v, r, s, {
+      await this.memeSale.buy(tokenId, price, [], [], false, v, r, s, {
         from: buyer,
         value: price,
       });

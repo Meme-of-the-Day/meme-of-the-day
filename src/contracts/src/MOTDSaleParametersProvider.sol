@@ -7,7 +7,7 @@ contract MOTDSaleParametersProvider is Ownable {
     uint256 public constant DEFAULT_CREATOR_FEE_PERCENT_INDEX = 0;
     uint256 public constant VOTERS_FEE_PERCENT_INDEX = 1;
     uint256 public constant PLATFORM_FEE_PERCENT_INDEX = 2;
-    uint256 public constant TOTAL_FEES_PERCENT = 3;
+    uint256 public constant TOTAL_FEES_PERCENT_INDEX = 3;
 
     mapping(uint256 => uint256) public parameters;
 
@@ -15,12 +15,12 @@ contract MOTDSaleParametersProvider is Ownable {
         parameters[DEFAULT_CREATOR_FEE_PERCENT_INDEX] = 100; // (default) or custom% set by creator when minting
         parameters[VOTERS_FEE_PERCENT_INDEX] = 5;
         parameters[PLATFORM_FEE_PERCENT_INDEX] = 19;
-        parameters[TOTAL_FEES_PERCENT] =
+        parameters[TOTAL_FEES_PERCENT_INDEX] =
             parameters[VOTERS_FEE_PERCENT_INDEX] +
             parameters[PLATFORM_FEE_PERCENT_INDEX];
     }
 
-    function changeParam(uint256 paramIndex, uint256 paramValue)
+    function changeParameter(uint256 paramIndex, uint256 paramValue)
         external
         onlyOwner
     {
@@ -34,7 +34,7 @@ contract MOTDSaleParametersProvider is Ownable {
             paramIndex == VOTERS_FEE_PERCENT_INDEX ||
             paramIndex == PLATFORM_FEE_PERCENT_INDEX
         ) {
-            parameters[TOTAL_FEES_PERCENT] =
+            parameters[TOTAL_FEES_PERCENT_INDEX] =
                 parameters[VOTERS_FEE_PERCENT_INDEX] +
                 parameters[PLATFORM_FEE_PERCENT_INDEX];
         }

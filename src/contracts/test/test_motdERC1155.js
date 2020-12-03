@@ -11,7 +11,7 @@ contract("MemeOfTheDay", ([owner, ...accounts]) => {
   });
 
   it("mints a token with given hash", async () => {
-    const tokenMintedRes = await this.motd.mint("testhash", {
+    const tokenMintedRes = await this.motd.mint("testhash", -1, {
       from: accounts[0],
     });
 
@@ -27,7 +27,7 @@ contract("MemeOfTheDay", ([owner, ...accounts]) => {
 
   it("doesn't mint a token if given hash is already used", async () => {
     try {
-      await this.motd.mint("testhash", {
+      await this.motd.mint("testhash", -1, {
         from: accounts[0],
       });
     } catch (err) {}
