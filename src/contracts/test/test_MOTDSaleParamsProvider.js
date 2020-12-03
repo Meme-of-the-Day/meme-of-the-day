@@ -7,7 +7,7 @@ const MOTDSaleParametersProvider = artifacts.require(
   "MOTDSaleParametersProvider.sol"
 );
 
-contract.only("MOTDSaleParametersProvider", ([owner, ...accounts]) => {
+contract("MOTDSaleParametersProvider", ([owner, ...accounts]) => {
   const DEFAULT_CREATOR_FEE_PERCENT_INDEX = 0;
   const VOTERS_FEE_PERCENT_INDEX = 1;
   const PLATFORM_FEE_PERCENT_INDEX = 2;
