@@ -63,7 +63,8 @@
     "test-contracts": "dotenv truffle test ./src/contracts/test/*",
     "ganache": "dotenv npm run run:ganache",
     "run:ganache": "cross-var  ganache-cli --chainId $npm_package_config_ganache_networkId --networkId $npm_package_config_ganache_networkId --allowUnlimitedContractSize --gasLimit $npm_package_config_ganache_gasLimit --gasPrice $npm_package_config_ganache_gasPrice --mnemonic '$MNEMONIC'",
-    "migrate": "rimraf ./src/abis && truffle migrate --reset --compile-all --network development",
+    "migrate-dev": "dotenv npm run run:migrate-dev",
+    "run:migrate-dev": "rimraf ./src/contracts/abis && truffle migrate --reset --compile-all --network development",
     "migratematic": "rimraf ./src/abis && truffle migrate --reset --compile-all --network matic",
     "deploydev": "concurrently \"npm run ganache\" \"npm run migrate\""
   },

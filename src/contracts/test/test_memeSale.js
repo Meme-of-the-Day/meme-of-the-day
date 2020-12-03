@@ -14,7 +14,7 @@ contract("MemeSale", ([owner, ...accounts]) => {
   let seller;
   let buyer;
 
-  before(async () => {
+  beforeEach(async () => {
     const version = "1";
 
     this.motd = await MemeOfTheDay.new();
@@ -53,10 +53,16 @@ contract("MemeSale", ([owner, ...accounts]) => {
       await this.memeSale.putOnSale(tokenId, {
         from: seller,
       });
+      await this.memeSale.putOnSale(tokenId, {
+        from: seller,
+      });
     } catch (err) {}
   });
 
   it("removes a token from sale", async () => {
+    await this.memeSale.putOnSale(tokenId, {
+      from: seller,
+    });
     await this.memeSale.removeFromSale(tokenId, {
       from: seller,
     });
@@ -66,6 +72,13 @@ contract("MemeSale", ([owner, ...accounts]) => {
 
   it("reverts if token is already not on sale", async () => {
     try {
+      await this.memeSale.putOnSale(tokenId, {
+        from: seller,
+      });
+
+      await this.memeSale.removeFromSale(tokenId, {
+        from: seller,
+      });
       await this.memeSale.removeFromSale(tokenId, {
         from: seller,
       });
@@ -105,5 +118,47 @@ contract("MemeSale", ([owner, ...accounts]) => {
       from: buyer,
       value: price,
     });
+  });
+
+  it("doesn't sell a token if signer of message is wrong", async () => {
+    await this.memeSale.putOnSale(tokenId, {
+      from: seller,
+    });
+
+    await this.motd.setApprovalForAll(this.memeSale.address, true, {
+      from: seller,
+    });
+
+    const mnemonic = process.env.MNEMONIC;
+    const sellerWalletMnemonic = ethers.Wallet.fromMnemonic(
+      mnemonic,
+      "m/44'/60'/0'/0/2"
+    );
+
+    // Wallet connected to a provider
+    const provider = new ethers.providers.JsonRpcProvider(
+      "http://localhost:8545"
+    );
+    let sellerWallet = sellerWalletMnemonic.connect(provider);
+
+    const price = web3.utils.toWei("1", "ether");
+    const { signature, v, r, s } = await getSellerSignedMessage(
+      tokenId,
+      price,
+      sellerWallet,
+      this.memeSale.address
+    );
+
+    try {
+      await this.memeSale.buy(tokenId, price, [], false, v, r, s, {
+        from: buyer,
+        value: price,
+      });
+    } catch (err) {
+      assert.strictEqual(
+        err.toString().includes("MemeSale: invalid signature."),
+        true
+      );
+    }
   });
 });

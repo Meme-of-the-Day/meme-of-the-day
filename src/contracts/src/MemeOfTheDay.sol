@@ -12,7 +12,8 @@ contract MemeOfTheDay is ERC1155, Ownable {
     mapping(string => bool) _hashExists;
 
     mapping(uint256 => address payable) public creatorOf;
-    mapping(uint256 => address) public ownerOf;
+    mapping(uint256 => address payable) public ownerOf;
+    mapping(uint256 => int256) public creatorFee;
 
     // Mapping from hash to NFT token ID
     mapping(string => address) private _hashToken;
@@ -21,7 +22,11 @@ contract MemeOfTheDay is ERC1155, Ownable {
 
     constructor() public ERC1155("https://game.example/api/item/{id}.json") {}
 
-    function mint(string memory _hash) public {
+    function setUri(string memory _newUri) external onlyOwner {
+        _setURI(_newUri);
+    }
+
+    function mint(string memory _hash, int256 _creatorFee) public {
         require(!_hashExists[_hash], "Token with this hash is already minted");
 
         hashes.push(_hash);
@@ -32,6 +37,7 @@ contract MemeOfTheDay is ERC1155, Ownable {
 
         creatorOf[_id] = msg.sender;
         ownerOf[_id] = msg.sender;
+        creatorFee[_id] = _creatorFee;
 
         emit MemeMinted(msg.sender, _id);
     }
