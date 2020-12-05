@@ -36,7 +36,8 @@ module.exports = {
       },
     },
   },
-  mocha: {
-    reporter: "eth-gas-reporter",
-  },
+  // Only to enable when wanting to test gas because otherwise it slows down the tests A LOT
+  // mocha: {
+  //   reporter: "eth-gas-reporter",
+  // },
 };

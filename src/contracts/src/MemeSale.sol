@@ -10,6 +10,11 @@ import "./MemeOfTheDay.sol";
 import "./MOTDTreasury.sol";
 import "./MOTDSaleParametersProvider.sol";
 
+/**
+ * @title MemeSale
+ * @notice contract that handles sales of memes
+ * @author MemeOfTheDay
+ */
 contract MemeSale is EIP712Domain {
     using SafeMath for uint256;
 
@@ -46,6 +51,10 @@ contract MemeSale is EIP712Domain {
         );
     }
 
+    /**
+     * @notice Puts on sale a token
+     * @param tokenId the id of the token to put to sale
+     */
     function putOnSale(uint256 tokenId) external {
         require(
             memeOfTheDay.ownerOf(tokenId) == msg.sender,
@@ -56,6 +65,10 @@ contract MemeSale is EIP712Domain {
         isOnSale[tokenId] = true;
     }
 
+    /**
+     * @notice Removes from sale a token
+     * @param tokenId the id of the token to remove from sale
+     */
     function removeFromSale(uint256 tokenId) external {
         require(
             memeOfTheDay.ownerOf(tokenId) == msg.sender,
@@ -66,6 +79,17 @@ contract MemeSale is EIP712Domain {
         isOnSale[tokenId] = false;
     }
 
+    /**
+     * @notice Buys token
+     * @param tokenId       the id of the token to buy
+     * @param price         the price of the token on sale
+     * @param voters        array of voters on the meme
+     * @param votes         array of votes of the voters
+     * @param payCreator    defines if creator has to be paid or not
+     * @param v             v part of the seller's signature
+     * @param r             r part of the seller's signature
+     * @param s             s part of the seller's signature
+     */
     function buy(
         uint256 tokenId,
         uint256 price,
