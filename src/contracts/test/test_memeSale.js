@@ -120,10 +120,20 @@ contract("MemeSale", ([owner, ...accounts]) => {
       this.memeSale.address
     );
 
-    await this.memeSale.buy(tokenId, price, [], [], false, v, r, s, {
-      from: buyer,
-      value: price,
-    });
+    await this.memeSale.buy(
+      tokenId,
+      price,
+      [accounts[1], accounts[2]],
+      [2, 5],
+      true,
+      v,
+      r,
+      s,
+      {
+        from: buyer,
+        value: price,
+      }
+    );
   });
 
   it("doesn't sell a token if signer of message is wrong", async () => {
