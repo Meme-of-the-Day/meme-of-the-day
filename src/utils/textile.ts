@@ -159,6 +159,11 @@ export class Textile {
     // TODO, use collections write-validator to run validations on writes.
     const query = new Where('cid').eq(cid);
     const memeList = await this.client.find<MemeMetadata>(ThreadID.fromString(this.dbThreadID), this.memeCollectionName, query);
+
+    if (memeList[0].owner === userId) {
+      return false;
+    }
+
     let voteList = isLiked ? memeList[0].likedBy : memeList[0].dislikedBy;
 
     if (!voteList) {
