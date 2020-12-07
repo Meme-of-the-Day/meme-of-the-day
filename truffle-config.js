@@ -1,6 +1,6 @@
-require('babel-register');
-require('babel-polyfill');
-const HDWalletProvider = require('truffle-hdwallet-provider');
+require("babel-register");
+require("babel-polyfill");
+const HDWalletProvider = require("truffle-hdwallet-provider");
 const mnemonic = process.env.MNEMONIC;
 var networkId = process.env.npm_package_config_ganache_networkId;
 var gasPrice = process.env.npm_package_config_ganache_gasPrice;
@@ -13,25 +13,31 @@ module.exports = {
       port: 8545,
       network_id: networkId,
       gas: gasLimit,
-      gasPrice: gasPrice
+      gasPrice: gasPrice,
     },
     matic: {
-      provider: () => new HDWalletProvider(mnemonic, `https://rpc-mumbai.matic.today`),
+      provider: () =>
+        new HDWalletProvider(mnemonic, `https://rpc-mumbai.matic.today`),
       network_id: 80001,
       confirmations: 2,
       timeoutBlocks: 200,
-      skipDryRun: true
+      skipDryRun: true,
     },
   },
-  contracts_directory: './src/contracts/',
-  contracts_build_directory: './src/abis/',
+  contracts_directory: "./src/contracts/src/",
+  contracts_build_directory: "./src/contracts/abis/",
+  migrations_directory: "./src/contracts/migrations/",
   compilers: {
     solc: {
-      version: "0.5.0",
+      version: "0.6.12",
       optimizer: {
         enabled: true,
-        runs: 200
-      }
-    }
-  }
-}
+        runs: 200,
+      },
+    },
+  },
+  // Only to enable when wanting to test gas because otherwise it slows down the tests A LOT
+  // mocha: {
+  //   reporter: "eth-gas-reporter",
+  // },
+};
