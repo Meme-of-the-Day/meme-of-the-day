@@ -392,7 +392,7 @@ const Upload: React.FC<{}> = () => {
               "IPFS Hash": meme.cid,
               "Transaction Hash": {
                 isLink: true,
-                link: `https://mumbai-explorer.matic.today/tx/${txHash}`,
+                link: `https://explorer-mainnet.maticvigil.com/tx/${txHash}`,
                 text: txHash
               }
             });
