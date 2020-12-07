@@ -18,10 +18,6 @@ const CustomMeme = styled(Meme)`
   @media screen and (min-width: 768px) {
     width: 60%;
   }
-
-  @media screen and (min-width: 1280px) {
-    width: 33%;
-  }
 `;
 
 const Memes: React.FC<{}> = () => {
@@ -40,8 +36,15 @@ const Memes: React.FC<{}> = () => {
 
   return (
     <Main>
-      {memeMetadata && textileInstance &&
-        memeMetadata.map(meme => <CustomMeme meme={meme} textileInstance={textileInstance} key={meme.cid} />)}
+      {memeMetadata &&
+        textileInstance &&
+        memeMetadata.map(meme => (
+          <CustomMeme
+            meme={meme}
+            textileInstance={textileInstance}
+            key={meme.cid}
+          />
+        ))}
     </Main>
   );
 };
