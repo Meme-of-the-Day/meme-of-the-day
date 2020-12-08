@@ -9,6 +9,7 @@ import Home from "./pages/Home";
 import Upload from "./pages/Upload";
 import MyMemes from "./pages/MyMemes";
 import Rankings from "./pages/Rankings";
+import MemeDetail from "./pages/MemeDetail";
 import { AuthProvider, authenticate } from "./utils/UserAuth";
 
 const Main = styled.main`
@@ -111,6 +112,7 @@ const App: React.FC = () => {
               </Message> */}
                 <Switch>
                   <Route exact path="/upload" component={Upload} />
+                  <Route exact path="/meme/:cid" component={MemeDetail} />
                   <Route exact path="/rankings" component={Rankings} />
                   <Route exact path="/me" component={MyMemes} />
                   <Route exact path="/" component={Home} />

@@ -33,6 +33,7 @@ const Home: React.FC<{}> = () => {
     const init = async () => {
       const textile = await Textile.getInstance();
       const memes = await textile.getAllMemes();
+      console.log(memes);
       setMemeMetadata(memes);
       setTextile(textile);
       setLoading(false);

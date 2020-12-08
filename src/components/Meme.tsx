@@ -1,4 +1,5 @@
 import React, { useContext } from "react";
+import { Link } from "react-router-dom";
 import styled from "styled-components";
 import dayjs from "dayjs";
 
@@ -19,7 +20,7 @@ interface Props {
   textileInstance: Textile;
 }
 
-const Main = styled.div`
+const Main = styled(Link)`
   display: flex;
   flex-direction: column;
   background-color: ${({ theme }) => theme.colors.white};
@@ -177,7 +178,7 @@ const Meme: React.FC<Props> = ({ className, meme, textileInstance }) => {
     : "N/A";
 
   return (
-    <Main className={`${className} MemeOfTheDay`}>
+    <Main to={`/meme/${meme.cid}`} className={`${className} MemeOfTheDay`}>
       <Top>
         <Owner>
           <OwnerImage>Owner</OwnerImage>
