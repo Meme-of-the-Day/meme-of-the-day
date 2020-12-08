@@ -18,8 +18,14 @@ import api from "./api";
 
 dotenv.config();
 
-if (!process.env.APP_PROD_API_KEY || !process.env.APP_PROD_API_SECRET) {
-  process.exit(1);
+if (process.env.NODE_ENV === 'production') {
+  process.exit(1);	  if (!process.env.APP_PROD_API_KEY || !process.env.APP_PROD_API_SECRET) {
+    process.exit(1);
+  }
+} else {
+  if (!process.env.APP_TEST_API_KEY || !process.env.APP_TEST_USER_KEY) {
+    process.exit(1);
+  }
 }
 
 const PORT = parseInt(process.env.PORT as string, 10) || 3001;

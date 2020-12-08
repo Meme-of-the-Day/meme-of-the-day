@@ -6,7 +6,7 @@ import { UIContext, AuthContext } from "../App";
 import { Textile } from "../utils/textile";
 import { NetworkIDToAddress } from "../utils/Contracts";
 
-const MemesHandler = require("../abis/MemeOfTheDay.json");
+const MemesHandler = require("../contracts/abis/MemeOfTheDay.json");
 
 enum UploadStatus {
   NOT_STARTED = 0,
@@ -376,7 +376,8 @@ const Upload: React.FC<{}> = () => {
       const contract = new authContext.authProvider.web3.eth.Contract(abi, contractAddress);
 
       contract.methods
-        .mint(meme.cid)
+        //second paramenter is creator fee, using 0% for now
+        .mint(meme.cid, 0)
         .send({ from: authContext.authProvider?.account }, async (error: any, txHash: string) => {
           setTxDetails({
             ...txDetails,
