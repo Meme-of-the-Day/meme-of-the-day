@@ -8,7 +8,9 @@ import Navigation from "./components/Navigation";
 import Home from "./pages/Home";
 import Upload from "./pages/Upload";
 import MyMemes from "./pages/MyMemes";
-import { AuthProvider, authenticate } from "./utils/UserAuth"
+import Rankings from "./pages/Rankings";
+import MemeDetail from "./pages/MemeDetail";
+import { AuthProvider, authenticate } from "./utils/UserAuth";
 
 const Main = styled.main`
   display: flex;
@@ -25,20 +27,6 @@ const AppBody = styled.div`
     width: auto;
     flex: 1;
   }
-`;
-
-const Message = styled.div`
-  padding: 8px;
-`;
-
-const Footer = styled.footer`
-  width: 100%;
-  padding: 10px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background-color: ${({ theme }) => theme.colors.blue50};
-  border-top: 1px solid ${({ theme }) => theme.colors.blue};
 `;
 
 const CustomNavigation = styled(Navigation)<{ open: boolean }>`
@@ -61,8 +49,8 @@ export type AuthContextType = {
 };
 
 export const AuthContext = React.createContext<AuthContextType>({
-  authenticate: () => { }
-})
+  authenticate: () => {}
+});
 
 export type UIContextType = {
   showHamburger: boolean;
@@ -76,7 +64,9 @@ export const UIContext = React.createContext<UIContextType>({
 
 const App: React.FC = () => {
   const [showHamburger, setShowHamburger] = useState(false);
-  const [authProvider, setAuthProvider] = useState<AuthProvider | undefined>(undefined);
+  const [authProvider, setAuthProvider] = useState<AuthProvider | undefined>(
+    undefined
+  );
 
   const windowClickHandler = () => {
     if (showHamburger) {
@@ -103,10 +93,11 @@ const App: React.FC = () => {
         toggleHamburger: () => setShowHamburger(showHamburger => !showHamburger)
       }}
     >
-      <AuthContext.Provider value={{
-        authProvider,
-        authenticate: login
-      }}
+      <AuthContext.Provider
+        value={{
+          authProvider,
+          authenticate: login
+        }}
       >
         <ThemeProvider theme={theme}>
           <Router>
@@ -121,6 +112,8 @@ const App: React.FC = () => {
               </Message> */}
                 <Switch>
                   <Route exact path="/upload" component={Upload} />
+                  <Route exact path="/meme/:cid" component={MemeDetail} />
+                  <Route exact path="/rankings" component={Rankings} />
                   <Route exact path="/me" component={MyMemes} />
                   <Route exact path="/" component={Home} />
                 </Switch>

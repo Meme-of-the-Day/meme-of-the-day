@@ -2,7 +2,7 @@ import React, { useContext } from "react";
 import { NavLink } from "react-router-dom";
 import styled, { css } from "styled-components";
 
-import motd from "../assets/MOTD.svg";
+import motd from "../assets/logo.svg";
 import { AuthContext, UIContext } from "../App";
 
 const Main = styled.nav`
@@ -103,7 +103,9 @@ const Navigation: React.FC<{ className?: string }> = ({ className }) => {
       </MainLinks>
       <OtherLinks>
         <Login onClick={async () => await login()}>Login</Login>
-        <OutbountLinks href="https://twitter.com">Twitter</OutbountLinks>
+        <OutbountLinks href="https://twitter.com/MemeofDayDApp">
+          Twitter
+        </OutbountLinks>
       </OtherLinks>
       <Footer>Powered By Matic</Footer>
     </Main>
