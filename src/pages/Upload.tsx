@@ -1,4 +1,4 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 
@@ -355,8 +355,12 @@ const Upload: React.FC<{}> = () => {
 
       //let web3 = new Web3(Web3.givenProvider || "ws://localhost:8545");
       //const accounts = await uiContext.authProvider.web3.eth.requestAccounts();
-      console.log("Using account in Metamask: " + authContext.authProvider?.account);
-      console.log("Meme will be stored with account: " + authContext.authProvider?.account);
+      console.log(
+        "Using account in Metamask: " + authContext.authProvider?.account
+      );
+      console.log(
+        "Meme will be stored with account: " + authContext.authProvider?.account
+      );
 
       const networkId = await authContext.authProvider?.web3.eth.net.getId();
       console.log("Metamask is connected to: " + networkId);
@@ -376,7 +380,10 @@ const Upload: React.FC<{}> = () => {
 
       const abi = MemesHandler.abi;
 
-      const contract = new authContext.authProvider.web3.eth.Contract(abi, contractAddress);
+      const contract = new authContext.authProvider.web3.eth.Contract(
+        abi,
+        contractAddress
+      );
 
       contract.methods
         .mint(meme.cid)
@@ -406,13 +413,21 @@ const Upload: React.FC<{}> = () => {
           }
 
           setUploadStatus(UploadStatus.COMPLETED);
+          (window as any).onbeforeunload = function() {};
         })
         .catch((error: any) => {
           alert("Something went wrong! Please try again");
           setUploadStatus(UploadStatus.NOT_STARTED);
+          (window as any).onbeforeunload = function() {};
         });
     }
   };
+
+  useEffect(() => {
+    return () => {
+      (window as any).onbeforeunload = function() {};
+    };
+  }, []);
 
   return (
     <Main>

@@ -1,10 +1,9 @@
 import React, { useContext } from "react";
+import { Link } from "react-router-dom";
 import styled from "styled-components";
 import dayjs from "dayjs";
 
 import voteIcon from "../assets/vote.svg";
-import bidIcon from "../assets/bid.svg";
-import favoriteIcon from "../assets/favorite.svg";
 import { MemeMetadata } from "../utils/Types";
 import { Textile } from "../utils/textile";
 import { AuthContext } from "../App";
@@ -21,7 +20,7 @@ interface Props {
   textileInstance: Textile;
 }
 
-const Main = styled.div`
+const Main = styled(Link)`
   display: flex;
   flex-direction: column;
   background-color: ${({ theme }) => theme.colors.white};
@@ -87,6 +86,7 @@ const Details = styled.div`
 
 const Address = styled.span`
   color: ${({ theme }) => theme.colors.black};
+  font-size: 14px;
 `;
 
 const MintedOn = styled.span`
@@ -97,7 +97,7 @@ const MintedOn = styled.span`
 const Name = styled.div`
   color: ${({ theme }) => theme.colors.black};
   text-align: right;
-  font-size: 12px;
+  font-size: 16px;
   margin-bottom: 4px;
 `;
 
@@ -120,7 +120,6 @@ const Meme: React.FC<Props> = ({ className, meme, textileInstance }) => {
   const authContext = useContext(AuthContext);
 
   const vote = async () => {
-
     if (!authContext.authProvider) {
       window.alert("Please login to vote");
     }
@@ -129,11 +128,16 @@ const Meme: React.FC<Props> = ({ className, meme, textileInstance }) => {
       if (
         window.confirm(
           "Owner of this meme is:\n" +
-          meme.owner +
-          "\n\nWould you like to vote for this Meme?"
+            meme.owner +
+            "\n\nWould you like to vote for this Meme?"
         )
       ) {
-        const isValid = await textileInstance.updateMemeVotes(authContext.authProvider.account, meme.cid, true, true);
+        const isValid = await textileInstance.updateMemeVotes(
+          authContext.authProvider.account,
+          meme.cid,
+          true,
+          true
+        );
         if (isValid) {
           if (meme.likes) {
             meme.likes += 1;
@@ -174,7 +178,7 @@ const Meme: React.FC<Props> = ({ className, meme, textileInstance }) => {
     : "N/A";
 
   return (
-    <Main className={`${className} MemeOfTheDay`}>
+    <Main to={`/meme/${meme.cid}`} className={`${className} MemeOfTheDay`}>
       <Top>
         <Owner>
           <OwnerImage>Owner</OwnerImage>
