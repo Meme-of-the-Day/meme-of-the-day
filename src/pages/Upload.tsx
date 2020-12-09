@@ -2,9 +2,9 @@ import React, { useState, useContext } from "react";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 
-import { UIContext, AuthContext } from "../App";
+import { AuthContext } from "../App";
 import { Textile } from "../utils/textile";
-import { NetworkIDToAddress } from "../utils/Contracts";
+import { NetworkIDToAddress, NetworkIDToExplorer } from "../utils/Contracts";
 
 const MemesHandler = require("../abis/MemeOfTheDay.json");
 
@@ -345,7 +345,7 @@ const Upload: React.FC<{}> = () => {
 
     const textile = await Textile.getInstance();
 
-    const meme = imageFile && (await textile.uploadMeme(imageFile));
+    const meme = imageFile && (await textile.uploadMeme(imageFile, memeName, description));
 
     if (meme && authContext.authProvider) {
       console.log(meme.cid);
@@ -362,11 +362,14 @@ const Upload: React.FC<{}> = () => {
       console.log("Metamask is connected to: " + networkId);
 
       let contractAddress: string;
+      let blockExplorerURL: string;
 
       if (networkId === 137) {
         contractAddress = NetworkIDToAddress[137];
+        blockExplorerURL = NetworkIDToExplorer[137];
       } else if (networkId === 80001) {
         contractAddress = NetworkIDToAddress[80001];
+        blockExplorerURL = NetworkIDToExplorer[80001];
       } else {
         throw new Error("chain not supported");
       }
@@ -383,19 +386,25 @@ const Upload: React.FC<{}> = () => {
             "IPFS Hash": meme.cid,
             "Transaction Hash": {
               isLink: true,
-              link: `https://mumbai-explorer.matic.today/tx/${txHash}`,
+              link: `${blockExplorerURL}tx/${txHash}`,
               text: txHash
             }
           });
-          await textile.uploadMemeMetadata({
-            ...meme,
-            txHash: txHash,
-            owner: authContext.authProvider?.account,
-            name: memeName,
-            description: description,
-            onSale: onSale,
-            price: memePrice
-          });
+
+          if (error) {
+            console.log("minting failed");
+          } else {
+            await textile.uploadMemeMetadata({
+              ...meme,
+              txHash: txHash,
+              owner: authContext.authProvider?.account,
+              name: memeName,
+              description: description,
+              onSale: onSale,
+              price: memePrice
+            });
+          }
+
           setUploadStatus(UploadStatus.COMPLETED);
         })
         .catch((error: any) => {

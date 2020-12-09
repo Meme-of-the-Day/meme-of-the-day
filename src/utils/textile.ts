@@ -1,4 +1,6 @@
 import { Buckets, Client, PrivateKey, ThreadID, Where, UserAuth, KeyInfo } from '@textile/hub'
+// @ts-ignore
+import { readAndCompressImage } from 'browser-image-resizer'
 import { MemeMetadata, TokenMetadata } from './Types'
 
 export class Textile {
@@ -17,6 +19,11 @@ export class Textile {
   private dbName = 'memeofthedaydb';
   private memeCollectionName = 'mememetadata';
   private ipfsGateway = 'https://hub.textile.io';
+
+  private tokenImageConfig = {
+    maxWidth: 800,
+    maxHeigth: 800
+  };
  
   private static singletonInstace: Textile;
 
@@ -98,7 +105,7 @@ export class Textile {
     return memeList[0];
   }
 
-  public async uploadMeme(file: File): Promise<MemeMetadata> {
+  public async uploadMeme(file: File, memeName: string = "", description: string = ""): Promise<MemeMetadata> {
     if (!this.bucketInfo.bucket || !this.bucketInfo.bucketKey) {
       throw new Error('No bucket client or root key');
     }
@@ -107,14 +114,31 @@ export class Textile {
     const fileName = `${file.name}`;
     const uploadName = `${now}_${fileName}`;
     const location = `memes/${uploadName}`;
+    const previewLocation = `preview/${uploadName}`;
 
+    const previewImage = await readAndCompressImage(file, this.tokenImageConfig);
+
+    const previewBuf = await previewImage.arrayBuffer();
     const buf = await file.arrayBuffer();
     const raw = await this.bucketInfo.bucket.pushPath(this.bucketInfo.bucketKey, location, buf);
+    const previewRaw = await this.bucketInfo.bucket.pushPath(this.bucketInfo.bucketKey, previewLocation, previewBuf);
+
+    const tokenMeta: TokenMetadata = {
+      name: memeName,
+      description: description,
+      image: `${this.ipfsGateway}/ipfs/${previewRaw.path.cid.toString()}`
+    };
+
+    const tokenMetaURL = await this.uploadTokenMetadata(tokenMeta);
 
     return {
       cid: raw.path.cid.toString(),
-      name: fileName,
+      previewCID: previewRaw.path.cid.toString(),
+      name: memeName,
+      description: description,
       path: location,
+      previewPath: previewLocation,
+      tokenMetadataURL: tokenMetaURL,
       date: now.toString(),
       txHash: "",
       likes: 0,
@@ -132,22 +156,6 @@ export class Textile {
     }
 
     await this.client.create(ThreadID.fromString(this.dbThreadID), this.memeCollectionName, [metadata]);
-  }
-
-  public async uploadTokenMetadata(metadata: TokenMetadata) {
-    if (!this.bucketInfo.bucket || !this.bucketInfo.bucketKey) {
-      throw new Error('No bucket client or root key');
-    }
-
-    const now = new Date().getTime();
-    const fileName = `${metadata.name}`;
-    const uploadName = `${now}_${fileName}`;
-    const location = `tokenmetadata/${uploadName}`;
-
-    const buf = Buffer.from(JSON.stringify(metadata, null, 2))
-    const raw = await this.bucketInfo.bucket.pushPath(this.bucketInfo.bucketKey, location, buf);
-
-    return `${this.ipfsGateway}/ipfs/${raw.path.cid.toString()}`;
   }
 
   public async updateMemeVotes(userId: string, cid: string, isLiked: boolean, isAdd: boolean): Promise<boolean> {
@@ -193,6 +201,22 @@ export class Textile {
 
     await this.client.save(ThreadID.fromString(this.dbThreadID), this.memeCollectionName, memeList);
     return true;
+  }
+
+  private async uploadTokenMetadata(metadata: TokenMetadata) {
+    if (!this.bucketInfo.bucket || !this.bucketInfo.bucketKey) {
+      throw new Error('No bucket client or root key');
+    }
+
+    const now = new Date().getTime();
+    const fileName = `${metadata.name}`;
+    const uploadName = `${now}_${fileName}`;
+    const location = `tokenmetadata/${uploadName}`;
+
+    const buf = Buffer.from(JSON.stringify(metadata, null, 2))
+    const raw = await this.bucketInfo.bucket.pushPath(this.bucketInfo.bucketKey, location, buf);
+
+    return `${this.ipfsGateway}/ipfs/${raw.path.cid.toString()}`;
   }
 
   private async getKeyInfo(): Promise<KeyInfo> {
