@@ -24,9 +24,7 @@ const LinkGroup = styled.div`
   padding: 20px 30px;
 `;
 
-const MainLinks = styled(LinkGroup)`
-  margin-bottom: 40px;
-`;
+const MainLinks = styled(LinkGroup)``;
 
 const OtherLinks = styled(LinkGroup)`
   justify-content: flex-end;
@@ -37,7 +35,7 @@ const links = css`
   color: ${({ theme }) => theme.colors.white};
   display: flex;
   align-items: center;
-  padding: 15px 10px;
+  padding: 10px;
   width: 100%;
   border-radius: 8px;
   margin: 10px 0;
