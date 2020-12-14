@@ -89,11 +89,12 @@ const Navigation: React.FC<{ className?: string }> = ({ className }) => {
     hasMetamask,
     isMetamaskConnected,
     isConnectedToMatic,
-    authenticate
+    authenticate,
+    authProvider
   } = authContext;
 
   const login = async () => {
-    if (!hasMetamask || !isMetamaskConnected || !isConnectedToMatic) {
+    if (!hasMetamask) {
       openModal();
     } else {
       await authenticate();
@@ -118,7 +119,9 @@ const Navigation: React.FC<{ className?: string }> = ({ className }) => {
         </CustomNavLink>
       </MainLinks>
       <OtherLinks>
-        <Login onClick={async () => await login()}>Login</Login>
+        {!authProvider && (
+          <Login onClick={async () => await login()}>Login</Login>
+        )}
         <OutbountLinks href="https://twitter.com/MemeofDayDApp">
           Twitter
         </OutbountLinks>

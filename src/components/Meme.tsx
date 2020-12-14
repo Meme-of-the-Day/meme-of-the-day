@@ -53,7 +53,7 @@ const Buttons = styled.div`
   justify-content: space-between;
   flex-wrap: wrap;
 
-  img {
+  & > img {
     width: 48px;
   }
 
@@ -140,10 +140,6 @@ const Meme: React.FC<Props> = ({ className, meme, textileInstance }) => {
     if (!hasMetamask || !isMetamaskConnected || !isConnectedToMatic) {
       openModal();
     } else {
-      if (!authProvider) {
-        window.alert("Please login to vote");
-      }
-
       if (authProvider) {
         if (
           window.confirm(

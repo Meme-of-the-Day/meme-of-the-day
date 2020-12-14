@@ -12,17 +12,12 @@ import Search from "./Search";
 
 const Main = styled.header`
   width: 100%;
-  /* height: 56px; */
   display: flex;
   align-items: center;
   justify-content: space-between;
   flex-wrap: wrap;
   padding: 8px;
   background-color: ${({ theme }) => theme.colors.white};
-
-  @media screen and (min-width: 768px) {
-    /* height: 60px; */
-  }
 `;
 
 const Title = styled.span`

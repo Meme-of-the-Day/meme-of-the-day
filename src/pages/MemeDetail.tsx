@@ -3,7 +3,7 @@ import { useParams } from "react-router-dom";
 import styled from "styled-components";
 import dayjs from "dayjs";
 
-import { AuthContext } from "../App";
+import { AuthContext, UIContext, UIContextType } from "../App";
 import { Textile } from "../utils/textile";
 import voteIcon from "../assets/vote.svg";
 import { MemeMetadata } from "../utils/Types";
@@ -61,7 +61,7 @@ const Buttons = styled.div`
   padding-bottom: 8px;
   border-bottom: 1px solid ${({ theme }) => theme.colors.purple100};
 
-  img {
+  & > img {
     width: 48px;
   }
 
@@ -127,43 +127,53 @@ export default function MemeDetail() {
   const authContext = useContext(AuthContext);
   const [meme, setMeme] = useState<MemeMetadata>();
 
+  const uiContext = useContext<UIContextType>(UIContext);
+
+  const { openModal } = uiContext;
+
+  const {
+    hasMetamask,
+    isMetamaskConnected,
+    isConnectedToMatic,
+    authProvider
+  } = authContext;
+
   useEffect(() => {
     (async () => {
       const textile = await Textile.getInstance();
       const meme = await textile.getMemeMetadata(cid);
-      console.log(meme);
       setMeme(meme);
     })();
   }, []);
 
   const vote = async () => {
-    if (!authContext.authProvider) {
-      window.alert("Please login to vote");
-    }
-
-    if (authContext.authProvider && meme) {
-      if (
-        window.confirm(
-          "Owner of this meme is:\n" +
-            meme.owner +
-            "\n\nWould you like to vote for this Meme?"
-        )
-      ) {
-        const textile = await Textile.getInstance();
-        const isValid = await textile.updateMemeVotes(
-          authContext.authProvider.account,
-          meme.cid,
-          true,
-          true
-        );
-        if (isValid) {
-          if (meme.likes) {
-            meme.likes += 1;
+    if (!hasMetamask || !isMetamaskConnected || !isConnectedToMatic) {
+      openModal();
+    } else {
+      if (authContext.authProvider && meme) {
+        if (
+          window.confirm(
+            "Owner of this meme is:\n" +
+              meme.owner +
+              "\n\nWould you like to vote for this Meme?"
+          )
+        ) {
+          const textile = await Textile.getInstance();
+          const isValid = await textile.updateMemeVotes(
+            authContext.authProvider.account,
+            meme.cid,
+            true,
+            true
+          );
+          if (isValid) {
+            if (meme.likes) {
+              meme.likes += 1;
+            } else {
+              meme.likes = 1;
+            }
           } else {
-            meme.likes = 1;
+            window.alert("Vote cannot be added twice");
           }
-        } else {
-          window.alert("Vote cannot be added twice");
         }
       }
     }
