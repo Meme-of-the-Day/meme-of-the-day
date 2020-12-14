@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import styled, { ThemeProvider } from "styled-components";
+import Web3 from "web3";
 
 import theme from "./theme";
 import AppBar from "./components/appBar/AppBar";
@@ -46,10 +47,16 @@ const CustomNavigation = styled(Navigation)<{ open: boolean }>`
 export type AuthContextType = {
   authProvider?: AuthProvider;
   authenticate: () => void;
+  hasMetamask: boolean;
+  isConnectedToMatic: boolean;
+  isMetamaskConnected: boolean;
 };
 
 export const AuthContext = React.createContext<AuthContextType>({
-  authenticate: () => {}
+  authenticate: () => {},
+  hasMetamask: false,
+  isConnectedToMatic: false,
+  isMetamaskConnected: false
 });
 
 export type UIContextType = {
@@ -68,11 +75,45 @@ const App: React.FC = () => {
     undefined
   );
 
+  const [isConnectedToMatic, setIsConnectedToMatic] = useState(false);
+  const [isMetamaskConnected, setIsMetamaskConnected] = useState(false);
+  const [hasMetamask, setHasMetamask] = useState(false);
+
   const windowClickHandler = () => {
     if (showHamburger) {
       setShowHamburger(false);
     }
   };
+
+  useEffect(() => {
+    if (window.ethereum) {
+      const web3 = new Web3(Web3.givenProvider);
+      web3.eth.getChainId().then(id => {
+        if (id === 80001 || id === 137) {
+          setIsConnectedToMatic(true);
+        } else {
+          setIsConnectedToMatic(false);
+        }
+        web3.eth.getAccounts().then(accounts => {
+          if (accounts.length > 0) {
+            setIsMetamaskConnected(true);
+          } else {
+            setIsMetamaskConnected(false);
+          }
+        });
+      });
+      setHasMetamask(true);
+
+      if (window.ethereum.on) {
+        window.ethereum.on("chainChanged", () => {
+          window.location.reload();
+        });
+      }
+    } else {
+      setHasMetamask(false);
+      setIsConnectedToMatic(false);
+    }
+  });
 
   useEffect(() => {
     window.addEventListener("click", windowClickHandler);
@@ -96,7 +137,10 @@ const App: React.FC = () => {
       <AuthContext.Provider
         value={{
           authProvider,
-          authenticate: login
+          authenticate: login,
+          hasMetamask,
+          isConnectedToMatic,
+          isMetamaskConnected
         }}
       >
         <ThemeProvider theme={theme}>
