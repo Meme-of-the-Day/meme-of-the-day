@@ -103,8 +103,6 @@ const AppBar: React.FC<{}> = () => {
     authenticate
   } = authContext;
 
-  console.log(hasMetamask, isConnectedToMatic, isMetamaskConnected);
-
   return (
     <Main>
       {(!hasMetamask || !isMetamaskConnected || !isConnectedToMatic) && (
