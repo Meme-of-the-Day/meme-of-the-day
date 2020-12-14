@@ -7,6 +7,7 @@ export interface MemeMetadata {
   path: string; // Bucket path
   previewPath?: string;
   tokenMetadataURL?: string;
+  tokenMetadataPath?: string;
   name: string; // meme Name
   txHash: string; // blockchain tx hash
   date: string; // created date
@@ -102,6 +103,10 @@ export const Schema = {
         tokenMetadataURL: {
           type: "string",
           description: "ERC1155 compliant token metadata URL."
+        },
+        tokenMetadataPath: {
+          type: "string",
+          description: "Bucket path for the token metadata resource."
         },
         name: {
           type: "string",
