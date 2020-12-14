@@ -20,11 +20,14 @@ interface Props {
   textileInstance: Textile;
 }
 
-const Main = styled(Link)`
+const Main = styled.div`
+  border-radius: 8px;
+  background-color: ${({ theme }) => theme.colors.white};
+`;
+
+const StyledLink = styled(Link)`
   display: flex;
   flex-direction: column;
-  background-color: ${({ theme }) => theme.colors.white};
-  border-radius: 8px;
   padding: 40px 40px 0;
 
   & > img {
@@ -41,7 +44,7 @@ const Meta = styled.div`
   display: flex;
   justify-content: space-between;
   flex-direction: column;
-  padding: 10px;
+  padding: 10px 40px;
 `;
 
 const Buttons = styled.div`
@@ -196,22 +199,26 @@ const Meme: React.FC<Props> = ({ className, meme, textileInstance }) => {
     : "N/A";
 
   return (
-    <Main to={`/meme/${meme.cid}`} className={`${className} MemeOfTheDay`}>
-      <Top>
-        <Owner>
-          <OwnerImage>Owner</OwnerImage>
-          <Details>
-            <Address>{ownerAddress}</Address>
-            <MintedOn>
-              Minted on: {dayjs(parseInt(meme.date)).format("DD MMM, YYYY")}
-            </MintedOn>
-          </Details>
-        </Owner>
-      </Top>
-      <Name>
-        {meme.name.length > 40 ? meme.name.substring(0, 40) + "..." : meme.name}
-      </Name>
-      <img src={`https://hub.textile.io/ipfs/${meme.cid}`} alt="" />
+    <Main className={`${className} MemeOfTheDay`}>
+      <StyledLink to={`/meme/${meme.cid}`}>
+        <Top>
+          <Owner>
+            <OwnerImage>Owner</OwnerImage>
+            <Details>
+              <Address>{ownerAddress}</Address>
+              <MintedOn>
+                Minted on: {dayjs(parseInt(meme.date)).format("DD MMM, YYYY")}
+              </MintedOn>
+            </Details>
+          </Owner>
+        </Top>
+        <Name>
+          {meme.name.length > 40
+            ? meme.name.substring(0, 40) + "..."
+            : meme.name}
+        </Name>
+        <img src={`https://hub.textile.io/ipfs/${meme.cid}`} alt="" />
+      </StyledLink>
       <Meta>
         <Buttons>
           <Button onClick={async () => await vote()}>
