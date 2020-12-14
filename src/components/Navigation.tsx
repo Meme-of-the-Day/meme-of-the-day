@@ -62,6 +62,11 @@ const Login = styled.button`
   border: none;
   font-size: 16px;
   ${links}
+  display: none;
+
+  @media screen and (min-width: 1000px) {
+    display: flex;
+  }
 `;
 
 const Footer = styled.div`

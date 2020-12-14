@@ -55,7 +55,7 @@ const Meta = styled.div`
 `;
 
 const Buttons = styled.div`
-  display: flex;
+  display: none;
   align-items: center;
   width: 100%;
   padding-bottom: 8px;
@@ -67,6 +67,9 @@ const Buttons = styled.div`
 
   @media screen and (min-width: 768px) {
     border-bottom: none;
+  }
+  @media screen and (min-width: 1000px) {
+    display: flex;
   }
 `;
 

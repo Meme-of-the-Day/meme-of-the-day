@@ -45,13 +45,17 @@ const Meta = styled.div`
 `;
 
 const Buttons = styled.div`
-  display: flex;
+  display: none;
   align-items: flex-end;
   justify-content: space-between;
   flex-wrap: wrap;
 
   img {
     width: 48px;
+  }
+
+  @media screen and (min-width: 1000px) {
+    display: flex;
   }
 `;
 
