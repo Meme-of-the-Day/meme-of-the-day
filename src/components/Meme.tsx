@@ -6,7 +6,7 @@ import dayjs from "dayjs";
 import voteIcon from "../assets/vote.svg";
 import { MemeMetadata } from "../utils/Types";
 import { Textile } from "../utils/textile";
-import { AuthContext } from "../App";
+import { AuthContext, UIContextType, UIContext } from "../App";
 
 type IMeme = {
   owner: string;
@@ -122,34 +122,48 @@ const Count = styled.span`
 
 const Meme: React.FC<Props> = ({ className, meme, textileInstance }) => {
   const authContext = useContext(AuthContext);
+  const uiContext = useContext<UIContextType>(UIContext);
+
+  const { openModal } = uiContext;
+
+  const {
+    hasMetamask,
+    isMetamaskConnected,
+    isConnectedToMatic,
+    authProvider
+  } = authContext;
 
   const vote = async () => {
-    if (!authContext.authProvider) {
-      window.alert("Please login to vote");
-    }
+    if (!hasMetamask || !isMetamaskConnected || !isConnectedToMatic) {
+      openModal();
+    } else {
+      if (!authProvider) {
+        window.alert("Please login to vote");
+      }
 
-    if (authContext.authProvider) {
-      if (
-        window.confirm(
-          "Owner of this meme is:\n" +
-            meme.owner +
-            "\n\nWould you like to vote for this Meme?"
-        )
-      ) {
-        const isValid = await textileInstance.updateMemeVotes(
-          authContext.authProvider.account,
-          meme.cid,
-          true,
-          true
-        );
-        if (isValid) {
-          if (meme.likes) {
-            meme.likes += 1;
+      if (authProvider) {
+        if (
+          window.confirm(
+            "Owner of this meme is:\n" +
+              meme.owner +
+              "\n\nWould you like to vote for this Meme?"
+          )
+        ) {
+          const isValid = await textileInstance.updateMemeVotes(
+            authProvider.account,
+            meme.cid,
+            true,
+            true
+          );
+          if (isValid) {
+            if (meme.likes) {
+              meme.likes += 1;
+            } else {
+              meme.likes = 1;
+            }
           } else {
-            meme.likes = 1;
+            window.alert("Vote cannot be added twice");
           }
-        } else {
-          window.alert("Vote cannot be added twice");
         }
       }
     }

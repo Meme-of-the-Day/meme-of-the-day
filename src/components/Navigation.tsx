@@ -32,7 +32,7 @@ const OtherLinks = styled(LinkGroup)`
 `;
 
 const links = css`
-  color: ${({ theme }) => theme.colors.white};
+  color: ${({ theme }) => theme.colors.white} !important;
   display: flex;
   align-items: center;
   padding: 10px;
@@ -83,8 +83,21 @@ const Navigation: React.FC<{ className?: string }> = ({ className }) => {
   const authContext = useContext(AuthContext);
   const uiContext = useContext(UIContext);
 
+  const { openModal } = uiContext;
+
+  const {
+    hasMetamask,
+    isMetamaskConnected,
+    isConnectedToMatic,
+    authenticate
+  } = authContext;
+
   const login = async () => {
-    await authContext.authenticate();
+    if (!hasMetamask || !isMetamaskConnected || !isConnectedToMatic) {
+      openModal();
+    } else {
+      await authenticate();
+    }
   };
 
   return (

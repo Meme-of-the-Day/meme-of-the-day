@@ -28,6 +28,14 @@ a {
   display: block;
 }
 
+a:visited {
+  color: inherit;
+}
+
+a:active {
+  color: inherit;
+}
+
 /* main {
   margin-top: 90px;
 }

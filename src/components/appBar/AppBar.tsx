@@ -86,6 +86,10 @@ const Message = styled.div`
   }
 `;
 
+const Connect = styled.span`
+  cursor: pointer;
+`;
+
 const AppBar: React.FC<{}> = () => {
   const location = useLocation();
   const uiContext = useContext<UIContextType>(UIContext);
@@ -104,40 +108,40 @@ const AppBar: React.FC<{}> = () => {
     authenticate
   } = authContext;
 
+  console.log(hasMetamask, isConnectedToMatic, isMetamaskConnected);
+
   return (
     <Main>
-      {!hasMetamask ||
-        !isMetamaskConnected ||
-        (!isConnectedToMatic && (
-          <Message>
-            {!hasMetamask ? (
-              <span>
-                <a
-                  href="https://metamask.io/download.html"
-                  rel="nofollow, noreferrer"
-                  target="_blank"
-                >
-                  Please install Metamask to use this app
-                </a>
-              </span>
-            ) : !isMetamaskConnected ? (
-              <span onClick={authenticate}>
-                Please connect with Metamask, <u>click here</u>
-              </span>
-            ) : !isConnectedToMatic ? (
-              <span>
-                <a
-                  href="https://blog.matic.network/deposits-and-withdrawals-on-pos-bridge/"
-                  rel="nofollow, noreferrer"
-                  target="_blank"
-                >
-                  Please follow the steps <u>here</u> to connect to the MATIC
-                  network to be able to use this app
-                </a>
-              </span>
-            ) : null}
-          </Message>
-        ))}
+      {(!hasMetamask || !isMetamaskConnected || !isConnectedToMatic) && (
+        <Message>
+          {!hasMetamask ? (
+            <span>
+              <a
+                href="https://metamask.io/download.html"
+                rel="nofollow, noreferrer"
+                target="_blank"
+              >
+                Please install Metamask to use this app
+              </a>
+            </span>
+          ) : !isMetamaskConnected ? (
+            <Connect onClick={authenticate}>
+              Please connect with Metamask, <u>click here</u>
+            </Connect>
+          ) : !isConnectedToMatic ? (
+            <span>
+              <a
+                href="https://blog.matic.network/deposits-and-withdrawals-on-pos-bridge/"
+                rel="nofollow, noreferrer"
+                target="_blank"
+              >
+                Please follow the steps <u>here</u> to connect to the MATIC
+                network to be able to use this app
+              </a>
+            </span>
+          ) : null}
+        </Message>
+      )}
       <HamburgerIcon onClick={uiContext.toggleHamburger}>
         <div></div>
         <div></div>

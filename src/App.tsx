@@ -6,6 +6,7 @@ import Web3 from "web3";
 import theme from "./theme";
 import AppBar from "./components/appBar/AppBar";
 import Navigation from "./components/Navigation";
+import MessageModal from "./components/MessageModal";
 import Home from "./pages/Home";
 import Upload from "./pages/Upload";
 import MyMemes from "./pages/MyMemes";
@@ -62,15 +63,22 @@ export const AuthContext = React.createContext<AuthContextType>({
 export type UIContextType = {
   showHamburger: boolean;
   toggleHamburger: () => void;
+  showModal: boolean;
+  closeModal: () => void;
+  openModal: () => void;
 };
 
 export const UIContext = React.createContext<UIContextType>({
   showHamburger: false,
-  toggleHamburger: () => {}
+  toggleHamburger: () => {},
+  showModal: false,
+  closeModal: () => {},
+  openModal: () => {}
 });
 
 const App: React.FC = () => {
   const [showHamburger, setShowHamburger] = useState(false);
+  const [showModal, setShowModal] = useState(false);
   const [authProvider, setAuthProvider] = useState<AuthProvider | undefined>(
     undefined
   );
@@ -131,7 +139,11 @@ const App: React.FC = () => {
     <UIContext.Provider
       value={{
         showHamburger,
-        toggleHamburger: () => setShowHamburger(showHamburger => !showHamburger)
+        toggleHamburger: () =>
+          setShowHamburger(showHamburger => !showHamburger),
+        showModal,
+        closeModal: () => setShowModal(false),
+        openModal: () => setShowModal(true)
       }}
     >
       <AuthContext.Provider
@@ -162,9 +174,7 @@ const App: React.FC = () => {
                   <Route exact path="/" component={Home} />
                 </Switch>
               </AppBody>
-              {/* <Footer>
-              Powered by&nbsp;<strong>Matic</strong>
-            </Footer> */}
+              <MessageModal />
             </Main>
           </Router>
         </ThemeProvider>
