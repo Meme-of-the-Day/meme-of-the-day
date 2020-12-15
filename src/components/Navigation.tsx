@@ -24,9 +24,7 @@ const LinkGroup = styled.div`
   padding: 20px 30px;
 `;
 
-const MainLinks = styled(LinkGroup)`
-  margin-bottom: 40px;
-`;
+const MainLinks = styled(LinkGroup)``;
 
 const OtherLinks = styled(LinkGroup)`
   justify-content: flex-end;
@@ -34,10 +32,10 @@ const OtherLinks = styled(LinkGroup)`
 `;
 
 const links = css`
-  color: ${({ theme }) => theme.colors.white};
+  color: ${({ theme }) => theme.colors.white} !important;
   display: flex;
   align-items: center;
-  padding: 15px 10px;
+  padding: 10px;
   width: 100%;
   border-radius: 8px;
   margin: 10px 0;
@@ -64,6 +62,11 @@ const Login = styled.button`
   border: none;
   font-size: 16px;
   ${links}
+  display: none;
+
+  @media screen and (min-width: 1000px) {
+    display: flex;
+  }
 `;
 
 const Footer = styled.div`
@@ -80,8 +83,22 @@ const Navigation: React.FC<{ className?: string }> = ({ className }) => {
   const authContext = useContext(AuthContext);
   const uiContext = useContext(UIContext);
 
+  const { openModal } = uiContext;
+
+  const {
+    hasMetamask,
+    isMetamaskConnected,
+    isConnectedToMatic,
+    authenticate,
+    authProvider
+  } = authContext;
+
   const login = async () => {
-    await authContext.authenticate();
+    if (!hasMetamask) {
+      openModal();
+    } else {
+      await authenticate();
+    }
   };
 
   return (
@@ -102,7 +119,9 @@ const Navigation: React.FC<{ className?: string }> = ({ className }) => {
         </CustomNavLink>
       </MainLinks>
       <OtherLinks>
-        <Login onClick={async () => await login()}>Login</Login>
+        {!authProvider && (
+          <Login onClick={async () => await login()}>Login</Login>
+        )}
         <OutbountLinks href="https://twitter.com/MemeofDayDApp">
           Twitter
         </OutbountLinks>
