@@ -32,15 +32,16 @@ const Title = styled.span`
   }
 `;
 
-// const CustomSearch = styled(Search)`
-//   background-color: ${({ theme }) => theme.colors.purple100};
-//   flex: 1;
+const CustomSearch = styled(Search)`
+  background-color: ${({ theme }) => theme.colors.purple100};
+  flex: 1;
+  display: none;
 
-//   @media screen and (min-width: 768px) {
-//     order: 1;
-//     max-width: 300px;
-//   }
-// `;
+  @media screen and (min-width: 768px) {
+    order: 1;
+    max-width: 300px;
+  }
+`;
 
 const HamburgerIcon = styled.button`
   height: 15px;
@@ -141,7 +142,7 @@ const AppBar: React.FC<{}> = () => {
         <div></div>
       </HamburgerIcon>
       <Title>{pageTitleFromRoute[location.pathname]}</Title>
-      {/* <CustomSearch /> */}
+      <CustomSearch />
     </Main>
   );
 };
