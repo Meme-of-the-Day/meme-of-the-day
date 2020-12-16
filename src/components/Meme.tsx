@@ -114,6 +114,7 @@ const Button = styled.button`
   display: flex;
   align-items: baseline;
   justify-content: space-between;
+  cursor: pointer;
 `;
 
 const Count = styled.span`

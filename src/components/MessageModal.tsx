@@ -64,7 +64,7 @@ const MessageModal: React.FC<{}> = () => {
       <ModalBody>
         <Close onClick={closeModal}>&times;</Close>
         {!hasMetamask ? (
-          <span>
+          <span onClick={closeModal}>
             <a
               href="https://metamask.io/download.html"
               rel="nofollow, noreferrer"
@@ -76,11 +76,16 @@ const MessageModal: React.FC<{}> = () => {
             </a>
           </span>
         ) : !isMetamaskConnected ? (
-          <Connect onClick={authenticate}>
+          <Connect
+            onClick={() => {
+              closeModal();
+              authenticate();
+            }}
+          >
             Please connect with Metamask, <u>click here</u>
           </Connect>
         ) : !isConnectedToMatic ? (
-          <span>
+          <span onClick={closeModal}>
             <a
               href="https://blog.matic.network/deposits-and-withdrawals-on-pos-bridge/"
               rel="nofollow, noreferrer"
