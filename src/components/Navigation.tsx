@@ -63,6 +63,7 @@ const Login = styled.button`
   font-size: 16px;
   ${links}
   display: none;
+  cursor: pointer;
 
   @media screen and (min-width: 1000px) {
     display: flex;
