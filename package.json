@@ -22,7 +22,7 @@
     "typescript": "^3.9.5"
   },
   "dependencies": {
-    "3id-connect": "^1.0.0-alpha.6",
+    "3id-connect": "^1.0.0-alpha.8",
     "@ceramicnetwork/ceramic-http-client": "^0.7.2",
     "@ceramicstudio/idx-constants": "^0.3.0",
     "@ceramicstudio/idx-web": "^0.2.0",
