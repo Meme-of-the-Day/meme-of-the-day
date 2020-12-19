@@ -33,8 +33,7 @@ const Home: React.FC<{}> = () => {
     const init = async () => {
       const textile = await Textile.getInstance();
       const memes = await textile.getAllMemes();
-      console.log(memes);
-      setMemeMetadata(memes);
+      setMemeMetadata(memes.sort((meme1, meme2) => meme2.likes - meme1.likes));
       setTextile(textile);
       setLoading(false);
     };
