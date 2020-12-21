@@ -16,6 +16,9 @@ contract MemeOfTheDay is ERC1155, Ownable {
     // Mapping for enforcing unique hashes
     mapping(string => bool) _hashExists;
 
+    // Mapping from pifs picture hash to NFT tokenID
+    mapping (string => uint256) private _hashToken;
+
     mapping(uint256 => address payable) public creatorOf;
     mapping(uint256 => address payable) public ownerOf;
     mapping(uint256 => int256) public creatorFee;
@@ -45,12 +48,21 @@ contract MemeOfTheDay is ERC1155, Ownable {
         _mint(msg.sender, _id, 1, "");
 
         _hashExists[_hash] = true;
+        _hashToken[_hash] = _id;
 
         creatorOf[_id] = msg.sender;
         ownerOf[_id] = msg.sender;
         creatorFee[_id] = _creatorFee;
 
         emit MemeMinted(msg.sender, _id);
+    }
+
+    /**
+     * @notice Returns the TokenID of meme
+     * @return tokenID of the meme
+     */
+    function getTokenID(string memory _hash) public view returns (uint256 tokenID) {
+        return _hashToken[_hash];
     }
 
     /**

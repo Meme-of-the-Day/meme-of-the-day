@@ -147,7 +147,7 @@
         "id": 264,
         "nodeType": "ImportDirective",
         "scope": 326,
-        "sourceUnit": 1175,
+        "sourceUnit": 1198,
         "src": "61:52:4",
         "symbolAliases": [],
         "unitAlias": ""
@@ -162,10 +162,10 @@
               "id": 266,
               "name": "Ownable",
               "nodeType": "UserDefinedTypeName",
-              "referencedDeclaration": 1174,
+              "referencedDeclaration": 1197,
               "src": "277:7:4",
               "typeDescriptions": {
-                "typeIdentifier": "t_contract$_Ownable_$1174",
+                "typeIdentifier": "t_contract$_Ownable_$1197",
                 "typeString": "contract Ownable"
               }
             },
@@ -175,8 +175,8 @@
           }
         ],
         "contractDependencies": [
-          1065,
-          1174
+          1088,
+          1197
         ],
         "contractKind": "contract",
         "documentation": {
@@ -189,8 +189,8 @@
         "id": 325,
         "linearizedBaseContracts": [
           325,
-          1174,
-          1065
+          1197,
+          1088
         ],
         "name": "MOTDTreasury",
         "nodeType": "ContractDefinition",
@@ -860,7 +860,7 @@
                   "name": "onlyOwner",
                   "nodeType": "Identifier",
                   "overloadedDeclarations": [],
-                  "referencedDeclaration": 1123,
+                  "referencedDeclaration": 1146,
                   "src": "649:9:4",
                   "typeDescriptions": {
                     "typeIdentifier": "t_modifier$__$",
@@ -956,7 +956,7 @@
         "id": 264,
         "nodeType": "ImportDirective",
         "scope": 326,
-        "sourceUnit": 1175,
+        "sourceUnit": 1198,
         "src": "61:52:4",
         "symbolAliases": [],
         "unitAlias": ""
@@ -971,10 +971,10 @@
               "id": 266,
               "name": "Ownable",
               "nodeType": "UserDefinedTypeName",
-              "referencedDeclaration": 1174,
+              "referencedDeclaration": 1197,
               "src": "277:7:4",
               "typeDescriptions": {
-                "typeIdentifier": "t_contract$_Ownable_$1174",
+                "typeIdentifier": "t_contract$_Ownable_$1197",
                 "typeString": "contract Ownable"
               }
             },
@@ -984,8 +984,8 @@
           }
         ],
         "contractDependencies": [
-          1065,
-          1174
+          1088,
+          1197
         ],
         "contractKind": "contract",
         "documentation": {
@@ -998,8 +998,8 @@
         "id": 325,
         "linearizedBaseContracts": [
           325,
-          1174,
-          1065
+          1197,
+          1088
         ],
         "name": "MOTDTreasury",
         "nodeType": "ContractDefinition",
@@ -1669,7 +1669,7 @@
                   "name": "onlyOwner",
                   "nodeType": "Identifier",
                   "overloadedDeclarations": [],
-                  "referencedDeclaration": 1123,
+                  "referencedDeclaration": 1146,
                   "src": "649:9:4",
                   "typeDescriptions": {
                     "typeIdentifier": "t_modifier$__$",
@@ -1803,76 +1803,12 @@
         }
       },
       "links": {},
-      "address": "0xC53D8cFFBD989f168306b96aa00533b88b353836",
-      "transactionHash": "0x4d3f3a90bc5da724d1dfbf18749abfcb90580c4f6eaff081e457f1f343289305"
-    },
-    "80001": {
-      "events": {
-        "0x8be0079c531659141344cd1fd0a4f28419497f9722a3daafe3b4186f6b6457e0": {
-          "anonymous": false,
-          "inputs": [
-            {
-              "indexed": true,
-              "internalType": "address",
-              "name": "previousOwner",
-              "type": "address"
-            },
-            {
-              "indexed": true,
-              "internalType": "address",
-              "name": "newOwner",
-              "type": "address"
-            }
-          ],
-          "name": "OwnershipTransferred",
-          "type": "event"
-        },
-        "0x737c69225d647e5994eab1a6c301bf6d9232beb2759ae1e27a8966b4732bc489": {
-          "anonymous": false,
-          "inputs": [
-            {
-              "indexed": false,
-              "internalType": "address",
-              "name": "from",
-              "type": "address"
-            },
-            {
-              "indexed": false,
-              "internalType": "uint256",
-              "name": "amount",
-              "type": "uint256"
-            }
-          ],
-          "name": "Paid",
-          "type": "event"
-        },
-        "0x7084f5476618d8e60b11ef0d7d3f06914655adb8793e28ff7f018d4c76d505d5": {
-          "anonymous": false,
-          "inputs": [
-            {
-              "indexed": false,
-              "internalType": "address",
-              "name": "by",
-              "type": "address"
-            },
-            {
-              "indexed": false,
-              "internalType": "uint256",
-              "name": "amount",
-              "type": "uint256"
-            }
-          ],
-          "name": "Withdrawn",
-          "type": "event"
-        }
-      },
-      "links": {},
-      "address": "0x43a4903967051fb35E6f7c2dc0627000AF000Cda",
-      "transactionHash": "0xc17ddb2490c7f7b912f6fdc95ebab9e35cc22036ec54bbeae7af7d9e4979e51a"
+      "address": "0x9C9149dF448D9A6A1ADB2955493913F8979a0eE7",
+      "transactionHash": "0x52b0ed6af0cf78f0c38b0a1d93963ed0a226dfe067063103c0b06736f9e0b527"
     }
   },
   "schemaVersion": "3.3.1",
-  "updatedAt": "2020-12-08T15:47:45.647Z",
+  "updatedAt": "2020-12-21T16:24:32.554Z",
   "networkType": "ethereum",
   "devdoc": {
     "author": "MemeOfTheDay",

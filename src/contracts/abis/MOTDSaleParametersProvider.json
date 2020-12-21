@@ -36,7 +36,8 @@
         }
       ],
       "stateMutability": "view",
-      "type": "function"
+      "type": "function",
+      "constant": true
     },
     {
       "inputs": [],
@@ -49,7 +50,8 @@
         }
       ],
       "stateMutability": "view",
-      "type": "function"
+      "type": "function",
+      "constant": true
     },
     {
       "inputs": [],
@@ -62,7 +64,8 @@
         }
       ],
       "stateMutability": "view",
-      "type": "function"
+      "type": "function",
+      "constant": true
     },
     {
       "inputs": [],
@@ -75,7 +78,8 @@
         }
       ],
       "stateMutability": "view",
-      "type": "function"
+      "type": "function",
+      "constant": true
     },
     {
       "inputs": [],
@@ -88,7 +92,8 @@
         }
       ],
       "stateMutability": "view",
-      "type": "function"
+      "type": "function",
+      "constant": true
     },
     {
       "inputs": [
@@ -107,7 +112,8 @@
         }
       ],
       "stateMutability": "view",
-      "type": "function"
+      "type": "function",
+      "constant": true
     },
     {
       "inputs": [],
@@ -184,7 +190,7 @@
         "id": 162,
         "nodeType": "ImportDirective",
         "scope": 262,
-        "sourceUnit": 1175,
+        "sourceUnit": 1198,
         "src": "61:52:3",
         "symbolAliases": [],
         "unitAlias": ""
@@ -199,10 +205,10 @@
               "id": 164,
               "name": "Ownable",
               "nodeType": "UserDefinedTypeName",
-              "referencedDeclaration": 1174,
+              "referencedDeclaration": 1197,
               "src": "319:7:3",
               "typeDescriptions": {
-                "typeIdentifier": "t_contract$_Ownable_$1174",
+                "typeIdentifier": "t_contract$_Ownable_$1197",
                 "typeString": "contract Ownable"
               }
             },
@@ -212,8 +218,8 @@
           }
         ],
         "contractDependencies": [
-          1065,
-          1174
+          1088,
+          1197
         ],
         "contractKind": "contract",
         "documentation": {
@@ -226,8 +232,8 @@
         "id": 261,
         "linearizedBaseContracts": [
           261,
-          1174,
-          1065
+          1197,
+          1088
         ],
         "name": "MOTDSaleParametersProvider",
         "nodeType": "ContractDefinition",
@@ -1390,7 +1396,7 @@
                   "name": "onlyOwner",
                   "nodeType": "Identifier",
                   "overloadedDeclarations": [],
-                  "referencedDeclaration": 1123,
+                  "referencedDeclaration": 1146,
                   "src": "1473:9:3",
                   "typeDescriptions": {
                     "typeIdentifier": "t_modifier$__$",
@@ -1514,7 +1520,7 @@
         "id": 162,
         "nodeType": "ImportDirective",
         "scope": 262,
-        "sourceUnit": 1175,
+        "sourceUnit": 1198,
         "src": "61:52:3",
         "symbolAliases": [],
         "unitAlias": ""
@@ -1529,10 +1535,10 @@
               "id": 164,
               "name": "Ownable",
               "nodeType": "UserDefinedTypeName",
-              "referencedDeclaration": 1174,
+              "referencedDeclaration": 1197,
               "src": "319:7:3",
               "typeDescriptions": {
-                "typeIdentifier": "t_contract$_Ownable_$1174",
+                "typeIdentifier": "t_contract$_Ownable_$1197",
                 "typeString": "contract Ownable"
               }
             },
@@ -1542,8 +1548,8 @@
           }
         ],
         "contractDependencies": [
-          1065,
-          1174
+          1088,
+          1197
         ],
         "contractKind": "contract",
         "documentation": {
@@ -1556,8 +1562,8 @@
         "id": 261,
         "linearizedBaseContracts": [
           261,
-          1174,
-          1065
+          1197,
+          1088
         ],
         "name": "MOTDSaleParametersProvider",
         "nodeType": "ContractDefinition",
@@ -2720,7 +2726,7 @@
                   "name": "onlyOwner",
                   "nodeType": "Identifier",
                   "overloadedDeclarations": [],
-                  "referencedDeclaration": 1123,
+                  "referencedDeclaration": 1146,
                   "src": "1473:9:3",
                   "typeDescriptions": {
                     "typeIdentifier": "t_modifier$__$",
@@ -2844,12 +2850,13 @@
         }
       },
       "links": {},
-      "address": "0x0495624a0B09433b10f6224f291de9A6B759eB13",
-      "transactionHash": "0xf094a11d3f60bf7bcbc697bd48aef45fe9208186b48790c225771aaa5034f2a2"
+      "address": "0x52e8D03DCa793f163B4E90aa0D35faA287e8cb49",
+      "transactionHash": "0x304f5dc9bcc0d8e7ade85fd5d78b3ddeeae736b2be734b0e5c6009a5108eea75"
     }
   },
   "schemaVersion": "3.3.1",
-  "updatedAt": "2020-12-08T15:43:12.302Z",
+  "updatedAt": "2020-12-21T16:24:32.564Z",
+  "networkType": "ethereum",
   "devdoc": {
     "author": "MemeOfTheDay",
     "kind": "dev",
