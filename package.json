@@ -67,7 +67,7 @@
     "migrate-dev": "dotenv npm run run:migrate-dev",
     "run:migrate-dev": "rimraf ./src/contracts/abis && truffle migrate --reset --compile-all --network development",
     "migratematic": "rimraf ./src/abis && truffle migrate --reset --compile-all --network matic",
-    "deploydev": "concurrently \"npm run ganache\" \"npm run migrate\""
+    "deploydev": "concurrently \"npm run ganache\" \"npm run migrate-dev\""
   },
   "config": {
     "ganache": {

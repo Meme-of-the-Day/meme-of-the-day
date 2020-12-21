@@ -5,6 +5,7 @@ import styled from "styled-components";
 import { UIContext, AuthContext } from "../App";
 import { Textile } from "../utils/textile";
 import { NetworkIDToAddress } from "../utils/Contracts";
+import { TransactionReceipt } from "web3-eth";
 
 const MemesHandler = require("../contracts/abis/MemeOfTheDay.json");
 
@@ -367,6 +368,8 @@ const Upload: React.FC<{}> = () => {
         contractAddress = NetworkIDToAddress[137];
       } else if (networkId === 80001) {
         contractAddress = NetworkIDToAddress[80001];
+      } else if (networkId === 3431) {
+        contractAddress = NetworkIDToAddress[3431];
       } else {
         throw new Error("chain not supported");
       }
@@ -378,26 +381,42 @@ const Upload: React.FC<{}> = () => {
       contract.methods
         //second paramenter is creator fee, using 0% for now
         .mint(meme.cid, 0)
-        .send({ from: authContext.authProvider?.account }, async (error: any, txHash: string) => {
+        .send({ from: authContext.authProvider?.account })
+        .then(async function (receipt: TransactionReceipt) {
+          console.log(receipt);
+
           setTxDetails({
             ...txDetails,
             "IPFS Hash": meme.cid,
             "Transaction Hash": {
               isLink: true,
-              link: `https://mumbai-explorer.matic.today/tx/${txHash}`,
-              text: txHash
+              link: `https://mumbai-explorer.matic.today/tx/${receipt.transactionHash}`,
+              text: receipt.transactionHash
             }
           });
-          await textile.uploadMemeMetadata({
-            ...meme,
-            txHash: txHash,
-            owner: authContext.authProvider?.account,
-            name: memeName,
-            description: description,
-            onSale: onSale,
-            price: memePrice
-          });
-          setUploadStatus(UploadStatus.COMPLETED);
+
+          contract.methods
+            //second paramenter is creator fee, using 0% for now
+            .getTokenID(meme.cid)
+            .call({ from: authContext.authProvider?.account })
+            .then(async function (result: any) {
+              await textile.uploadMemeMetadata({
+                ...meme,
+                txHash: receipt.transactionHash,
+                owner: authContext.authProvider?.account,
+                tokenID: result,
+                name: memeName,
+                description: description,
+                onSale: onSale,
+                price: memePrice
+              });
+
+              setUploadStatus(UploadStatus.COMPLETED);
+            })
+            .catch((error: any) => {
+              alert("Something went wrong! Please try again");
+              setUploadStatus(UploadStatus.NOT_STARTED);
+            });
         })
         .catch((error: any) => {
           alert("Something went wrong! Please try again");
