@@ -16,7 +16,7 @@ contract MemeOfTheDay is ERC1155, Ownable {
     // Mapping for enforcing unique hashes
     mapping(string => bool) _hashExists;
 
-    // Mapping from pifs picture hash to NFT tokenID
+    // Mapping from ipfs picture hash to NFT tokenID
     mapping (string => uint256) private _hashToken;
 
     mapping(uint256 => address payable) public creatorOf;
@@ -25,7 +25,7 @@ contract MemeOfTheDay is ERC1155, Ownable {
 
     event MemeMinted(address creator, uint256 tokenId);
 
-    constructor() public ERC1155("https://game.example/api/item/{id}.json") {}
+    constructor() public ERC1155("https://hub.textile.io/ipfs/bafybeiaz4sqwracygsux7moam3tcd7zng53f6gh4khzhsrlhkto473c5rq/tokenmetadata/{id}.json") {}
 
     /**
      * @notice Changes the URI to fetch NFTs info from

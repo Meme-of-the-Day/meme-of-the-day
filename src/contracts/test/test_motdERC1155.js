@@ -35,6 +35,12 @@ contract("MemeOfTheDay", ([owner, ...accounts]) => {
     } catch (err) {}
   });
 
+  it("uri metadata retrieval check", async () => {
+    const matedataUri = await this.motd.uri(tokenId);
+
+    assert.strictEqual(matedataUri, "https://hub.textile.io/ipfs/bafybeiaz4sqwracygsux7moam3tcd7zng53f6gh4khzhsrlhkto473c5rq/tokenmetadata/{id}.json");
+  });
+
   it("returns the number of tokens", async () => {
     let memesCount = await this.motd.getMemesCount({
       from: accounts[0],
@@ -52,4 +58,5 @@ contract("MemeOfTheDay", ([owner, ...accounts]) => {
 
     assert.strictEqual(retriewedTokenId, tokenId);
   });
+
 });
