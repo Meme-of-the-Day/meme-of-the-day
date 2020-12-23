@@ -12,5 +12,6 @@ export default {
   purple400: "#2E55FF",
   purple300: "#5236FF",
   purple200: "#B5C5FF",
-  purple100: "#EBEFFF"
+  purple100: "#EBEFFF",
+  overlay: "rgba(0, 0, 0, 0.5)"
 };

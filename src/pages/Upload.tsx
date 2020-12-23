@@ -1,11 +1,11 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 
-import { UIContext, AuthContext } from "../App";
+import { AuthContext } from "../App";
 import { Textile } from "../utils/textile";
-import { NetworkIDToAddress } from "../utils/Contracts";
-import { TransactionReceipt } from "web3-eth";
+import { NetworkIDToAddress, NetworkIDToExplorer } from "../utils/Contracts";
+import { TransactionReceipt } from 'web3-eth';
 
 const MemesHandler = require("../contracts/abis/MemeOfTheDay.json");
 
@@ -346,7 +346,7 @@ const Upload: React.FC<{}> = () => {
 
     const textile = await Textile.getInstance();
 
-    const meme = imageFile && (await textile.uploadMeme(imageFile));
+    const meme = imageFile && (await textile.uploadMeme(imageFile, memeName, description));
 
     if (meme && authContext.authProvider) {
       console.log(meme.cid);
@@ -356,18 +356,25 @@ const Upload: React.FC<{}> = () => {
 
       //let web3 = new Web3(Web3.givenProvider || "ws://localhost:8545");
       //const accounts = await uiContext.authProvider.web3.eth.requestAccounts();
-      console.log("Using account in Metamask: " + authContext.authProvider?.account);
-      console.log("Meme will be stored with account: " + authContext.authProvider?.account);
+      console.log(
+        "Using account in Metamask: " + authContext.authProvider?.account
+      );
+      console.log(
+        "Meme will be stored with account: " + authContext.authProvider?.account
+      );
 
       const networkId = await authContext.authProvider?.web3.eth.net.getId();
       console.log("Metamask is connected to: " + networkId);
 
       let contractAddress: string;
+      let blockExplorerURL: string;
 
       if (networkId === 137) {
         contractAddress = NetworkIDToAddress[137];
+        blockExplorerURL = NetworkIDToExplorer[137];
       } else if (networkId === 80001) {
         contractAddress = NetworkIDToAddress[80001];
+        blockExplorerURL = NetworkIDToExplorer[80001];
       } else if (networkId === 3431) {
         contractAddress = NetworkIDToAddress[3431];
       } else {
@@ -376,7 +383,10 @@ const Upload: React.FC<{}> = () => {
 
       const abi = MemesHandler.abi;
 
-      const contract = new authContext.authProvider.web3.eth.Contract(abi, contractAddress);
+      const contract = new authContext.authProvider.web3.eth.Contract(
+        abi,
+        contractAddress
+      );
 
       contract.methods
         //second paramenter is creator fee, using 0% for now
@@ -390,7 +400,7 @@ const Upload: React.FC<{}> = () => {
             "IPFS Hash": meme.cid,
             "Transaction Hash": {
               isLink: true,
-              link: `https://mumbai-explorer.matic.today/tx/${receipt.transactionHash}`,
+              link: `${blockExplorerURL}tx/${receipt.transactionHash}`,
               text: receipt.transactionHash
             }
           });
@@ -413,17 +423,28 @@ const Upload: React.FC<{}> = () => {
 
               setUploadStatus(UploadStatus.COMPLETED);
             })
-            .catch((error: any) => {
+            .catch(async (error: any) => {
               alert("Something went wrong! Please try again");
+              await textile.deleteMemeFromBucket(meme);
               setUploadStatus(UploadStatus.NOT_STARTED);
             });
+
+          (window as any).onbeforeunload = function() {};
         })
-        .catch((error: any) => {
+        .catch(async (error: any) => {
           alert("Something went wrong! Please try again");
+          await textile.deleteMemeFromBucket(meme);
           setUploadStatus(UploadStatus.NOT_STARTED);
+          (window as any).onbeforeunload = function() {};
         });
     }
   };
+
+  useEffect(() => {
+    return () => {
+      (window as any).onbeforeunload = function() {};
+    };
+  }, []);
 
   return (
     <Main>
