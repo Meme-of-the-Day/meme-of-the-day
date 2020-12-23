@@ -4,6 +4,7 @@ import styled from "styled-components";
 
 import { AuthContext } from "../App";
 import { Textile } from "../utils/textile";
+import { MemeMetadata } from '../utils/Types'
 import { NetworkIDToAddress, NetworkIDToExplorer } from "../utils/Contracts";
 import { TransactionReceipt } from 'web3-eth';
 
@@ -392,6 +393,10 @@ const Upload: React.FC<{}> = () => {
         //second paramenter is creator fee, using 0% for now
         .mint(meme.cid, 0)
         .send({ from: authContext.authProvider?.account })
+        .on('error', async function(error: any) {
+          console.log(error);
+          await textile.deleteMemeFromBucket(meme);
+        })
         .then(async function (receipt: TransactionReceipt) {
           console.log(receipt);
 
@@ -409,8 +414,12 @@ const Upload: React.FC<{}> = () => {
             //second paramenter is creator fee, using 0% for now
             .getTokenID(meme.cid)
             .call({ from: authContext.authProvider?.account })
+            .on('error', async function(error: any) {
+              console.log(error);
+              await textile.deleteMemeFromBucket(meme);
+            })
             .then(async function (result: any) {
-              await textile.uploadMemeMetadata({
+              let memeUpdated: MemeMetadata = {
                 ...meme,
                 txHash: receipt.transactionHash,
                 owner: authContext.authProvider?.account,
@@ -419,7 +428,11 @@ const Upload: React.FC<{}> = () => {
                 description: description,
                 onSale: onSale,
                 price: memePrice
-              });
+              };
+
+              await textile.uploadTokenMetadata(memeUpdated);
+
+              await textile.uploadMemeMetadata(memeUpdated);
 
               setUploadStatus(UploadStatus.COMPLETED);
             })

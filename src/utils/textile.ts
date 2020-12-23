@@ -220,21 +220,25 @@ export class Textile {
     }
   }
 
-  public async uploadTokenMetadata(metadata: TokenMetadata, tokenID: string) {
-    if (!this.bucketInfo.bucket || !this.bucketInfo.bucketKey || !tokenID) {
+  public async uploadTokenMetadata(meme: MemeMetadata) {
+    if (!this.bucketInfo.bucket || !this.bucketInfo.bucketKey || !meme.tokenID || !meme.previewCID) {
       throw new Error('No bucket client or root key or tokenID');
     }
 
-    const uploadName = `${tokenID}.json`;
+    const tokenMeta: TokenMetadata = {
+      name: meme.name,
+      description: meme.description,
+      image: `${this.ipfsGateway}/ipfs/${meme.previewCID}`
+    };
+
+    const uploadName = `${meme.tokenID}.json`;
     const location = `tokenmetadata/${uploadName}`;
 
-    const buf = Buffer.from(JSON.stringify(metadata, null, 2))
+    const buf = Buffer.from(JSON.stringify(tokenMeta, null, 2))
     const raw = await this.bucketInfo.bucket.pushPath(this.bucketInfo.bucketKey, location, buf);
 
-    return {
-      url: `${this.ipfsGateway}/ipfs/${raw.path.cid.toString()}`,
-      path: location
-    };
+    meme.tokenMetadataPath = location;
+    meme.tokenMetadataURL = `${this.ipfsGateway}/ipfs/${raw.path.cid.toString()}`;
   }
 
   private async getKeyInfo(): Promise<KeyInfo> {
