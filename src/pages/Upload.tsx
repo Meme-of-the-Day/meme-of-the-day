@@ -400,6 +400,10 @@ const Upload: React.FC<{}> = () => {
 
           if (error) {
             console.log("minting failed");
+            await textile.deleteMemeFromBucket(meme);
+
+            alert("Something went wrong! Please try again");
+            setUploadStatus(UploadStatus.NOT_STARTED);
           } else {
             await textile.uploadMemeMetadata({
               ...meme,
@@ -410,9 +414,10 @@ const Upload: React.FC<{}> = () => {
               onSale: onSale,
               price: memePrice
             });
+
+            setUploadStatus(UploadStatus.COMPLETED);
           }
 
-          setUploadStatus(UploadStatus.COMPLETED);
           (window as any).onbeforeunload = function() {};
         })
         .catch((error: any) => {
