@@ -38,6 +38,11 @@ export class Textile {
 
   private async init() {
     const env = process.env.NODE_ENV;
+    console.log(env);
+    console.log(process.env.REACT_APP_TEST_HUB_BROWSER_AUTH_URL);
+    console.log(process.env.REACT_APP_PROD_HUB_BROWSER_AUTH_URL);
+    console.log(process.env.REACT_APP_TEST_THREADID);
+    
     this.hubAuthURL = env !== 'production' ? process.env.REACT_APP_TEST_HUB_BROWSER_AUTH_URL as string
      : process.env.REACT_APP_PROD_HUB_BROWSER_AUTH_URL as string;
 
