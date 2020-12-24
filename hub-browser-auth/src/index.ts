@@ -19,7 +19,7 @@ import api from "./api";
 dotenv.config();
 
 if (process.env.NODE_ENV === 'production') {
-  process.exit(1);	  if (!process.env.APP_PROD_API_KEY || !process.env.APP_PROD_API_SECRET) {
+  if (!process.env.APP_PROD_API_KEY || !process.env.APP_PROD_API_SECRET) {
     process.exit(1);
   }
 } else {

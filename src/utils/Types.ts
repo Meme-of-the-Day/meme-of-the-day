@@ -3,7 +3,11 @@ export interface MemeMetadata {
   _mod?: number;
   tokenID?: string; // NFT tokenID
   cid: string; // IPFS CID
+  previewCID?: string;
   path: string; // Bucket path
+  previewPath?: string;
+  tokenMetadataURL?: string;
+  tokenMetadataPath?: string;
   name: string; // meme Name
   txHash: string; // blockchain tx hash
   date: string; // created date
@@ -84,9 +88,25 @@ export const Schema = {
           type: "string",
           description: "Meme IPFS CID."
         },
+        previewCID: {
+          type: "string",
+          description: "Meme Token Metadata IPFS CID."
+        },
         path: {
           type: "string",
           description: "Meme bucket path."
+        },
+        previewPath: {
+          type: "string",
+          description: "Meme Token metadata preview image bucket path."
+        },
+        tokenMetadataURL: {
+          type: "string",
+          description: "ERC1155 compliant token metadata URL."
+        },
+        tokenMetadataPath: {
+          type: "string",
+          description: "Bucket path for the token metadata resource."
         },
         name: {
           type: "string",

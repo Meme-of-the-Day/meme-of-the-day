@@ -1,13 +1,12 @@
 import React, { useContext } from "react";
+import { Link } from "react-router-dom";
 import styled from "styled-components";
 import dayjs from "dayjs";
 
 import voteIcon from "../assets/vote.svg";
-import bidIcon from "../assets/bid.svg";
-import favoriteIcon from "../assets/favorite.svg";
 import { MemeMetadata } from "../utils/Types";
 import { Textile } from "../utils/textile";
-import { AuthContext } from "../App";
+import { AuthContext, UIContextType, UIContext } from "../App";
 
 type IMeme = {
   owner: string;
@@ -22,10 +21,13 @@ interface Props {
 }
 
 const Main = styled.div`
+  border-radius: 8px;
+  background-color: ${({ theme }) => theme.colors.white};
+`;
+
+const StyledLink = styled(Link)`
   display: flex;
   flex-direction: column;
-  background-color: ${({ theme }) => theme.colors.white};
-  border-radius: 8px;
   padding: 40px 40px 0;
 
   & > img {
@@ -42,17 +44,21 @@ const Meta = styled.div`
   display: flex;
   justify-content: space-between;
   flex-direction: column;
-  padding: 10px;
+  padding: 10px 40px;
 `;
 
 const Buttons = styled.div`
-  display: flex;
+  display: none;
   align-items: flex-end;
   justify-content: space-between;
   flex-wrap: wrap;
 
-  img {
+  & > img {
     width: 48px;
+  }
+
+  @media screen and (min-width: 1000px) {
+    display: flex;
   }
 `;
 
@@ -87,6 +93,7 @@ const Details = styled.div`
 
 const Address = styled.span`
   color: ${({ theme }) => theme.colors.black};
+  font-size: 14px;
 `;
 
 const MintedOn = styled.span`
@@ -97,7 +104,7 @@ const MintedOn = styled.span`
 const Name = styled.div`
   color: ${({ theme }) => theme.colors.black};
   text-align: right;
-  font-size: 12px;
+  font-size: 16px;
   margin-bottom: 4px;
 `;
 
@@ -107,6 +114,7 @@ const Button = styled.button`
   display: flex;
   align-items: baseline;
   justify-content: space-between;
+  cursor: pointer;
 `;
 
 const Count = styled.span`
@@ -118,30 +126,44 @@ const Count = styled.span`
 
 const Meme: React.FC<Props> = ({ className, meme, textileInstance }) => {
   const authContext = useContext(AuthContext);
+  const uiContext = useContext<UIContextType>(UIContext);
+
+  const { openModal } = uiContext;
+
+  const {
+    hasMetamask,
+    isMetamaskConnected,
+    isConnectedToMatic,
+    authProvider
+  } = authContext;
 
   const vote = async () => {
-
-    if (!authContext.authProvider) {
-      window.alert("Please login to vote");
-    }
-
-    if (authContext.authProvider) {
-      if (
-        window.confirm(
-          "Owner of this meme is:\n" +
-          meme.owner +
-          "\n\nWould you like to vote for this Meme?"
-        )
-      ) {
-        const isValid = await textileInstance.updateMemeVotes(authContext.authProvider.account, meme.cid, true, true);
-        if (isValid) {
-          if (meme.likes) {
-            meme.likes += 1;
+    if (!hasMetamask || !isMetamaskConnected || !isConnectedToMatic) {
+      openModal();
+    } else {
+      if (authProvider) {
+        if (
+          window.confirm(
+            "Owner of this meme is:\n" +
+              meme.owner +
+              "\n\nWould you like to vote for this Meme?"
+          )
+        ) {
+          const isValid = await textileInstance.updateMemeVotes(
+            authProvider.account,
+            meme.cid,
+            true,
+            true
+          );
+          if (isValid) {
+            if (meme.likes) {
+              meme.likes += 1;
+            } else {
+              meme.likes = 1;
+            }
           } else {
-            meme.likes = 1;
+            window.alert("Vote cannot be added twice");
           }
-        } else {
-          window.alert("Vote cannot be added twice");
         }
       }
     }
@@ -175,21 +197,25 @@ const Meme: React.FC<Props> = ({ className, meme, textileInstance }) => {
 
   return (
     <Main className={`${className} MemeOfTheDay`}>
-      <Top>
-        <Owner>
-          <OwnerImage>Owner</OwnerImage>
-          <Details>
-            <Address>{ownerAddress}</Address>
-            <MintedOn>
-              Minted on: {dayjs(parseInt(meme.date)).format("DD MMM, YYYY")}
-            </MintedOn>
-          </Details>
-        </Owner>
-      </Top>
-      <Name>
-        {meme.name.length > 40 ? meme.name.substring(0, 40) + "..." : meme.name}
-      </Name>
-      <img src={`https://hub.textile.io/ipfs/${meme.cid}`} alt="" />
+      <StyledLink to={`/meme/${meme.cid}`}>
+        <Top>
+          <Owner>
+            <OwnerImage>Owner</OwnerImage>
+            <Details>
+              <Address>{ownerAddress}</Address>
+              <MintedOn>
+                Minted on: {dayjs(parseInt(meme.date)).format("DD MMM, YYYY")}
+              </MintedOn>
+            </Details>
+          </Owner>
+        </Top>
+        <Name>
+          {meme.name.length > 40
+            ? meme.name.substring(0, 40) + "..."
+            : meme.name}
+        </Name>
+        <img src={`https://hub.textile.io/ipfs/${meme.cid}`} alt="" />
+      </StyledLink>
       <Meta>
         <Buttons>
           <Button onClick={async () => await vote()}>
