@@ -97,7 +97,7 @@ const App: React.FC = () => {
     if (window.ethereum) {
       const web3 = new Web3(Web3.givenProvider);
       web3.eth.getChainId().then(id => {
-        if (id === 80001 || id === 137) {
+        if (id === 80001 || id === 137 || id === 3431) {
           setIsConnectedToMatic(true);
         } else {
           setIsConnectedToMatic(false);

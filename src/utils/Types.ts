@@ -1,3 +1,5 @@
+import { SignedTransaction } from "web3-core";
+
 export interface MemeMetadata {
   _id?: string;
   _mod?: number;
@@ -21,6 +23,7 @@ export interface MemeMetadata {
   dislikedBy: Array<string>; // set of user ids who disliked this meme.
   onSale?: boolean;
   description?: string;
+  signature?: SignedTransaction;
 }
 
 export interface TokenMetadata {
