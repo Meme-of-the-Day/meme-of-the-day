@@ -106,7 +106,6 @@ contract MemeSale is EIP712Domain {
         bytes32 s
     ) external payable {
         require(isOnSale[tokenId], "Given token is not on sale");
-        //require(msg.value == price, "Sent value should be equal to set price");
 
         bytes memory data = abi.encode(VERIFY_PRICE_TYPEHASH, tokenId, price);
 
@@ -242,7 +241,7 @@ contract MemeSale is EIP712Domain {
         uint256 votersFee = _getVotersFee(tokenPrice);
         uint256 creatorFee = _getCreatorFee(tokenPrice, tokenId, payCreator);
         uint256 platformFee = _getPlatformFee(tokenPrice);
-        //"buyer pay fee" economic model check
+        //buyer pays fees economic model check
         require(msg.value >= tokenPrice+votersFee+platformFee);
         uint256 ownerFee = _getOwnerFee(
             votersFee,
