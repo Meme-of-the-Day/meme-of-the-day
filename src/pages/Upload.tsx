@@ -298,6 +298,7 @@ const Upload: React.FC<{}> = () => {
         const params = [from, sellerSetPriceTypedData];
         const method = "eth_signTypedData_v4";
 
+        // @ts-ignore
         authContext.authProvider?.web3.currentProvider.sendAsync(
           {
             method,
