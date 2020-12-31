@@ -37,12 +37,9 @@ export class Textile {
   }
 
   private async init() {
-    const env = process.env.NODE_ENV;
+    const env = process.env.REACT_APP_ENV;
     console.log(env);
-    console.log(process.env.REACT_APP_TEST_HUB_BROWSER_AUTH_URL);
-    console.log(process.env.REACT_APP_PROD_HUB_BROWSER_AUTH_URL);
-    console.log(process.env.REACT_APP_TEST_THREADID);
-    
+
     this.hubAuthURL = env !== 'production' ? process.env.REACT_APP_TEST_HUB_BROWSER_AUTH_URL as string
      : process.env.REACT_APP_PROD_HUB_BROWSER_AUTH_URL as string;
 
@@ -110,6 +107,14 @@ export class Textile {
     return memeList[0];
   }
 
+  public async updateMemeMetadata(meme: MemeMetadata) {
+    if (!this.client || !meme._id) {
+      throw new Error("No client or meme doesn't contain a valid id property");
+    }
+
+    await this.client.save(ThreadID.fromString(this.dbThreadID), this.memeCollectionName, [meme]);
+  }
+
   public async uploadMeme(file: File, memeName: string = "", description: string = ""): Promise<MemeMetadata> {
     if (!this.bucketInfo.bucket || !this.bucketInfo.bucketKey) {
       throw new Error('No bucket client or root key');
@@ -127,14 +132,6 @@ export class Textile {
     const buf = await file.arrayBuffer();
     const raw = await this.bucketInfo.bucket.pushPath(this.bucketInfo.bucketKey, location, buf);
     const previewRaw = await this.bucketInfo.bucket.pushPath(this.bucketInfo.bucketKey, previewLocation, previewBuf);
-
-    // const tokenMeta: TokenMetadata = {
-    //   name: memeName,
-    //   description: description,
-    //   image: `${this.ipfsGateway}/ipfs/${previewRaw.path.cid.toString()}`
-    // };
-
-    // const tokenMetadata = await this.uploadTokenMetadata(tokenMeta);
 
     return {
       cid: raw.path.cid.toString(),
@@ -271,7 +268,7 @@ export class Textile {
   }
 
   private async getIdentity(): Promise<PrivateKey> {
-    const hubIdentityURL = `${this.hubAuthURL}/identity`;
+    const hubIdentityURL = process.env.REACT_APP_ENV !== 'production' ? `${this.hubAuthURL}/testidentity` : `${this.hubAuthURL}/identity`;
 
     const response = await fetch(hubIdentityURL, {
       method: 'GET'

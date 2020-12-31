@@ -42,8 +42,16 @@ api.get( '/keyinfo', async (ctx, next: () => Promise<any>) => {
 
 api.get('/identity', async (ctx, next: () => Promise<any>) => {
   /** Get API authorization for the user */
-  const userKey = process.env.NODE_ENV === "production" ? process.env.APP_PROD_USER_KEY as string
-    : process.env.APP_TEST_USER_KEY as string;
+  const userKey = process.env.APP_PROD_USER_KEY as string;
+
+  ctx.body = userKey;
+
+  await next();
+});
+
+api.get('/testidentity', async (ctx, next: () => Promise<any>) => {
+  /** Get API authorization for the user */
+  const userKey = process.env.APP_TEST_USER_KEY as string;
 
   ctx.body = userKey;
 
