@@ -13,8 +13,7 @@
     "dev:watch": "ts-node-dev --respawn ./src/index.ts",
     "dev": "ts-node src/index.ts",
     "start": "tsc && node dist/index.js",
-    "tscCheck": "tsc --noEmit",
-    "tsc": "tsc"
+    "tscCheck": "tsc --noEmit"
   },
   "keywords": [],
   "devDependencies": {
