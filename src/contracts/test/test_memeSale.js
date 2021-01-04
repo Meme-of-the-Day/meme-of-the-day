@@ -113,6 +113,7 @@ contract("MemeSale", ([owner, ...accounts]) => {
     let sellerWallet = sellerWalletMnemonic.connect(provider);
 
     const price = web3.utils.toWei("1", "ether");
+    const buyPrice = web3.utils.toWei("1.024", "ether");
     const { signature, v, r, s } = await getSellerSignedMessage(
       tokenId,
       price,
@@ -120,7 +121,7 @@ contract("MemeSale", ([owner, ...accounts]) => {
       this.memeSale.address
     );
 
-    await this.memeSale.buy(
+    const buyRes = await this.memeSale.buy(
       tokenId,
       price,
       [accounts[1], accounts[2]],
@@ -131,9 +132,34 @@ contract("MemeSale", ([owner, ...accounts]) => {
       s,
       {
         from: buyer,
-        value: price,
+        value: buyPrice,
       }
     );
+
+    const [votersFeeEvent] = buyRes.logs.filter(
+      ({ event }) => event === "VotersFee"
+    );
+    votersFee = web3.utils.BN(votersFeeEvent.args.votersFee).toString();
+    assert.strictEqual(votersFee, '5000000000000000'); // voters fee 0,005
+
+    const [creatorFeeEvent] = buyRes.logs.filter(
+      ({ event }) => event === "CreatorFee"
+    );
+    creatorsFee = web3.utils.BN(creatorFeeEvent.args.creatorFee).toString();
+    assert.strictEqual(creatorsFee, '100000000000000000'); // creators fee 0,1
+
+    const [platformFeeEvent] = buyRes.logs.filter(
+      ({ event }) => event === "PlatformFee"
+    );
+    platformFee = web3.utils.BN(platformFeeEvent.args.platformFee).toString();
+    assert.strictEqual(platformFee, '19000000000000000'); // platform fee 0,019
+
+    const [ownerFeeEvent] = buyRes.logs.filter(
+      ({ event }) => event === "OwnerFee"
+    );
+    ownerFee = web3.utils.BN(ownerFeeEvent.args.ownerFee).toString();
+    assert.strictEqual(ownerFee, '900000000000000000'); // owner fee $0,90
+
   });
 
   it("doesn't sell a token if signer of message is wrong", async () => {

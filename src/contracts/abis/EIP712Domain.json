@@ -15,16 +15,16 @@
       "type": "function"
     }
   ],
-  "metadata": "{\"compiler\":{\"version\":\"0.6.12+commit.27d51765\"},\"language\":\"Solidity\",\"output\":{\"abi\":[{\"inputs\":[],\"name\":\"DOMAIN_SEPARATOR\",\"outputs\":[{\"internalType\":\"bytes32\",\"name\":\"\",\"type\":\"bytes32\"}],\"stateMutability\":\"view\",\"type\":\"function\"}],\"devdoc\":{\"kind\":\"dev\",\"methods\":{},\"stateVariables\":{\"DOMAIN_SEPARATOR\":{\"details\":\"EIP712 Domain Separator\"}},\"version\":1},\"userdoc\":{\"kind\":\"user\",\"methods\":{},\"version\":1}},\"settings\":{\"compilationTarget\":{\"/home/developer/meme-of-the-day-marketplace/src/contracts/src/EIP712Domain.sol\":\"EIP712Domain\"},\"evmVersion\":\"istanbul\",\"libraries\":{},\"metadata\":{\"bytecodeHash\":\"ipfs\"},\"optimizer\":{\"enabled\":false,\"runs\":200},\"remappings\":[]},\"sources\":{\"/home/developer/meme-of-the-day-marketplace/src/contracts/src/EIP712Domain.sol\":{\"keccak256\":\"0xb230050cd3a2b051c70460fa0520894313e713b78005ab7153a7738aa61af676\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://20ff34cd18de1a008ee53762c1720983a93a96dffc078f099e6dc8ebec2d848a\",\"dweb:/ipfs/QmfAETpFyGaaBJMuBZhfjxv4kXqxiXeGHgfJ5WiRRA62QV\"]}},\"version\":1}",
+  "metadata": "{\"compiler\":{\"version\":\"0.6.12+commit.27d51765\"},\"language\":\"Solidity\",\"output\":{\"abi\":[{\"inputs\":[],\"name\":\"DOMAIN_SEPARATOR\",\"outputs\":[{\"internalType\":\"bytes32\",\"name\":\"\",\"type\":\"bytes32\"}],\"stateMutability\":\"view\",\"type\":\"function\"}],\"devdoc\":{\"kind\":\"dev\",\"methods\":{},\"stateVariables\":{\"DOMAIN_SEPARATOR\":{\"details\":\"EIP712 Domain Separator\"}},\"version\":1},\"userdoc\":{\"kind\":\"user\",\"methods\":{},\"version\":1}},\"settings\":{\"compilationTarget\":{\"/home/developer/meme-of-the-day-fees/src/contracts/src/EIP712Domain.sol\":\"EIP712Domain\"},\"evmVersion\":\"istanbul\",\"libraries\":{},\"metadata\":{\"bytecodeHash\":\"ipfs\"},\"optimizer\":{\"enabled\":false,\"runs\":200},\"remappings\":[]},\"sources\":{\"/home/developer/meme-of-the-day-fees/src/contracts/src/EIP712Domain.sol\":{\"keccak256\":\"0xb230050cd3a2b051c70460fa0520894313e713b78005ab7153a7738aa61af676\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://20ff34cd18de1a008ee53762c1720983a93a96dffc078f099e6dc8ebec2d848a\",\"dweb:/ipfs/QmfAETpFyGaaBJMuBZhfjxv4kXqxiXeGHgfJ5WiRRA62QV\"]}},\"version\":1}",
   "bytecode": "0x",
   "deployedBytecode": "0x",
   "immutableReferences": {},
   "sourceMap": "",
   "deployedSourceMap": "",
   "source": "// SPDX-License-Identifier: MIT\r\n\r\npragma solidity 0.6.12;\r\n\r\nabstract contract EIP712Domain {\r\n    /**\r\n     * @dev EIP712 Domain Separator\r\n     */\r\n    bytes32 public DOMAIN_SEPARATOR;\r\n}\r\n",
-  "sourcePath": "/home/developer/meme-of-the-day-marketplace/src/contracts/src/EIP712Domain.sol",
+  "sourcePath": "/home/developer/meme-of-the-day-fees/src/contracts/src/EIP712Domain.sol",
   "ast": {
-    "absolutePath": "/home/developer/meme-of-the-day-marketplace/src/contracts/src/EIP712Domain.sol",
+    "absolutePath": "/home/developer/meme-of-the-day-fees/src/contracts/src/EIP712Domain.sol",
     "exportedSymbols": {
       "EIP712Domain": [
         159
@@ -101,7 +101,7 @@
     "src": "35:157:2"
   },
   "legacyAST": {
-    "absolutePath": "/home/developer/meme-of-the-day-marketplace/src/contracts/src/EIP712Domain.sol",
+    "absolutePath": "/home/developer/meme-of-the-day-fees/src/contracts/src/EIP712Domain.sol",
     "exportedSymbols": {
       "EIP712Domain": [
         159
@@ -183,7 +183,7 @@
   },
   "networks": {},
   "schemaVersion": "3.3.1",
-  "updatedAt": "2020-12-21T16:24:30.972Z",
+  "updatedAt": "2021-01-04T14:19:40.369Z",
   "devdoc": {
     "kind": "dev",
     "methods": {},

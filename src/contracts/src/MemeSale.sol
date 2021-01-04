@@ -33,6 +33,11 @@ contract MemeSale is EIP712Domain {
 
     mapping(uint256 => bool) public isOnSale;
 
+    event VotersFee(uint256 votersFee);
+    event CreatorFee(uint256 creatorFee);
+    event PlatformFee(uint256 platformFee);
+    event OwnerFee(uint256 ownerFee);
+
     constructor(
         address memeOfTheDayAddress,
         address payable motdTreasuryAddress,
@@ -101,7 +106,6 @@ contract MemeSale is EIP712Domain {
         bytes32 s
     ) external payable {
         require(isOnSale[tokenId], "Given token is not on sale");
-        require(msg.value == price, "Sent value should be equal to set price");
 
         bytes memory data = abi.encode(VERIFY_PRICE_TYPEHASH, tokenId, price);
 
@@ -127,6 +131,11 @@ contract MemeSale is EIP712Domain {
             uint256 platformFee,
             uint256 ownerFee
         ) = _getFeesAmounts(price, tokenId, payCreator);
+
+        emit VotersFee(votersFee);
+        emit CreatorFee(creatorFee);
+        emit PlatformFee(platformFee);
+        emit OwnerFee(ownerFee);
 
         uint256 totVotes = 0;
         for (uint256 i = 0; i < votes.length; i++) {
@@ -205,12 +214,14 @@ contract MemeSale is EIP712Domain {
     }
 
     function _getOwnerFee(
-        uint256 tokenPrice,
         uint256 votersFee,
         uint256 creatorFee,
         uint256 platformFee
-    ) internal pure returns (uint256) {
-        return tokenPrice.sub(votersFee).sub(creatorFee).sub(platformFee);
+    ) internal view returns (uint256) {
+
+        //economic model "buyer pay fee", buyer needs to send to contract
+        //token price including voters fee and platform fee
+        return msg.value.sub(votersFee).sub(creatorFee).sub(platformFee);
     }
 
     function _getFeesAmounts(
@@ -230,8 +241,9 @@ contract MemeSale is EIP712Domain {
         uint256 votersFee = _getVotersFee(tokenPrice);
         uint256 creatorFee = _getCreatorFee(tokenPrice, tokenId, payCreator);
         uint256 platformFee = _getPlatformFee(tokenPrice);
+        //buyer pays fees economic model check
+        require(msg.value >= tokenPrice+votersFee+platformFee);
         uint256 ownerFee = _getOwnerFee(
-            tokenPrice,
             votersFee,
             creatorFee,
             platformFee
