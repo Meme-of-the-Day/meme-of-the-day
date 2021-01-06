@@ -306,8 +306,6 @@ const Upload: React.FC<{}> = () => {
             from
           },
           async (err: any, result: any) => {
-            // putOnSale
-            // update signature on textile
             if (err) {
               console.log(err);
               const textile = await Textile.getInstance();
@@ -338,7 +336,7 @@ const Upload: React.FC<{}> = () => {
               });
             const newMeme = {
               ...meme,
-              signature: result.result
+              sellApprovalSignature: result.result
             };
             setMeme(newMeme);
 
