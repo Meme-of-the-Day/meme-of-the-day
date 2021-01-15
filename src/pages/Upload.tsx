@@ -265,7 +265,7 @@ const Upload: React.FC<{}> = () => {
     setSubmitEnabled(true);
   };
 
-  const signMessage = function(meme: MemeMetadata): Promise<SignedTransaction> {
+  const signMessage = function(meme: MemeMetadata): Promise<string> {
     const sellerSetPriceTypedData = JSON.stringify({
       types: {
         EIP712Domain: [
@@ -306,13 +306,6 @@ const Upload: React.FC<{}> = () => {
             from
           },
           async (err: any, result: any) => {
-            if (err) {
-              console.log(err);
-              const textile = await Textile.getInstance();
-              await textile.deleteMemeFromBucket(meme);
-              reject(err);
-            }
-
             console.log(result.result);
 
             const abi = MemeSale.abi;
@@ -329,10 +322,6 @@ const Upload: React.FC<{}> = () => {
               .call({ from: authContext.authProvider?.account })
               .then(() => {
                 console.log("Put on sale completed");
-              })
-              .catch(async function(error: any) {
-                console.log(error);
-                await textile.deleteMemeFromBucket(meme);
               });
             const newMeme = {
               ...meme,
@@ -344,7 +333,7 @@ const Upload: React.FC<{}> = () => {
             await textile.uploadMemeMetadata(newMeme);
 
             setUploadStep(uploadStep + 1);
-            resolve(result.result);
+            resolve(result.result as string);
           }
         );
       } else {
@@ -377,11 +366,6 @@ const Upload: React.FC<{}> = () => {
         //second paramenter is creator fee, using 0% for now
         .setApprovalForAll(NetworkIDToSaleContract[networkId as number], true)
         .send({ from: authContext.authProvider?.account })
-        .on("error", async function(error: any) {
-          console.log(error);
-          const textile = await Textile.getInstance();
-          await textile.deleteMemeFromBucket(meme);
-        })
         .then(() => {
           setUploadStep(uploadStep + 1);
         });
