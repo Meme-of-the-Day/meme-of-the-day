@@ -1,15 +1,11 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
-import { SignedTransaction } from "web3-core";
-import { Contract } from "web3-eth-contract";
-
-import { MemeMetadata } from "../utils/Types";
 import Loader from "./Loader";
 
 interface Props {
   step: number;
-  signMessage: () => Promise<SignedTransaction>;
+  signMessage: () => Promise<string>;
   getSellerApproval: () => Promise<any>;
   txDetails: any;
   closeModal: () => void;

@@ -1,5 +1,3 @@
-import { SignedTransaction } from "web3-core";
-
 export interface MemeMetadata {
   _id?: string;
   _mod?: number;
