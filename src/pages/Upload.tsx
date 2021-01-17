@@ -329,8 +329,9 @@ const Upload: React.FC<{}> = () => {
             };
             setMeme(newMeme);
 
-            await textile.uploadTokenMetadata(newMeme);
-            await textile.uploadMemeMetadata(newMeme);
+            //if meme is put on sale then next 2 lines produce double meme
+            //await textile.uploadTokenMetadata(newMeme);
+            //await textile.uploadMemeMetadata(newMeme);
 
             setUploadStep(uploadStep + 1);
             resolve(result.result as string);
