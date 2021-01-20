@@ -50,3 +50,7 @@ a:active {
     margin-top: 70px;
   }
 } */
+
+button {
+  cursor: pointer;
+}

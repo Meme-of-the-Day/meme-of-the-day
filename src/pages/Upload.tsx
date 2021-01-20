@@ -1,13 +1,21 @@
 import React, { useState, useContext, useEffect } from "react";
-import { Link } from "react-router-dom";
 import styled from "styled-components";
+import { Contract } from "web3-eth-contract";
+import { TransactionReceipt } from "web3-eth";
+import { SignedTransaction } from "web3-core";
 
 import { AuthContext } from "../App";
 import { Textile } from "../utils/textile";
-import { MemeMetadata } from '../utils/Types'
-import { NetworkIDToAddress, NetworkIDToExplorer } from "../utils/Contracts";
-import { TransactionReceipt } from 'web3-eth';
+import { MemeMetadata } from "../utils/Types";
+import {
+  NetworkIDToAddress,
+  NetworkIDToExplorer,
+  NetworkIDToSaleContract
+} from "../utils/Contracts";
+import { AuthProvider } from "../utils/UserAuth";
+import UploadModal from "../components/UploadModal";
 
+const MemeSale = require("../contracts/abis/MemeSale.json");
 const MemesHandler = require("../contracts/abis/MemeOfTheDay.json");
 
 enum UploadStatus {
@@ -18,6 +26,7 @@ enum UploadStatus {
 
 const Main = styled.div`
   padding: 20px;
+  overflow: auto;
 `;
 
 const Title = styled.p`
@@ -108,31 +117,6 @@ const ViewDetails = styled.div`
     font-size: 14px;
     text-decoration: underline;
   }
-`;
-
-const CustomLink = styled(Link)`
-  text-decoration: underline;
-  font-size: 14px;
-  color: ${({ theme }) => theme.colors.black};
-`;
-
-const TxDetails = styled.div`
-  height: 0;
-  overflow: hidden;
-  transition: height 0.5s ease-out;
-  width: 400px;
-  word-break: break-word;
-
-  &.open {
-    border: 1px solid ${({ theme }) => theme.colors.gray50};
-    height: 200px;
-    padding: 10px;
-  }
-`;
-
-const DetailDiv = styled.div`
-  word-break: break-all;
-  margin: 10px 0;
 `;
 
 const Message = styled.div`
@@ -250,30 +234,6 @@ const Switch = styled.div`
   }
 `;
 
-type DetailsObject = {
-  isLink?: boolean;
-  link?: string;
-  text?: string;
-};
-
-const renderDetails = (value: string | DetailsObject) => {
-  switch (typeof value) {
-    case "string":
-      return value;
-    case "object":
-      if (value.isLink) {
-        return (
-          <a target="_blank" rel="noopener noreferrer" href={value.link}>
-            {value.text || value.link}
-          </a>
-        );
-      }
-      return null;
-    default:
-      return null;
-  }
-};
-
 const Upload: React.FC<{}> = () => {
   let authContext = useContext(AuthContext);
 
@@ -282,7 +242,10 @@ const Upload: React.FC<{}> = () => {
   const [imageFile, setImageFile] = useState<File>();
   const [txDetails, setTxDetails] = useState({});
   const [uploadStatus, setUploadStatus] = useState(UploadStatus.NOT_STARTED);
-  const [viewDetails, setViewDetails] = useState(false);
+  const [showUploadModal, setShowUploadModal] = useState(false);
+  const [uploadStep, setUploadStep] = useState(1);
+  const [meme, setMeme] = useState<MemeMetadata>();
+  const [networkId, setNetworkId] = useState<number>();
 
   const changeHandler = async (event: React.ChangeEvent) => {
     event.preventDefault();
@@ -302,13 +265,121 @@ const Upload: React.FC<{}> = () => {
     setSubmitEnabled(true);
   };
 
+  const signMessage = function(meme: MemeMetadata): Promise<string> {
+    const sellerSetPriceTypedData = JSON.stringify({
+      types: {
+        EIP712Domain: [
+          { name: "name", type: "string" },
+          { name: "version", type: "string" },
+          { name: "chainId", type: "uint256" },
+          { name: "verifyingContract", type: "address" }
+        ],
+        VerifyPrice: [
+          { name: "tokenId", type: "uint256" },
+          { name: "price", type: "uint256" }
+        ]
+      },
+      domain: {
+        name: "MemeSale",
+        version: "1",
+        chainId: 3431,
+        verifyingContract: NetworkIDToSaleContract[networkId as number]
+      },
+      primaryType: "VerifyPrice",
+      message: {
+        tokenId: meme.tokenID,
+        price: meme.price
+      }
+    });
+
+    return new Promise((resolve, reject) => {
+      if (authContext && authContext.authProvider) {
+        const from = authContext.authProvider?.account;
+        const params = [from, sellerSetPriceTypedData];
+        const method = "eth_signTypedData_v4";
+
+        // @ts-ignore
+        authContext.authProvider?.web3.currentProvider.sendAsync(
+          {
+            method,
+            params,
+            from
+          },
+          async (err: any, result: any) => {
+            console.log(result.result);
+
+            const abi = MemeSale.abi;
+
+            const contract = new (authContext.authProvider as AuthProvider).web3.eth.Contract(
+              abi,
+              NetworkIDToSaleContract[networkId as number]
+            );
+
+            const textile = await Textile.getInstance();
+
+            await contract.methods
+              .putOnSale(meme.tokenID)
+              .call({ from: authContext.authProvider?.account })
+              .then(() => {
+                console.log("Put on sale completed");
+              });
+            const newMeme = {
+              ...meme,
+              sellApprovalSignature: result.result
+            };
+            setMeme(newMeme);
+
+            //if meme is put on sale then next 2 lines produce double meme
+            //await textile.uploadTokenMetadata(newMeme);
+            //await textile.uploadMemeMetadata(newMeme);
+
+            setUploadStep(uploadStep + 1);
+            resolve(result.result as string);
+          }
+        );
+      } else {
+        reject();
+      }
+    });
+  };
+
+  const getSellerApproval = async (meme: MemeMetadata) => {
+    const abi = MemesHandler.abi;
+
+    if (authContext.authProvider) {
+      let contractAddress: string;
+
+      if (networkId === 137) {
+        contractAddress = NetworkIDToAddress[137];
+      } else if (networkId === 80001) {
+        contractAddress = NetworkIDToAddress[80001];
+      } else if (networkId === 3431) {
+        contractAddress = NetworkIDToAddress[3431];
+      } else {
+        throw new Error("chain not supported");
+      }
+
+      const contract = new authContext.authProvider.web3.eth.Contract(
+        abi,
+        contractAddress
+      );
+      return await contract.methods
+        //second paramenter is creator fee, using 0% for now
+        .setApprovalForAll(NetworkIDToSaleContract[networkId as number], true)
+        .send({ from: authContext.authProvider?.account })
+        .then(() => {
+          setUploadStep(uploadStep + 1);
+        });
+    }
+  };
+
   const uploadMeme = async (event: React.FormEvent) => {
+    event.preventDefault();
+
     if (!authContext.authProvider) {
       window.alert("Please login before uploading");
       return;
     }
-
-    event.preventDefault();
 
     setSubmitEnabled(false);
     setUploadStatus(UploadStatus.IN_PROGRESS);
@@ -323,6 +394,7 @@ const Upload: React.FC<{}> = () => {
       onSale: { checked: onSale },
       price: { value: price }
     } = event.target as HTMLFormElement;
+    const form = event.target;
 
     let memePrice: number = parseInt(price);
 
@@ -343,14 +415,16 @@ const Upload: React.FC<{}> = () => {
       setSubmitEnabled(true);
       return;
     }
-    debugger;
+
+    setShowUploadModal(true);
 
     const textile = await Textile.getInstance();
 
-    const meme = imageFile && (await textile.uploadMeme(imageFile, memeName, description));
+    const meme =
+      imageFile && (await textile.uploadMeme(imageFile, memeName, description));
 
     if (meme && authContext.authProvider) {
-      console.log(meme.cid);
+      console.log("Meme cid:", meme.cid);
       setTxDetails({ ipfsHash: meme.cid });
 
       console.log("Submitting the form...storing meme on blockchain");
@@ -363,9 +437,6 @@ const Upload: React.FC<{}> = () => {
       console.log(
         "Meme will be stored with account: " + authContext.authProvider?.account
       );
-
-      const networkId = await authContext.authProvider?.web3.eth.net.getId();
-      console.log("Metamask is connected to: " + networkId);
 
       let contractAddress: string;
       let blockExplorerURL: string;
@@ -393,12 +464,12 @@ const Upload: React.FC<{}> = () => {
         //second paramenter is creator fee, using 0% for now
         .mint(meme.cid, 0)
         .send({ from: authContext.authProvider?.account })
-        .on('error', async function(error: any) {
+        .on("error", async function(error: any) {
           console.log(error);
           await textile.deleteMemeFromBucket(meme);
         })
-        .then(async function (receipt: TransactionReceipt) {
-          console.log(receipt);
+        .then(async function(receipt: TransactionReceipt) {
+          console.log("Mint tx:", receipt);
 
           setTxDetails({
             ...txDetails,
@@ -414,11 +485,7 @@ const Upload: React.FC<{}> = () => {
             //second paramenter is creator fee, using 0% for now
             .getTokenID(meme.cid)
             .call({ from: authContext.authProvider?.account })
-            .on('error', async function(error: any) {
-              console.log(error);
-              await textile.deleteMemeFromBucket(meme);
-            })
-            .then(async function (result: any) {
+            .then(async function(result: any) {
               let memeUpdated: MemeMetadata = {
                 ...meme,
                 txHash: receipt.transactionHash,
@@ -430,34 +497,60 @@ const Upload: React.FC<{}> = () => {
                 price: memePrice
               };
 
+              setMeme(memeUpdated);
+              if (onSale) {
+                setUploadStep(uploadStep + 1);
+              } else {
+                setUploadStep(4);
+              }
+
               await textile.uploadTokenMetadata(memeUpdated);
 
               await textile.uploadMemeMetadata(memeUpdated);
 
               setUploadStatus(UploadStatus.COMPLETED);
+              (form as HTMLFormElement).reset();
+              setImage("");
             })
-            .catch(async (error: any) => {
-              alert("Something went wrong! Please try again");
+            .catch("error", async function(error: any) {
+              console.log(error);
               await textile.deleteMemeFromBucket(meme);
+              alert("Something went wrong! Please try again");
               setUploadStatus(UploadStatus.NOT_STARTED);
+              setUploadStep(1);
+              setShowUploadModal(false);
             });
 
           (window as any).onbeforeunload = function() {};
         })
         .catch(async (error: any) => {
+          console.log(error);
+          setUploadStatus(UploadStatus.NOT_STARTED);
+          setUploadStep(1);
+          setShowUploadModal(false);
           alert("Something went wrong! Please try again");
           await textile.deleteMemeFromBucket(meme);
-          setUploadStatus(UploadStatus.NOT_STARTED);
           (window as any).onbeforeunload = function() {};
         });
     }
   };
 
+  const deleteMeme = async () => {
+    const textile = await Textile.getInstance();
+    await textile.deleteMemeFromBucket(meme as MemeMetadata);
+  };
+
   useEffect(() => {
+    (async () => {
+      const networkId = await authContext.authProvider?.web3.eth.net.getId();
+      setNetworkId(networkId);
+      console.log("Metamask is connected to: " + networkId);
+    })();
+
     return () => {
       (window as any).onbeforeunload = function() {};
     };
-  }, []);
+  }, [authContext.authProvider]);
 
   return (
     <Main>
@@ -513,32 +606,22 @@ const Upload: React.FC<{}> = () => {
           {uploadStatus === UploadStatus.COMPLETED && (
             <em>Uploaded Successfully!</em>
           )}
-          {uploadStatus === UploadStatus.COMPLETED && (
-            <ViewDetails>
-              <span
-                className="btn"
-                onClick={() => setViewDetails(!viewDetails)}
-              >
-                View transaction details
-              </span>
-              <TxDetails className={viewDetails ? "open" : ""}>
-                {Object.keys(txDetails).map(key => {
-                  return (
-                    <DetailDiv>
-                      <em>{key}</em>: {renderDetails(txDetails[key])}
-                    </DetailDiv>
-                  );
-                })}
-              </TxDetails>
-              <CustomLink to="/me">View your memes</CustomLink>
-            </ViewDetails>
-          )}
         </Inputs>
         <Preview>
           Preview
           <Image>{image && <img src={image} alt="" />}</Image>
         </Preview>
       </UploadForm>
+      {showUploadModal && (
+        <UploadModal
+          step={uploadStep}
+          signMessage={() => signMessage(meme as MemeMetadata)}
+          getSellerApproval={() => getSellerApproval(meme as MemeMetadata)}
+          txDetails={txDetails}
+          closeModal={() => setShowUploadModal(false)}
+          dismiss={() => deleteMeme()}
+        />
+      )}
     </Main>
   );
 };

@@ -21,6 +21,7 @@ export interface MemeMetadata {
   dislikedBy: Array<string>; // set of user ids who disliked this meme.
   onSale?: boolean;
   description?: string;
+  sellApprovalSignature?: string;
 }
 
 export interface TokenMetadata {
