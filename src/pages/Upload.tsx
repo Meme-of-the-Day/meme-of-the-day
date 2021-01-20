@@ -329,7 +329,7 @@ const Upload: React.FC<{}> = () => {
             };
             setMeme(newMeme);
 
-            await textile.uploadTokenMetadata(newMeme);
+            await textile.updateMemeMetadata(newMeme);
 
             setUploadStep(uploadStep + 1);
             resolve(result.result as string);
