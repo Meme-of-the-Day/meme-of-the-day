@@ -1,32 +1,32 @@
 // SPDX-License-Identifier: MIT
-pragma solidity ^0.6.0;
 
-import "@openzeppelin/contracts/token/ERC1155/ERC1155.sol";
-import "@openzeppelin/contracts/access/Ownable.sol";
+pragma solidity ^0.8.0;
 
-/**
- * @title MemeOfTheDay
- * @notice An ERC1155 compliant token that manages meme NFTs
- * @author MemeOfTheDay
- */
-contract MemeOfTheDay is ERC1155, Ownable {
-    // Hashes of meme pictures on IPFS
-    string[] public hashes;
+import "../../../node_modules/@openzeppelin/contracts-upgradeable/token/ERC1155/ERC1155Upgradeable.sol";
+import "../../../node_modules/@openzeppelin/contracts-upgradeable/access/OwnableUpgradeable.sol";
+import "../../../node_modules/@openzeppelin/contracts-upgradeable/proxy/utils/Initializable.sol";
+
+contract MemeOfTheDay is ERC1155Upgradeable, OwnableUpgradeable {
+
+string[] public hashes;
 
     // Mapping for enforcing unique hashes
-    mapping(string => bool) _hashExists;
+    mapping(string => bool) _hashExists; 
 
     // Mapping from ipfs picture hash to NFT tokenID
-    mapping (string => uint256) private _hashToken;
+    mapping (string => uint256) private _hashToken;  
 
-    mapping(uint256 => address payable) public creatorOf;
-    mapping(uint256 => address payable) public ownerOf;
+    mapping(uint256 => address) public creatorOf;
+    mapping(uint256 => address) public ownerOf;
     mapping(uint256 => int256) public creatorFee;
 
     event MemeMinted(address creator, uint256 tokenId);
 
-    constructor() public ERC1155("https://hub.textile.io/ipfs/bafybeiaz4sqwracygsux7moam3tcd7zng53f6gh4khzhsrlhkto473c5rq/tokenmetadata/{id}.json") {}
-
+    function initialize() public initializer {
+        __ERC1155_init("https://hub.textile.io/ipfs/bafybeiaz4sqwracygsux7moam3tcd7zng53f6gh4khzhsrlhkto473c5rq/tokenmetadata/{id}.json");
+        __ERC165_init();
+        __Ownable_init();
+    }
     /**
      * @notice Changes the URI to fetch NFTs info from
      * @param _newUri   the new URI to fetch NFTs info from
@@ -72,4 +72,5 @@ contract MemeOfTheDay is ERC1155, Ownable {
     function getMemesCount() public view returns (uint256 count) {
         return hashes.length;
     }
+
 }

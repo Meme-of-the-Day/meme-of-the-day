@@ -1,14 +1,14 @@
 // SPDX-License-Identifier: MIT
-pragma solidity ^0.6.12;
+pragma solidity ^0.8.0;
 
-import "@openzeppelin/contracts/access/Ownable.sol";
-
+import "../../../node_modules/@openzeppelin/contracts-upgradeable/access/OwnableUpgradeable.sol";
+import "../../../node_modules/@openzeppelin/contracts-upgradeable/proxy/utils/Initializable.sol";
 /**
  * @title MOTDSaleParametersProvider
  * @notice A contract which holds all parameters necessary to calculate fees during sale
  * @author MemeOfTheDay
  */
-contract MOTDSaleParametersProvider is Ownable {
+contract MOTDSaleParametersProvider is OwnableUpgradeable {
     uint256 public constant DEFAULT_CREATOR_FEE_PERCENT_INDEX = 0;
     uint256 public constant VOTERS_FEE_PERCENT_INDEX = 1;
     uint256 public constant PLATFORM_FEE_PERCENT_INDEX = 2;
@@ -16,15 +16,25 @@ contract MOTDSaleParametersProvider is Ownable {
 
     mapping(uint256 => uint256) public parameters;
 
-    // Here percents are expressed as perthousands, since in Solidity float numbers don't exist
-    constructor() public {
-        parameters[DEFAULT_CREATOR_FEE_PERCENT_INDEX] = 100; // 10% (default) or custom% set by creator when minting
+    function initialize() public initializer{
+        __Ownable_init();
+        
+          parameters[DEFAULT_CREATOR_FEE_PERCENT_INDEX] = 100; // 10% (default) or custom% set by creator when minting
         parameters[VOTERS_FEE_PERCENT_INDEX] = 5; // 0.5%
         parameters[PLATFORM_FEE_PERCENT_INDEX] = 19; // 1.9%
         parameters[TOTAL_FEES_PERCENT_INDEX] =
             parameters[VOTERS_FEE_PERCENT_INDEX] +
             parameters[PLATFORM_FEE_PERCENT_INDEX];
     }
+    // Here percents are expressed as perthousands, since in Solidity float numbers don't exist
+    // constructor() public {
+    //     parameters[DEFAULT_CREATOR_FEE_PERCENT_INDEX] = 100; // 10% (default) or custom% set by creator when minting
+    //     parameters[VOTERS_FEE_PERCENT_INDEX] = 5; // 0.5%
+    //     parameters[PLATFORM_FEE_PERCENT_INDEX] = 19; // 1.9%
+    //     parameters[TOTAL_FEES_PERCENT_INDEX] =
+    //         parameters[VOTERS_FEE_PERCENT_INDEX] +
+    //         parameters[PLATFORM_FEE_PERCENT_INDEX];
+    // }
 
     /**
      * @notice Changes one of the parameters with the given value

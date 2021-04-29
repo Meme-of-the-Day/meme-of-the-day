@@ -1,11 +1,14 @@
 // SPDX-License-Identifier: MIT
-pragma solidity ^0.6.12;
+pragma solidity ^0.8.0;
 
-import "@openzeppelin/contracts/math/SafeMath.sol";
+//Removed because sol 0.8.0 already checks for over and underflow
+//import "@openzeppelin/contracts/math/SafeMath.sol";
 
 import {EIP712Domain} from "./EIP712Domain.sol";
 import {EIP712} from "./EIP712.sol";
+import "../../../node_modules/@openzeppelin/contracts-upgradeable/proxy/utils/Initializable.sol";
 
+//IN CASE OF UPGRADE THESE IMPORTS NEED TO BE UPDATED AS WELL
 import "./MemeOfTheDay.sol";
 import "./MOTDTreasury.sol";
 import "./MOTDSaleParametersProvider.sol";
@@ -15,8 +18,9 @@ import "./MOTDSaleParametersProvider.sol";
  * @notice contract that handles sales of memes
  * @author MemeOfTheDay
  */
-contract MemeSale is EIP712Domain {
-    using SafeMath for uint256;
+contract MemeSale is EIP712Domain, Initializable{
+    //Removed because sol 0.8.0 already checks for over and underflow
+    //using SafeMath for uint256;
 
     string internal constant VERIFYING_CONTRACT_NAME = "MemeSale";
 
@@ -38,23 +42,43 @@ contract MemeSale is EIP712Domain {
     event PlatformFee(uint256 platformFee);
     event OwnerFee(uint256 ownerFee);
 
-    constructor(
+    function initialize(
         address memeOfTheDayAddress,
         address payable motdTreasuryAddress,
         address memeOfTheDaySaleParametersProviderAddress,
         string memory version
-    ) public {
-        memeOfTheDay = MemeOfTheDay(memeOfTheDayAddress);
-        memeOfTheDayTreasury = MOTDTreasury(motdTreasuryAddress);
-        memeOfTheDaySaleParametersProvider = MOTDSaleParametersProvider(
-            memeOfTheDaySaleParametersProviderAddress
-        );
+        ) public initializer {
+         memeOfTheDay = MemeOfTheDay(memeOfTheDayAddress);
 
+        memeOfTheDayTreasury = MOTDTreasury(motdTreasuryAddress);
+
+        memeOfTheDaySaleParametersProvider = MOTDSaleParametersProvider(memeOfTheDaySaleParametersProviderAddress);
+        
         DOMAIN_SEPARATOR = EIP712.makeDomainSeparator(
             VERIFYING_CONTRACT_NAME,
             version
         );
     }
+   
+
+    //REPLACED BY INITIALIZER DUE TO UPGRADEABLE DESIGN
+    // constructor(
+    //     address memeOfTheDayAddress,
+    //     address payable motdTreasuryAddress,
+    //     address memeOfTheDaySaleParametersProviderAddress,
+    //     string memory version
+    // ) public {
+    //     memeOfTheDay = MemeOfTheDay(memeOfTheDayAddress);
+    //     memeOfTheDayTreasury = MOTDTreasury(motdTreasuryAddress);
+    //     memeOfTheDaySaleParametersProvider = MOTDSaleParametersProvider(
+    //         memeOfTheDaySaleParametersProviderAddress
+    //     );
+
+    //     DOMAIN_SEPARATOR = EIP712.makeDomainSeparator(
+    //         VERIFYING_CONTRACT_NAME,
+    //         version
+    //     );
+    // }
 
     /**
      * @notice Puts on sale a token
@@ -137,22 +161,46 @@ contract MemeSale is EIP712Domain {
         emit PlatformFee(platformFee);
         emit OwnerFee(ownerFee);
 
+
+        //BLOCK SCOPING DUE TO STACK TOO DEEP ERROR !!!
+
+
+    //    { //BLOCK SCOPE 1 START
+
+            
         uint256 totVotes = 0;
         for (uint256 i = 0; i < votes.length; i++) {
             totVotes += votes[i];
         }
 
         for (uint256 i = 0; i < voters.length; i++) {
-            uint256 voterFee = votersFee.mul(votes[i].div(totVotes));
-            voters[i].transfer(voterFee);
+            uint256 voterFee = votersFee * (votes[i]/totVotes); //No more div or mul becasue SafeMath checks are native to sol 0.8.0
+            (bool success, ) = voters[i].call{value: voterFee}(""); //use call{value: }("") instead of Transfer since Istanbul fork! EIP 1884
+            require(success, "Transfer failed.");
         }
 
-        if (payCreator) {
-            memeOfTheDay.creatorOf(tokenId).transfer(creatorFee);
+
+    //    }  //BLOCK SCOPE 1 END
+
+    //    {  //BLOCK SCOPE 2 START
+
+              if (payCreator) {
+           (bool success1, ) = memeOfTheDay.creatorOf(tokenId).call{value: creatorFee}("");  //use call{value: }("") instead of Transfer since Istanbul fork! EIP 1884
+           require(success1, "Transfer failed.");
         }
 
-        address(memeOfTheDayTreasury).transfer(platformFee);
-        memeOfTheDay.ownerOf(tokenId).transfer(ownerFee);
+    //    }  //BLOCK SCOPE 2 END
+
+        {  //BLOCK SCOPE 3 Start
+
+        (bool success2, ) = address(memeOfTheDayTreasury).call{value: platformFee}(""); //use call{value: }("") instead of Transfer since Istanbul fork! EIP 1884
+         require(success2, "Transfer failed.");
+        (bool success3, ) = memeOfTheDay.ownerOf(tokenId).call{value: ownerFee}("");  //use call{value: }("") instead of Transfer since Istanbul fork! EIP 1884
+         require(success3, "Transfer failed.");
+
+        }  //BLOCK SCOPE 3 END
+
+        {  //BLOCK SCOPE 4 START
 
         memeOfTheDay.safeTransferFrom(
             memeOfTheDay.ownerOf(tokenId),
@@ -163,11 +211,15 @@ contract MemeSale is EIP712Domain {
         );
 
         isOnSale[tokenId] = false;
+
+        }  //BLOCK SCOPE 4 END
+
+        //LOOKS LIKE OWNLY BLOCK SCOPE 3 AND 4 ARE NEEDED TO SOLVE STACK TOO DEEP ISSUE
     }
 
     function _getVotersFee(uint256 tokenPrice) internal view returns (uint256) {
         return
-            tokenPrice.div(1000).mul(
+            tokenPrice / (1000) * (                                //No more div or mul because SafeMath checks are native since sol 0.8.0
                 memeOfTheDaySaleParametersProvider.parameters(
                     memeOfTheDaySaleParametersProvider
                         .VOTERS_FEE_PERCENT_INDEX()
@@ -183,11 +235,11 @@ contract MemeSale is EIP712Domain {
         uint256 creatorFee = 0;
         if (payCreator) {
             if (memeOfTheDay.creatorFee(tokenId) > -1) {
-                creatorFee = tokenPrice.div(1000).mul(
+                creatorFee = tokenPrice / (1000) * (            //No more div or mul becasue SafeMath checks are native to sol 0.8.0
                     uint256(memeOfTheDay.creatorFee(tokenId))
                 );
             } else {
-                creatorFee = tokenPrice.div(1000).mul(
+                creatorFee = tokenPrice / (1000) * (                //No more div or mul becasue SafeMath checks are native to sol 0.8.0
                     memeOfTheDaySaleParametersProvider.parameters(
                         memeOfTheDaySaleParametersProvider
                             .DEFAULT_CREATOR_FEE_PERCENT_INDEX()
@@ -205,7 +257,7 @@ contract MemeSale is EIP712Domain {
         returns (uint256)
     {
         return
-            tokenPrice.div(1000).mul(
+            tokenPrice / (1000) * (                             //No more div or mul becasue SafeMath checks are native to sol 0.8.0
                 memeOfTheDaySaleParametersProvider.parameters(
                     memeOfTheDaySaleParametersProvider
                         .PLATFORM_FEE_PERCENT_INDEX()
@@ -221,7 +273,7 @@ contract MemeSale is EIP712Domain {
 
         //economic model "buyer pay fee", buyer needs to send to contract
         //token price including voters fee and platform fee
-        return msg.value.sub(votersFee).sub(creatorFee).sub(platformFee);
+        return msg.value - (votersFee) - (creatorFee) - (platformFee);    //No more sub, add, div or mul becasue SafeMath checks are native to sol 0.8.0
     }
 
     function _getFeesAmounts(
@@ -251,4 +303,5 @@ contract MemeSale is EIP712Domain {
 
         return (votersFee, creatorFee, platformFee, ownerFee);
     }
+
 }
