@@ -33013,18 +33013,116 @@
     "5777": {
       "events": {},
       "links": {},
-      "address": "0x12338cCb061AA9b64C0447cC521D231615AAa957",
-      "transactionHash": "0x254001e325ba98c455e538dc482ecaa45cf1cf1e756e1caed31c7162dc9fe3c7"
+      "address": "0xcd7f3a2c041caeDe12834A785B8265a6Ae5BDE21",
+      "transactionHash": "0xfd8832056ae583ec6365dd7eb224b63850579524aa0215d140a52ebd8a02ca21"
     },
     "80001": {
-      "events": {},
+      "events": {
+        "0xce38999dded47da0afaf5ed4186a2b50ab40367c7b0abc2ba7e2ee3db0d1a281": {
+          "anonymous": false,
+          "inputs": [
+            {
+              "indexed": false,
+              "internalType": "uint256",
+              "name": "creatorFee",
+              "type": "uint256"
+            }
+          ],
+          "name": "CreatorFee",
+          "type": "event"
+        },
+        "0xd0d39a845ce9a85c506556420bacf3313b17c54cb854655b4c3b5284ffe43652": {
+          "anonymous": false,
+          "inputs": [
+            {
+              "indexed": false,
+              "internalType": "uint256",
+              "name": "ownerFee",
+              "type": "uint256"
+            }
+          ],
+          "name": "OwnerFee",
+          "type": "event"
+        },
+        "0x8be0079c531659141344cd1fd0a4f28419497f9722a3daafe3b4186f6b6457e0": {
+          "anonymous": false,
+          "inputs": [
+            {
+              "indexed": true,
+              "internalType": "address",
+              "name": "previousOwner",
+              "type": "address"
+            },
+            {
+              "indexed": true,
+              "internalType": "address",
+              "name": "newOwner",
+              "type": "address"
+            }
+          ],
+          "name": "OwnershipTransferred",
+          "type": "event"
+        },
+        "0x62e78cea01bee320cd4e420270b5ea74000d11b0c9f74754ebdbfc544b05a258": {
+          "anonymous": false,
+          "inputs": [
+            {
+              "indexed": false,
+              "internalType": "address",
+              "name": "account",
+              "type": "address"
+            }
+          ],
+          "name": "Paused",
+          "type": "event"
+        },
+        "0x6f9983488bd1500c372d1f10befe9e7790d764b18c848cfa10872f4e248ded92": {
+          "anonymous": false,
+          "inputs": [
+            {
+              "indexed": false,
+              "internalType": "uint256",
+              "name": "platformFee",
+              "type": "uint256"
+            }
+          ],
+          "name": "PlatformFee",
+          "type": "event"
+        },
+        "0x5db9ee0a495bf2e6ff9c91a7834c1ba4fdd244a5e8aa4e537bd38aeae4b073aa": {
+          "anonymous": false,
+          "inputs": [
+            {
+              "indexed": false,
+              "internalType": "address",
+              "name": "account",
+              "type": "address"
+            }
+          ],
+          "name": "Unpaused",
+          "type": "event"
+        },
+        "0x2aad9e33ce58271cb1401a4211b102aad5eed0b41fcd4221b3b8f59775833714": {
+          "anonymous": false,
+          "inputs": [
+            {
+              "indexed": false,
+              "internalType": "uint256",
+              "name": "votersFee",
+              "type": "uint256"
+            }
+          ],
+          "name": "VotersFee",
+          "type": "event"
+        }
+      },
       "links": {},
-      "address": "0xffd87230e781058fe696a9B580BF2eC738092d9d",
-      "transactionHash": "0x2f4c69b79507df614321b6f80a72a7aa1ceaed16c92d779c173ce560be1392dd"
+      "address": "0x7066181dCa4887265717a8b1AAB302D64e76Ee36",
+      "transactionHash": "0x9018f1adcccc01cc95a8c60bdc4d6e7d3425d5a18b539672b959e5be601b34af"
     }
   },
   "schemaVersion": "3.3.4",
-  "updatedAt": "2021-04-29T09:32:45.593Z",
+  "updatedAt": "2021-05-01T15:31:21.096Z",
   "devdoc": {
     "author": "MemeOfTheDay",
     "kind": "dev",

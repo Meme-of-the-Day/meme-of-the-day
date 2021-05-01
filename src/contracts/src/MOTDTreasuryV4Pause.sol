@@ -56,7 +56,7 @@ contract MOTDTreasuryV4Pause is OwnableUpgradeable, PausableUpgradeable {
     }
 
     function sayHello() public pure returns(string memory){
-        return "Hello from after the upgrade! I am a new function!";
+        return "Hello from after the Proxy Upgrade!! I am the new function!";
     }
      
 }

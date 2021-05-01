@@ -12,9 +12,9 @@ import "../../../node_modules/@openzeppelin/contracts-upgradeable/access/Ownable
 import "../../../node_modules/@openzeppelin/contracts-upgradeable/security/ReentrancyGuardUpgradeable.sol";
 
 //IN CASE OF UPGRADE THESE IMPORTS NEED TO BE UPDATED AS WELL ! ! !
-import "./MemeOfTheDayV3Pause.sol";
-import "./MOTDTreasuryV3Pause.sol";
-import "./MOTDSaleParametersProviderV3Pause.sol";
+import "./MemeOfTheDayV4Pause.sol";
+import "./MOTDTreasuryV4Pause.sol";
+import "./MOTDSaleParametersProviderV4Pause.sol";
 
 /**
  * @title MemeSale
@@ -35,9 +35,9 @@ contract MemeSaleV4PauseReentrancy is EIP712Domain, Initializable, OwnableUpgrad
     string
         internal constant _INVALID_SIGNATURE_ERROR = "MemeSale: invalid signature";
 
-    MemeOfTheDayV3Pause public memeOfTheDay;
-    MOTDTreasuryV3Pause public memeOfTheDayTreasury;
-    MOTDSaleParametersProviderV3Pause memeOfTheDaySaleParametersProvider;
+    MemeOfTheDayV4Pause public memeOfTheDay;
+    MOTDTreasuryV4Pause public memeOfTheDayTreasury;
+    MOTDSaleParametersProviderV4Pause memeOfTheDaySaleParametersProvider;
 
     mapping(uint256 => bool) public isOnSale;
 
@@ -57,11 +57,11 @@ contract MemeSaleV4PauseReentrancy is EIP712Domain, Initializable, OwnableUpgrad
         __Ownable_init();
         __Pausable_init();
 
-        memeOfTheDay = MemeOfTheDayV3Pause(memeOfTheDayAddress);
+        memeOfTheDay = MemeOfTheDayV4Pause(memeOfTheDayAddress);
 
-        memeOfTheDayTreasury = MOTDTreasuryV3Pause(motdTreasuryAddress);
+        memeOfTheDayTreasury = MOTDTreasuryV4Pause(motdTreasuryAddress);
 
-        memeOfTheDaySaleParametersProvider = MOTDSaleParametersProviderV3Pause(memeOfTheDaySaleParametersProviderAddress);
+        memeOfTheDaySaleParametersProvider = MOTDSaleParametersProviderV4Pause(memeOfTheDaySaleParametersProviderAddress);
         
         DOMAIN_SEPARATOR = EIP712.makeDomainSeparator(
             VERIFYING_CONTRACT_NAME,
@@ -323,6 +323,6 @@ contract MemeSaleV4PauseReentrancy is EIP712Domain, Initializable, OwnableUpgrad
     }
 
     function sayHello() public pure returns(string memory){
-        return "Hello from after the upgrade! I am a new function!";
+        return "Hello from after the Proxy Upgrade!! I am the new function!";
     }
 }

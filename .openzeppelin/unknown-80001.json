@@ -1,707 +1,9 @@
 {
   "manifestVersion": "3.1",
   "impls": {
-    "95b058be552b657f5c2ac28d1958a2a18812bc03f44289c6c40325c0cf015387": {
-      "address": "0xdbF5Df46A82357705B310f52bF7615aba21f3e5F",
-      "txHash": "0x5c37c3db8988845280b80b799bc23a9235abbc044c1f40891e8059cbf0880f1e",
-      "layout": {
-        "storage": [
-          {
-            "contract": "Initializable",
-            "label": "_initialized",
-            "type": "t_bool",
-            "src": "..\\..\\..\\..\\..\\..\\..\\..\\C\\Users\\sound\\Desktop\\MOTD\\meme-repo-copy\\node_modules\\@openzeppelin\\contracts-upgradeable\\proxy\\utils\\Initializable.sol:25"
-          },
-          {
-            "contract": "Initializable",
-            "label": "_initializing",
-            "type": "t_bool",
-            "src": "..\\..\\..\\..\\..\\..\\..\\..\\C\\Users\\sound\\Desktop\\MOTD\\meme-repo-copy\\node_modules\\@openzeppelin\\contracts-upgradeable\\proxy\\utils\\Initializable.sol:30"
-          },
-          {
-            "contract": "ContextUpgradeable",
-            "label": "__gap",
-            "type": "t_array(t_uint256)50_storage",
-            "src": "..\\..\\..\\..\\..\\..\\..\\..\\C\\Users\\sound\\Desktop\\MOTD\\meme-repo-copy\\node_modules\\@openzeppelin\\contracts-upgradeable\\utils\\ContextUpgradeable.sol:31"
-          },
-          {
-            "contract": "ERC165Upgradeable",
-            "label": "__gap",
-            "type": "t_array(t_uint256)50_storage",
-            "src": "..\\..\\..\\..\\..\\..\\..\\..\\C\\Users\\sound\\Desktop\\MOTD\\meme-repo-copy\\node_modules\\@openzeppelin\\contracts-upgradeable\\utils\\introspection\\ERC165Upgradeable.sol:35"
-          },
-          {
-            "contract": "ERC1155Upgradeable",
-            "label": "_balances",
-            "type": "t_mapping(t_uint256,t_mapping(t_address,t_uint256))",
-            "src": "..\\..\\..\\..\\..\\..\\..\\..\\C\\Users\\sound\\Desktop\\MOTD\\meme-repo-copy\\node_modules\\@openzeppelin\\contracts-upgradeable\\token\\ERC1155\\ERC1155Upgradeable.sol:25"
-          },
-          {
-            "contract": "ERC1155Upgradeable",
-            "label": "_operatorApprovals",
-            "type": "t_mapping(t_address,t_mapping(t_address,t_bool))",
-            "src": "..\\..\\..\\..\\..\\..\\..\\..\\C\\Users\\sound\\Desktop\\MOTD\\meme-repo-copy\\node_modules\\@openzeppelin\\contracts-upgradeable\\token\\ERC1155\\ERC1155Upgradeable.sol:28"
-          },
-          {
-            "contract": "ERC1155Upgradeable",
-            "label": "_uri",
-            "type": "t_string_storage",
-            "src": "..\\..\\..\\..\\..\\..\\..\\..\\C\\Users\\sound\\Desktop\\MOTD\\meme-repo-copy\\node_modules\\@openzeppelin\\contracts-upgradeable\\token\\ERC1155\\ERC1155Upgradeable.sol:31"
-          },
-          {
-            "contract": "ERC1155Upgradeable",
-            "label": "__gap",
-            "type": "t_array(t_uint256)47_storage",
-            "src": "..\\..\\..\\..\\..\\..\\..\\..\\C\\Users\\sound\\Desktop\\MOTD\\meme-repo-copy\\node_modules\\@openzeppelin\\contracts-upgradeable\\token\\ERC1155\\ERC1155Upgradeable.sol:406"
-          },
-          {
-            "contract": "OwnableUpgradeable",
-            "label": "_owner",
-            "type": "t_address",
-            "src": "..\\..\\..\\..\\..\\..\\..\\..\\C\\Users\\sound\\Desktop\\MOTD\\meme-repo-copy\\node_modules\\@openzeppelin\\contracts-upgradeable\\access\\OwnableUpgradeable.sol:20"
-          },
-          {
-            "contract": "OwnableUpgradeable",
-            "label": "__gap",
-            "type": "t_array(t_uint256)49_storage",
-            "src": "..\\..\\..\\..\\..\\..\\..\\..\\C\\Users\\sound\\Desktop\\MOTD\\meme-repo-copy\\node_modules\\@openzeppelin\\contracts-upgradeable\\access\\OwnableUpgradeable.sol:74"
-          },
-          {
-            "contract": "MemeOfTheDay",
-            "label": "hashes",
-            "type": "t_array(t_string_storage)dyn_storage",
-            "src": "..\\..\\..\\..\\..\\..\\..\\..\\C\\Users\\sound\\Desktop\\MOTD\\meme-repo-copy\\src\\contracts\\src\\MemeOfTheDay.sol:11"
-          },
-          {
-            "contract": "MemeOfTheDay",
-            "label": "_hashExists",
-            "type": "t_mapping(t_string_memory_ptr,t_bool)",
-            "src": "..\\..\\..\\..\\..\\..\\..\\..\\C\\Users\\sound\\Desktop\\MOTD\\meme-repo-copy\\src\\contracts\\src\\MemeOfTheDay.sol:14"
-          },
-          {
-            "contract": "MemeOfTheDay",
-            "label": "_hashToken",
-            "type": "t_mapping(t_string_memory_ptr,t_uint256)",
-            "src": "..\\..\\..\\..\\..\\..\\..\\..\\C\\Users\\sound\\Desktop\\MOTD\\meme-repo-copy\\src\\contracts\\src\\MemeOfTheDay.sol:17"
-          },
-          {
-            "contract": "MemeOfTheDay",
-            "label": "creatorOf",
-            "type": "t_mapping(t_uint256,t_address)",
-            "src": "..\\..\\..\\..\\..\\..\\..\\..\\C\\Users\\sound\\Desktop\\MOTD\\meme-repo-copy\\src\\contracts\\src\\MemeOfTheDay.sol:19"
-          },
-          {
-            "contract": "MemeOfTheDay",
-            "label": "ownerOf",
-            "type": "t_mapping(t_uint256,t_address)",
-            "src": "..\\..\\..\\..\\..\\..\\..\\..\\C\\Users\\sound\\Desktop\\MOTD\\meme-repo-copy\\src\\contracts\\src\\MemeOfTheDay.sol:20"
-          },
-          {
-            "contract": "MemeOfTheDay",
-            "label": "creatorFee",
-            "type": "t_mapping(t_uint256,t_int256)",
-            "src": "..\\..\\..\\..\\..\\..\\..\\..\\C\\Users\\sound\\Desktop\\MOTD\\meme-repo-copy\\src\\contracts\\src\\MemeOfTheDay.sol:21"
-          }
-        ],
-        "types": {
-          "t_array(t_string_storage)dyn_storage": {
-            "label": "string[]"
-          },
-          "t_string_storage": {
-            "label": "string"
-          },
-          "t_mapping(t_string_memory_ptr,t_bool)": {
-            "label": "mapping(string => bool)"
-          },
-          "t_bool": {
-            "label": "bool"
-          },
-          "t_mapping(t_string_memory_ptr,t_uint256)": {
-            "label": "mapping(string => uint256)"
-          },
-          "t_uint256": {
-            "label": "uint256"
-          },
-          "t_mapping(t_uint256,t_address)": {
-            "label": "mapping(uint256 => address)"
-          },
-          "t_address": {
-            "label": "address"
-          },
-          "t_mapping(t_uint256,t_int256)": {
-            "label": "mapping(uint256 => int256)"
-          },
-          "t_int256": {
-            "label": "int256"
-          },
-          "t_array(t_uint256)49_storage": {
-            "label": "uint256[49]"
-          },
-          "t_mapping(t_uint256,t_mapping(t_address,t_uint256))": {
-            "label": "mapping(uint256 => mapping(address => uint256))"
-          },
-          "t_mapping(t_address,t_uint256)": {
-            "label": "mapping(address => uint256)"
-          },
-          "t_mapping(t_address,t_mapping(t_address,t_bool))": {
-            "label": "mapping(address => mapping(address => bool))"
-          },
-          "t_mapping(t_address,t_bool)": {
-            "label": "mapping(address => bool)"
-          },
-          "t_array(t_uint256)47_storage": {
-            "label": "uint256[47]"
-          },
-          "t_array(t_uint256)50_storage": {
-            "label": "uint256[50]"
-          }
-        }
-      }
-    },
-    "b6252dbd2434481d21e0fb2a2cb8d206a2c8c8682c3d44823fbbfea540244691": {
-      "address": "0xBf79c1fCf0E88FeD068CC239E5A5546C33bAf2da",
-      "txHash": "0x447f5abcd8dc17364a831ae5f40429ab67dd9cc50c6746c9ea0bbf060f570fb4",
-      "layout": {
-        "storage": [
-          {
-            "contract": "Initializable",
-            "label": "_initialized",
-            "type": "t_bool",
-            "src": "..\\..\\..\\..\\..\\..\\..\\..\\C\\Users\\sound\\Desktop\\MOTD\\meme-repo-copy\\node_modules\\@openzeppelin\\contracts-upgradeable\\proxy\\utils\\Initializable.sol:25"
-          },
-          {
-            "contract": "Initializable",
-            "label": "_initializing",
-            "type": "t_bool",
-            "src": "..\\..\\..\\..\\..\\..\\..\\..\\C\\Users\\sound\\Desktop\\MOTD\\meme-repo-copy\\node_modules\\@openzeppelin\\contracts-upgradeable\\proxy\\utils\\Initializable.sol:30"
-          },
-          {
-            "contract": "ContextUpgradeable",
-            "label": "__gap",
-            "type": "t_array(t_uint256)50_storage",
-            "src": "..\\..\\..\\..\\..\\..\\..\\..\\C\\Users\\sound\\Desktop\\MOTD\\meme-repo-copy\\node_modules\\@openzeppelin\\contracts-upgradeable\\utils\\ContextUpgradeable.sol:31"
-          },
-          {
-            "contract": "OwnableUpgradeable",
-            "label": "_owner",
-            "type": "t_address",
-            "src": "..\\..\\..\\..\\..\\..\\..\\..\\C\\Users\\sound\\Desktop\\MOTD\\meme-repo-copy\\node_modules\\@openzeppelin\\contracts-upgradeable\\access\\OwnableUpgradeable.sol:20"
-          },
-          {
-            "contract": "OwnableUpgradeable",
-            "label": "__gap",
-            "type": "t_array(t_uint256)49_storage",
-            "src": "..\\..\\..\\..\\..\\..\\..\\..\\C\\Users\\sound\\Desktop\\MOTD\\meme-repo-copy\\node_modules\\@openzeppelin\\contracts-upgradeable\\access\\OwnableUpgradeable.sol:74"
-          }
-        ],
-        "types": {
-          "t_address": {
-            "label": "address"
-          },
-          "t_array(t_uint256)49_storage": {
-            "label": "uint256[49]"
-          },
-          "t_uint256": {
-            "label": "uint256"
-          },
-          "t_array(t_uint256)50_storage": {
-            "label": "uint256[50]"
-          },
-          "t_bool": {
-            "label": "bool"
-          }
-        }
-      }
-    },
-    "244b5d4c3b0a95e4efa153acdcf38fb8ab7a11a5c3dc5a50f5085512bee2c40e": {
-      "address": "0x43bBFFFD8dAf3aCE1b0E45EEAC77D654A03DBD06",
-      "txHash": "0xd016bf3f79c481077bb04b24fc3659f43ac6fe93dc9dc03ec12c75f9e1723f45",
-      "layout": {
-        "storage": [
-          {
-            "contract": "Initializable",
-            "label": "_initialized",
-            "type": "t_bool",
-            "src": "..\\..\\..\\..\\..\\..\\..\\..\\C\\Users\\sound\\Desktop\\MOTD\\meme-repo-copy\\node_modules\\@openzeppelin\\contracts-upgradeable\\proxy\\utils\\Initializable.sol:25"
-          },
-          {
-            "contract": "Initializable",
-            "label": "_initializing",
-            "type": "t_bool",
-            "src": "..\\..\\..\\..\\..\\..\\..\\..\\C\\Users\\sound\\Desktop\\MOTD\\meme-repo-copy\\node_modules\\@openzeppelin\\contracts-upgradeable\\proxy\\utils\\Initializable.sol:30"
-          },
-          {
-            "contract": "ContextUpgradeable",
-            "label": "__gap",
-            "type": "t_array(t_uint256)50_storage",
-            "src": "..\\..\\..\\..\\..\\..\\..\\..\\C\\Users\\sound\\Desktop\\MOTD\\meme-repo-copy\\node_modules\\@openzeppelin\\contracts-upgradeable\\utils\\ContextUpgradeable.sol:31"
-          },
-          {
-            "contract": "OwnableUpgradeable",
-            "label": "_owner",
-            "type": "t_address",
-            "src": "..\\..\\..\\..\\..\\..\\..\\..\\C\\Users\\sound\\Desktop\\MOTD\\meme-repo-copy\\node_modules\\@openzeppelin\\contracts-upgradeable\\access\\OwnableUpgradeable.sol:20"
-          },
-          {
-            "contract": "OwnableUpgradeable",
-            "label": "__gap",
-            "type": "t_array(t_uint256)49_storage",
-            "src": "..\\..\\..\\..\\..\\..\\..\\..\\C\\Users\\sound\\Desktop\\MOTD\\meme-repo-copy\\node_modules\\@openzeppelin\\contracts-upgradeable\\access\\OwnableUpgradeable.sol:74"
-          },
-          {
-            "contract": "MOTDSaleParametersProvider",
-            "label": "parameters",
-            "type": "t_mapping(t_uint256,t_uint256)",
-            "src": "..\\..\\..\\..\\..\\..\\..\\..\\C\\Users\\sound\\Desktop\\MOTD\\meme-repo-copy\\src\\contracts\\src\\MOTDSaleParametersProvider.sol:17"
-          }
-        ],
-        "types": {
-          "t_mapping(t_uint256,t_uint256)": {
-            "label": "mapping(uint256 => uint256)"
-          },
-          "t_uint256": {
-            "label": "uint256"
-          },
-          "t_address": {
-            "label": "address"
-          },
-          "t_array(t_uint256)49_storage": {
-            "label": "uint256[49]"
-          },
-          "t_array(t_uint256)50_storage": {
-            "label": "uint256[50]"
-          },
-          "t_bool": {
-            "label": "bool"
-          }
-        }
-      }
-    },
-    "3d59e6debeb3f9a14fd47ec00fe663ec34fc8722b3aa67172ed12a9043d6f0c1": {
-      "address": "0x1cE2944eC21A8DDB37D762DDd32aE8731b10cc2F",
-      "txHash": "0x61ec55a650bcbda8ce2a7966beda82c9d4ac9cca8ecb7538b1d7938c682c276f",
-      "layout": {
-        "storage": [
-          {
-            "contract": "EIP712Domain",
-            "label": "DOMAIN_SEPARATOR",
-            "type": "t_bytes32",
-            "src": "..\\..\\..\\..\\..\\..\\..\\..\\C\\Users\\sound\\Desktop\\MOTD\\meme-repo-copy\\src\\contracts\\src\\EIP712Domain.sol:9"
-          },
-          {
-            "contract": "Initializable",
-            "label": "_initialized",
-            "type": "t_bool",
-            "src": "..\\..\\..\\..\\..\\..\\..\\..\\C\\Users\\sound\\Desktop\\MOTD\\meme-repo-copy\\node_modules\\@openzeppelin\\contracts-upgradeable\\proxy\\utils\\Initializable.sol:25"
-          },
-          {
-            "contract": "Initializable",
-            "label": "_initializing",
-            "type": "t_bool",
-            "src": "..\\..\\..\\..\\..\\..\\..\\..\\C\\Users\\sound\\Desktop\\MOTD\\meme-repo-copy\\node_modules\\@openzeppelin\\contracts-upgradeable\\proxy\\utils\\Initializable.sol:30"
-          },
-          {
-            "contract": "MemeSale",
-            "label": "memeOfTheDay",
-            "type": "t_contract(MemeOfTheDay)2483",
-            "src": "..\\..\\..\\..\\..\\..\\..\\..\\C\\Users\\sound\\Desktop\\MOTD\\meme-repo-copy\\src\\contracts\\src\\MemeSale.sol:34"
-          },
-          {
-            "contract": "MemeSale",
-            "label": "memeOfTheDayTreasury",
-            "type": "t_contract(MOTDTreasury)2227",
-            "src": "..\\..\\..\\..\\..\\..\\..\\..\\C\\Users\\sound\\Desktop\\MOTD\\meme-repo-copy\\src\\contracts\\src\\MemeSale.sol:35"
-          },
-          {
-            "contract": "MemeSale",
-            "label": "memeOfTheDaySaleParametersProvider",
-            "type": "t_contract(MOTDSaleParametersProvider)2030",
-            "src": "..\\..\\..\\..\\..\\..\\..\\..\\C\\Users\\sound\\Desktop\\MOTD\\meme-repo-copy\\src\\contracts\\src\\MemeSale.sol:36"
-          },
-          {
-            "contract": "MemeSale",
-            "label": "isOnSale",
-            "type": "t_mapping(t_uint256,t_bool)",
-            "src": "..\\..\\..\\..\\..\\..\\..\\..\\C\\Users\\sound\\Desktop\\MOTD\\meme-repo-copy\\src\\contracts\\src\\MemeSale.sol:38"
-          }
-        ],
-        "types": {
-          "t_contract(MemeOfTheDay)2483": {
-            "label": "contract MemeOfTheDay"
-          },
-          "t_contract(MOTDTreasury)2227": {
-            "label": "contract MOTDTreasury"
-          },
-          "t_contract(MOTDSaleParametersProvider)2030": {
-            "label": "contract MOTDSaleParametersProvider"
-          },
-          "t_mapping(t_uint256,t_bool)": {
-            "label": "mapping(uint256 => bool)"
-          },
-          "t_uint256": {
-            "label": "uint256"
-          },
-          "t_bool": {
-            "label": "bool"
-          },
-          "t_bytes32": {
-            "label": "bytes32"
-          }
-        }
-      }
-    },
-    "79e9ed167a08bd7c9fb56fbb2f6b513121e5933fb330c3cefdba8b444a1ef097": {
-      "address": "0x4BdB3c31AF42b2c840293ffC46D37B3f8d0871fB",
-      "txHash": "0xa2a27e63b5eed53dacb943cb9abaa29c404ee8cf4c9704251100b1ce47db3a11",
-      "layout": {
-        "storage": [
-          {
-            "contract": "Initializable",
-            "label": "_initialized",
-            "type": "t_bool",
-            "src": "..\\..\\..\\..\\..\\..\\..\\..\\C\\Users\\sound\\Desktop\\MOTD\\meme-repo-copy\\node_modules\\@openzeppelin\\contracts-upgradeable\\proxy\\utils\\Initializable.sol:25"
-          },
-          {
-            "contract": "Initializable",
-            "label": "_initializing",
-            "type": "t_bool",
-            "src": "..\\..\\..\\..\\..\\..\\..\\..\\C\\Users\\sound\\Desktop\\MOTD\\meme-repo-copy\\node_modules\\@openzeppelin\\contracts-upgradeable\\proxy\\utils\\Initializable.sol:30"
-          },
-          {
-            "contract": "ContextUpgradeable",
-            "label": "__gap",
-            "type": "t_array(t_uint256)50_storage",
-            "src": "..\\..\\..\\..\\..\\..\\..\\..\\C\\Users\\sound\\Desktop\\MOTD\\meme-repo-copy\\node_modules\\@openzeppelin\\contracts-upgradeable\\utils\\ContextUpgradeable.sol:31"
-          },
-          {
-            "contract": "ERC165Upgradeable",
-            "label": "__gap",
-            "type": "t_array(t_uint256)50_storage",
-            "src": "..\\..\\..\\..\\..\\..\\..\\..\\C\\Users\\sound\\Desktop\\MOTD\\meme-repo-copy\\node_modules\\@openzeppelin\\contracts-upgradeable\\utils\\introspection\\ERC165Upgradeable.sol:35"
-          },
-          {
-            "contract": "ERC1155Upgradeable",
-            "label": "_balances",
-            "type": "t_mapping(t_uint256,t_mapping(t_address,t_uint256))",
-            "src": "..\\..\\..\\..\\..\\..\\..\\..\\C\\Users\\sound\\Desktop\\MOTD\\meme-repo-copy\\node_modules\\@openzeppelin\\contracts-upgradeable\\token\\ERC1155\\ERC1155Upgradeable.sol:25"
-          },
-          {
-            "contract": "ERC1155Upgradeable",
-            "label": "_operatorApprovals",
-            "type": "t_mapping(t_address,t_mapping(t_address,t_bool))",
-            "src": "..\\..\\..\\..\\..\\..\\..\\..\\C\\Users\\sound\\Desktop\\MOTD\\meme-repo-copy\\node_modules\\@openzeppelin\\contracts-upgradeable\\token\\ERC1155\\ERC1155Upgradeable.sol:28"
-          },
-          {
-            "contract": "ERC1155Upgradeable",
-            "label": "_uri",
-            "type": "t_string_storage",
-            "src": "..\\..\\..\\..\\..\\..\\..\\..\\C\\Users\\sound\\Desktop\\MOTD\\meme-repo-copy\\node_modules\\@openzeppelin\\contracts-upgradeable\\token\\ERC1155\\ERC1155Upgradeable.sol:31"
-          },
-          {
-            "contract": "ERC1155Upgradeable",
-            "label": "__gap",
-            "type": "t_array(t_uint256)47_storage",
-            "src": "..\\..\\..\\..\\..\\..\\..\\..\\C\\Users\\sound\\Desktop\\MOTD\\meme-repo-copy\\node_modules\\@openzeppelin\\contracts-upgradeable\\token\\ERC1155\\ERC1155Upgradeable.sol:406"
-          },
-          {
-            "contract": "OwnableUpgradeable",
-            "label": "_owner",
-            "type": "t_address",
-            "src": "..\\..\\..\\..\\..\\..\\..\\..\\C\\Users\\sound\\Desktop\\MOTD\\meme-repo-copy\\node_modules\\@openzeppelin\\contracts-upgradeable\\access\\OwnableUpgradeable.sol:20"
-          },
-          {
-            "contract": "OwnableUpgradeable",
-            "label": "__gap",
-            "type": "t_array(t_uint256)49_storage",
-            "src": "..\\..\\..\\..\\..\\..\\..\\..\\C\\Users\\sound\\Desktop\\MOTD\\meme-repo-copy\\node_modules\\@openzeppelin\\contracts-upgradeable\\access\\OwnableUpgradeable.sol:74"
-          },
-          {
-            "contract": "MemeOfTheDayV2",
-            "label": "hashes",
-            "type": "t_array(t_string_storage)dyn_storage",
-            "src": "..\\..\\..\\..\\..\\..\\..\\..\\C\\Users\\sound\\Desktop\\MOTD\\meme-repo-copy\\src\\contracts\\src\\MemeOfTheDayV2.sol:11"
-          },
-          {
-            "contract": "MemeOfTheDayV2",
-            "label": "_hashExists",
-            "type": "t_mapping(t_string_memory_ptr,t_bool)",
-            "src": "..\\..\\..\\..\\..\\..\\..\\..\\C\\Users\\sound\\Desktop\\MOTD\\meme-repo-copy\\src\\contracts\\src\\MemeOfTheDayV2.sol:14"
-          },
-          {
-            "contract": "MemeOfTheDayV2",
-            "label": "_hashToken",
-            "type": "t_mapping(t_string_memory_ptr,t_uint256)",
-            "src": "..\\..\\..\\..\\..\\..\\..\\..\\C\\Users\\sound\\Desktop\\MOTD\\meme-repo-copy\\src\\contracts\\src\\MemeOfTheDayV2.sol:17"
-          },
-          {
-            "contract": "MemeOfTheDayV2",
-            "label": "creatorOf",
-            "type": "t_mapping(t_uint256,t_address)",
-            "src": "..\\..\\..\\..\\..\\..\\..\\..\\C\\Users\\sound\\Desktop\\MOTD\\meme-repo-copy\\src\\contracts\\src\\MemeOfTheDayV2.sol:19"
-          },
-          {
-            "contract": "MemeOfTheDayV2",
-            "label": "ownerOf",
-            "type": "t_mapping(t_uint256,t_address)",
-            "src": "..\\..\\..\\..\\..\\..\\..\\..\\C\\Users\\sound\\Desktop\\MOTD\\meme-repo-copy\\src\\contracts\\src\\MemeOfTheDayV2.sol:20"
-          },
-          {
-            "contract": "MemeOfTheDayV2",
-            "label": "creatorFee",
-            "type": "t_mapping(t_uint256,t_int256)",
-            "src": "..\\..\\..\\..\\..\\..\\..\\..\\C\\Users\\sound\\Desktop\\MOTD\\meme-repo-copy\\src\\contracts\\src\\MemeOfTheDayV2.sol:21"
-          }
-        ],
-        "types": {
-          "t_array(t_string_storage)dyn_storage": {
-            "label": "string[]"
-          },
-          "t_string_storage": {
-            "label": "string"
-          },
-          "t_mapping(t_string_memory_ptr,t_bool)": {
-            "label": "mapping(string => bool)"
-          },
-          "t_bool": {
-            "label": "bool"
-          },
-          "t_mapping(t_string_memory_ptr,t_uint256)": {
-            "label": "mapping(string => uint256)"
-          },
-          "t_uint256": {
-            "label": "uint256"
-          },
-          "t_mapping(t_uint256,t_address)": {
-            "label": "mapping(uint256 => address)"
-          },
-          "t_address": {
-            "label": "address"
-          },
-          "t_mapping(t_uint256,t_int256)": {
-            "label": "mapping(uint256 => int256)"
-          },
-          "t_int256": {
-            "label": "int256"
-          },
-          "t_array(t_uint256)49_storage": {
-            "label": "uint256[49]"
-          },
-          "t_mapping(t_uint256,t_mapping(t_address,t_uint256))": {
-            "label": "mapping(uint256 => mapping(address => uint256))"
-          },
-          "t_mapping(t_address,t_uint256)": {
-            "label": "mapping(address => uint256)"
-          },
-          "t_mapping(t_address,t_mapping(t_address,t_bool))": {
-            "label": "mapping(address => mapping(address => bool))"
-          },
-          "t_mapping(t_address,t_bool)": {
-            "label": "mapping(address => bool)"
-          },
-          "t_array(t_uint256)47_storage": {
-            "label": "uint256[47]"
-          },
-          "t_array(t_uint256)50_storage": {
-            "label": "uint256[50]"
-          }
-        }
-      }
-    },
-    "19f080505ee320b022564189b4b58651ac617eb96131cfd849866a5c1c3386a4": {
-      "address": "0x61D6529CcdDAaa161EC9beFb2141296af889985E",
-      "txHash": "0xa4389763562a898207af73e74378d90943b9dc78c007d0812908a10155efc93a",
-      "layout": {
-        "storage": [
-          {
-            "contract": "Initializable",
-            "label": "_initialized",
-            "type": "t_bool",
-            "src": "..\\..\\..\\..\\..\\..\\..\\..\\C\\Users\\sound\\Desktop\\MOTD\\meme-repo-copy\\node_modules\\@openzeppelin\\contracts-upgradeable\\proxy\\utils\\Initializable.sol:25"
-          },
-          {
-            "contract": "Initializable",
-            "label": "_initializing",
-            "type": "t_bool",
-            "src": "..\\..\\..\\..\\..\\..\\..\\..\\C\\Users\\sound\\Desktop\\MOTD\\meme-repo-copy\\node_modules\\@openzeppelin\\contracts-upgradeable\\proxy\\utils\\Initializable.sol:30"
-          },
-          {
-            "contract": "ContextUpgradeable",
-            "label": "__gap",
-            "type": "t_array(t_uint256)50_storage",
-            "src": "..\\..\\..\\..\\..\\..\\..\\..\\C\\Users\\sound\\Desktop\\MOTD\\meme-repo-copy\\node_modules\\@openzeppelin\\contracts-upgradeable\\utils\\ContextUpgradeable.sol:31"
-          },
-          {
-            "contract": "OwnableUpgradeable",
-            "label": "_owner",
-            "type": "t_address",
-            "src": "..\\..\\..\\..\\..\\..\\..\\..\\C\\Users\\sound\\Desktop\\MOTD\\meme-repo-copy\\node_modules\\@openzeppelin\\contracts-upgradeable\\access\\OwnableUpgradeable.sol:20"
-          },
-          {
-            "contract": "OwnableUpgradeable",
-            "label": "__gap",
-            "type": "t_array(t_uint256)49_storage",
-            "src": "..\\..\\..\\..\\..\\..\\..\\..\\C\\Users\\sound\\Desktop\\MOTD\\meme-repo-copy\\node_modules\\@openzeppelin\\contracts-upgradeable\\access\\OwnableUpgradeable.sol:74"
-          }
-        ],
-        "types": {
-          "t_address": {
-            "label": "address"
-          },
-          "t_array(t_uint256)49_storage": {
-            "label": "uint256[49]"
-          },
-          "t_uint256": {
-            "label": "uint256"
-          },
-          "t_array(t_uint256)50_storage": {
-            "label": "uint256[50]"
-          },
-          "t_bool": {
-            "label": "bool"
-          }
-        }
-      }
-    },
-    "c2c17dc3357f4846d1a478c1e0eb1a4a39a1204099686933cd6310564df5ce32": {
-      "address": "0x5B6c2d70Acac9F2271d81d95d1064d3C7d914FB1",
-      "txHash": "0xdf39c9eab7f03aa2c8e692293e6bc21de736503a942cd0adda888a0fe0ddd897",
-      "layout": {
-        "storage": [
-          {
-            "contract": "Initializable",
-            "label": "_initialized",
-            "type": "t_bool",
-            "src": "..\\..\\..\\..\\..\\..\\..\\..\\C\\Users\\sound\\Desktop\\MOTD\\meme-repo-copy\\node_modules\\@openzeppelin\\contracts-upgradeable\\proxy\\utils\\Initializable.sol:25"
-          },
-          {
-            "contract": "Initializable",
-            "label": "_initializing",
-            "type": "t_bool",
-            "src": "..\\..\\..\\..\\..\\..\\..\\..\\C\\Users\\sound\\Desktop\\MOTD\\meme-repo-copy\\node_modules\\@openzeppelin\\contracts-upgradeable\\proxy\\utils\\Initializable.sol:30"
-          },
-          {
-            "contract": "ContextUpgradeable",
-            "label": "__gap",
-            "type": "t_array(t_uint256)50_storage",
-            "src": "..\\..\\..\\..\\..\\..\\..\\..\\C\\Users\\sound\\Desktop\\MOTD\\meme-repo-copy\\node_modules\\@openzeppelin\\contracts-upgradeable\\utils\\ContextUpgradeable.sol:31"
-          },
-          {
-            "contract": "OwnableUpgradeable",
-            "label": "_owner",
-            "type": "t_address",
-            "src": "..\\..\\..\\..\\..\\..\\..\\..\\C\\Users\\sound\\Desktop\\MOTD\\meme-repo-copy\\node_modules\\@openzeppelin\\contracts-upgradeable\\access\\OwnableUpgradeable.sol:20"
-          },
-          {
-            "contract": "OwnableUpgradeable",
-            "label": "__gap",
-            "type": "t_array(t_uint256)49_storage",
-            "src": "..\\..\\..\\..\\..\\..\\..\\..\\C\\Users\\sound\\Desktop\\MOTD\\meme-repo-copy\\node_modules\\@openzeppelin\\contracts-upgradeable\\access\\OwnableUpgradeable.sol:74"
-          },
-          {
-            "contract": "MOTDSaleParametersProviderV2",
-            "label": "parameters",
-            "type": "t_mapping(t_uint256,t_uint256)",
-            "src": "..\\..\\..\\..\\..\\..\\..\\..\\C\\Users\\sound\\Desktop\\MOTD\\meme-repo-copy\\src\\contracts\\src\\MOTDSaleParametersProviderV2.sol:17"
-          }
-        ],
-        "types": {
-          "t_mapping(t_uint256,t_uint256)": {
-            "label": "mapping(uint256 => uint256)"
-          },
-          "t_uint256": {
-            "label": "uint256"
-          },
-          "t_address": {
-            "label": "address"
-          },
-          "t_array(t_uint256)49_storage": {
-            "label": "uint256[49]"
-          },
-          "t_array(t_uint256)50_storage": {
-            "label": "uint256[50]"
-          },
-          "t_bool": {
-            "label": "bool"
-          }
-        }
-      }
-    },
-    "37f04ff49fef69a07b14112b7f2b4ac6440cd3cc9f55e2ad77469f147f9fb146": {
-      "address": "0xDD595410f710226d851F63C638A02717e35C504E",
-      "txHash": "0x3bd731f81246931cb7c57a345e39995f62148ef6d597e24559f2a7dd614c97c6",
-      "layout": {
-        "storage": [
-          {
-            "contract": "EIP712Domain",
-            "label": "DOMAIN_SEPARATOR",
-            "type": "t_bytes32",
-            "src": "..\\..\\..\\..\\..\\..\\..\\..\\C\\Users\\sound\\Desktop\\MOTD\\meme-repo-copy\\src\\contracts\\src\\EIP712Domain.sol:9"
-          },
-          {
-            "contract": "Initializable",
-            "label": "_initialized",
-            "type": "t_bool",
-            "src": "..\\..\\..\\..\\..\\..\\..\\..\\C\\Users\\sound\\Desktop\\MOTD\\meme-repo-copy\\node_modules\\@openzeppelin\\contracts-upgradeable\\proxy\\utils\\Initializable.sol:25"
-          },
-          {
-            "contract": "Initializable",
-            "label": "_initializing",
-            "type": "t_bool",
-            "src": "..\\..\\..\\..\\..\\..\\..\\..\\C\\Users\\sound\\Desktop\\MOTD\\meme-repo-copy\\node_modules\\@openzeppelin\\contracts-upgradeable\\proxy\\utils\\Initializable.sol:30"
-          },
-          {
-            "contract": "MemeSaleV2",
-            "label": "memeOfTheDay",
-            "type": "t_contract(MemeOfTheDayV2)2658",
-            "src": "..\\..\\..\\..\\..\\..\\..\\..\\C\\Users\\sound\\Desktop\\MOTD\\meme-repo-copy\\src\\contracts\\src\\MemeSaleV2.sol:34"
-          },
-          {
-            "contract": "MemeSaleV2",
-            "label": "memeOfTheDayTreasury",
-            "type": "t_contract(MOTDTreasuryV2)2316",
-            "src": "..\\..\\..\\..\\..\\..\\..\\..\\C\\Users\\sound\\Desktop\\MOTD\\meme-repo-copy\\src\\contracts\\src\\MemeSaleV2.sol:35"
-          },
-          {
-            "contract": "MemeSaleV2",
-            "label": "memeOfTheDaySaleParametersProvider",
-            "type": "t_contract(MOTDSaleParametersProviderV2)2146",
-            "src": "..\\..\\..\\..\\..\\..\\..\\..\\C\\Users\\sound\\Desktop\\MOTD\\meme-repo-copy\\src\\contracts\\src\\MemeSaleV2.sol:36"
-          },
-          {
-            "contract": "MemeSaleV2",
-            "label": "isOnSale",
-            "type": "t_mapping(t_uint256,t_bool)",
-            "src": "..\\..\\..\\..\\..\\..\\..\\..\\C\\Users\\sound\\Desktop\\MOTD\\meme-repo-copy\\src\\contracts\\src\\MemeSaleV2.sol:38"
-          }
-        ],
-        "types": {
-          "t_contract(MemeOfTheDayV2)2658": {
-            "label": "contract MemeOfTheDayV2"
-          },
-          "t_contract(MOTDTreasuryV2)2316": {
-            "label": "contract MOTDTreasuryV2"
-          },
-          "t_contract(MOTDSaleParametersProviderV2)2146": {
-            "label": "contract MOTDSaleParametersProviderV2"
-          },
-          "t_mapping(t_uint256,t_bool)": {
-            "label": "mapping(uint256 => bool)"
-          },
-          "t_uint256": {
-            "label": "uint256"
-          },
-          "t_bool": {
-            "label": "bool"
-          },
-          "t_bytes32": {
-            "label": "bytes32"
-          }
-        }
-      }
-    },
-    "5178c3829e1346d449f9d693957b8aa65aede4d253cd388a066689e563313167": {
-      "address": "0x8D627C02Dd9A00aFccB19EDA800D4893BD918d43",
-      "txHash": "0xfa7aa80994cf92e4b90e2b7abe98c07ae709d57a4517e2e3bc2c3ddfb8c6262b",
+    "5d4d28494fd3212d6209831678c883b9cfc265b91c8a9da4e1e87dac5e43bcf4": {
+      "address": "0x16AA5D1e2B2E7666a7930095adf7FF2d4fC01dE4",
+      "txHash": "0x228913225935d65d3f797673c6168dfa258dc854dbb92cacfc40a4af34e449b1",
       "layout": {
         "storage": [
           {
@@ -777,40 +79,40 @@
             "src": "..\\..\\..\\..\\..\\..\\..\\..\\C\\Users\\sound\\Desktop\\MOTD\\meme-repo-copy\\node_modules\\@openzeppelin\\contracts-upgradeable\\security\\PausableUpgradeable.sol:96"
           },
           {
-            "contract": "MemeOfTheDayV3PauseReentrancy",
+            "contract": "MemeOfTheDayV3Pause",
             "label": "hashes",
             "type": "t_array(t_string_storage)dyn_storage",
-            "src": "..\\..\\..\\..\\..\\..\\..\\..\\C\\Users\\sound\\Desktop\\MOTD\\meme-repo-copy\\src\\contracts\\src\\MemeOfTheDayV3PauseReentrancy.sol:12"
+            "src": "..\\..\\..\\..\\..\\..\\..\\..\\C\\Users\\sound\\Desktop\\MOTD\\meme-repo-copy\\src\\contracts\\src\\MemeOfTheDayV3Pause.sol:12"
           },
           {
-            "contract": "MemeOfTheDayV3PauseReentrancy",
+            "contract": "MemeOfTheDayV3Pause",
             "label": "_hashExists",
             "type": "t_mapping(t_string_memory_ptr,t_bool)",
-            "src": "..\\..\\..\\..\\..\\..\\..\\..\\C\\Users\\sound\\Desktop\\MOTD\\meme-repo-copy\\src\\contracts\\src\\MemeOfTheDayV3PauseReentrancy.sol:15"
+            "src": "..\\..\\..\\..\\..\\..\\..\\..\\C\\Users\\sound\\Desktop\\MOTD\\meme-repo-copy\\src\\contracts\\src\\MemeOfTheDayV3Pause.sol:15"
           },
           {
-            "contract": "MemeOfTheDayV3PauseReentrancy",
+            "contract": "MemeOfTheDayV3Pause",
             "label": "_hashToken",
             "type": "t_mapping(t_string_memory_ptr,t_uint256)",
-            "src": "..\\..\\..\\..\\..\\..\\..\\..\\C\\Users\\sound\\Desktop\\MOTD\\meme-repo-copy\\src\\contracts\\src\\MemeOfTheDayV3PauseReentrancy.sol:18"
+            "src": "..\\..\\..\\..\\..\\..\\..\\..\\C\\Users\\sound\\Desktop\\MOTD\\meme-repo-copy\\src\\contracts\\src\\MemeOfTheDayV3Pause.sol:18"
           },
           {
-            "contract": "MemeOfTheDayV3PauseReentrancy",
+            "contract": "MemeOfTheDayV3Pause",
             "label": "creatorOf",
             "type": "t_mapping(t_uint256,t_address)",
-            "src": "..\\..\\..\\..\\..\\..\\..\\..\\C\\Users\\sound\\Desktop\\MOTD\\meme-repo-copy\\src\\contracts\\src\\MemeOfTheDayV3PauseReentrancy.sol:20"
+            "src": "..\\..\\..\\..\\..\\..\\..\\..\\C\\Users\\sound\\Desktop\\MOTD\\meme-repo-copy\\src\\contracts\\src\\MemeOfTheDayV3Pause.sol:20"
           },
           {
-            "contract": "MemeOfTheDayV3PauseReentrancy",
+            "contract": "MemeOfTheDayV3Pause",
             "label": "ownerOf",
             "type": "t_mapping(t_uint256,t_address)",
-            "src": "..\\..\\..\\..\\..\\..\\..\\..\\C\\Users\\sound\\Desktop\\MOTD\\meme-repo-copy\\src\\contracts\\src\\MemeOfTheDayV3PauseReentrancy.sol:21"
+            "src": "..\\..\\..\\..\\..\\..\\..\\..\\C\\Users\\sound\\Desktop\\MOTD\\meme-repo-copy\\src\\contracts\\src\\MemeOfTheDayV3Pause.sol:21"
           },
           {
-            "contract": "MemeOfTheDayV3PauseReentrancy",
+            "contract": "MemeOfTheDayV3Pause",
             "label": "creatorFee",
             "type": "t_mapping(t_uint256,t_int256)",
-            "src": "..\\..\\..\\..\\..\\..\\..\\..\\C\\Users\\sound\\Desktop\\MOTD\\meme-repo-copy\\src\\contracts\\src\\MemeOfTheDayV3PauseReentrancy.sol:22"
+            "src": "..\\..\\..\\..\\..\\..\\..\\..\\C\\Users\\sound\\Desktop\\MOTD\\meme-repo-copy\\src\\contracts\\src\\MemeOfTheDayV3Pause.sol:22"
           }
         ],
         "types": {
@@ -868,9 +170,9 @@
         }
       }
     },
-    "90d572ce4f7dc500aaae3066b548df6bee518fcb3fed497fd703e24966b211a6": {
-      "address": "0x4c734587A68AD02Da5FF024CEb781Af588f2396A",
-      "txHash": "0x08b475e5f6676be37cff5874b70f3ee751da909cbaf57e3cfb2fca9e7f2ad9f3",
+    "f21851dfba9c5605f5541f600012b4b3d272aa094465919ca7492ef22899a14b": {
+      "address": "0x03a2EB48f86a0d334deB2C646Dff1Ef83C26CCb1",
+      "txHash": "0xe64c901f58c679dc046e74b403e0ad8189777886269615572b328451af1480b9",
       "layout": {
         "storage": [
           {
@@ -935,9 +237,9 @@
         }
       }
     },
-    "ba57c86acf7c5ba5e394a808704889397d237acf051faa99db32f2e5f99b894c": {
-      "address": "0x4e9354aD0EBF92a060f94E14dA7525AFCb1d5e6E",
-      "txHash": "0x78545db268ac5d6668433c642763447f15d7fb76f55ac3a150d1cf4d5496ef1b",
+    "0c8b07a52036e08525a9ccc6ad5a194a30389199eb54cf479b48543051d5b940": {
+      "address": "0xd48AF7d4222501A070BD0793142a9a3AD5Ba7553",
+      "txHash": "0xfd44d6bbacfc4e1c5423665ef8f7e8f2f0c5304d01ddcb1ac1875cb1fef80b7e",
       "layout": {
         "storage": [
           {
@@ -983,10 +285,10 @@
             "src": "..\\..\\..\\..\\..\\..\\..\\..\\C\\Users\\sound\\Desktop\\MOTD\\meme-repo-copy\\node_modules\\@openzeppelin\\contracts-upgradeable\\security\\PausableUpgradeable.sol:96"
           },
           {
-            "contract": "MOTDSaleParametersProviderV3PauseReentrancy",
+            "contract": "MOTDSaleParametersProviderV3Pause",
             "label": "parameters",
             "type": "t_mapping(t_uint256,t_uint256)",
-            "src": "..\\..\\..\\..\\..\\..\\..\\..\\C\\Users\\sound\\Desktop\\MOTD\\meme-repo-copy\\src\\contracts\\src\\MOTDSaleParametersProviderV3PauseReentrancy.sol:18"
+            "src": "..\\..\\..\\..\\..\\..\\..\\..\\C\\Users\\sound\\Desktop\\MOTD\\meme-repo-copy\\src\\contracts\\src\\MOTDSaleParametersProviderV3Pause.sol:18"
           }
         ],
         "types": {
@@ -1011,9 +313,9 @@
         }
       }
     },
-    "b41d2ce352b69651ec4efba8ec1a9b42713e603a8d770da0cb9e8de0aeab6a45": {
-      "address": "0x68593153ae8451774fF6135bfD13516Be89Cca85",
-      "txHash": "0x2f4c69b79507df614321b6f80a72a7aa1ceaed16c92d779c173ce560be1392dd",
+    "f6114f2d664dcdf781692cedb75e1ba33191623a6434cf3acaa14848d33b1f58": {
+      "address": "0x76d177a968e36c407363F9281FF9Ac9912b97366",
+      "txHash": "0x9018f1adcccc01cc95a8c60bdc4d6e7d3425d5a18b539672b959e5be601b34af",
       "layout": {
         "storage": [
           {
@@ -1065,39 +367,1359 @@
             "src": "..\\..\\..\\..\\..\\..\\..\\..\\C\\Users\\sound\\Desktop\\MOTD\\meme-repo-copy\\node_modules\\@openzeppelin\\contracts-upgradeable\\security\\PausableUpgradeable.sol:96"
           },
           {
+            "contract": "ReentrancyGuardUpgradeable",
+            "label": "_status",
+            "type": "t_uint256",
+            "src": "..\\..\\..\\..\\..\\..\\..\\..\\C\\Users\\sound\\Desktop\\MOTD\\meme-repo-copy\\node_modules\\@openzeppelin\\contracts-upgradeable\\security\\ReentrancyGuardUpgradeable.sol:37"
+          },
+          {
+            "contract": "ReentrancyGuardUpgradeable",
+            "label": "__gap",
+            "type": "t_array(t_uint256)49_storage",
+            "src": "..\\..\\..\\..\\..\\..\\..\\..\\C\\Users\\sound\\Desktop\\MOTD\\meme-repo-copy\\node_modules\\@openzeppelin\\contracts-upgradeable\\security\\ReentrancyGuardUpgradeable.sol:67"
+          },
+          {
             "contract": "MemeSaleV3PauseReentrancy",
             "label": "memeOfTheDay",
-            "type": "t_contract(MemeOfTheDayV2)3036",
-            "src": "..\\..\\..\\..\\..\\..\\..\\..\\C\\Users\\sound\\Desktop\\MOTD\\meme-repo-copy\\src\\contracts\\src\\MemeSaleV3PauseReentrancy.sol:36"
-          },
-          {
-            "contract": "MemeSaleV3PauseReentrancy",
-            "label": "memeOfTheDayTreasury",
-            "type": "t_contract(MOTDTreasuryV2)2575",
-            "src": "..\\..\\..\\..\\..\\..\\..\\..\\C\\Users\\sound\\Desktop\\MOTD\\meme-repo-copy\\src\\contracts\\src\\MemeSaleV3PauseReentrancy.sol:37"
-          },
-          {
-            "contract": "MemeSaleV3PauseReentrancy",
-            "label": "memeOfTheDaySaleParametersProvider",
-            "type": "t_contract(MOTDSaleParametersProviderV2)2259",
+            "type": "t_contract(MemeOfTheDayV3Pause)3546",
             "src": "..\\..\\..\\..\\..\\..\\..\\..\\C\\Users\\sound\\Desktop\\MOTD\\meme-repo-copy\\src\\contracts\\src\\MemeSaleV3PauseReentrancy.sol:38"
           },
           {
             "contract": "MemeSaleV3PauseReentrancy",
+            "label": "memeOfTheDayTreasury",
+            "type": "t_contract(MOTDTreasuryV3Pause)2882",
+            "src": "..\\..\\..\\..\\..\\..\\..\\..\\C\\Users\\sound\\Desktop\\MOTD\\meme-repo-copy\\src\\contracts\\src\\MemeSaleV3PauseReentrancy.sol:39"
+          },
+          {
+            "contract": "MemeSaleV3PauseReentrancy",
+            "label": "memeOfTheDaySaleParametersProvider",
+            "type": "t_contract(MOTDSaleParametersProviderV3Pause)2455",
+            "src": "..\\..\\..\\..\\..\\..\\..\\..\\C\\Users\\sound\\Desktop\\MOTD\\meme-repo-copy\\src\\contracts\\src\\MemeSaleV3PauseReentrancy.sol:40"
+          },
+          {
+            "contract": "MemeSaleV3PauseReentrancy",
             "label": "isOnSale",
             "type": "t_mapping(t_uint256,t_bool)",
-            "src": "..\\..\\..\\..\\..\\..\\..\\..\\C\\Users\\sound\\Desktop\\MOTD\\meme-repo-copy\\src\\contracts\\src\\MemeSaleV3PauseReentrancy.sol:40"
+            "src": "..\\..\\..\\..\\..\\..\\..\\..\\C\\Users\\sound\\Desktop\\MOTD\\meme-repo-copy\\src\\contracts\\src\\MemeSaleV3PauseReentrancy.sol:42"
           }
         ],
         "types": {
-          "t_contract(MemeOfTheDayV2)3036": {
-            "label": "contract MemeOfTheDayV2"
+          "t_contract(MemeOfTheDayV3Pause)3546": {
+            "label": "contract MemeOfTheDayV3Pause"
           },
-          "t_contract(MOTDTreasuryV2)2575": {
-            "label": "contract MOTDTreasuryV2"
+          "t_contract(MOTDTreasuryV3Pause)2882": {
+            "label": "contract MOTDTreasuryV3Pause"
           },
-          "t_contract(MOTDSaleParametersProviderV2)2259": {
-            "label": "contract MOTDSaleParametersProviderV2"
+          "t_contract(MOTDSaleParametersProviderV3Pause)2455": {
+            "label": "contract MOTDSaleParametersProviderV3Pause"
+          },
+          "t_mapping(t_uint256,t_bool)": {
+            "label": "mapping(uint256 => bool)"
+          },
+          "t_uint256": {
+            "label": "uint256"
+          },
+          "t_bool": {
+            "label": "bool"
+          },
+          "t_array(t_uint256)49_storage": {
+            "label": "uint256[49]"
+          },
+          "t_address": {
+            "label": "address"
+          },
+          "t_array(t_uint256)50_storage": {
+            "label": "uint256[50]"
+          },
+          "t_bytes32": {
+            "label": "bytes32"
+          }
+        }
+      }
+    },
+    "6abdbe3d15fb12d56f86ea7e60360729da8515cfd9608ab2749ccdb9d2142560": {
+      "address": "0xf8686dd0Fef2108D50bA340C6a48b830Eee67c59",
+      "txHash": "0xfeb1b21b48961dfaa93a66672cc63cbca72de980fc0ccb8f074c773fba8940a5",
+      "layout": {
+        "storage": [
+          {
+            "contract": "Initializable",
+            "label": "_initialized",
+            "type": "t_bool",
+            "src": "..\\..\\..\\..\\..\\..\\..\\..\\C\\Users\\sound\\Desktop\\MOTD\\meme-repo-copy\\node_modules\\@openzeppelin\\contracts-upgradeable\\proxy\\utils\\Initializable.sol:25"
+          },
+          {
+            "contract": "Initializable",
+            "label": "_initializing",
+            "type": "t_bool",
+            "src": "..\\..\\..\\..\\..\\..\\..\\..\\C\\Users\\sound\\Desktop\\MOTD\\meme-repo-copy\\node_modules\\@openzeppelin\\contracts-upgradeable\\proxy\\utils\\Initializable.sol:30"
+          },
+          {
+            "contract": "ContextUpgradeable",
+            "label": "__gap",
+            "type": "t_array(t_uint256)50_storage",
+            "src": "..\\..\\..\\..\\..\\..\\..\\..\\C\\Users\\sound\\Desktop\\MOTD\\meme-repo-copy\\node_modules\\@openzeppelin\\contracts-upgradeable\\utils\\ContextUpgradeable.sol:31"
+          },
+          {
+            "contract": "ERC165Upgradeable",
+            "label": "__gap",
+            "type": "t_array(t_uint256)50_storage",
+            "src": "..\\..\\..\\..\\..\\..\\..\\..\\C\\Users\\sound\\Desktop\\MOTD\\meme-repo-copy\\node_modules\\@openzeppelin\\contracts-upgradeable\\utils\\introspection\\ERC165Upgradeable.sol:35"
+          },
+          {
+            "contract": "ERC1155Upgradeable",
+            "label": "_balances",
+            "type": "t_mapping(t_uint256,t_mapping(t_address,t_uint256))",
+            "src": "..\\..\\..\\..\\..\\..\\..\\..\\C\\Users\\sound\\Desktop\\MOTD\\meme-repo-copy\\node_modules\\@openzeppelin\\contracts-upgradeable\\token\\ERC1155\\ERC1155Upgradeable.sol:25"
+          },
+          {
+            "contract": "ERC1155Upgradeable",
+            "label": "_operatorApprovals",
+            "type": "t_mapping(t_address,t_mapping(t_address,t_bool))",
+            "src": "..\\..\\..\\..\\..\\..\\..\\..\\C\\Users\\sound\\Desktop\\MOTD\\meme-repo-copy\\node_modules\\@openzeppelin\\contracts-upgradeable\\token\\ERC1155\\ERC1155Upgradeable.sol:28"
+          },
+          {
+            "contract": "ERC1155Upgradeable",
+            "label": "_uri",
+            "type": "t_string_storage",
+            "src": "..\\..\\..\\..\\..\\..\\..\\..\\C\\Users\\sound\\Desktop\\MOTD\\meme-repo-copy\\node_modules\\@openzeppelin\\contracts-upgradeable\\token\\ERC1155\\ERC1155Upgradeable.sol:31"
+          },
+          {
+            "contract": "ERC1155Upgradeable",
+            "label": "__gap",
+            "type": "t_array(t_uint256)47_storage",
+            "src": "..\\..\\..\\..\\..\\..\\..\\..\\C\\Users\\sound\\Desktop\\MOTD\\meme-repo-copy\\node_modules\\@openzeppelin\\contracts-upgradeable\\token\\ERC1155\\ERC1155Upgradeable.sol:406"
+          },
+          {
+            "contract": "OwnableUpgradeable",
+            "label": "_owner",
+            "type": "t_address",
+            "src": "..\\..\\..\\..\\..\\..\\..\\..\\C\\Users\\sound\\Desktop\\MOTD\\meme-repo-copy\\node_modules\\@openzeppelin\\contracts-upgradeable\\access\\OwnableUpgradeable.sol:20"
+          },
+          {
+            "contract": "OwnableUpgradeable",
+            "label": "__gap",
+            "type": "t_array(t_uint256)49_storage",
+            "src": "..\\..\\..\\..\\..\\..\\..\\..\\C\\Users\\sound\\Desktop\\MOTD\\meme-repo-copy\\node_modules\\@openzeppelin\\contracts-upgradeable\\access\\OwnableUpgradeable.sol:74"
+          },
+          {
+            "contract": "PausableUpgradeable",
+            "label": "_paused",
+            "type": "t_bool",
+            "src": "..\\..\\..\\..\\..\\..\\..\\..\\C\\Users\\sound\\Desktop\\MOTD\\meme-repo-copy\\node_modules\\@openzeppelin\\contracts-upgradeable\\security\\PausableUpgradeable.sol:28"
+          },
+          {
+            "contract": "PausableUpgradeable",
+            "label": "__gap",
+            "type": "t_array(t_uint256)49_storage",
+            "src": "..\\..\\..\\..\\..\\..\\..\\..\\C\\Users\\sound\\Desktop\\MOTD\\meme-repo-copy\\node_modules\\@openzeppelin\\contracts-upgradeable\\security\\PausableUpgradeable.sol:96"
+          },
+          {
+            "contract": "MemeOfTheDayV4Pause",
+            "label": "hashes",
+            "type": "t_array(t_string_storage)dyn_storage",
+            "src": "..\\..\\..\\..\\..\\..\\..\\..\\C\\Users\\sound\\Desktop\\MOTD\\meme-repo-copy\\src\\contracts\\src\\MemeOfTheDayV4Pause.sol:12"
+          },
+          {
+            "contract": "MemeOfTheDayV4Pause",
+            "label": "_hashExists",
+            "type": "t_mapping(t_string_memory_ptr,t_bool)",
+            "src": "..\\..\\..\\..\\..\\..\\..\\..\\C\\Users\\sound\\Desktop\\MOTD\\meme-repo-copy\\src\\contracts\\src\\MemeOfTheDayV4Pause.sol:15"
+          },
+          {
+            "contract": "MemeOfTheDayV4Pause",
+            "label": "_hashToken",
+            "type": "t_mapping(t_string_memory_ptr,t_uint256)",
+            "src": "..\\..\\..\\..\\..\\..\\..\\..\\C\\Users\\sound\\Desktop\\MOTD\\meme-repo-copy\\src\\contracts\\src\\MemeOfTheDayV4Pause.sol:18"
+          },
+          {
+            "contract": "MemeOfTheDayV4Pause",
+            "label": "creatorOf",
+            "type": "t_mapping(t_uint256,t_address)",
+            "src": "..\\..\\..\\..\\..\\..\\..\\..\\C\\Users\\sound\\Desktop\\MOTD\\meme-repo-copy\\src\\contracts\\src\\MemeOfTheDayV4Pause.sol:20"
+          },
+          {
+            "contract": "MemeOfTheDayV4Pause",
+            "label": "ownerOf",
+            "type": "t_mapping(t_uint256,t_address)",
+            "src": "..\\..\\..\\..\\..\\..\\..\\..\\C\\Users\\sound\\Desktop\\MOTD\\meme-repo-copy\\src\\contracts\\src\\MemeOfTheDayV4Pause.sol:21"
+          },
+          {
+            "contract": "MemeOfTheDayV4Pause",
+            "label": "creatorFee",
+            "type": "t_mapping(t_uint256,t_int256)",
+            "src": "..\\..\\..\\..\\..\\..\\..\\..\\C\\Users\\sound\\Desktop\\MOTD\\meme-repo-copy\\src\\contracts\\src\\MemeOfTheDayV4Pause.sol:22"
+          }
+        ],
+        "types": {
+          "t_array(t_string_storage)dyn_storage": {
+            "label": "string[]"
+          },
+          "t_string_storage": {
+            "label": "string"
+          },
+          "t_mapping(t_string_memory_ptr,t_bool)": {
+            "label": "mapping(string => bool)"
+          },
+          "t_bool": {
+            "label": "bool"
+          },
+          "t_mapping(t_string_memory_ptr,t_uint256)": {
+            "label": "mapping(string => uint256)"
+          },
+          "t_uint256": {
+            "label": "uint256"
+          },
+          "t_mapping(t_uint256,t_address)": {
+            "label": "mapping(uint256 => address)"
+          },
+          "t_address": {
+            "label": "address"
+          },
+          "t_mapping(t_uint256,t_int256)": {
+            "label": "mapping(uint256 => int256)"
+          },
+          "t_int256": {
+            "label": "int256"
+          },
+          "t_array(t_uint256)49_storage": {
+            "label": "uint256[49]"
+          },
+          "t_mapping(t_uint256,t_mapping(t_address,t_uint256))": {
+            "label": "mapping(uint256 => mapping(address => uint256))"
+          },
+          "t_mapping(t_address,t_uint256)": {
+            "label": "mapping(address => uint256)"
+          },
+          "t_mapping(t_address,t_mapping(t_address,t_bool))": {
+            "label": "mapping(address => mapping(address => bool))"
+          },
+          "t_mapping(t_address,t_bool)": {
+            "label": "mapping(address => bool)"
+          },
+          "t_array(t_uint256)47_storage": {
+            "label": "uint256[47]"
+          },
+          "t_array(t_uint256)50_storage": {
+            "label": "uint256[50]"
+          }
+        }
+      }
+    },
+    "da486303f7f5d07ce53300868da38333f2252a2ec9d19714f08a1ebb623d7302": {
+      "address": "0xDD331aCB7a73deD7599eacf538f3F5E68b6d1d1F",
+      "txHash": "0xc999d44c1821d17da512c422bccff11eb9e20fc2b78dd84c7ae2e148350e643d",
+      "layout": {
+        "storage": [
+          {
+            "contract": "Initializable",
+            "label": "_initialized",
+            "type": "t_bool",
+            "src": "..\\..\\..\\..\\..\\..\\..\\..\\C\\Users\\sound\\Desktop\\MOTD\\meme-repo-copy\\node_modules\\@openzeppelin\\contracts-upgradeable\\proxy\\utils\\Initializable.sol:25"
+          },
+          {
+            "contract": "Initializable",
+            "label": "_initializing",
+            "type": "t_bool",
+            "src": "..\\..\\..\\..\\..\\..\\..\\..\\C\\Users\\sound\\Desktop\\MOTD\\meme-repo-copy\\node_modules\\@openzeppelin\\contracts-upgradeable\\proxy\\utils\\Initializable.sol:30"
+          },
+          {
+            "contract": "ContextUpgradeable",
+            "label": "__gap",
+            "type": "t_array(t_uint256)50_storage",
+            "src": "..\\..\\..\\..\\..\\..\\..\\..\\C\\Users\\sound\\Desktop\\MOTD\\meme-repo-copy\\node_modules\\@openzeppelin\\contracts-upgradeable\\utils\\ContextUpgradeable.sol:31"
+          },
+          {
+            "contract": "OwnableUpgradeable",
+            "label": "_owner",
+            "type": "t_address",
+            "src": "..\\..\\..\\..\\..\\..\\..\\..\\C\\Users\\sound\\Desktop\\MOTD\\meme-repo-copy\\node_modules\\@openzeppelin\\contracts-upgradeable\\access\\OwnableUpgradeable.sol:20"
+          },
+          {
+            "contract": "OwnableUpgradeable",
+            "label": "__gap",
+            "type": "t_array(t_uint256)49_storage",
+            "src": "..\\..\\..\\..\\..\\..\\..\\..\\C\\Users\\sound\\Desktop\\MOTD\\meme-repo-copy\\node_modules\\@openzeppelin\\contracts-upgradeable\\access\\OwnableUpgradeable.sol:74"
+          },
+          {
+            "contract": "PausableUpgradeable",
+            "label": "_paused",
+            "type": "t_bool",
+            "src": "..\\..\\..\\..\\..\\..\\..\\..\\C\\Users\\sound\\Desktop\\MOTD\\meme-repo-copy\\node_modules\\@openzeppelin\\contracts-upgradeable\\security\\PausableUpgradeable.sol:28"
+          },
+          {
+            "contract": "PausableUpgradeable",
+            "label": "__gap",
+            "type": "t_array(t_uint256)49_storage",
+            "src": "..\\..\\..\\..\\..\\..\\..\\..\\C\\Users\\sound\\Desktop\\MOTD\\meme-repo-copy\\node_modules\\@openzeppelin\\contracts-upgradeable\\security\\PausableUpgradeable.sol:96"
+          }
+        ],
+        "types": {
+          "t_bool": {
+            "label": "bool"
+          },
+          "t_array(t_uint256)49_storage": {
+            "label": "uint256[49]"
+          },
+          "t_uint256": {
+            "label": "uint256"
+          },
+          "t_address": {
+            "label": "address"
+          },
+          "t_array(t_uint256)50_storage": {
+            "label": "uint256[50]"
+          }
+        }
+      }
+    },
+    "63f45ffcceaf7847d3052db199081d3e64e06b22763514f141f376af004f338f": {
+      "address": "0x3E8D19B23E36144e4a6024917A641ec1E3C59510",
+      "txHash": "0xc4cdec98a60bee827ba12d1fcf6bdc2bc8f77fc986b09285b95b9d061f9717b9",
+      "layout": {
+        "storage": [
+          {
+            "contract": "Initializable",
+            "label": "_initialized",
+            "type": "t_bool",
+            "src": "..\\..\\..\\..\\..\\..\\..\\..\\C\\Users\\sound\\Desktop\\MOTD\\meme-repo-copy\\node_modules\\@openzeppelin\\contracts-upgradeable\\proxy\\utils\\Initializable.sol:25"
+          },
+          {
+            "contract": "Initializable",
+            "label": "_initializing",
+            "type": "t_bool",
+            "src": "..\\..\\..\\..\\..\\..\\..\\..\\C\\Users\\sound\\Desktop\\MOTD\\meme-repo-copy\\node_modules\\@openzeppelin\\contracts-upgradeable\\proxy\\utils\\Initializable.sol:30"
+          },
+          {
+            "contract": "ContextUpgradeable",
+            "label": "__gap",
+            "type": "t_array(t_uint256)50_storage",
+            "src": "..\\..\\..\\..\\..\\..\\..\\..\\C\\Users\\sound\\Desktop\\MOTD\\meme-repo-copy\\node_modules\\@openzeppelin\\contracts-upgradeable\\utils\\ContextUpgradeable.sol:31"
+          },
+          {
+            "contract": "OwnableUpgradeable",
+            "label": "_owner",
+            "type": "t_address",
+            "src": "..\\..\\..\\..\\..\\..\\..\\..\\C\\Users\\sound\\Desktop\\MOTD\\meme-repo-copy\\node_modules\\@openzeppelin\\contracts-upgradeable\\access\\OwnableUpgradeable.sol:20"
+          },
+          {
+            "contract": "OwnableUpgradeable",
+            "label": "__gap",
+            "type": "t_array(t_uint256)49_storage",
+            "src": "..\\..\\..\\..\\..\\..\\..\\..\\C\\Users\\sound\\Desktop\\MOTD\\meme-repo-copy\\node_modules\\@openzeppelin\\contracts-upgradeable\\access\\OwnableUpgradeable.sol:74"
+          },
+          {
+            "contract": "PausableUpgradeable",
+            "label": "_paused",
+            "type": "t_bool",
+            "src": "..\\..\\..\\..\\..\\..\\..\\..\\C\\Users\\sound\\Desktop\\MOTD\\meme-repo-copy\\node_modules\\@openzeppelin\\contracts-upgradeable\\security\\PausableUpgradeable.sol:28"
+          },
+          {
+            "contract": "PausableUpgradeable",
+            "label": "__gap",
+            "type": "t_array(t_uint256)49_storage",
+            "src": "..\\..\\..\\..\\..\\..\\..\\..\\C\\Users\\sound\\Desktop\\MOTD\\meme-repo-copy\\node_modules\\@openzeppelin\\contracts-upgradeable\\security\\PausableUpgradeable.sol:96"
+          },
+          {
+            "contract": "MOTDSaleParametersProviderV4Pause",
+            "label": "parameters",
+            "type": "t_mapping(t_uint256,t_uint256)",
+            "src": "..\\..\\..\\..\\..\\..\\..\\..\\C\\Users\\sound\\Desktop\\MOTD\\meme-repo-copy\\src\\contracts\\src\\MOTDSaleParametersProviderV4Pause.sol:19"
+          }
+        ],
+        "types": {
+          "t_mapping(t_uint256,t_uint256)": {
+            "label": "mapping(uint256 => uint256)"
+          },
+          "t_uint256": {
+            "label": "uint256"
+          },
+          "t_bool": {
+            "label": "bool"
+          },
+          "t_array(t_uint256)49_storage": {
+            "label": "uint256[49]"
+          },
+          "t_address": {
+            "label": "address"
+          },
+          "t_array(t_uint256)50_storage": {
+            "label": "uint256[50]"
+          }
+        }
+      }
+    },
+    "5d8c542c0fe6535087428909398330a5928db3c07b107e40b54230ecf00f2aff": {
+      "address": "0x41D28104367c38539eA6f82e91f5A7555db8303a",
+      "txHash": "0xcec61af37c592e5b16d0e68a189e9cb97493185b322949a955b718e9140ed1fd",
+      "layout": {
+        "storage": [
+          {
+            "contract": "EIP712Domain",
+            "label": "DOMAIN_SEPARATOR",
+            "type": "t_bytes32",
+            "src": "..\\..\\..\\..\\..\\..\\..\\..\\C\\Users\\sound\\Desktop\\MOTD\\meme-repo-copy\\src\\contracts\\src\\EIP712Domain.sol:9"
+          },
+          {
+            "contract": "Initializable",
+            "label": "_initialized",
+            "type": "t_bool",
+            "src": "..\\..\\..\\..\\..\\..\\..\\..\\C\\Users\\sound\\Desktop\\MOTD\\meme-repo-copy\\node_modules\\@openzeppelin\\contracts-upgradeable\\proxy\\utils\\Initializable.sol:25"
+          },
+          {
+            "contract": "Initializable",
+            "label": "_initializing",
+            "type": "t_bool",
+            "src": "..\\..\\..\\..\\..\\..\\..\\..\\C\\Users\\sound\\Desktop\\MOTD\\meme-repo-copy\\node_modules\\@openzeppelin\\contracts-upgradeable\\proxy\\utils\\Initializable.sol:30"
+          },
+          {
+            "contract": "ContextUpgradeable",
+            "label": "__gap",
+            "type": "t_array(t_uint256)50_storage",
+            "src": "..\\..\\..\\..\\..\\..\\..\\..\\C\\Users\\sound\\Desktop\\MOTD\\meme-repo-copy\\node_modules\\@openzeppelin\\contracts-upgradeable\\utils\\ContextUpgradeable.sol:31"
+          },
+          {
+            "contract": "OwnableUpgradeable",
+            "label": "_owner",
+            "type": "t_address",
+            "src": "..\\..\\..\\..\\..\\..\\..\\..\\C\\Users\\sound\\Desktop\\MOTD\\meme-repo-copy\\node_modules\\@openzeppelin\\contracts-upgradeable\\access\\OwnableUpgradeable.sol:20"
+          },
+          {
+            "contract": "OwnableUpgradeable",
+            "label": "__gap",
+            "type": "t_array(t_uint256)49_storage",
+            "src": "..\\..\\..\\..\\..\\..\\..\\..\\C\\Users\\sound\\Desktop\\MOTD\\meme-repo-copy\\node_modules\\@openzeppelin\\contracts-upgradeable\\access\\OwnableUpgradeable.sol:74"
+          },
+          {
+            "contract": "PausableUpgradeable",
+            "label": "_paused",
+            "type": "t_bool",
+            "src": "..\\..\\..\\..\\..\\..\\..\\..\\C\\Users\\sound\\Desktop\\MOTD\\meme-repo-copy\\node_modules\\@openzeppelin\\contracts-upgradeable\\security\\PausableUpgradeable.sol:28"
+          },
+          {
+            "contract": "PausableUpgradeable",
+            "label": "__gap",
+            "type": "t_array(t_uint256)49_storage",
+            "src": "..\\..\\..\\..\\..\\..\\..\\..\\C\\Users\\sound\\Desktop\\MOTD\\meme-repo-copy\\node_modules\\@openzeppelin\\contracts-upgradeable\\security\\PausableUpgradeable.sol:96"
+          },
+          {
+            "contract": "ReentrancyGuardUpgradeable",
+            "label": "_status",
+            "type": "t_uint256",
+            "src": "..\\..\\..\\..\\..\\..\\..\\..\\C\\Users\\sound\\Desktop\\MOTD\\meme-repo-copy\\node_modules\\@openzeppelin\\contracts-upgradeable\\security\\ReentrancyGuardUpgradeable.sol:37"
+          },
+          {
+            "contract": "ReentrancyGuardUpgradeable",
+            "label": "__gap",
+            "type": "t_array(t_uint256)49_storage",
+            "src": "..\\..\\..\\..\\..\\..\\..\\..\\C\\Users\\sound\\Desktop\\MOTD\\meme-repo-copy\\node_modules\\@openzeppelin\\contracts-upgradeable\\security\\ReentrancyGuardUpgradeable.sol:67"
+          },
+          {
+            "contract": "MemeSaleV4PauseReentrancy",
+            "label": "memeOfTheDay",
+            "type": "t_contract(MemeOfTheDayV4Pause)3757",
+            "src": "..\\..\\..\\..\\..\\..\\..\\..\\C\\Users\\sound\\Desktop\\MOTD\\meme-repo-copy\\src\\contracts\\src\\MemeSaleV4PauseReentrancy.sol:38"
+          },
+          {
+            "contract": "MemeSaleV4PauseReentrancy",
+            "label": "memeOfTheDayTreasury",
+            "type": "t_contract(MOTDTreasuryV4Pause)3001",
+            "src": "..\\..\\..\\..\\..\\..\\..\\..\\C\\Users\\sound\\Desktop\\MOTD\\meme-repo-copy\\src\\contracts\\src\\MemeSaleV4PauseReentrancy.sol:39"
+          },
+          {
+            "contract": "MemeSaleV4PauseReentrancy",
+            "label": "memeOfTheDaySaleParametersProvider",
+            "type": "t_contract(MOTDSaleParametersProviderV4Pause)2601",
+            "src": "..\\..\\..\\..\\..\\..\\..\\..\\C\\Users\\sound\\Desktop\\MOTD\\meme-repo-copy\\src\\contracts\\src\\MemeSaleV4PauseReentrancy.sol:40"
+          },
+          {
+            "contract": "MemeSaleV4PauseReentrancy",
+            "label": "isOnSale",
+            "type": "t_mapping(t_uint256,t_bool)",
+            "src": "..\\..\\..\\..\\..\\..\\..\\..\\C\\Users\\sound\\Desktop\\MOTD\\meme-repo-copy\\src\\contracts\\src\\MemeSaleV4PauseReentrancy.sol:42"
+          }
+        ],
+        "types": {
+          "t_contract(MemeOfTheDayV4Pause)3757": {
+            "label": "contract MemeOfTheDayV4Pause"
+          },
+          "t_contract(MOTDTreasuryV4Pause)3001": {
+            "label": "contract MOTDTreasuryV4Pause"
+          },
+          "t_contract(MOTDSaleParametersProviderV4Pause)2601": {
+            "label": "contract MOTDSaleParametersProviderV4Pause"
+          },
+          "t_mapping(t_uint256,t_bool)": {
+            "label": "mapping(uint256 => bool)"
+          },
+          "t_uint256": {
+            "label": "uint256"
+          },
+          "t_bool": {
+            "label": "bool"
+          },
+          "t_array(t_uint256)49_storage": {
+            "label": "uint256[49]"
+          },
+          "t_address": {
+            "label": "address"
+          },
+          "t_array(t_uint256)50_storage": {
+            "label": "uint256[50]"
+          },
+          "t_bytes32": {
+            "label": "bytes32"
+          }
+        }
+      }
+    },
+    "1dbeef618c74df401adbc89b7189927feafcb23ca480526455afcc9d90f67e9c": {
+      "address": "0xBC68120fa76c99B37d819649B01a9A2bcf20d683",
+      "txHash": "0x5b54c09e7a4c634a9df58a0b4c0779eaa08e2151d34c9bb35c7ab5730757090c",
+      "layout": {
+        "storage": [
+          {
+            "contract": "Initializable",
+            "label": "_initialized",
+            "type": "t_bool",
+            "src": "..\\..\\..\\..\\..\\..\\..\\..\\C\\Users\\sound\\Desktop\\MOTD\\meme-repo-copy\\node_modules\\@openzeppelin\\contracts-upgradeable\\proxy\\utils\\Initializable.sol:25"
+          },
+          {
+            "contract": "Initializable",
+            "label": "_initializing",
+            "type": "t_bool",
+            "src": "..\\..\\..\\..\\..\\..\\..\\..\\C\\Users\\sound\\Desktop\\MOTD\\meme-repo-copy\\node_modules\\@openzeppelin\\contracts-upgradeable\\proxy\\utils\\Initializable.sol:30"
+          },
+          {
+            "contract": "ContextUpgradeable",
+            "label": "__gap",
+            "type": "t_array(t_uint256)50_storage",
+            "src": "..\\..\\..\\..\\..\\..\\..\\..\\C\\Users\\sound\\Desktop\\MOTD\\meme-repo-copy\\node_modules\\@openzeppelin\\contracts-upgradeable\\utils\\ContextUpgradeable.sol:31"
+          },
+          {
+            "contract": "ERC165Upgradeable",
+            "label": "__gap",
+            "type": "t_array(t_uint256)50_storage",
+            "src": "..\\..\\..\\..\\..\\..\\..\\..\\C\\Users\\sound\\Desktop\\MOTD\\meme-repo-copy\\node_modules\\@openzeppelin\\contracts-upgradeable\\utils\\introspection\\ERC165Upgradeable.sol:35"
+          },
+          {
+            "contract": "ERC1155Upgradeable",
+            "label": "_balances",
+            "type": "t_mapping(t_uint256,t_mapping(t_address,t_uint256))",
+            "src": "..\\..\\..\\..\\..\\..\\..\\..\\C\\Users\\sound\\Desktop\\MOTD\\meme-repo-copy\\node_modules\\@openzeppelin\\contracts-upgradeable\\token\\ERC1155\\ERC1155Upgradeable.sol:25"
+          },
+          {
+            "contract": "ERC1155Upgradeable",
+            "label": "_operatorApprovals",
+            "type": "t_mapping(t_address,t_mapping(t_address,t_bool))",
+            "src": "..\\..\\..\\..\\..\\..\\..\\..\\C\\Users\\sound\\Desktop\\MOTD\\meme-repo-copy\\node_modules\\@openzeppelin\\contracts-upgradeable\\token\\ERC1155\\ERC1155Upgradeable.sol:28"
+          },
+          {
+            "contract": "ERC1155Upgradeable",
+            "label": "_uri",
+            "type": "t_string_storage",
+            "src": "..\\..\\..\\..\\..\\..\\..\\..\\C\\Users\\sound\\Desktop\\MOTD\\meme-repo-copy\\node_modules\\@openzeppelin\\contracts-upgradeable\\token\\ERC1155\\ERC1155Upgradeable.sol:31"
+          },
+          {
+            "contract": "ERC1155Upgradeable",
+            "label": "__gap",
+            "type": "t_array(t_uint256)47_storage",
+            "src": "..\\..\\..\\..\\..\\..\\..\\..\\C\\Users\\sound\\Desktop\\MOTD\\meme-repo-copy\\node_modules\\@openzeppelin\\contracts-upgradeable\\token\\ERC1155\\ERC1155Upgradeable.sol:406"
+          },
+          {
+            "contract": "OwnableUpgradeable",
+            "label": "_owner",
+            "type": "t_address",
+            "src": "..\\..\\..\\..\\..\\..\\..\\..\\C\\Users\\sound\\Desktop\\MOTD\\meme-repo-copy\\node_modules\\@openzeppelin\\contracts-upgradeable\\access\\OwnableUpgradeable.sol:20"
+          },
+          {
+            "contract": "OwnableUpgradeable",
+            "label": "__gap",
+            "type": "t_array(t_uint256)49_storage",
+            "src": "..\\..\\..\\..\\..\\..\\..\\..\\C\\Users\\sound\\Desktop\\MOTD\\meme-repo-copy\\node_modules\\@openzeppelin\\contracts-upgradeable\\access\\OwnableUpgradeable.sol:74"
+          },
+          {
+            "contract": "PausableUpgradeable",
+            "label": "_paused",
+            "type": "t_bool",
+            "src": "..\\..\\..\\..\\..\\..\\..\\..\\C\\Users\\sound\\Desktop\\MOTD\\meme-repo-copy\\node_modules\\@openzeppelin\\contracts-upgradeable\\security\\PausableUpgradeable.sol:28"
+          },
+          {
+            "contract": "PausableUpgradeable",
+            "label": "__gap",
+            "type": "t_array(t_uint256)49_storage",
+            "src": "..\\..\\..\\..\\..\\..\\..\\..\\C\\Users\\sound\\Desktop\\MOTD\\meme-repo-copy\\node_modules\\@openzeppelin\\contracts-upgradeable\\security\\PausableUpgradeable.sol:96"
+          },
+          {
+            "contract": "MemeOfTheDayV4Pause",
+            "label": "hashes",
+            "type": "t_array(t_string_storage)dyn_storage",
+            "src": "..\\..\\..\\..\\..\\..\\..\\..\\C\\Users\\sound\\Desktop\\MOTD\\meme-repo-copy\\src\\contracts\\src\\MemeOfTheDayV4Pause.sol:12"
+          },
+          {
+            "contract": "MemeOfTheDayV4Pause",
+            "label": "_hashExists",
+            "type": "t_mapping(t_string_memory_ptr,t_bool)",
+            "src": "..\\..\\..\\..\\..\\..\\..\\..\\C\\Users\\sound\\Desktop\\MOTD\\meme-repo-copy\\src\\contracts\\src\\MemeOfTheDayV4Pause.sol:15"
+          },
+          {
+            "contract": "MemeOfTheDayV4Pause",
+            "label": "_hashToken",
+            "type": "t_mapping(t_string_memory_ptr,t_uint256)",
+            "src": "..\\..\\..\\..\\..\\..\\..\\..\\C\\Users\\sound\\Desktop\\MOTD\\meme-repo-copy\\src\\contracts\\src\\MemeOfTheDayV4Pause.sol:18"
+          },
+          {
+            "contract": "MemeOfTheDayV4Pause",
+            "label": "creatorOf",
+            "type": "t_mapping(t_uint256,t_address)",
+            "src": "..\\..\\..\\..\\..\\..\\..\\..\\C\\Users\\sound\\Desktop\\MOTD\\meme-repo-copy\\src\\contracts\\src\\MemeOfTheDayV4Pause.sol:20"
+          },
+          {
+            "contract": "MemeOfTheDayV4Pause",
+            "label": "ownerOf",
+            "type": "t_mapping(t_uint256,t_address)",
+            "src": "..\\..\\..\\..\\..\\..\\..\\..\\C\\Users\\sound\\Desktop\\MOTD\\meme-repo-copy\\src\\contracts\\src\\MemeOfTheDayV4Pause.sol:21"
+          },
+          {
+            "contract": "MemeOfTheDayV4Pause",
+            "label": "creatorFee",
+            "type": "t_mapping(t_uint256,t_int256)",
+            "src": "..\\..\\..\\..\\..\\..\\..\\..\\C\\Users\\sound\\Desktop\\MOTD\\meme-repo-copy\\src\\contracts\\src\\MemeOfTheDayV4Pause.sol:22"
+          }
+        ],
+        "types": {
+          "t_array(t_string_storage)dyn_storage": {
+            "label": "string[]"
+          },
+          "t_string_storage": {
+            "label": "string"
+          },
+          "t_mapping(t_string_memory_ptr,t_bool)": {
+            "label": "mapping(string => bool)"
+          },
+          "t_bool": {
+            "label": "bool"
+          },
+          "t_mapping(t_string_memory_ptr,t_uint256)": {
+            "label": "mapping(string => uint256)"
+          },
+          "t_uint256": {
+            "label": "uint256"
+          },
+          "t_mapping(t_uint256,t_address)": {
+            "label": "mapping(uint256 => address)"
+          },
+          "t_address": {
+            "label": "address"
+          },
+          "t_mapping(t_uint256,t_int256)": {
+            "label": "mapping(uint256 => int256)"
+          },
+          "t_int256": {
+            "label": "int256"
+          },
+          "t_array(t_uint256)49_storage": {
+            "label": "uint256[49]"
+          },
+          "t_mapping(t_uint256,t_mapping(t_address,t_uint256))": {
+            "label": "mapping(uint256 => mapping(address => uint256))"
+          },
+          "t_mapping(t_address,t_uint256)": {
+            "label": "mapping(address => uint256)"
+          },
+          "t_mapping(t_address,t_mapping(t_address,t_bool))": {
+            "label": "mapping(address => mapping(address => bool))"
+          },
+          "t_mapping(t_address,t_bool)": {
+            "label": "mapping(address => bool)"
+          },
+          "t_array(t_uint256)47_storage": {
+            "label": "uint256[47]"
+          },
+          "t_array(t_uint256)50_storage": {
+            "label": "uint256[50]"
+          }
+        }
+      }
+    },
+    "15b18fd6a636df74845ab762c99a24b8136ee8840819ff44c1ad16c826f8c8ec": {
+      "address": "0xFf4e95eE8250bc3a70b354B3a2dd684a75D5fbF6",
+      "txHash": "0xb818ca1467d623efa3948ae1cfd79e1e6f2231ba5e2f78f75f05ebab427e1a26",
+      "layout": {
+        "storage": [
+          {
+            "contract": "Initializable",
+            "label": "_initialized",
+            "type": "t_bool",
+            "src": "..\\..\\..\\..\\..\\..\\..\\..\\C\\Users\\sound\\Desktop\\MOTD\\meme-repo-copy\\node_modules\\@openzeppelin\\contracts-upgradeable\\proxy\\utils\\Initializable.sol:25"
+          },
+          {
+            "contract": "Initializable",
+            "label": "_initializing",
+            "type": "t_bool",
+            "src": "..\\..\\..\\..\\..\\..\\..\\..\\C\\Users\\sound\\Desktop\\MOTD\\meme-repo-copy\\node_modules\\@openzeppelin\\contracts-upgradeable\\proxy\\utils\\Initializable.sol:30"
+          },
+          {
+            "contract": "ContextUpgradeable",
+            "label": "__gap",
+            "type": "t_array(t_uint256)50_storage",
+            "src": "..\\..\\..\\..\\..\\..\\..\\..\\C\\Users\\sound\\Desktop\\MOTD\\meme-repo-copy\\node_modules\\@openzeppelin\\contracts-upgradeable\\utils\\ContextUpgradeable.sol:31"
+          },
+          {
+            "contract": "OwnableUpgradeable",
+            "label": "_owner",
+            "type": "t_address",
+            "src": "..\\..\\..\\..\\..\\..\\..\\..\\C\\Users\\sound\\Desktop\\MOTD\\meme-repo-copy\\node_modules\\@openzeppelin\\contracts-upgradeable\\access\\OwnableUpgradeable.sol:20"
+          },
+          {
+            "contract": "OwnableUpgradeable",
+            "label": "__gap",
+            "type": "t_array(t_uint256)49_storage",
+            "src": "..\\..\\..\\..\\..\\..\\..\\..\\C\\Users\\sound\\Desktop\\MOTD\\meme-repo-copy\\node_modules\\@openzeppelin\\contracts-upgradeable\\access\\OwnableUpgradeable.sol:74"
+          },
+          {
+            "contract": "PausableUpgradeable",
+            "label": "_paused",
+            "type": "t_bool",
+            "src": "..\\..\\..\\..\\..\\..\\..\\..\\C\\Users\\sound\\Desktop\\MOTD\\meme-repo-copy\\node_modules\\@openzeppelin\\contracts-upgradeable\\security\\PausableUpgradeable.sol:28"
+          },
+          {
+            "contract": "PausableUpgradeable",
+            "label": "__gap",
+            "type": "t_array(t_uint256)49_storage",
+            "src": "..\\..\\..\\..\\..\\..\\..\\..\\C\\Users\\sound\\Desktop\\MOTD\\meme-repo-copy\\node_modules\\@openzeppelin\\contracts-upgradeable\\security\\PausableUpgradeable.sol:96"
+          }
+        ],
+        "types": {
+          "t_bool": {
+            "label": "bool"
+          },
+          "t_array(t_uint256)49_storage": {
+            "label": "uint256[49]"
+          },
+          "t_uint256": {
+            "label": "uint256"
+          },
+          "t_address": {
+            "label": "address"
+          },
+          "t_array(t_uint256)50_storage": {
+            "label": "uint256[50]"
+          }
+        }
+      }
+    },
+    "5bc87cccb42fd6aa00a9f906115cdd66577316bd01e53a86aa3fc27c30d17980": {
+      "address": "0x6AF67c2a33A6756ED0e1602c0f7201b949E2257d",
+      "txHash": "0x30049d2a8803aae1c40530bd8132665e78dcdb603dad718d900c2253355bd0f6",
+      "layout": {
+        "storage": [
+          {
+            "contract": "Initializable",
+            "label": "_initialized",
+            "type": "t_bool",
+            "src": "..\\..\\..\\..\\..\\..\\..\\..\\C\\Users\\sound\\Desktop\\MOTD\\meme-repo-copy\\node_modules\\@openzeppelin\\contracts-upgradeable\\proxy\\utils\\Initializable.sol:25"
+          },
+          {
+            "contract": "Initializable",
+            "label": "_initializing",
+            "type": "t_bool",
+            "src": "..\\..\\..\\..\\..\\..\\..\\..\\C\\Users\\sound\\Desktop\\MOTD\\meme-repo-copy\\node_modules\\@openzeppelin\\contracts-upgradeable\\proxy\\utils\\Initializable.sol:30"
+          },
+          {
+            "contract": "ContextUpgradeable",
+            "label": "__gap",
+            "type": "t_array(t_uint256)50_storage",
+            "src": "..\\..\\..\\..\\..\\..\\..\\..\\C\\Users\\sound\\Desktop\\MOTD\\meme-repo-copy\\node_modules\\@openzeppelin\\contracts-upgradeable\\utils\\ContextUpgradeable.sol:31"
+          },
+          {
+            "contract": "OwnableUpgradeable",
+            "label": "_owner",
+            "type": "t_address",
+            "src": "..\\..\\..\\..\\..\\..\\..\\..\\C\\Users\\sound\\Desktop\\MOTD\\meme-repo-copy\\node_modules\\@openzeppelin\\contracts-upgradeable\\access\\OwnableUpgradeable.sol:20"
+          },
+          {
+            "contract": "OwnableUpgradeable",
+            "label": "__gap",
+            "type": "t_array(t_uint256)49_storage",
+            "src": "..\\..\\..\\..\\..\\..\\..\\..\\C\\Users\\sound\\Desktop\\MOTD\\meme-repo-copy\\node_modules\\@openzeppelin\\contracts-upgradeable\\access\\OwnableUpgradeable.sol:74"
+          },
+          {
+            "contract": "PausableUpgradeable",
+            "label": "_paused",
+            "type": "t_bool",
+            "src": "..\\..\\..\\..\\..\\..\\..\\..\\C\\Users\\sound\\Desktop\\MOTD\\meme-repo-copy\\node_modules\\@openzeppelin\\contracts-upgradeable\\security\\PausableUpgradeable.sol:28"
+          },
+          {
+            "contract": "PausableUpgradeable",
+            "label": "__gap",
+            "type": "t_array(t_uint256)49_storage",
+            "src": "..\\..\\..\\..\\..\\..\\..\\..\\C\\Users\\sound\\Desktop\\MOTD\\meme-repo-copy\\node_modules\\@openzeppelin\\contracts-upgradeable\\security\\PausableUpgradeable.sol:96"
+          },
+          {
+            "contract": "MOTDSaleParametersProviderV4Pause",
+            "label": "parameters",
+            "type": "t_mapping(t_uint256,t_uint256)",
+            "src": "..\\..\\..\\..\\..\\..\\..\\..\\C\\Users\\sound\\Desktop\\MOTD\\meme-repo-copy\\src\\contracts\\src\\MOTDSaleParametersProviderV4Pause.sol:19"
+          }
+        ],
+        "types": {
+          "t_mapping(t_uint256,t_uint256)": {
+            "label": "mapping(uint256 => uint256)"
+          },
+          "t_uint256": {
+            "label": "uint256"
+          },
+          "t_bool": {
+            "label": "bool"
+          },
+          "t_array(t_uint256)49_storage": {
+            "label": "uint256[49]"
+          },
+          "t_address": {
+            "label": "address"
+          },
+          "t_array(t_uint256)50_storage": {
+            "label": "uint256[50]"
+          }
+        }
+      }
+    },
+    "86116c69b870956d22c1bbba589a1e20e2bf674d338bb9bb6f519a80602873db": {
+      "address": "0x7f8ea634b4D642c8F1fB536D8e76a361aF93aF54",
+      "txHash": "0xfe4b63b2da24edcf550ec7a7afa0a62be8b587fd02e334da9179bc2ad41fb3c3",
+      "layout": {
+        "storage": [
+          {
+            "contract": "EIP712Domain",
+            "label": "DOMAIN_SEPARATOR",
+            "type": "t_bytes32",
+            "src": "..\\..\\..\\..\\..\\..\\..\\..\\C\\Users\\sound\\Desktop\\MOTD\\meme-repo-copy\\src\\contracts\\src\\EIP712Domain.sol:9"
+          },
+          {
+            "contract": "Initializable",
+            "label": "_initialized",
+            "type": "t_bool",
+            "src": "..\\..\\..\\..\\..\\..\\..\\..\\C\\Users\\sound\\Desktop\\MOTD\\meme-repo-copy\\node_modules\\@openzeppelin\\contracts-upgradeable\\proxy\\utils\\Initializable.sol:25"
+          },
+          {
+            "contract": "Initializable",
+            "label": "_initializing",
+            "type": "t_bool",
+            "src": "..\\..\\..\\..\\..\\..\\..\\..\\C\\Users\\sound\\Desktop\\MOTD\\meme-repo-copy\\node_modules\\@openzeppelin\\contracts-upgradeable\\proxy\\utils\\Initializable.sol:30"
+          },
+          {
+            "contract": "ContextUpgradeable",
+            "label": "__gap",
+            "type": "t_array(t_uint256)50_storage",
+            "src": "..\\..\\..\\..\\..\\..\\..\\..\\C\\Users\\sound\\Desktop\\MOTD\\meme-repo-copy\\node_modules\\@openzeppelin\\contracts-upgradeable\\utils\\ContextUpgradeable.sol:31"
+          },
+          {
+            "contract": "OwnableUpgradeable",
+            "label": "_owner",
+            "type": "t_address",
+            "src": "..\\..\\..\\..\\..\\..\\..\\..\\C\\Users\\sound\\Desktop\\MOTD\\meme-repo-copy\\node_modules\\@openzeppelin\\contracts-upgradeable\\access\\OwnableUpgradeable.sol:20"
+          },
+          {
+            "contract": "OwnableUpgradeable",
+            "label": "__gap",
+            "type": "t_array(t_uint256)49_storage",
+            "src": "..\\..\\..\\..\\..\\..\\..\\..\\C\\Users\\sound\\Desktop\\MOTD\\meme-repo-copy\\node_modules\\@openzeppelin\\contracts-upgradeable\\access\\OwnableUpgradeable.sol:74"
+          },
+          {
+            "contract": "PausableUpgradeable",
+            "label": "_paused",
+            "type": "t_bool",
+            "src": "..\\..\\..\\..\\..\\..\\..\\..\\C\\Users\\sound\\Desktop\\MOTD\\meme-repo-copy\\node_modules\\@openzeppelin\\contracts-upgradeable\\security\\PausableUpgradeable.sol:28"
+          },
+          {
+            "contract": "PausableUpgradeable",
+            "label": "__gap",
+            "type": "t_array(t_uint256)49_storage",
+            "src": "..\\..\\..\\..\\..\\..\\..\\..\\C\\Users\\sound\\Desktop\\MOTD\\meme-repo-copy\\node_modules\\@openzeppelin\\contracts-upgradeable\\security\\PausableUpgradeable.sol:96"
+          },
+          {
+            "contract": "ReentrancyGuardUpgradeable",
+            "label": "_status",
+            "type": "t_uint256",
+            "src": "..\\..\\..\\..\\..\\..\\..\\..\\C\\Users\\sound\\Desktop\\MOTD\\meme-repo-copy\\node_modules\\@openzeppelin\\contracts-upgradeable\\security\\ReentrancyGuardUpgradeable.sol:37"
+          },
+          {
+            "contract": "ReentrancyGuardUpgradeable",
+            "label": "__gap",
+            "type": "t_array(t_uint256)49_storage",
+            "src": "..\\..\\..\\..\\..\\..\\..\\..\\C\\Users\\sound\\Desktop\\MOTD\\meme-repo-copy\\node_modules\\@openzeppelin\\contracts-upgradeable\\security\\ReentrancyGuardUpgradeable.sol:67"
+          },
+          {
+            "contract": "MemeSaleV4PauseReentrancy",
+            "label": "memeOfTheDay",
+            "type": "t_contract(MemeOfTheDayV4Pause)3757",
+            "src": "..\\..\\..\\..\\..\\..\\..\\..\\C\\Users\\sound\\Desktop\\MOTD\\meme-repo-copy\\src\\contracts\\src\\MemeSaleV4PauseReentrancy.sol:38"
+          },
+          {
+            "contract": "MemeSaleV4PauseReentrancy",
+            "label": "memeOfTheDayTreasury",
+            "type": "t_contract(MOTDTreasuryV4Pause)3001",
+            "src": "..\\..\\..\\..\\..\\..\\..\\..\\C\\Users\\sound\\Desktop\\MOTD\\meme-repo-copy\\src\\contracts\\src\\MemeSaleV4PauseReentrancy.sol:39"
+          },
+          {
+            "contract": "MemeSaleV4PauseReentrancy",
+            "label": "memeOfTheDaySaleParametersProvider",
+            "type": "t_contract(MOTDSaleParametersProviderV4Pause)2601",
+            "src": "..\\..\\..\\..\\..\\..\\..\\..\\C\\Users\\sound\\Desktop\\MOTD\\meme-repo-copy\\src\\contracts\\src\\MemeSaleV4PauseReentrancy.sol:40"
+          },
+          {
+            "contract": "MemeSaleV4PauseReentrancy",
+            "label": "isOnSale",
+            "type": "t_mapping(t_uint256,t_bool)",
+            "src": "..\\..\\..\\..\\..\\..\\..\\..\\C\\Users\\sound\\Desktop\\MOTD\\meme-repo-copy\\src\\contracts\\src\\MemeSaleV4PauseReentrancy.sol:42"
+          }
+        ],
+        "types": {
+          "t_contract(MemeOfTheDayV4Pause)3757": {
+            "label": "contract MemeOfTheDayV4Pause"
+          },
+          "t_contract(MOTDTreasuryV4Pause)3001": {
+            "label": "contract MOTDTreasuryV4Pause"
+          },
+          "t_contract(MOTDSaleParametersProviderV4Pause)2601": {
+            "label": "contract MOTDSaleParametersProviderV4Pause"
+          },
+          "t_mapping(t_uint256,t_bool)": {
+            "label": "mapping(uint256 => bool)"
+          },
+          "t_uint256": {
+            "label": "uint256"
+          },
+          "t_bool": {
+            "label": "bool"
+          },
+          "t_array(t_uint256)49_storage": {
+            "label": "uint256[49]"
+          },
+          "t_address": {
+            "label": "address"
+          },
+          "t_array(t_uint256)50_storage": {
+            "label": "uint256[50]"
+          },
+          "t_bytes32": {
+            "label": "bytes32"
+          }
+        }
+      }
+    },
+    "3214ed766ef0afb1bca435872c61ede773f3312040ca3e9391efa2589b0847f0": {
+      "address": "0x2976C167dA8AD3EE3AB3eBBB43740b07EbD1132c",
+      "txHash": "0x18b58c167516f562b4400fd7648aca72a746fc9b95b05e0ce5f7f0ba9b02faeb",
+      "layout": {
+        "storage": [
+          {
+            "contract": "Initializable",
+            "label": "_initialized",
+            "type": "t_bool",
+            "src": "..\\..\\..\\..\\..\\..\\..\\..\\C\\Users\\sound\\Desktop\\MOTD\\meme-repo-copy\\node_modules\\@openzeppelin\\contracts-upgradeable\\proxy\\utils\\Initializable.sol:25"
+          },
+          {
+            "contract": "Initializable",
+            "label": "_initializing",
+            "type": "t_bool",
+            "src": "..\\..\\..\\..\\..\\..\\..\\..\\C\\Users\\sound\\Desktop\\MOTD\\meme-repo-copy\\node_modules\\@openzeppelin\\contracts-upgradeable\\proxy\\utils\\Initializable.sol:30"
+          },
+          {
+            "contract": "ContextUpgradeable",
+            "label": "__gap",
+            "type": "t_array(t_uint256)50_storage",
+            "src": "..\\..\\..\\..\\..\\..\\..\\..\\C\\Users\\sound\\Desktop\\MOTD\\meme-repo-copy\\node_modules\\@openzeppelin\\contracts-upgradeable\\utils\\ContextUpgradeable.sol:31"
+          },
+          {
+            "contract": "ERC165Upgradeable",
+            "label": "__gap",
+            "type": "t_array(t_uint256)50_storage",
+            "src": "..\\..\\..\\..\\..\\..\\..\\..\\C\\Users\\sound\\Desktop\\MOTD\\meme-repo-copy\\node_modules\\@openzeppelin\\contracts-upgradeable\\utils\\introspection\\ERC165Upgradeable.sol:35"
+          },
+          {
+            "contract": "ERC1155Upgradeable",
+            "label": "_balances",
+            "type": "t_mapping(t_uint256,t_mapping(t_address,t_uint256))",
+            "src": "..\\..\\..\\..\\..\\..\\..\\..\\C\\Users\\sound\\Desktop\\MOTD\\meme-repo-copy\\node_modules\\@openzeppelin\\contracts-upgradeable\\token\\ERC1155\\ERC1155Upgradeable.sol:25"
+          },
+          {
+            "contract": "ERC1155Upgradeable",
+            "label": "_operatorApprovals",
+            "type": "t_mapping(t_address,t_mapping(t_address,t_bool))",
+            "src": "..\\..\\..\\..\\..\\..\\..\\..\\C\\Users\\sound\\Desktop\\MOTD\\meme-repo-copy\\node_modules\\@openzeppelin\\contracts-upgradeable\\token\\ERC1155\\ERC1155Upgradeable.sol:28"
+          },
+          {
+            "contract": "ERC1155Upgradeable",
+            "label": "_uri",
+            "type": "t_string_storage",
+            "src": "..\\..\\..\\..\\..\\..\\..\\..\\C\\Users\\sound\\Desktop\\MOTD\\meme-repo-copy\\node_modules\\@openzeppelin\\contracts-upgradeable\\token\\ERC1155\\ERC1155Upgradeable.sol:31"
+          },
+          {
+            "contract": "ERC1155Upgradeable",
+            "label": "__gap",
+            "type": "t_array(t_uint256)47_storage",
+            "src": "..\\..\\..\\..\\..\\..\\..\\..\\C\\Users\\sound\\Desktop\\MOTD\\meme-repo-copy\\node_modules\\@openzeppelin\\contracts-upgradeable\\token\\ERC1155\\ERC1155Upgradeable.sol:406"
+          },
+          {
+            "contract": "OwnableUpgradeable",
+            "label": "_owner",
+            "type": "t_address",
+            "src": "..\\..\\..\\..\\..\\..\\..\\..\\C\\Users\\sound\\Desktop\\MOTD\\meme-repo-copy\\node_modules\\@openzeppelin\\contracts-upgradeable\\access\\OwnableUpgradeable.sol:20"
+          },
+          {
+            "contract": "OwnableUpgradeable",
+            "label": "__gap",
+            "type": "t_array(t_uint256)49_storage",
+            "src": "..\\..\\..\\..\\..\\..\\..\\..\\C\\Users\\sound\\Desktop\\MOTD\\meme-repo-copy\\node_modules\\@openzeppelin\\contracts-upgradeable\\access\\OwnableUpgradeable.sol:74"
+          },
+          {
+            "contract": "PausableUpgradeable",
+            "label": "_paused",
+            "type": "t_bool",
+            "src": "..\\..\\..\\..\\..\\..\\..\\..\\C\\Users\\sound\\Desktop\\MOTD\\meme-repo-copy\\node_modules\\@openzeppelin\\contracts-upgradeable\\security\\PausableUpgradeable.sol:28"
+          },
+          {
+            "contract": "PausableUpgradeable",
+            "label": "__gap",
+            "type": "t_array(t_uint256)49_storage",
+            "src": "..\\..\\..\\..\\..\\..\\..\\..\\C\\Users\\sound\\Desktop\\MOTD\\meme-repo-copy\\node_modules\\@openzeppelin\\contracts-upgradeable\\security\\PausableUpgradeable.sol:96"
+          },
+          {
+            "contract": "MemeOfTheDayV4Pause",
+            "label": "hashes",
+            "type": "t_array(t_string_storage)dyn_storage",
+            "src": "..\\..\\..\\..\\..\\..\\..\\..\\C\\Users\\sound\\Desktop\\MOTD\\meme-repo-copy\\src\\contracts\\src\\MemeOfTheDayV4Pause.sol:12"
+          },
+          {
+            "contract": "MemeOfTheDayV4Pause",
+            "label": "_hashExists",
+            "type": "t_mapping(t_string_memory_ptr,t_bool)",
+            "src": "..\\..\\..\\..\\..\\..\\..\\..\\C\\Users\\sound\\Desktop\\MOTD\\meme-repo-copy\\src\\contracts\\src\\MemeOfTheDayV4Pause.sol:15"
+          },
+          {
+            "contract": "MemeOfTheDayV4Pause",
+            "label": "_hashToken",
+            "type": "t_mapping(t_string_memory_ptr,t_uint256)",
+            "src": "..\\..\\..\\..\\..\\..\\..\\..\\C\\Users\\sound\\Desktop\\MOTD\\meme-repo-copy\\src\\contracts\\src\\MemeOfTheDayV4Pause.sol:18"
+          },
+          {
+            "contract": "MemeOfTheDayV4Pause",
+            "label": "creatorOf",
+            "type": "t_mapping(t_uint256,t_address)",
+            "src": "..\\..\\..\\..\\..\\..\\..\\..\\C\\Users\\sound\\Desktop\\MOTD\\meme-repo-copy\\src\\contracts\\src\\MemeOfTheDayV4Pause.sol:20"
+          },
+          {
+            "contract": "MemeOfTheDayV4Pause",
+            "label": "ownerOf",
+            "type": "t_mapping(t_uint256,t_address)",
+            "src": "..\\..\\..\\..\\..\\..\\..\\..\\C\\Users\\sound\\Desktop\\MOTD\\meme-repo-copy\\src\\contracts\\src\\MemeOfTheDayV4Pause.sol:21"
+          },
+          {
+            "contract": "MemeOfTheDayV4Pause",
+            "label": "creatorFee",
+            "type": "t_mapping(t_uint256,t_int256)",
+            "src": "..\\..\\..\\..\\..\\..\\..\\..\\C\\Users\\sound\\Desktop\\MOTD\\meme-repo-copy\\src\\contracts\\src\\MemeOfTheDayV4Pause.sol:22"
+          }
+        ],
+        "types": {
+          "t_array(t_string_storage)dyn_storage": {
+            "label": "string[]"
+          },
+          "t_string_storage": {
+            "label": "string"
+          },
+          "t_mapping(t_string_memory_ptr,t_bool)": {
+            "label": "mapping(string => bool)"
+          },
+          "t_bool": {
+            "label": "bool"
+          },
+          "t_mapping(t_string_memory_ptr,t_uint256)": {
+            "label": "mapping(string => uint256)"
+          },
+          "t_uint256": {
+            "label": "uint256"
+          },
+          "t_mapping(t_uint256,t_address)": {
+            "label": "mapping(uint256 => address)"
+          },
+          "t_address": {
+            "label": "address"
+          },
+          "t_mapping(t_uint256,t_int256)": {
+            "label": "mapping(uint256 => int256)"
+          },
+          "t_int256": {
+            "label": "int256"
+          },
+          "t_array(t_uint256)49_storage": {
+            "label": "uint256[49]"
+          },
+          "t_mapping(t_uint256,t_mapping(t_address,t_uint256))": {
+            "label": "mapping(uint256 => mapping(address => uint256))"
+          },
+          "t_mapping(t_address,t_uint256)": {
+            "label": "mapping(address => uint256)"
+          },
+          "t_mapping(t_address,t_mapping(t_address,t_bool))": {
+            "label": "mapping(address => mapping(address => bool))"
+          },
+          "t_mapping(t_address,t_bool)": {
+            "label": "mapping(address => bool)"
+          },
+          "t_array(t_uint256)47_storage": {
+            "label": "uint256[47]"
+          },
+          "t_array(t_uint256)50_storage": {
+            "label": "uint256[50]"
+          }
+        }
+      }
+    },
+    "0c8c061ed4ecc619f8d1acc535bc9c9ef54ff8efe5690b53ac320b10379d15a4": {
+      "address": "0xCB112408eA2dd1E1b81c85d0866C79242D195d19",
+      "txHash": "0x28c1fe21c777272787dec5ce3aecc05ee6b9fe5fb2412756bf3e87296fef7abb",
+      "layout": {
+        "storage": [
+          {
+            "contract": "Initializable",
+            "label": "_initialized",
+            "type": "t_bool",
+            "src": "..\\..\\..\\..\\..\\..\\..\\..\\C\\Users\\sound\\Desktop\\MOTD\\meme-repo-copy\\node_modules\\@openzeppelin\\contracts-upgradeable\\proxy\\utils\\Initializable.sol:25"
+          },
+          {
+            "contract": "Initializable",
+            "label": "_initializing",
+            "type": "t_bool",
+            "src": "..\\..\\..\\..\\..\\..\\..\\..\\C\\Users\\sound\\Desktop\\MOTD\\meme-repo-copy\\node_modules\\@openzeppelin\\contracts-upgradeable\\proxy\\utils\\Initializable.sol:30"
+          },
+          {
+            "contract": "ContextUpgradeable",
+            "label": "__gap",
+            "type": "t_array(t_uint256)50_storage",
+            "src": "..\\..\\..\\..\\..\\..\\..\\..\\C\\Users\\sound\\Desktop\\MOTD\\meme-repo-copy\\node_modules\\@openzeppelin\\contracts-upgradeable\\utils\\ContextUpgradeable.sol:31"
+          },
+          {
+            "contract": "OwnableUpgradeable",
+            "label": "_owner",
+            "type": "t_address",
+            "src": "..\\..\\..\\..\\..\\..\\..\\..\\C\\Users\\sound\\Desktop\\MOTD\\meme-repo-copy\\node_modules\\@openzeppelin\\contracts-upgradeable\\access\\OwnableUpgradeable.sol:20"
+          },
+          {
+            "contract": "OwnableUpgradeable",
+            "label": "__gap",
+            "type": "t_array(t_uint256)49_storage",
+            "src": "..\\..\\..\\..\\..\\..\\..\\..\\C\\Users\\sound\\Desktop\\MOTD\\meme-repo-copy\\node_modules\\@openzeppelin\\contracts-upgradeable\\access\\OwnableUpgradeable.sol:74"
+          },
+          {
+            "contract": "PausableUpgradeable",
+            "label": "_paused",
+            "type": "t_bool",
+            "src": "..\\..\\..\\..\\..\\..\\..\\..\\C\\Users\\sound\\Desktop\\MOTD\\meme-repo-copy\\node_modules\\@openzeppelin\\contracts-upgradeable\\security\\PausableUpgradeable.sol:28"
+          },
+          {
+            "contract": "PausableUpgradeable",
+            "label": "__gap",
+            "type": "t_array(t_uint256)49_storage",
+            "src": "..\\..\\..\\..\\..\\..\\..\\..\\C\\Users\\sound\\Desktop\\MOTD\\meme-repo-copy\\node_modules\\@openzeppelin\\contracts-upgradeable\\security\\PausableUpgradeable.sol:96"
+          }
+        ],
+        "types": {
+          "t_bool": {
+            "label": "bool"
+          },
+          "t_array(t_uint256)49_storage": {
+            "label": "uint256[49]"
+          },
+          "t_uint256": {
+            "label": "uint256"
+          },
+          "t_address": {
+            "label": "address"
+          },
+          "t_array(t_uint256)50_storage": {
+            "label": "uint256[50]"
+          }
+        }
+      }
+    },
+    "974314db2826aba5e803a8eaffadaacf7fc44174b91c27c7aac29c1424335c51": {
+      "address": "0xBee465c2243FaEafb5f9FCeadC25Aed61Cb1E687",
+      "txHash": "0xe03789651db6e712d326db5f27d99a2a899b94131cf499ba2c7eaa324de4742e",
+      "layout": {
+        "storage": [
+          {
+            "contract": "Initializable",
+            "label": "_initialized",
+            "type": "t_bool",
+            "src": "..\\..\\..\\..\\..\\..\\..\\..\\C\\Users\\sound\\Desktop\\MOTD\\meme-repo-copy\\node_modules\\@openzeppelin\\contracts-upgradeable\\proxy\\utils\\Initializable.sol:25"
+          },
+          {
+            "contract": "Initializable",
+            "label": "_initializing",
+            "type": "t_bool",
+            "src": "..\\..\\..\\..\\..\\..\\..\\..\\C\\Users\\sound\\Desktop\\MOTD\\meme-repo-copy\\node_modules\\@openzeppelin\\contracts-upgradeable\\proxy\\utils\\Initializable.sol:30"
+          },
+          {
+            "contract": "ContextUpgradeable",
+            "label": "__gap",
+            "type": "t_array(t_uint256)50_storage",
+            "src": "..\\..\\..\\..\\..\\..\\..\\..\\C\\Users\\sound\\Desktop\\MOTD\\meme-repo-copy\\node_modules\\@openzeppelin\\contracts-upgradeable\\utils\\ContextUpgradeable.sol:31"
+          },
+          {
+            "contract": "OwnableUpgradeable",
+            "label": "_owner",
+            "type": "t_address",
+            "src": "..\\..\\..\\..\\..\\..\\..\\..\\C\\Users\\sound\\Desktop\\MOTD\\meme-repo-copy\\node_modules\\@openzeppelin\\contracts-upgradeable\\access\\OwnableUpgradeable.sol:20"
+          },
+          {
+            "contract": "OwnableUpgradeable",
+            "label": "__gap",
+            "type": "t_array(t_uint256)49_storage",
+            "src": "..\\..\\..\\..\\..\\..\\..\\..\\C\\Users\\sound\\Desktop\\MOTD\\meme-repo-copy\\node_modules\\@openzeppelin\\contracts-upgradeable\\access\\OwnableUpgradeable.sol:74"
+          },
+          {
+            "contract": "PausableUpgradeable",
+            "label": "_paused",
+            "type": "t_bool",
+            "src": "..\\..\\..\\..\\..\\..\\..\\..\\C\\Users\\sound\\Desktop\\MOTD\\meme-repo-copy\\node_modules\\@openzeppelin\\contracts-upgradeable\\security\\PausableUpgradeable.sol:28"
+          },
+          {
+            "contract": "PausableUpgradeable",
+            "label": "__gap",
+            "type": "t_array(t_uint256)49_storage",
+            "src": "..\\..\\..\\..\\..\\..\\..\\..\\C\\Users\\sound\\Desktop\\MOTD\\meme-repo-copy\\node_modules\\@openzeppelin\\contracts-upgradeable\\security\\PausableUpgradeable.sol:96"
+          },
+          {
+            "contract": "MOTDSaleParametersProviderV4Pause",
+            "label": "parameters",
+            "type": "t_mapping(t_uint256,t_uint256)",
+            "src": "..\\..\\..\\..\\..\\..\\..\\..\\C\\Users\\sound\\Desktop\\MOTD\\meme-repo-copy\\src\\contracts\\src\\MOTDSaleParametersProviderV4Pause.sol:19"
+          }
+        ],
+        "types": {
+          "t_mapping(t_uint256,t_uint256)": {
+            "label": "mapping(uint256 => uint256)"
+          },
+          "t_uint256": {
+            "label": "uint256"
+          },
+          "t_bool": {
+            "label": "bool"
+          },
+          "t_array(t_uint256)49_storage": {
+            "label": "uint256[49]"
+          },
+          "t_address": {
+            "label": "address"
+          },
+          "t_array(t_uint256)50_storage": {
+            "label": "uint256[50]"
+          }
+        }
+      }
+    },
+    "1f710f97f1590ba6c8f710fabb097b70312233ec6160de1a2ecf1bc80370ccba": {
+      "address": "0x2FD5507b9188F8394AcAcA73B3086832C362bC87",
+      "txHash": "0xdf9851b882283fbc2483469069c5d592baf97e51df5e9337a88d1228e550cacb",
+      "layout": {
+        "storage": [
+          {
+            "contract": "EIP712Domain",
+            "label": "DOMAIN_SEPARATOR",
+            "type": "t_bytes32",
+            "src": "..\\..\\..\\..\\..\\..\\..\\..\\C\\Users\\sound\\Desktop\\MOTD\\meme-repo-copy\\src\\contracts\\src\\EIP712Domain.sol:9"
+          },
+          {
+            "contract": "Initializable",
+            "label": "_initialized",
+            "type": "t_bool",
+            "src": "..\\..\\..\\..\\..\\..\\..\\..\\C\\Users\\sound\\Desktop\\MOTD\\meme-repo-copy\\node_modules\\@openzeppelin\\contracts-upgradeable\\proxy\\utils\\Initializable.sol:25"
+          },
+          {
+            "contract": "Initializable",
+            "label": "_initializing",
+            "type": "t_bool",
+            "src": "..\\..\\..\\..\\..\\..\\..\\..\\C\\Users\\sound\\Desktop\\MOTD\\meme-repo-copy\\node_modules\\@openzeppelin\\contracts-upgradeable\\proxy\\utils\\Initializable.sol:30"
+          },
+          {
+            "contract": "ContextUpgradeable",
+            "label": "__gap",
+            "type": "t_array(t_uint256)50_storage",
+            "src": "..\\..\\..\\..\\..\\..\\..\\..\\C\\Users\\sound\\Desktop\\MOTD\\meme-repo-copy\\node_modules\\@openzeppelin\\contracts-upgradeable\\utils\\ContextUpgradeable.sol:31"
+          },
+          {
+            "contract": "OwnableUpgradeable",
+            "label": "_owner",
+            "type": "t_address",
+            "src": "..\\..\\..\\..\\..\\..\\..\\..\\C\\Users\\sound\\Desktop\\MOTD\\meme-repo-copy\\node_modules\\@openzeppelin\\contracts-upgradeable\\access\\OwnableUpgradeable.sol:20"
+          },
+          {
+            "contract": "OwnableUpgradeable",
+            "label": "__gap",
+            "type": "t_array(t_uint256)49_storage",
+            "src": "..\\..\\..\\..\\..\\..\\..\\..\\C\\Users\\sound\\Desktop\\MOTD\\meme-repo-copy\\node_modules\\@openzeppelin\\contracts-upgradeable\\access\\OwnableUpgradeable.sol:74"
+          },
+          {
+            "contract": "PausableUpgradeable",
+            "label": "_paused",
+            "type": "t_bool",
+            "src": "..\\..\\..\\..\\..\\..\\..\\..\\C\\Users\\sound\\Desktop\\MOTD\\meme-repo-copy\\node_modules\\@openzeppelin\\contracts-upgradeable\\security\\PausableUpgradeable.sol:28"
+          },
+          {
+            "contract": "PausableUpgradeable",
+            "label": "__gap",
+            "type": "t_array(t_uint256)49_storage",
+            "src": "..\\..\\..\\..\\..\\..\\..\\..\\C\\Users\\sound\\Desktop\\MOTD\\meme-repo-copy\\node_modules\\@openzeppelin\\contracts-upgradeable\\security\\PausableUpgradeable.sol:96"
+          },
+          {
+            "contract": "ReentrancyGuardUpgradeable",
+            "label": "_status",
+            "type": "t_uint256",
+            "src": "..\\..\\..\\..\\..\\..\\..\\..\\C\\Users\\sound\\Desktop\\MOTD\\meme-repo-copy\\node_modules\\@openzeppelin\\contracts-upgradeable\\security\\ReentrancyGuardUpgradeable.sol:37"
+          },
+          {
+            "contract": "ReentrancyGuardUpgradeable",
+            "label": "__gap",
+            "type": "t_array(t_uint256)49_storage",
+            "src": "..\\..\\..\\..\\..\\..\\..\\..\\C\\Users\\sound\\Desktop\\MOTD\\meme-repo-copy\\node_modules\\@openzeppelin\\contracts-upgradeable\\security\\ReentrancyGuardUpgradeable.sol:67"
+          },
+          {
+            "contract": "MemeSaleV4PauseReentrancy",
+            "label": "memeOfTheDay",
+            "type": "t_contract(MemeOfTheDayV4Pause)3757",
+            "src": "..\\..\\..\\..\\..\\..\\..\\..\\C\\Users\\sound\\Desktop\\MOTD\\meme-repo-copy\\src\\contracts\\src\\MemeSaleV4PauseReentrancy.sol:38"
+          },
+          {
+            "contract": "MemeSaleV4PauseReentrancy",
+            "label": "memeOfTheDayTreasury",
+            "type": "t_contract(MOTDTreasuryV4Pause)3001",
+            "src": "..\\..\\..\\..\\..\\..\\..\\..\\C\\Users\\sound\\Desktop\\MOTD\\meme-repo-copy\\src\\contracts\\src\\MemeSaleV4PauseReentrancy.sol:39"
+          },
+          {
+            "contract": "MemeSaleV4PauseReentrancy",
+            "label": "memeOfTheDaySaleParametersProvider",
+            "type": "t_contract(MOTDSaleParametersProviderV4Pause)2601",
+            "src": "..\\..\\..\\..\\..\\..\\..\\..\\C\\Users\\sound\\Desktop\\MOTD\\meme-repo-copy\\src\\contracts\\src\\MemeSaleV4PauseReentrancy.sol:40"
+          },
+          {
+            "contract": "MemeSaleV4PauseReentrancy",
+            "label": "isOnSale",
+            "type": "t_mapping(t_uint256,t_bool)",
+            "src": "..\\..\\..\\..\\..\\..\\..\\..\\C\\Users\\sound\\Desktop\\MOTD\\meme-repo-copy\\src\\contracts\\src\\MemeSaleV4PauseReentrancy.sol:42"
+          }
+        ],
+        "types": {
+          "t_contract(MemeOfTheDayV4Pause)3757": {
+            "label": "contract MemeOfTheDayV4Pause"
+          },
+          "t_contract(MOTDTreasuryV4Pause)3001": {
+            "label": "contract MOTDTreasuryV4Pause"
+          },
+          "t_contract(MOTDSaleParametersProviderV4Pause)2601": {
+            "label": "contract MOTDSaleParametersProviderV4Pause"
           },
           "t_mapping(t_uint256,t_bool)": {
             "label": "mapping(uint256 => bool)"
@@ -1125,7 +1747,7 @@
     }
   },
   "admin": {
-    "address": "0xaeBfd43E2424E65fDCF1eF0e100d9738E8d39f33",
-    "txHash": "0x01d38c6e81dafcc91b946f6fceb7681783e0f97d9bfbbd50ee24ea603bee543c"
+    "address": "0x8523D0f5a2eb00bB62F66cd5d6541ce2Ab486d07",
+    "txHash": "0xc55421a0bb09308b26a18cf0ec8b6e12f85d36715e3fbfd11d42f2378c48b96e"
   }
 }
