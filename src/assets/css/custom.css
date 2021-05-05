@@ -1,0 +1,53 @@
+.signupBtn{
+    background-color: #2E55FF;
+    border: 2px solid #1c43ab;
+    padding: 12px 30px;
+    border-radius: 8px;
+    margin: 10px 0;
+    color: #1c43ab !important;
+}
+.signupBtn:hover{
+    background-color: #2E55FF!important;
+    color: #fff !important;
+}
+.socialBtnWrap{
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    gap: 15px 25px;
+}
+
+.socialBtnWrap button:hover{
+    background-color: #2E55FF!important;
+    color: #fff !important;
+    border-color: #1c43ab!important;
+}
+.socialBtnWrap button:hover svg {
+    fill: #fff;
+}
+.or_divider{
+    border-bottom: 1px solid #ddd;
+    position: relative;
+    padding: 15px 0;
+    margin-bottom: 10px;
+}
+.or_divider span{
+    position: absolute;
+    left: 0;
+    top: 12px;
+    background: #fff;
+    padding-right: 10px;
+}
+.gray{
+    color: #747474;
+}
+.statement_para p{
+    font-size: 13px;
+    text-align: left;
+    color: black;
+    max-width: 440px;
+
+}
+.statement_para p a{
+    display: inline-block;
+    color: #2e48b0;
+}

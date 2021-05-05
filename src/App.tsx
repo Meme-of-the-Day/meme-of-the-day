@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from "react";
-import { HashRouter as Router, Switch, Route } from "react-router-dom";
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import styled, { ThemeProvider } from "styled-components";
 import Web3 from "web3";
-
 import theme from "./theme";
 import AppBar from "./components/appBar/AppBar";
 import Navigation from "./components/Navigation";
 import MessageModal from "./components/MessageModal";
+import LoginModal from "./components/LoginModal";
 import Home from "./pages/Home";
 import Upload from "./pages/Upload";
 import MyMemes from "./pages/MyMemes";
@@ -31,7 +31,7 @@ const AppBody = styled.div`
   }
 `;
 
-const CustomNavigation = styled(Navigation)<{ open: boolean }>`
+const CustomNavigation = styled(Navigation) <{ open: boolean }>`
   transform: ${props =>
     props.open === true ? "translateX(0)" : "translateX(-100vw)"};
   transition: transform 0.5s ease;
@@ -54,7 +54,7 @@ export type AuthContextType = {
 };
 
 export const AuthContext = React.createContext<AuthContextType>({
-  authenticate: () => {},
+  authenticate: () => { },
   hasMetamask: false,
   isConnectedToMatic: false,
   isMetamaskConnected: false
@@ -63,6 +63,7 @@ export const AuthContext = React.createContext<AuthContextType>({
 export type UIContextType = {
   showHamburger: boolean;
   toggleHamburger: () => void;
+  showLoginModal: boolean;
   showModal: boolean;
   closeModal: () => void;
   openModal: () => void;
@@ -70,15 +71,17 @@ export type UIContextType = {
 
 export const UIContext = React.createContext<UIContextType>({
   showHamburger: false,
-  toggleHamburger: () => {},
+  toggleHamburger: () => { },
+  showLoginModal: false,
   showModal: false,
-  closeModal: () => {},
-  openModal: () => {}
+  closeModal: () => { },
+  openModal: () => { }
 });
 
 const App: React.FC = () => {
   const [showHamburger, setShowHamburger] = useState(false);
   const [showModal, setShowModal] = useState(false);
+  const [showLoginModal, setLoginModal] = useState(false);
   const [authProvider, setAuthProvider] = useState<AuthProvider | undefined>(
     undefined
   );
@@ -141,9 +144,10 @@ const App: React.FC = () => {
         showHamburger,
         toggleHamburger: () =>
           setShowHamburger(showHamburger => !showHamburger),
+        showLoginModal,
         showModal,
-        closeModal: () => setShowModal(false),
-        openModal: () => setShowModal(true)
+        closeModal: () => setLoginModal(false),
+        openModal: () => setLoginModal(true)
       }}
     >
       <AuthContext.Provider
@@ -175,8 +179,10 @@ const App: React.FC = () => {
                 </Switch>
               </AppBody>
               <MessageModal />
+              <LoginModal />
             </Main>
           </Router>
+
         </ThemeProvider>
       </AuthContext.Provider>
     </UIContext.Provider>

@@ -95,11 +95,11 @@ const Navigation: React.FC<{ className?: string }> = ({ className }) => {
   } = authContext;
 
   const login = async () => {
-    if (!hasMetamask) {
-      openModal();
-    } else {
-      await authenticate();
-    }
+    // if (!hasMetamask) {
+    openModal();
+    // } else {
+    //   await authenticate();
+    // }
   };
 
   return (

@@ -63,7 +63,7 @@ export class Textile {
     await this.client.getToken(this.identity);
 
     const buck = await buckets.getOrCreate('memeoftheday');
-    //await this.client.updateCollection(ThreadID.fromString(this.dbThreadID), {name: this.memeCollectionName, schema: Schema});
+    // await this.client.updateCollection(ThreadID.fromString(this.dbThreadID), {name: this.memeCollectionName, schema: Schema});
     if (!buck.root) {
       throw new Error('Failed to get or create bucket');
     }
