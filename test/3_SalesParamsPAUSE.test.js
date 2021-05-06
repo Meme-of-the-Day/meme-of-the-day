@@ -4,6 +4,8 @@ const { deployProxy, upgradeProxy } = require('@openzeppelin/truffle-upgrades');
 const { assert } = require('chai');
 
 const Web3 = require("web3");
+
+//using GanacheGUI because CLI would not work correctly on my system
 let web3 = new Web3(new Web3.providers.HttpProvider("http://localhost:7545"));
 
 contract('SaleParametersProvider upgradeSafe Pause', async function (accounts) {

@@ -1,6 +1,11 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.0;
 
+//This contract is an example of an Upgraded contract, At the end of the code you can find an additional function sayHello()
+//This shall demonstrate, that it is possible to add functionality at the end of the code. It is very important to only append code
+//and never change any order of variables, nor delete any of them, in order to avoid storage collisions!!
+//Compare MOTDSaleParametersProviderV3Pause with MOTDSaleParametersProviderV4Pause to get a precise understanding! 
+
 import "../../../node_modules/@openzeppelin/contracts-upgradeable/access/OwnableUpgradeable.sol";
 import "../../../node_modules/@openzeppelin/contracts-upgradeable/proxy/utils/Initializable.sol";
 import "../../../node_modules/@openzeppelin/contracts-upgradeable/security/PausableUpgradeable.sol";

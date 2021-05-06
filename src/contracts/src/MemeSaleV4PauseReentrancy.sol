@@ -1,4 +1,13 @@
 // SPDX-License-Identifier: MIT
+
+//This contract is an example of an Upgraded contract, At the end of the code you can find an additional function sayHello()
+//This shall demonstrate, that it is possible to add functionality at the end of the code. It is very important to only append code
+//and never change any order of variables, nor delete any of them, in order to avoid storage collisions!!
+//With the MemeSale Contract, it is further very important to keep the imports updated as well in case of any upgrade of
+//MemeOfTheDay, MOTDTreasury or MOTDSaleParametersProvider!
+
+//Compare MemeSaleV4PauseReentrancy with MemeSaleV3PauseReentrancy to get a precise understanding! 
+
 pragma solidity ^0.8.0;
 
 //Removed because sol 0.8.0 already checks for over and underflow

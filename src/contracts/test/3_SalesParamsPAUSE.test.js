@@ -1,14 +1,15 @@
-const SalesParam = artifacts.require('MOTDSaleParametersProvider');
-const SalesParam2 = artifacts.require('MOTDSaleParametersProviderV2');
+const SalesParamV3Pause = artifacts.require('MOTDSaleParametersProviderV3Pause');
+const SalesParamV4Pause = artifacts.require('MOTDSaleParametersProviderV4Pause');
 const { deployProxy, upgradeProxy } = require('@openzeppelin/truffle-upgrades');
 const { assert } = require('chai');
 
 const Web3 = require("web3");
+//using GanacheGUI because CLI would not work correctly on my system
 let web3 = new Web3(new Web3.providers.HttpProvider("http://localhost:7545"));
 
-contract('SaleParametersProvider upgradeSafe', async function (accounts) {
+contract('SaleParametersProvider upgradeSafe Pause', async function (accounts) {
     it('should initialize correctly', async function () {
-        this.salesparams1 = await deployProxy(SalesParam, {initializer: 'initialize'});
+        this.salesparams1 = await deployProxy(SalesParamV3Pause, {initializer: 'initialize'});
 
         //GETTING STATE CONSTANTS
         let defCreFeePerInd = await this.salesparams1.DEFAULT_CREATOR_FEE_PERCENT_INDEX();
@@ -46,11 +47,32 @@ contract('SaleParametersProvider upgradeSafe', async function (accounts) {
         assert.equal(platformFee.toString(), 19);
         assert.equal(totalFee.toString(), 24);
 
+    });
 
-    })
+    it('should return correct pause state', async function () {
+        var pauseState = await this.salesparams1.paused();
+
+        assert.equal(pauseState.toString(), "false");
+    });
+
+    it('should allow to pause, not allow to changeParameters whenPaused and unpause', async function () {
+        await this.salesparams1.pause();
+        var pauseState = await this.salesparams1.paused();
+        assert.equal(pauseState.toString(), "true");
+
+        try{
+            await this.salesparams1.changeParameter(0, 150, {from: accounts[0]});
+        }catch(errPaused){
+            console.log(errPaused.reason);
+        }
+
+        await this.salesparams1.unpause();
+        pauseState = await this.salesparams1.paused();
+        assert.equal(pauseState.toString(), "false");
+    });
 
     it('should keep state after upgrade', async function () {
-        this.salesparams2 = await upgradeProxy(this.salesparams1.address, SalesParam2, {initializer: 'initialize'});
+        this.salesparams2 = await upgradeProxy(this.salesparams1.address, SalesParamV4Pause, {initializer: 'initialize'});
 
         console.log(await this.salesparams2.sayHello());
 
@@ -90,7 +112,7 @@ contract('SaleParametersProvider upgradeSafe', async function (accounts) {
          assert.equal(platformFee.toString(), 19);
          assert.equal(totalFee.toString(), 24);
 
-    })
+    });
 
     it('should allow to change parameters by owner', async function () {
         // console.log(await this.salesparams2.owner());
@@ -121,7 +143,6 @@ contract('SaleParametersProvider upgradeSafe', async function (accounts) {
         assert.equal(platformFee.toString(), 21);
         assert.equal(totalFee.toString(), 31);
 
-
-    })
+    });
     
 })

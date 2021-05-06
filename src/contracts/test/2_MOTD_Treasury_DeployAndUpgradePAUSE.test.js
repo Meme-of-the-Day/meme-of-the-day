@@ -1,5 +1,5 @@
-const Treasury = artifacts.require('MOTDTreasury');
-const Treasury2 = artifacts.require('MOTDTreasuryV2');
+const TreasuryV3Pause = artifacts.require('MOTDTreasuryV3Pause');
+const TreasuryV4Pause = artifacts.require('MOTDTreasuryV4Pause');
 
 const { deployProxy, upgradeProxy } = require('@openzeppelin/truffle-upgrades');
 const { assert } = require('chai');
@@ -10,12 +10,13 @@ const { assert } = require('chai');
 
 
 const Web3 = require("web3");
+//using GanacheGUI because CLI would not work correctly on my system
 let web3 = new Web3(new Web3.providers.HttpProvider("http://localhost:7545"));  // 
 
-contract('Treasury (proxy)', async function (accounts) {
+contract('Treasury upgradeSafe Pause', async function (accounts) {
     it('should deploy proxy and set owner to accounts[0]', async function () {
         console.log("Deploying Proxy...");
-        this.treasury1 = await deployProxy(Treasury, {initializer: 'initialize'});
+        this.treasury1 = await deployProxy(TreasuryV3Pause, {initializer: 'initialize'});
         console.log("Treasury1 Proxy Address: " + this.treasury1.address);
         let owner = await this.treasury1.owner();
         console.log("Owner is: " + owner);
@@ -110,11 +111,33 @@ contract('Treasury (proxy)', async function (accounts) {
             to: this.treasury1.address,
             value: web3.utils.toWei("2", "ether"),
         });
-    })
+    });
+
+    it('should return correct pause state', async function () {
+        var pauseState = await this.treasury1.paused();
+
+        assert.equal(pauseState.toString(), "false");
+    });
+
+    it('should allow to pause, prevent withdraw whenPaused, and unpause', async function () {
+        await this.treasury1.pause();
+        var pauseState = await this.treasury1.paused();
+        assert.equal(pauseState.toString(), "true");
+
+        try{
+            await this.treasury1.withdraw(web3.utils.toWei("1", "ether"), {from: accounts[0]});
+        }catch(errPause){
+            console.log(errPause.reason);
+        }
+
+        await this.treasury1.unpause();
+        pauseState = await this.treasury1.paused();
+        assert.equal(pauseState.toString(), "false");
+    });
 
     it('should keep balance after proxy upgrade and have right owner', async function () {
         console.log("Upgrading Proxy...");
-        this.treasury2 = await upgradeProxy(this.treasury1.address, Treasury2, {initializer: 'initialize'});
+        this.treasury2 = await upgradeProxy(this.treasury1.address, TreasuryV4Pause, {initializer: 'initialize'});
 
         //TESTING NEW FUNCTION!
         console.log(await this.treasury2.sayHello());
@@ -138,7 +161,7 @@ contract('Treasury (proxy)', async function (accounts) {
     })
 
     it('should still allow owner to withdraw', async function () {
-       let tresInst = await Treasury2.at(this.treasury2.address); 
+       let tresInst = await TreasuryV4Pause.at(this.treasury2.address); 
        try{
             await tresInst.withdraw(web3.utils.toWei("1", "ether"), {from: accounts[0]});
         } catch(err){
