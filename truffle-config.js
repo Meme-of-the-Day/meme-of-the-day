@@ -1,6 +1,6 @@
 require("babel-register");
 require("babel-polyfill");
-const { mnemonic } = require('./secrets.json');
+//const { mnemonic } = require('./secrets.json');
 const HDWalletProvider = require("truffle-hdwallet-provider");
 //const mnemonic = process.env.MNEMONIC;
 var networkId = process.env.npm_package_config_ganache_networkId;

@@ -24,12 +24,12 @@
     {
       "ast": {
         "nodeType": "YulBlock",
-        "src": "0:463:32",
+        "src": "0:463:24",
         "statements": [
           {
             "body": {
               "nodeType": "YulBlock",
-              "src": "80:53:32",
+              "src": "80:53:24",
               "statements": [
                 {
                   "expression": {
@@ -37,35 +37,35 @@
                       {
                         "name": "pos",
                         "nodeType": "YulIdentifier",
-                        "src": "97:3:32"
+                        "src": "97:3:24"
                       },
                       {
                         "arguments": [
                           {
                             "name": "value",
                             "nodeType": "YulIdentifier",
-                            "src": "120:5:32"
+                            "src": "120:5:24"
                           }
                         ],
                         "functionName": {
                           "name": "cleanup_t_bytes32",
                           "nodeType": "YulIdentifier",
-                          "src": "102:17:32"
+                          "src": "102:17:24"
                         },
                         "nodeType": "YulFunctionCall",
-                        "src": "102:24:32"
+                        "src": "102:24:24"
                       }
                     ],
                     "functionName": {
                       "name": "mstore",
                       "nodeType": "YulIdentifier",
-                      "src": "90:6:32"
+                      "src": "90:6:24"
                     },
                     "nodeType": "YulFunctionCall",
-                    "src": "90:37:32"
+                    "src": "90:37:24"
                   },
                   "nodeType": "YulExpressionStatement",
-                  "src": "90:37:32"
+                  "src": "90:37:24"
                 }
               ]
             },
@@ -75,37 +75,37 @@
               {
                 "name": "value",
                 "nodeType": "YulTypedName",
-                "src": "68:5:32",
+                "src": "68:5:24",
                 "type": ""
               },
               {
                 "name": "pos",
                 "nodeType": "YulTypedName",
-                "src": "75:3:32",
+                "src": "75:3:24",
                 "type": ""
               }
             ],
-            "src": "7:126:32"
+            "src": "7:126:24"
           },
           {
             "body": {
               "nodeType": "YulBlock",
-              "src": "245:132:32",
+              "src": "245:132:24",
               "statements": [
                 {
                   "nodeType": "YulAssignment",
-                  "src": "255:26:32",
+                  "src": "255:26:24",
                   "value": {
                     "arguments": [
                       {
                         "name": "headStart",
                         "nodeType": "YulIdentifier",
-                        "src": "267:9:32"
+                        "src": "267:9:24"
                       },
                       {
                         "kind": "number",
                         "nodeType": "YulLiteral",
-                        "src": "278:2:32",
+                        "src": "278:2:24",
                         "type": "",
                         "value": "32"
                       }
@@ -113,16 +113,16 @@
                     "functionName": {
                       "name": "add",
                       "nodeType": "YulIdentifier",
-                      "src": "263:3:32"
+                      "src": "263:3:24"
                     },
                     "nodeType": "YulFunctionCall",
-                    "src": "263:18:32"
+                    "src": "263:18:24"
                   },
                   "variableNames": [
                     {
                       "name": "tail",
                       "nodeType": "YulIdentifier",
-                      "src": "255:4:32"
+                      "src": "255:4:24"
                     }
                   ]
                 },
@@ -132,19 +132,19 @@
                       {
                         "name": "value0",
                         "nodeType": "YulIdentifier",
-                        "src": "343:6:32"
+                        "src": "343:6:24"
                       },
                       {
                         "arguments": [
                           {
                             "name": "headStart",
                             "nodeType": "YulIdentifier",
-                            "src": "356:9:32"
+                            "src": "356:9:24"
                           },
                           {
                             "kind": "number",
                             "nodeType": "YulLiteral",
-                            "src": "367:1:32",
+                            "src": "367:1:24",
                             "type": "",
                             "value": "0"
                           }
@@ -152,22 +152,22 @@
                         "functionName": {
                           "name": "add",
                           "nodeType": "YulIdentifier",
-                          "src": "352:3:32"
+                          "src": "352:3:24"
                         },
                         "nodeType": "YulFunctionCall",
-                        "src": "352:17:32"
+                        "src": "352:17:24"
                       }
                     ],
                     "functionName": {
                       "name": "abi_encode_t_bytes32_to_t_bytes32_fromStack_library",
                       "nodeType": "YulIdentifier",
-                      "src": "291:51:32"
+                      "src": "291:51:24"
                     },
                     "nodeType": "YulFunctionCall",
-                    "src": "291:79:32"
+                    "src": "291:79:24"
                   },
                   "nodeType": "YulExpressionStatement",
-                  "src": "291:79:32"
+                  "src": "291:79:24"
                 }
               ]
             },
@@ -177,13 +177,13 @@
               {
                 "name": "headStart",
                 "nodeType": "YulTypedName",
-                "src": "217:9:32",
+                "src": "217:9:24",
                 "type": ""
               },
               {
                 "name": "value0",
                 "nodeType": "YulTypedName",
-                "src": "229:6:32",
+                "src": "229:6:24",
                 "type": ""
               }
             ],
@@ -191,30 +191,30 @@
               {
                 "name": "tail",
                 "nodeType": "YulTypedName",
-                "src": "240:4:32",
+                "src": "240:4:24",
                 "type": ""
               }
             ],
-            "src": "139:238:32"
+            "src": "139:238:24"
           },
           {
             "body": {
               "nodeType": "YulBlock",
-              "src": "428:32:32",
+              "src": "428:32:24",
               "statements": [
                 {
                   "nodeType": "YulAssignment",
-                  "src": "438:16:32",
+                  "src": "438:16:24",
                   "value": {
                     "name": "value",
                     "nodeType": "YulIdentifier",
-                    "src": "449:5:32"
+                    "src": "449:5:24"
                   },
                   "variableNames": [
                     {
                       "name": "cleaned",
                       "nodeType": "YulIdentifier",
-                      "src": "438:7:32"
+                      "src": "438:7:24"
                     }
                   ]
                 }
@@ -226,7 +226,7 @@
               {
                 "name": "value",
                 "nodeType": "YulTypedName",
-                "src": "410:5:32",
+                "src": "410:5:24",
                 "type": ""
               }
             ],
@@ -234,22 +234,22 @@
               {
                 "name": "cleaned",
                 "nodeType": "YulTypedName",
-                "src": "420:7:32",
+                "src": "420:7:24",
                 "type": ""
               }
             ],
-            "src": "383:77:32"
+            "src": "383:77:24"
           }
         ]
       },
       "contents": "{\n\n    function abi_encode_t_bytes32_to_t_bytes32_fromStack_library(value, pos) {\n        mstore(pos, cleanup_t_bytes32(value))\n    }\n\n    function abi_encode_tuple_t_bytes32__to_t_bytes32__fromStack_library_reversed(headStart , value0) -> tail {\n        tail := add(headStart, 32)\n\n        abi_encode_t_bytes32_to_t_bytes32_fromStack_library(value0,  add(headStart, 0))\n\n    }\n\n    function cleanup_t_bytes32(value) -> cleaned {\n        cleaned := value\n    }\n\n}\n",
-      "id": 32,
+      "id": 24,
       "language": "Yul",
       "name": "#utility.yul"
     }
   ],
   "sourceMap": "1364:1837:13:-:0;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;",
-  "deployedSourceMap": "1364:1837:13:-:0;;;;;;;;;;;;;;;;;;;;;;;;1490:124;;;:::i;:::-;;;;;;;:::i;:::-;;;;;;;;;1548:66;1490:124;;;:::o;7:126:32:-;102:24;120:5;102:24;:::i;:::-;97:3;90:37;80:53;;:::o;139:238::-;;278:2;267:9;263:18;255:26;;291:79;367:1;356:9;352:17;343:6;291:79;:::i;:::-;245:132;;;;:::o;383:77::-;;449:5;438:16;;428:32;;;:::o",
+  "deployedSourceMap": "1364:1837:13:-:0;;;;;;;;;;;;;;;;;;;;;;;;1490:124;;;:::i;:::-;;;;;;;:::i;:::-;;;;;;;;;1548:66;1490:124;;;:::o;7:126:24:-;102:24;120:5;102:24;:::i;:::-;97:3;90:37;80:53;;:::o;139:238::-;;278:2;267:9;263:18;255:26;;291:79;367:1;356:9;352:17;343:6;291:79;:::i;:::-;245:132;;;;:::o;383:77::-;;449:5;438:16;;428:32;;;:::o",
   "source": "/**\r\n * SPDX-License-Identifier: MIT\r\n *\r\n * Copyright (c) 2020 CENTRE SECZ\r\n *\r\n * Permission is hereby granted, free of charge, to any person obtaining a copy\r\n * of this software and associated documentation files (the \"Software\"), to deal\r\n * in the Software without restriction, including without limitation the rights\r\n * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell\r\n * copies of the Software, and to permit persons to whom the Software is\r\n * furnished to do so, subject to the following conditions:\r\n *\r\n * The above copyright notice and this permission notice shall be included in\r\n * copies or substantial portions of the Software.\r\n *\r\n * THE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\r\n * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\r\n * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\r\n * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\r\n * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\r\n * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE\r\n * SOFTWARE.\r\n */\r\n\r\npragma solidity ^0.8.0; //change from 0.6.12 to 0.8.0\r\n\r\nimport {ECRecover} from \"./ECRecover.sol\";\r\n\r\n/**\r\n * @title EIP712\r\n * @notice A library that provides EIP712 helper functions\r\n */\r\nlibrary EIP712 {\r\n    // keccak256(\"EIP712Domain(string name,string version,address verifyingContract,uint256 chainId)\")\r\n    bytes32\r\n        public constant EIP712_DOMAIN_TYPEHASH = 0x8b73c3c69bb8fe3d512ecc4cf759cc79239f7b179b0ffacaa9a75d522b39400f;\r\n\r\n    /**\r\n     * @notice Make EIP712 domain separator\r\n     * @param name      Contract name\r\n     * @param version   Contract version\r\n     * @return Domain separator\r\n     */\r\n    function makeDomainSeparator(string memory name, string memory version)\r\n        internal\r\n        view\r\n        returns (bytes32)\r\n    {\r\n        uint256 chainId;\r\n        assembly {\r\n            chainId := chainid()\r\n        }\r\n\r\n        return\r\n            keccak256(\r\n                abi.encode(\r\n                    EIP712_DOMAIN_TYPEHASH,\r\n                    keccak256(bytes(name)),\r\n                    keccak256(bytes(version)),\r\n                    bytes32(chainId),\r\n                    address(this)\r\n                )\r\n            );\r\n    }\r\n\r\n    /**\r\n     * @notice Recover signer's address from a EIP712 signature\r\n     * @param domainSeparator   Domain separator\r\n     * @param v                 v of the signature\r\n     * @param r                 r of the signature\r\n     * @param s                 s of the signature\r\n     * @param typeHashAndData   Type hash concatenated with data\r\n     * @return Signer's address\r\n     */\r\n    function recover(\r\n        bytes32 domainSeparator,\r\n        uint8 v,\r\n        bytes32 r,\r\n        bytes32 s,\r\n        bytes memory typeHashAndData\r\n    ) internal pure returns (address) {\r\n        bytes32 digest = keccak256(\r\n            abi.encodePacked(\r\n                \"\\x19\\x01\",\r\n                domainSeparator,\r\n                keccak256(typeHashAndData)\r\n            )\r\n        );\r\n        return ECRecover.recover(digest, v, r, s);\r\n    }\r\n}\r\n",
   "sourcePath": "C:\\Users\\sound\\Desktop\\MOTD\\meme-repo-copy\\src\\contracts\\src\\EIP712.sol",
   "ast": {
@@ -2753,8 +2753,8 @@
     "version": "0.8.0+commit.c7dfd78e.Emscripten.clang"
   },
   "networks": {},
-  "schemaVersion": "3.3.4",
-  "updatedAt": "2021-05-01T15:31:20.800Z",
+  "schemaVersion": "3.4.1",
+  "updatedAt": "2021-05-08T07:27:59.216Z",
   "devdoc": {
     "kind": "dev",
     "methods": {},

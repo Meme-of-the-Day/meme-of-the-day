@@ -26,7 +26,7 @@ contract MemeSaleV3PauseReentrancy is EIP712Domain, Initializable, OwnableUpgrad
     //Removed because sol 0.8.0 natively checks for over and underflow
     //using SafeMath for uint256;
 
-    string internal constant VERIFYING_CONTRACT_NAME = "MemeSale";
+    string internal constant VERIFYING_CONTRACT_NAME = "MemeSaleV3PauseReentrancy";
 
     // keccak256(VerifyPrice(uint256 tokenId,uint256 price)")
     bytes32

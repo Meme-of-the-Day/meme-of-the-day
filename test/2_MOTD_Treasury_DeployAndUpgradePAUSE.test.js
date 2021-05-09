@@ -20,17 +20,18 @@ contract('Treasury upgradeSafe Pause', async function (accounts) {
         console.log("Treasury1 Proxy Address: " + this.treasury1.address);
         let owner = await this.treasury1.owner();
         console.log("Owner is: " + owner);
-
         //CHECK IF OWNER IS EQUAl TO DEPLOYER ACCOUNT
         assert.equal(owner, accounts[0]);
     });
 
     it('should allow to deposit ETH', async function() {
         let treasBalance = await web3.eth.getBalance(this.treasury1.address);
-      //  console.log("Balance Treasury1 BEFORE TX: " + treasBalance);
+       
+    
+        //console.log("Balance Treasury1 BEFORE TX: " + treasBalance);
 
-     //   acc1Balance = await web3.eth.getBalance(accounts[1]);
-     //   console.log("Balance accounts[1] BEFORE TX: " + acc1Balance);
+       //acc1Balance = await web3.eth.getBalance(accounts[1]);
+      //console.log("Balance accounts[1] BEFORE TX: " + acc1Balance);
 
         console.log("Sending 2 Ether from accounts[1] to treasury");
 
