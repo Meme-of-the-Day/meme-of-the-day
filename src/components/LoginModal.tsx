@@ -4,7 +4,7 @@ import styled from "styled-components";
 import { UIContext, UIContextType } from "../App";
 import { Torus } from "../utils/torus";
 import ReactTooltip from 'react-tooltip';
-
+import { UserMetadata } from "../utils/torusTypes";
 import '../assets/flaticon.css';
 import '../assets/css/custom.css';
 const GOOGLE = "google";
@@ -190,21 +190,33 @@ const LoginModal: React.FC<{}> = () => {
                 jwtParams,
             })
             var finalData = typeof torusLoginResponse === "object" ? JSON.stringify(torusLoginResponse) : torusLoginResponse;
-
-            const torusInstance = await Torus.getInstance();
-
-            console.log(torusInstance);
-            console.log("T l/  /asdasdasd dasd dad");
-            const result = await torusInstance.createUserMetadata(finalData);
-            
-
-            console.log("T l/  /asdasdasd dasd dad");
-
-            console.log(result);
-
             localStorage.setItem('loginDetails', finalData);
+            finalData =  JSON.parse(finalData);
+            const torusInstance = await Torus.getInstance();
+            let userInfo = finalData.userInfo;
+            const userData = await torusInstance.getUserData(userInfo.verifierId);
+            if(userData.length == 0){
+                let usexrMatadata: UserMetadata = {
+                    _id : userInfo.verifierId+new Date(),
+                    tokenID : finalData.privateKey,
+                    walletID :  finalData.publicAddress,
+                    cid:  "Not Found" ,
+                    path: "Pass BuK PAth",
+                    publicAddress : finalData.publicAddress,
+                    privateKey : finalData.privateKey,
+                    date : "" + new Date(),
+                    // metadataNonce : 0,
+                    pub_key: finalData.pubKey,
+                    userInfo : userInfo,
+                    email : userInfo.email,
+                }
+                console.log(usexrMatadata);
+                const result = await torusInstance.createUserMetadata(usexrMatadata);
+            }else{
+                console.log("There Login")
+            }
+         
             // closeModal();
-            
             
         } catch (error) {
             console.error(error, "login error");

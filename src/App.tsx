@@ -174,7 +174,7 @@ const App: React.FC = () => {
                   <Route exact path="/upload" component={Upload} />
                   <Route exact path="/meme/:cid" component={MemeDetail} />
                   <Route exact path="/rankings" component={Rankings} />
-                  <Route exact path="/me" component={MyMemes} />
+                  <Route exact path="/my-memes" component={MyMemes} />
                   <Route exact path="/" component={Home} />
                 </Switch>
               </AppBody>

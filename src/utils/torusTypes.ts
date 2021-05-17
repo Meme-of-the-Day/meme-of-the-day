@@ -1,31 +1,16 @@
 export interface UserMetadata {
   _id?: string;
   tokenID?: string; // NFT tokenID
+  walletID: string; //Public Address is wallet ID
   cid: string; // IPFS CID
   path: string; // Bucket path
-  tokenMetadataURL?: string;
-  tokenMetadataPath?: string;
   publicAddress: string; // meme Name
   privateKey: string; // blockchain tx hash
   date: string; // created date
-  metadataNonce: number;
-  pub_key_X?: string; // account address
-  pub_key_Y?: string; // public key
-  userInfo: Array<string>;
+  // metadataNonce: number;
+  pub_key?: object; // public key
+  userInfo: object;
   email?: string;
-  username: string; // set of user name we get from auth.
-  profileImage: string; // set of user ids who disliked this meme.
-  verifier?: string;
-  verifierId?: string;
-  typeOfLogin?: string;
-  accessToken?: string;
-  idToken?: string;
-  instanceId?: string;
-  token_type?: string;
-  expires_in?: string;
-  scope?: string;
-  authuser?: string;
-  prompt?: string;
 }
 
 export interface TokenMetadata {
@@ -81,6 +66,10 @@ export const Schema = {
           type: "string",
           description: "The Users's id."
         },
+        walletID: {
+          type: "string",
+          description: "The Users's id."
+        },
         tokenID: {
           type: "string",
           description: "NFT TokenID."
@@ -89,25 +78,9 @@ export const Schema = {
           type: "string",
           description: "User IPFS CID."
         },
-        previewCID: {
-          type: "string",
-          description: "User Token Metadata IPFS CID."
-        },
         path: {
           type: "string",
           description: "User bucket path."
-        },
-        previewPath: {
-          type: "string",
-          description: "User image Token metadata preview image bucket path."
-        },
-        tokenMetadataURL: {
-          type: "string",
-          description: "ERC1155 compliant token metadata URL."
-        },
-        tokenMetadataPath: {
-          type: "string",
-          description: "Bucket path for the token metadata resource."
         },
         date: {
           type: "string",
@@ -121,60 +94,24 @@ export const Schema = {
           type: "string",
           description: "User private key."
         },
-        metadataNonce: {
-          type: "Number",
-          description: "User mata nounce number."
+        // metadataNonce: {
+        //   type: "Number",
+        //   description: "User mata nounce number."
+        // },
+        pub_key: {
+          type: "object",
+          description: "User public key ."
         },
-        pub_key_X: {
-          type: "string",
-          description: "User public key X."
-        },
-        pub_key_Y: {
-          type: "string",
-          description: "User public key Y."
+        userInfo: {
+          type: "object",
+          description: "User Info From Tours."
         },
         email: {
           type: "string",
           description: "User email for login"
-        },
-        username: {
-          type: "string",
-          description: "User name."
-        },
-        profileImage: {
-          type: "string",
-          description: "User profile image path."
-        },
-        verifier: {
-          type: "string",
-          description: "User verifier name like google-lrc."
-        },
-        verifierId: {
-          type: "string",
-          description: "User verifier id genrated by verifier."
-        },
-        typeOfLogin: {
-          type: "string",
-          description: "User login provider."
-        },
-        accessToken: {
-          type: "string",
-          description: "Access token returned by verifier."
-        },
-        idToken: {
-          type: "string",
-          description: "User ID token."
-        },
-        instanceId: {
-          type: "string",
-          description: "Verifier instance id."
-        },
-        token_type: {
-          type: "string",
-          description: "Type of token like Bearer."
         }
       },
-      required: ["cid", "path", "email", "date","publicAddress","privateKey",],
+      required: ["cid", "path", "email", "date","publicAddress","privateKey"],
       additionalProperties: false
     }
   }

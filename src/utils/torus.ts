@@ -62,10 +62,18 @@ export class Torus {
 
     const buck = await buckets.getOrCreate('ahrammemebuck');
    
-    // let list = await this.client.listCollections(ThreadID.fromString(this.dbThreadID));
-    // console.log( "asdasddasdsddas" ,  list);
+    
+     console.log("new    Creation ");
+   
+    //  let createCol = await this.client.newCollection(ThreadID.fromString(this.dbThreadID), { name: this.memeCollectionName, schema : Schema }); 
+    //  console.log("new    asdasd " + createCol);
+
+      let list = await this.client.listCollections(ThreadID.fromString(this.dbThreadID));
+      console.log("sddasdd" );
+      console.log( list);
 
     // await this.client.updateCollection(ThreadID.fromString(this.dbThreadID), {name: this.memeCollectionName, schema: Schema});
+    
     if (!buck.root) {
       throw new Error('Failed to get or create bucket');
     }
@@ -76,15 +84,15 @@ export class Torus {
     };
   }
 
-  public async getUserData(owner: string) {
-    if (!this.client || !owner) {
+  public async getUserData(verifierId: string) {
+    if (!this.client || !verifierId) {
       throw new Error('No client or owner address');
     }
 
-    const query = new Where('owner').eq(owner);
-    const memeList = await this.client.find<UserMetadata>(ThreadID.fromString(this.dbThreadID), this.memeCollectionName, query);
+    const query = new  Where('_id').eq(verifierId);
+    const userList = await this.client.find<UserMetadata>(ThreadID.fromString(this.dbThreadID), this.memeCollectionName, query);
 
-    return memeList;
+    return userList;
   }
 
   public async getUserMetadata(cid: string) {
