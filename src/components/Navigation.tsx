@@ -102,6 +102,13 @@ const Navigation: React.FC<{ className?: string }> = ({ className }) => {
     // }
   };
 
+  const logOut = async () => {
+    localStorage.clear();
+    window.location.href = "/";
+  };
+
+  let loginDetail = localStorage.getItem('loginDetails');
+  
   return (
     <Main className={className} onClick={uiContext.toggleHamburger}>
       <Logo src={motd} alt="MOTD logo" />
@@ -115,14 +122,23 @@ const Navigation: React.FC<{ className?: string }> = ({ className }) => {
         <CustomNavLink exact to="/upload" activeClassName={"active"}>
           Upload
         </CustomNavLink>
+        {localStorage.getItem('loginDetails') &&(
         <CustomNavLink exact to="/my-memes" activeClassName={"active"}>
           My Memes
         </CustomNavLink>
+        )}
       </MainLinks>
       <OtherLinks>
-        {!authProvider && (
+        {!localStorage.getItem('loginDetails') && (
           <Login onClick={async () => await login()}>Login</Login>
         )}
+        {localStorage.getItem('loginDetails') && (
+          <Login onClick={async () => await logOut()}>Log Out</Login>
+        )}
+        {/* {!authProvider && (
+          <Login onClick={async () => await login()}>Login</Login>
+        )} */}
+
         <OutbountLinks href="https://twitter.com/MemeofDayDApp">
           Twitter
         </OutbountLinks>

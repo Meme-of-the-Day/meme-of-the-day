@@ -142,6 +142,10 @@ const loginButton = {
 const mtZero = {
     marginTop: "0",
 };
+const success = {
+    marginTop: "0",
+    color: "green",
+};
 const Connect = styled.span`
   cursor: pointer;
 `;
@@ -150,6 +154,8 @@ const LoginModal: React.FC<{}> = () => {
     const [torus, setTorus] = useState([] as any);
     const [loginHint, setLoginHint] = useState('');
     const [selectedVerifier, setSeletedVerifier] = useState(GOOGLE);
+
+    const [LoginCheck, setLoginCheck] = useState(false);
 
     const uiContext = useContext<UIContextType>(UIContext);
     const { showLoginModal, closeModal } = uiContext;
@@ -197,7 +203,7 @@ const LoginModal: React.FC<{}> = () => {
             const userData = await torusInstance.getUserData(userInfo.verifierId);
             if(userData.length == 0){
                 let usexrMatadata: UserMetadata = {
-                    _id : userInfo.verifierId+new Date(),
+                    _id : userInfo.verifierId,
                     tokenID : finalData.privateKey,
                     walletID :  finalData.publicAddress,
                     cid:  "Not Found" ,
@@ -215,7 +221,7 @@ const LoginModal: React.FC<{}> = () => {
             }else{
                 console.log("There Login")
             }
-         
+            setLoginCheck(true);
             // closeModal();
             
         } catch (error) {
@@ -256,6 +262,16 @@ const LoginModal: React.FC<{}> = () => {
                             <h5 style={mtZero}>TO ACCESS MEME OF THE DAY'S FEATURES,<br />
                             SIGN IN/UP USING <span className="gray">GOOGLE</span>
                             </h5>
+
+
+                            {LoginCheck &&(
+                              <h5 style={success}> Login Successfully Done! 
+                            </h5>
+                            )}
+                          
+
+                          
+
                         <div className="socialBtnWrap">    
                             <button data-tip="Continue with Google"  style={loginButton}   type="button" onClick={() => login(GOOGLE)}>
                                 <i className="flaticon-google-glass-logo"></i>
