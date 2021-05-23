@@ -15,8 +15,8 @@ import {
 import { AuthProvider } from "../utils/UserAuth";
 import UploadModal from "../components/UploadModal";
 
-const MemeSale = require("../contracts/abis/MemeSale.json");
-const MemesHandler = require("../contracts/abis/MemeOfTheDay.json");
+const MemeSale = require("../contracts/abis/MemeSaleV3PauseReentrancy.jsonn");
+const MemesHandler = require("../contracts/abis/MemeOfTheDayV3Pause.json");
 
 enum UploadStatus {
   NOT_STARTED = 0,
