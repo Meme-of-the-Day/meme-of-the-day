@@ -21,7 +21,7 @@ jobs:
     - name: Set up Node.js version
       uses: actions/setup-node@v1
       with:
-        node-version: '12.x'
+        node-version: '12.16.2'
 
     - name: npm install, build, and test
       run: |
