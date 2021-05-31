@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
-
+import { torusObject } from '../helper/toruslabs'
 import Meme from '../components/Meme';
 import Loader from '../components/Loader';
 import { Textile } from '../utils/textile';
@@ -65,7 +65,11 @@ const MyMemes: React.FC<{}> = () => {
 
       const connectedAccount = await web3.eth.getAccounts();
       console.log(connectedAccount);
-      const memes = await textile.getUserMemes(connectedAccount[0]);
+      console.log(torusObject.account);
+
+      const memes = await textile.getUserMemes(torusObject.account);
+      // const memes = await textile.getUserMemes(connectedAccount[0]);
+
       setMemeMetadata(memes);
       setTextile(textile);
       setLoading(false);
@@ -76,13 +80,13 @@ const MyMemes: React.FC<{}> = () => {
   return (
     <Main>
       {
-        loading ? 
-        <Loader /> :
-        memeMetadata.length > 0 && textileInstance ? memeMetadata.map((meme) => <CustomMeme meme={meme} textileInstance={textileInstance} key={meme.cid} />) :
-        <NoMemesMsg>
-          <span>You haven't uploaded any memes.</span>
-          <CustomLink to="/upload">Upload a meme</CustomLink>
-        </NoMemesMsg>
+        loading ?
+          <Loader /> :
+          memeMetadata.length > 0 && textileInstance ? memeMetadata.map((meme) => <CustomMeme meme={meme} textileInstance={textileInstance} key={meme.cid} />) :
+            <NoMemesMsg>
+              <span>You haven't uploaded any memes.</span>
+              <CustomLink to="/upload">Upload a meme</CustomLink>
+            </NoMemesMsg>
       }
     </Main>
   )

@@ -24,7 +24,7 @@ export class Textile {
     maxWidth: 800,
     maxHeigth: 800
   };
- 
+
   private static singletonInstace: Textile;
 
   public static async getInstance(): Promise<Textile> {
@@ -41,7 +41,7 @@ export class Textile {
     console.log(env);
 
     this.hubAuthURL = env !== 'production' ? process.env.REACT_APP_TEST_HUB_BROWSER_AUTH_URL as string
-     : process.env.REACT_APP_PROD_HUB_BROWSER_AUTH_URL as string;
+      : process.env.REACT_APP_PROD_HUB_BROWSER_AUTH_URL as string;
 
     this.identity = await this.getIdentity();
     let buckets: Buckets;
@@ -63,7 +63,7 @@ export class Textile {
     await this.client.getToken(this.identity);
 
     const buck = await buckets.getOrCreate('memeoftheday');
-    // await this.client.updateCollection(ThreadID.fromString(this.dbThreadID), {name: this.memeCollectionName, schema: Schema});
+    await this.client.updateCollection(ThreadID.fromString(this.dbThreadID), { name: this.memeCollectionName, schema: Schema });
     if (!buck.root) {
       throw new Error('Failed to get or create bucket');
     }
@@ -89,8 +89,9 @@ export class Textile {
     if (!this.client || !owner) {
       throw new Error('No client or owner address');
     }
-
-    const query = new Where('owner').eq(owner);
+    // walletID
+    const query = new Where('walletID').eq(owner);
+    // const query = new Where('owner').eq(owner);
     const memeList = await this.client.find<MemeMetadata>(ThreadID.fromString(this.dbThreadID), this.memeCollectionName, query);
 
     return memeList;
@@ -149,7 +150,8 @@ export class Textile {
       likedBy: new Array<string>(),
       dislikedBy: new Array<string>(),
       owner: "",
-      tags: new Array<string>()
+      tags: new Array<string>(),
+      walletID: ""
     };
   }
 
@@ -157,6 +159,7 @@ export class Textile {
     if (!this.bucketInfo.bucket || !this.bucketInfo.bucketKey || !this.client) {
       throw new Error('No bucket or client or root key');
     }
+    console.log(metadata);
 
     await this.client.create(ThreadID.fromString(this.dbThreadID), this.memeCollectionName, [metadata]);
   }

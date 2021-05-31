@@ -23,7 +23,7 @@ export class Torus {
     maxWidth: 800,
     maxHeigth: 800
   };
- 
+
   private static singletonInstace: Torus;
 
   public static async getInstance(): Promise<Torus> {
@@ -40,7 +40,7 @@ export class Torus {
     console.log(env);
 
     this.hubAuthURL = env !== 'production' ? process.env.REACT_APP_TEST_HUB_BROWSER_AUTH_URL as string
-     : process.env.REACT_APP_PROD_HUB_BROWSER_AUTH_URL as string;
+      : process.env.REACT_APP_PROD_HUB_BROWSER_AUTH_URL as string;
 
     this.identity = await this.getIdentity();
     let buckets: Buckets;
@@ -61,19 +61,17 @@ export class Torus {
     await this.client.getToken(this.identity);
 
     const buck = await buckets.getOrCreate('ahrammemebuck');
-   
-    
-     console.log("new    Creation ");
-   
+
+
+    console.log("new    Creation ");
+
     //  let createCol = await this.client.newCollection(ThreadID.fromString(this.dbThreadID), { name: this.memeCollectionName, schema : Schema }); 
-    //  console.log("new    asdasd " + createCol);
 
-      let list = await this.client.listCollections(ThreadID.fromString(this.dbThreadID));
-      console.log("sddasdd" );
-      console.log( list);
+    let list = await this.client.listCollections(ThreadID.fromString(this.dbThreadID));
+    console.log(list);
 
-    // await this.client.updateCollection(ThreadID.fromString(this.dbThreadID), {name: this.memeCollectionName, schema: Schema});
-    
+    // await this.client.updateCollection(ThreadID.fromString(this.dbThreadID), { name: this.memeCollectionName, schema: Schema });
+
     if (!buck.root) {
       throw new Error('Failed to get or create bucket');
     }
@@ -89,7 +87,7 @@ export class Torus {
       throw new Error('No client or owner address');
     }
 
-    const query = new  Where('_id').eq(verifierId);
+    const query = new Where('_id').eq(verifierId);
     const userList = await this.client.find<UserMetadata>(ThreadID.fromString(this.dbThreadID), this.memeCollectionName, query);
 
     return userList;

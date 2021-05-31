@@ -3,7 +3,7 @@ import styled from "styled-components";
 import { Contract } from "web3-eth-contract";
 import { TransactionReceipt } from "web3-eth";
 import { SignedTransaction } from "web3-core";
-
+import { torusObject } from '../helper/toruslabs'
 import { AuthContext } from "../App";
 import { Textile } from "../utils/textile";
 import { MemeMetadata } from "../utils/Types";
@@ -235,6 +235,8 @@ const Switch = styled.div`
 `;
 
 const Upload: React.FC<{}> = () => {
+
+
   let authContext = useContext(AuthContext);
 
   const [submitEnabled, setSubmitEnabled] = useState(false);
@@ -265,7 +267,7 @@ const Upload: React.FC<{}> = () => {
     setSubmitEnabled(true);
   };
 
-  const signMessage = function(meme: MemeMetadata): Promise<string> {
+  const signMessage = function (meme: MemeMetadata): Promise<string> {
     const sellerSetPriceTypedData = JSON.stringify({
       types: {
         EIP712Domain: [
@@ -382,7 +384,7 @@ const Upload: React.FC<{}> = () => {
     setSubmitEnabled(false);
     setUploadStatus(UploadStatus.IN_PROGRESS);
 
-    (window as any).onbeforeunload = function() {
+    (window as any).onbeforeunload = function () {
       return "Are you sure you want to navigate away?";
     };
 
@@ -462,11 +464,11 @@ const Upload: React.FC<{}> = () => {
         //second paramenter is creator fee, using 0% for now
         .mint(meme.cid, 0)
         .send({ from: authContext.authProvider?.account })
-        .on("error", async function(error: any) {
+        .on("error", async function (error: any) {
           console.log(error);
           await textile.deleteMemeFromBucket(meme);
         })
-        .then(async function(receipt: TransactionReceipt) {
+        .then(async function (receipt: TransactionReceipt) {
           console.log("Mint tx:", receipt);
 
           setTxDetails({
@@ -483,7 +485,7 @@ const Upload: React.FC<{}> = () => {
             //second paramenter is creator fee, using 0% for now
             .getTokenID(meme.cid)
             .call({ from: authContext.authProvider?.account })
-            .then(async function(result: any) {
+            .then(async function (result: any) {
               let memeUpdated: MemeMetadata = {
                 ...meme,
                 txHash: receipt.transactionHash,
@@ -492,7 +494,8 @@ const Upload: React.FC<{}> = () => {
                 name: memeName,
                 description: description,
                 onSale: onSale,
-                price: memePrice
+                price: memePrice,
+                walletID: torusObject.account
               };
 
               setMeme(memeUpdated);
@@ -506,11 +509,13 @@ const Upload: React.FC<{}> = () => {
 
               await textile.uploadMemeMetadata(memeUpdated);
 
+
+
               setUploadStatus(UploadStatus.COMPLETED);
               (form as HTMLFormElement).reset();
               setImage("");
             })
-            .catch("error", async function(error: any) {
+            .catch("error", async function (error: any) {
               console.log(error);
               await textile.deleteMemeFromBucket(meme);
               alert("Something went wrong! Please try again");
@@ -519,7 +524,7 @@ const Upload: React.FC<{}> = () => {
               setShowUploadModal(false);
             });
 
-          (window as any).onbeforeunload = function() {};
+          (window as any).onbeforeunload = function () { };
         })
         .catch(async (error: any) => {
           console.log(error);
@@ -528,7 +533,7 @@ const Upload: React.FC<{}> = () => {
           setShowUploadModal(false);
           alert("Something went wrong! Please try again");
           await textile.deleteMemeFromBucket(meme);
-          (window as any).onbeforeunload = function() {};
+          (window as any).onbeforeunload = function () { };
         });
     }
   };
@@ -546,7 +551,7 @@ const Upload: React.FC<{}> = () => {
     })();
 
     return () => {
-      (window as any).onbeforeunload = function() {};
+      (window as any).onbeforeunload = function () { };
     };
   }, [authContext.authProvider]);
 

@@ -6,7 +6,7 @@ import theme from "./theme";
 import AppBar from "./components/appBar/AppBar";
 import Navigation from "./components/Navigation";
 import MessageModal from "./components/MessageModal";
-import LoginModal from "./components/LoginModal";
+// import LoginModal from "./components/LoginModal";
 import Home from "./pages/Home";
 import Upload from "./pages/Upload";
 import MyMemes from "./pages/MyMemes";
@@ -179,7 +179,7 @@ const App: React.FC = () => {
                 </Switch>
               </AppBody>
               <MessageModal />
-              <LoginModal />
+              {/* <LoginModal /> */}
             </Main>
           </Router>
 

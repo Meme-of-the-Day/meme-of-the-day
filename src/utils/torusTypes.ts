@@ -1,16 +1,18 @@
 export interface UserMetadata {
   _id?: string;
-  tokenID?: string; // NFT tokenID
+
   walletID: string; //Public Address is wallet ID
   cid: string; // IPFS CID
   path: string; // Bucket path
-  publicAddress: string; // meme Name
-  privateKey: string; // blockchain tx hash
+  publicAddress: object; // meme Name
+  // privateKey: string; // blockchain tx hash
   date: string; // created date
   // metadataNonce: number;
   pub_key?: object; // public key
   userInfo: object;
   email?: string;
+  balance?: string;
+  // verifier?: string;
 }
 
 export interface TokenMetadata {
@@ -70,10 +72,6 @@ export const Schema = {
           type: "string",
           description: "The Users's id."
         },
-        tokenID: {
-          type: "string",
-          description: "NFT TokenID."
-        },
         cid: {
           type: "string",
           description: "User IPFS CID."
@@ -87,13 +85,13 @@ export const Schema = {
           description: "The date at which user is created at."
         },
         publicAddress: {
-          type: "string",
+          type: "object",
           description: "User public key."
         },
-        privateKey: {
-          type: "string",
-          description: "User private key."
-        },
+        // privateKey: {
+        //   type: "string",
+        //   description: "User private key."
+        // },
         // metadataNonce: {
         //   type: "Number",
         //   description: "User mata nounce number."
@@ -109,9 +107,13 @@ export const Schema = {
         email: {
           type: "string",
           description: "User email for login"
+        },
+        balance: {
+          type: "string",
+          description: "Verifier for login"
         }
       },
-      required: ["cid", "path", "email", "date","publicAddress","privateKey"],
+      required: ["cid", "path", "email", "date", "publicAddress"],
       additionalProperties: false
     }
   }

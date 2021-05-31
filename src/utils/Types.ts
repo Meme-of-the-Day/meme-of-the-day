@@ -22,6 +22,7 @@ export interface MemeMetadata {
   onSale?: boolean;
   description?: string;
   sellApprovalSignature?: string;
+  walletID: string
 }
 
 export interface TokenMetadata {
@@ -169,7 +170,11 @@ export const Schema = {
         onSale: {
           type: "boolean",
           description: "Is the meme on sale"
-        }
+        },
+        walletID: {
+          type: "string",
+          description: "walletID for the meme"
+        },
       },
       required: ["cid", "path", "name", "date"],
       additionalProperties: false

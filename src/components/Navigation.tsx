@@ -1,7 +1,7 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { NavLink } from "react-router-dom";
 import styled, { css } from "styled-components";
-
+import { enableTorus, logout } from "../helper/toruslabs";
 import motd from "../assets/logo.svg";
 import { AuthContext, UIContext } from "../App";
 
@@ -84,6 +84,8 @@ const Navigation: React.FC<{ className?: string }> = ({ className }) => {
   const authContext = useContext(AuthContext);
   const uiContext = useContext(UIContext);
 
+  const [loginCheck, setLoginCheck] = useState(false);
+
   const { openModal } = uiContext;
 
   const {
@@ -94,21 +96,48 @@ const Navigation: React.FC<{ className?: string }> = ({ className }) => {
     authProvider
   } = authContext;
 
+  useEffect(() => {
+    const isTorus = sessionStorage.getItem('pageUsingTorus')
+    let loginDetail = localStorage.getItem('loginDetails');
+    if (loginDetail) {
+      setLoginCheck(true)
+    }
+    if (isTorus) {
+      enableTorus(isTorus)
+    }
+  }, [])
+
   const login = async () => {
     // if (!hasMetamask) {
-    openModal();
+    // openModal();
+    enableTorus('testing');
+    checkLoginStatus();
     // } else {
     //   await authenticate();
     // }
   };
 
+
+  const checkLoginStatus = async () => {
+    let loginDetail = localStorage.getItem('loginDetails');
+    if (loginDetail) {
+      setLoginCheck(true);
+    } else {
+      setTimeout(function () { checkLoginStatus(); }, 3000);
+
+    }
+
+  }
+
   const logOut = async () => {
+    logout();
+    sessionStorage.clear();
     localStorage.clear();
     window.location.href = "/";
   };
 
   let loginDetail = localStorage.getItem('loginDetails');
-  
+
   return (
     <Main className={className} onClick={uiContext.toggleHamburger}>
       <Logo src={motd} alt="MOTD logo" />
@@ -119,20 +148,22 @@ const Navigation: React.FC<{ className?: string }> = ({ className }) => {
         <CustomNavLink exact to="/rankings" activeClassName={"active"}>
           Rankings
         </CustomNavLink>
-        <CustomNavLink exact to="/upload" activeClassName={"active"}>
-          Upload
-        </CustomNavLink>
-        {localStorage.getItem('loginDetails') &&(
-        <CustomNavLink exact to="/my-memes" activeClassName={"active"}>
-          My Memes
-        </CustomNavLink>
+        {loginCheck && (
+          <CustomNavLink exact to="/upload" activeClassName={"active"}>
+            Upload
+          </CustomNavLink>
+        )}
+        {loginCheck && (
+          <CustomNavLink exact to="/my-memes" activeClassName={"active"}>
+            My Memes
+          </CustomNavLink>
         )}
       </MainLinks>
       <OtherLinks>
-        {!localStorage.getItem('loginDetails') && (
+        {!loginCheck && (
           <Login onClick={async () => await login()}>Login</Login>
         )}
-        {localStorage.getItem('loginDetails') && (
+        {loginCheck && (
           <Login onClick={async () => await logOut()}>Log Out</Login>
         )}
         {/* {!authProvider && (
