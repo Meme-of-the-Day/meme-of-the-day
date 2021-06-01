@@ -63,7 +63,7 @@ export class Textile {
     await this.client.getToken(this.identity);
 
     const buck = await buckets.getOrCreate('memeoftheday');
-    await this.client.updateCollection(ThreadID.fromString(this.dbThreadID), { name: this.memeCollectionName, schema: Schema });
+    //await this.client.updateCollection(ThreadID.fromString(this.dbThreadID), { name: this.memeCollectionName, schema: Schema });
     if (!buck.root) {
       throw new Error('Failed to get or create bucket');
     }
@@ -72,16 +72,17 @@ export class Textile {
       bucket: buckets,
       bucketKey: buck.root.key
     };
+
   }
 
   public async getAllMemes() {
     if (!this.client) {
       throw new Error('No client');
     }
-
+    //await this.client.delete(ThreadID.fromString(this.dbThreadID), this.memeCollectionName, ['01f6stfn7dnhgcq2sd66qdkbra','01f6swn364znzq4vvm0ss0faqr','01f6swtxcvye1v0kkvndd8m6s9','01f6sxqc7rpf7301b14hw20x82','01f6sysg323cvczsyy3w7frs5d','01f6szbmztcgbgdygy2nv0y4vg','01f72fz4q00vf7rv9hs25b0sxj'])
     // TODO: Implement a pagination logic to query only limited data.
     const memeList = await this.client.find<MemeMetadata>(ThreadID.fromString(this.dbThreadID), this.memeCollectionName, {});
-
+    console.log("Meme",memeList)
     return memeList;
   }
 
@@ -89,9 +90,11 @@ export class Textile {
     if (!this.client || !owner) {
       throw new Error('No client or owner address');
     }
+   
+    console.log("WaletID",owner)
     // walletID
-    const query = new Where('walletID').eq(owner);
-    // const query = new Where('owner').eq(owner);
+    //const query = new Where('walletid').eq(owner);
+    const query = new Where('walletid').eq(owner);
     const memeList = await this.client.find<MemeMetadata>(ThreadID.fromString(this.dbThreadID), this.memeCollectionName, query);
 
     return memeList;
@@ -151,7 +154,7 @@ export class Textile {
       dislikedBy: new Array<string>(),
       owner: "",
       tags: new Array<string>(),
-      walletID: ""
+      walletid: ""
     };
   }
 
@@ -208,7 +211,6 @@ export class Textile {
     await this.client.save(ThreadID.fromString(this.dbThreadID), this.memeCollectionName, memeList);
     return true;
   }
-
   public async deleteMemeFromBucket(meme: MemeMetadata) {
     if (!this.bucketInfo.bucket || !this.bucketInfo.bucketKey) {
       throw new Error('No bucket client or root key');

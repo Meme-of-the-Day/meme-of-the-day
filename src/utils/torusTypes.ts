@@ -1,18 +1,15 @@
 export interface UserMetadata {
   _id?: string;
 
-  walletID: string; //Public Address is wallet ID
+  walletID: string; //Account Address is wallet ID
   cid: string; // IPFS CID
   path: string; // Bucket path
   publicAddress: object; // meme Name
-  // privateKey: string; // blockchain tx hash
   date: string; // created date
-  // metadataNonce: number;
   pub_key?: object; // public key
-  userInfo: object;
-  email?: string;
+  userInfo: object; // Object with all the user info from the verifier
+  email?: string; // verifier email
   balance?: string;
-  // verifier?: string;
 }
 
 export interface TokenMetadata {
@@ -88,14 +85,6 @@ export const Schema = {
           type: "object",
           description: "User public key."
         },
-        // privateKey: {
-        //   type: "string",
-        //   description: "User private key."
-        // },
-        // metadataNonce: {
-        //   type: "Number",
-        //   description: "User mata nounce number."
-        // },
         pub_key: {
           type: "object",
           description: "User public key ."

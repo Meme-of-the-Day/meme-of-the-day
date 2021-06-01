@@ -495,7 +495,7 @@ const Upload: React.FC<{}> = () => {
                 description: description,
                 onSale: onSale,
                 price: memePrice,
-                walletID: torusObject.account
+                walletid: torusObject.account
               };
 
               setMeme(memeUpdated);
