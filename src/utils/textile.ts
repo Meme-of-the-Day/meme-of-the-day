@@ -17,7 +17,7 @@ export class Textile {
   private dbThreadID: string;
   private hubAuthURL: string;
   private dbName = 'memeofthedaydb';
-  private memeCollectionName = 'mememetadata';
+  private memeCollectionName = 'memeahrammemebuck';
   private ipfsGateway = 'https://hub.textile.io';
 
   private tokenImageConfig = {
@@ -62,8 +62,15 @@ export class Textile {
     await buckets.getToken(this.identity);
     await this.client.getToken(this.identity);
 
-    const buck = await buckets.getOrCreate('memeoftheday');
-    //await this.client.updateCollection(ThreadID.fromString(this.dbThreadID), { name: this.memeCollectionName, schema: Schema });
+    const buck = await buckets.getOrCreate('ahrammemebuck');
+
+
+    // let createCol = await this.client.newCollection(ThreadID.fromString(this.dbThreadID), { name: this.memeCollectionName, schema: Schema });
+
+    let list = await this.client.listCollections(ThreadID.fromString(this.dbThreadID));
+    console.log(list);
+
+    // await this.client.updateCollection(ThreadID.fromString(this.dbThreadID), { name: this.memeCollectionName, schema: Schema });
     if (!buck.root) {
       throw new Error('Failed to get or create bucket');
     }
@@ -82,7 +89,7 @@ export class Textile {
     //await this.client.delete(ThreadID.fromString(this.dbThreadID), this.memeCollectionName, ['01f6stfn7dnhgcq2sd66qdkbra','01f6swn364znzq4vvm0ss0faqr','01f6swtxcvye1v0kkvndd8m6s9','01f6sxqc7rpf7301b14hw20x82','01f6sysg323cvczsyy3w7frs5d','01f6szbmztcgbgdygy2nv0y4vg','01f72fz4q00vf7rv9hs25b0sxj'])
     // TODO: Implement a pagination logic to query only limited data.
     const memeList = await this.client.find<MemeMetadata>(ThreadID.fromString(this.dbThreadID), this.memeCollectionName, {});
-    console.log("Meme",memeList)
+    console.log("Meme", memeList)
     return memeList;
   }
 
@@ -90,8 +97,8 @@ export class Textile {
     if (!this.client || !owner) {
       throw new Error('No client or owner address');
     }
-   
-    console.log("WaletID",owner)
+
+    console.log("WaletID", owner)
     // walletID
     //const query = new Where('walletid').eq(owner);
     const query = new Where('walletid').eq(owner);

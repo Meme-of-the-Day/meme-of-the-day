@@ -99,6 +99,7 @@ const AppBar: React.FC<{}> = () => {
 
   const {
     hasMetamask,
+    authProvider,
     isConnectedToMatic,
     isMetamaskConnected,
     authenticate
@@ -106,7 +107,7 @@ const AppBar: React.FC<{}> = () => {
 
   return (
     <Main>
-      {(!hasMetamask || !isMetamaskConnected || !isConnectedToMatic) && (
+      {(!hasMetamask || !isMetamaskConnected || !isConnectedToMatic || authProvider == undefined) && (
         <Message>
           {!hasMetamask ? (
             <span>
@@ -118,7 +119,7 @@ const AppBar: React.FC<{}> = () => {
                 Please install Metamask to use this app
               </a>
             </span>
-          ) : !isMetamaskConnected ? (
+          ) : !isMetamaskConnected || authProvider == undefined ? (
             <Connect onClick={authenticate}>
               Please connect with Metamask, <u>click here</u>
             </Connect>

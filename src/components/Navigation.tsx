@@ -107,16 +107,17 @@ const Navigation: React.FC<{ className?: string }> = ({ className }) => {
     }
   }, [])
 
+
   const login = async () => {
-    // if (!hasMetamask) {
-    // openModal();
     enableTorus('testing');
     checkLoginStatus();
-    // } else {
-    //   await authenticate();
-    // }
-  };
+    if (!hasMetamask) {
+      // openModal();
 
+    } else {
+      await authenticate();
+    }
+  };
 
   const checkLoginStatus = async () => {
     let loginDetail = localStorage.getItem('loginDetails');
