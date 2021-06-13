@@ -1,7 +1,8 @@
 require("babel-register");
 require("babel-polyfill");
+//const { mnemonic } = require('./secrets.json');
 const HDWalletProvider = require("truffle-hdwallet-provider");
-const mnemonic = process.env.MNEMONIC;
+//const mnemonic = process.env.MNEMONIC;
 var networkId = process.env.npm_package_config_ganache_networkId;
 var gasPrice = process.env.npm_package_config_ganache_gasPrice;
 var gasLimit = process.env.npm_package_config_ganache_gasLimit;
@@ -10,10 +11,10 @@ module.exports = {
   networks: {
     development: {
       host: "127.0.0.1",
-      port: 8545,
-      network_id: networkId,
-      gas: gasLimit,
-      gasPrice: gasPrice,
+      port: 7545,
+      network_id: 5777,  //networkId
+      gas: 6500000,     //gasLimit
+      gasPrice: 25000000000,  //gasPrice
     },
     matic: {
       provider: () =>
@@ -29,7 +30,7 @@ module.exports = {
   migrations_directory: "./src/contracts/migrations/",
   compilers: {
     solc: {
-      version: "0.6.12",
+      version: "0.8.0",  //change from 0.6.12 to 0.8.0, reason: f. e. safemath is now native, also: since Istanbul fork, transfer is deprecated!
       optimizer: {
         enabled: true,
         runs: 200,

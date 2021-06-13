@@ -22,7 +22,7 @@
  * SOFTWARE.
  */
 
-pragma solidity 0.6.12;
+pragma solidity ^0.8.0; //change from 0.6.12 to 0.8.0
 
 import {ECRecover} from "./ECRecover.sol";
 

@@ -15,45 +15,47 @@
       "type": "function"
     }
   ],
-  "metadata": "{\"compiler\":{\"version\":\"0.6.12+commit.27d51765\"},\"language\":\"Solidity\",\"output\":{\"abi\":[{\"inputs\":[],\"name\":\"DOMAIN_SEPARATOR\",\"outputs\":[{\"internalType\":\"bytes32\",\"name\":\"\",\"type\":\"bytes32\"}],\"stateMutability\":\"view\",\"type\":\"function\"}],\"devdoc\":{\"kind\":\"dev\",\"methods\":{},\"stateVariables\":{\"DOMAIN_SEPARATOR\":{\"details\":\"EIP712 Domain Separator\"}},\"version\":1},\"userdoc\":{\"kind\":\"user\",\"methods\":{},\"version\":1}},\"settings\":{\"compilationTarget\":{\"/home/muhammadrehman/Desktop/meme-of-the-day/src/contracts/src/EIP712Domain.sol\":\"EIP712Domain\"},\"evmVersion\":\"istanbul\",\"libraries\":{},\"metadata\":{\"bytecodeHash\":\"ipfs\"},\"optimizer\":{\"enabled\":false,\"runs\":200},\"remappings\":[]},\"sources\":{\"/home/muhammadrehman/Desktop/meme-of-the-day/src/contracts/src/EIP712Domain.sol\":{\"keccak256\":\"0xb230050cd3a2b051c70460fa0520894313e713b78005ab7153a7738aa61af676\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://20ff34cd18de1a008ee53762c1720983a93a96dffc078f099e6dc8ebec2d848a\",\"dweb:/ipfs/QmfAETpFyGaaBJMuBZhfjxv4kXqxiXeGHgfJ5WiRRA62QV\"]}},\"version\":1}",
+  "metadata": "{\"compiler\":{\"version\":\"0.8.0+commit.c7dfd78e\"},\"language\":\"Solidity\",\"output\":{\"abi\":[{\"inputs\":[],\"name\":\"DOMAIN_SEPARATOR\",\"outputs\":[{\"internalType\":\"bytes32\",\"name\":\"\",\"type\":\"bytes32\"}],\"stateMutability\":\"view\",\"type\":\"function\"}],\"devdoc\":{\"kind\":\"dev\",\"methods\":{},\"stateVariables\":{\"DOMAIN_SEPARATOR\":{\"details\":\"EIP712 Domain Separator\"}},\"version\":1},\"userdoc\":{\"kind\":\"user\",\"methods\":{},\"version\":1}},\"settings\":{\"compilationTarget\":{\"/C/Users/sound/Desktop/MOTD/meme-repo-copy/src/contracts/src/EIP712Domain.sol\":\"EIP712Domain\"},\"evmVersion\":\"istanbul\",\"libraries\":{},\"metadata\":{\"bytecodeHash\":\"ipfs\"},\"optimizer\":{\"enabled\":false,\"runs\":200},\"remappings\":[]},\"sources\":{\"/C/Users/sound/Desktop/MOTD/meme-repo-copy/src/contracts/src/EIP712Domain.sol\":{\"keccak256\":\"0x29acb024b7a65aa5b4230f90fb248b147e787b47937ce27750729054486caff5\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://e7db87857a2372d437027df392676c1f1e8157cd7cbbfb43f506fa67a98da40b\",\"dweb:/ipfs/QmcUpvpgdp5yfQzWDcrFdvL9UZ7FveAVKg6eH9oSKMoxgF\"]}},\"version\":1}",
   "bytecode": "0x",
   "deployedBytecode": "0x",
   "immutableReferences": {},
+  "generatedSources": [],
+  "deployedGeneratedSources": [],
   "sourceMap": "",
   "deployedSourceMap": "",
-  "source": "// SPDX-License-Identifier: MIT\r\n\r\npragma solidity 0.6.12;\r\n\r\nabstract contract EIP712Domain {\r\n    /**\r\n     * @dev EIP712 Domain Separator\r\n     */\r\n    bytes32 public DOMAIN_SEPARATOR;\r\n}\r\n",
-  "sourcePath": "/home/muhammadrehman/Desktop/meme-of-the-day/src/contracts/src/EIP712Domain.sol",
+  "source": "// SPDX-License-Identifier: MIT\r\n\r\npragma solidity ^0.8.0; //change from 0.6.12 to 0.8.0\r\n\r\nabstract contract EIP712Domain {\r\n    /**\r\n     * @dev EIP712 Domain Separator\r\n     */\r\n    bytes32 public DOMAIN_SEPARATOR;\r\n}\r\n",
+  "sourcePath": "C:\\Users\\sound\\Desktop\\MOTD\\meme-repo-copy\\src\\contracts\\src\\EIP712Domain.sol",
   "ast": {
-    "absolutePath": "/home/muhammadrehman/Desktop/meme-of-the-day/src/contracts/src/EIP712Domain.sol",
+    "absolutePath": "/C/Users/sound/Desktop/MOTD/meme-repo-copy/src/contracts/src/EIP712Domain.sol",
     "exportedSymbols": {
       "EIP712Domain": [
-        159
+        2093
       ]
     },
-    "id": 160,
+    "id": 2094,
     "license": "MIT",
     "nodeType": "SourceUnit",
     "nodes": [
       {
-        "id": 155,
+        "id": 2089,
         "literals": [
           "solidity",
-          "0.6",
-          ".12"
+          "^",
+          "0.8",
+          ".0"
         ],
         "nodeType": "PragmaDirective",
-        "src": "35:23:2"
+        "src": "35:23:14"
       },
       {
         "abstract": true,
         "baseContracts": [],
         "contractDependencies": [],
         "contractKind": "contract",
-        "documentation": null,
         "fullyImplemented": true,
-        "id": 159,
+        "id": 2093,
         "linearizedBaseContracts": [
-          159
+          2093
         ],
         "name": "EIP712Domain",
         "nodeType": "ContractDefinition",
@@ -61,19 +63,18 @@
           {
             "constant": false,
             "documentation": {
-              "id": 156,
+              "id": 2090,
               "nodeType": "StructuredDocumentation",
-              "src": "100:49:2",
+              "src": "130:49:14",
               "text": " @dev EIP712 Domain Separator"
             },
             "functionSelector": "3644e515",
-            "id": 158,
+            "id": 2092,
             "mutability": "mutable",
             "name": "DOMAIN_SEPARATOR",
             "nodeType": "VariableDeclaration",
-            "overrides": null,
-            "scope": 159,
-            "src": "155:31:2",
+            "scope": 2093,
+            "src": "185:31:14",
             "stateVariable": true,
             "storageLocation": "default",
             "typeDescriptions": {
@@ -81,121 +82,106 @@
               "typeString": "bytes32"
             },
             "typeName": {
-              "id": 157,
+              "id": 2091,
               "name": "bytes32",
               "nodeType": "ElementaryTypeName",
-              "src": "155:7:2",
+              "src": "185:7:14",
               "typeDescriptions": {
                 "typeIdentifier": "t_bytes32",
                 "typeString": "bytes32"
               }
             },
-            "value": null,
             "visibility": "public"
           }
         ],
-        "scope": 160,
-        "src": "62:128:2"
+        "scope": 2094,
+        "src": "92:128:14"
       }
     ],
-    "src": "35:157:2"
+    "src": "35:187:14"
   },
   "legacyAST": {
-    "attributes": {
-      "absolutePath": "/home/muhammadrehman/Desktop/meme-of-the-day/src/contracts/src/EIP712Domain.sol",
-      "exportedSymbols": {
-        "EIP712Domain": [
-          159
-        ]
-      },
-      "license": "MIT"
+    "absolutePath": "/C/Users/sound/Desktop/MOTD/meme-repo-copy/src/contracts/src/EIP712Domain.sol",
+    "exportedSymbols": {
+      "EIP712Domain": [
+        2093
+      ]
     },
-    "children": [
+    "id": 2094,
+    "license": "MIT",
+    "nodeType": "SourceUnit",
+    "nodes": [
       {
-        "attributes": {
-          "literals": [
-            "solidity",
-            "0.6",
-            ".12"
-          ]
-        },
-        "id": 155,
-        "name": "PragmaDirective",
-        "src": "35:23:2"
+        "id": 2089,
+        "literals": [
+          "solidity",
+          "^",
+          "0.8",
+          ".0"
+        ],
+        "nodeType": "PragmaDirective",
+        "src": "35:23:14"
       },
       {
-        "attributes": {
-          "abstract": true,
-          "baseContracts": [
-            null
-          ],
-          "contractDependencies": [
-            null
-          ],
-          "contractKind": "contract",
-          "documentation": null,
-          "fullyImplemented": true,
-          "linearizedBaseContracts": [
-            159
-          ],
-          "name": "EIP712Domain",
-          "scope": 160
-        },
-        "children": [
+        "abstract": true,
+        "baseContracts": [],
+        "contractDependencies": [],
+        "contractKind": "contract",
+        "fullyImplemented": true,
+        "id": 2093,
+        "linearizedBaseContracts": [
+          2093
+        ],
+        "name": "EIP712Domain",
+        "nodeType": "ContractDefinition",
+        "nodes": [
           {
-            "attributes": {
-              "constant": false,
-              "functionSelector": "3644e515",
-              "mutability": "mutable",
-              "name": "DOMAIN_SEPARATOR",
-              "overrides": null,
-              "scope": 159,
-              "stateVariable": true,
-              "storageLocation": "default",
-              "type": "bytes32",
-              "value": null,
-              "visibility": "public"
+            "constant": false,
+            "documentation": {
+              "id": 2090,
+              "nodeType": "StructuredDocumentation",
+              "src": "130:49:14",
+              "text": " @dev EIP712 Domain Separator"
             },
-            "children": [
-              {
-                "attributes": {
-                  "name": "bytes32",
-                  "type": "bytes32"
-                },
-                "id": 157,
-                "name": "ElementaryTypeName",
-                "src": "155:7:2"
-              },
-              {
-                "attributes": {
-                  "text": " @dev EIP712 Domain Separator"
-                },
-                "id": 156,
-                "name": "StructuredDocumentation",
-                "src": "100:49:2"
+            "functionSelector": "3644e515",
+            "id": 2092,
+            "mutability": "mutable",
+            "name": "DOMAIN_SEPARATOR",
+            "nodeType": "VariableDeclaration",
+            "scope": 2093,
+            "src": "185:31:14",
+            "stateVariable": true,
+            "storageLocation": "default",
+            "typeDescriptions": {
+              "typeIdentifier": "t_bytes32",
+              "typeString": "bytes32"
+            },
+            "typeName": {
+              "id": 2091,
+              "name": "bytes32",
+              "nodeType": "ElementaryTypeName",
+              "src": "185:7:14",
+              "typeDescriptions": {
+                "typeIdentifier": "t_bytes32",
+                "typeString": "bytes32"
               }
-            ],
-            "id": 158,
-            "name": "VariableDeclaration",
-            "src": "155:31:2"
+            },
+            "visibility": "public"
           }
         ],
-        "id": 159,
-        "name": "ContractDefinition",
-        "src": "62:128:2"
+        "scope": 2094,
+        "src": "92:128:14"
       }
     ],
-    "id": 160,
-    "name": "SourceUnit",
-    "src": "35:157:2"
+    "src": "35:187:14"
   },
   "compiler": {
     "name": "solc",
-    "version": "0.6.12+commit.27d51765.Emscripten.clang"
+    "version": "0.8.0+commit.c7dfd78e.Emscripten.clang"
   },
   "networks": {},
-  "schemaVersion": "3.4.0",
-  "updatedAt": "2021-04-30T16:19:19.163Z",
+  "schemaVersion": "3.4.1",
+  "updatedAt": "2021-05-08T07:27:59.221Z",
   "devdoc": {
     "kind": "dev",
     "methods": {},
