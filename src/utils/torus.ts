@@ -62,13 +62,10 @@ export class Torus {
 
     const buck = await buckets.getOrCreate('ahrammemebuck');
 
-
-    console.log("new    Creation ");
-
     //  let createCol = await this.client.newCollection(ThreadID.fromString(this.dbThreadID), { name: this.memeCollectionName, schema : Schema }); 
 
-    let list = await this.client.listCollections(ThreadID.fromString(this.dbThreadID));
-    console.log(list);
+    // let list = await this.client.listCollections(ThreadID.fromString(this.dbThreadID));
+    // console.log(list);
 
     // await this.client.updateCollection(ThreadID.fromString(this.dbThreadID), { name: this.memeCollectionName, schema: Schema });
 

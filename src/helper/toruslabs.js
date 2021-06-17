@@ -80,23 +80,18 @@ export const getPublicAddress = async () => {
     if (userData.length == 0) {
         let usexrMatadata = {
             _id: torusObject.account,
-            // tokenID: finalData.privateKey,
             walletID: torusObject.account,
             cid: "Not Found",
             path: "Pass BuK PAth",
             publicAddress: torusObject.publicAddress,
             balance: torusObject.balance,
-            // privateKey: finalData.privateKey,
             date: "" + new Date(),
-            // // metadataNonce : 0,
             userInfo: userInfo,
             email: userInfo.email,
         }
         const result = await torusInstance.createUserMetadata(usexrMatadata);
         console.log(result);
-        // window.location.reload();
     } else {
-        // window.location.reload();
         console.log("There Login")
     }
 }

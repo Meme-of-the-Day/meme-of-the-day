@@ -1,8 +1,8 @@
-import React, { useContext } from "react";
+import React, { useContext , useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 import dayjs from "dayjs";
-
+import { torusObject } from '../helper/toruslabs'
 import voteIcon from "../assets/vote.svg";
 import { MemeMetadata } from "../utils/Types";
 import { Textile } from "../utils/textile";
@@ -126,6 +126,7 @@ const Count = styled.span`
 
 const Meme: React.FC<Props> = ({ className, meme, textileInstance }) => {
   const authContext = useContext(AuthContext);
+  const [memesLike, setMemesLike] = useState(meme.likes);
   const uiContext = useContext<UIContextType>(UIContext);
 
   const { openModal } = uiContext;
@@ -138,35 +139,39 @@ const Meme: React.FC<Props> = ({ className, meme, textileInstance }) => {
   } = authContext;
 
   const vote = async () => {
-    if (!hasMetamask || !isMetamaskConnected || !isConnectedToMatic) {
-      openModal();
-    } else {
-      if (authProvider) {
+    if (torusObject) {
+      if (torusObject.account) {
         if (
           window.confirm(
             "Owner of this meme is:\n" +
-              meme.owner +
+              meme.walletid +
               "\n\nWould you like to vote for this Meme?"
           )
         ) {
+
+          
           const isValid = await textileInstance.updateMemeVotes(
-            authProvider.account,
-            meme.cid,
+            torusObject.account,
+            meme._id,
             true,
             true
           );
+          
+
+          
+      
           if (isValid) {
             if (meme.likes) {
-              meme.likes += 1;
+              setMemesLike( meme.likes + 1);
             } else {
-              meme.likes = 1;
+              setMemesLike(1);
             }
           } else {
             window.alert("Vote cannot be added twice");
           }
         }
       }
-    }
+    } 
   };
 
   const bid = () => {
@@ -220,7 +225,7 @@ const Meme: React.FC<Props> = ({ className, meme, textileInstance }) => {
         <Buttons>
           <Button onClick={async () => await vote()}>
             <img src={voteIcon} alt="Vote" />
-            <Count>{meme.likes}</Count>
+            <Count>{memesLike}</Count>
           </Button>
         </Buttons>
       </Meta>

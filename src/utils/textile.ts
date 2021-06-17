@@ -67,8 +67,8 @@ export class Textile {
 
     // let createCol = await this.client.newCollection(ThreadID.fromString(this.dbThreadID), { name: this.memeCollectionName, schema: Schema });
 
-    let list = await this.client.listCollections(ThreadID.fromString(this.dbThreadID));
-    console.log(list);
+    // let list = await this.client.listCollections(ThreadID.fromString(this.dbThreadID));
+    // console.log(list);
 
     // await this.client.updateCollection(ThreadID.fromString(this.dbThreadID), { name: this.memeCollectionName, schema: Schema });
     if (!buck.root) {
@@ -89,7 +89,6 @@ export class Textile {
     //await this.client.delete(ThreadID.fromString(this.dbThreadID), this.memeCollectionName, ['01f6stfn7dnhgcq2sd66qdkbra','01f6swn364znzq4vvm0ss0faqr','01f6swtxcvye1v0kkvndd8m6s9','01f6sxqc7rpf7301b14hw20x82','01f6sysg323cvczsyy3w7frs5d','01f6szbmztcgbgdygy2nv0y4vg','01f72fz4q00vf7rv9hs25b0sxj'])
     // TODO: Implement a pagination logic to query only limited data.
     const memeList = await this.client.find<MemeMetadata>(ThreadID.fromString(this.dbThreadID), this.memeCollectionName, {});
-    console.log("Meme", memeList)
     return memeList;
   }
 
@@ -97,10 +96,6 @@ export class Textile {
     if (!this.client || !owner) {
       throw new Error('No client or owner address');
     }
-
-    console.log("WaletID", owner)
-    // walletID
-    //const query = new Where('walletid').eq(owner);
     const query = new Where('walletid').eq(owner);
     const memeList = await this.client.find<MemeMetadata>(ThreadID.fromString(this.dbThreadID), this.memeCollectionName, query);
 
@@ -174,16 +169,16 @@ export class Textile {
     await this.client.create(ThreadID.fromString(this.dbThreadID), this.memeCollectionName, [metadata]);
   }
 
-  public async updateMemeVotes(userId: string, cid: string, isLiked: boolean, isAdd: boolean): Promise<boolean> {
+  public async updateMemeVotes(userId: string, _id: any, isLiked: boolean, isAdd: boolean): Promise<boolean> {
     if (!this.client) {
       throw new Error('No client');
     }
-
     // Ideally we need not query the instance here to update.
     // TODO, use collections write-validator to run validations on writes.
-    const query = new Where('cid').eq(cid);
+    
+    const query = new Where('_id').eq(_id);
     const memeList = await this.client.find<MemeMetadata>(ThreadID.fromString(this.dbThreadID), this.memeCollectionName, query);
-
+    
     if (memeList[0].owner === userId) {
       return false;
     }

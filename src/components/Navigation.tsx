@@ -113,7 +113,6 @@ const Navigation: React.FC<{ className?: string }> = ({ className }) => {
     checkLoginStatus();
     if (!hasMetamask) {
       // openModal();
-
     } else {
       await authenticate();
     }
