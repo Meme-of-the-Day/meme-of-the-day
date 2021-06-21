@@ -43,8 +43,17 @@ const StyledLink = styled(Link)`
 const Meta = styled.div`
   display: flex;
   justify-content: space-between;
-  flex-direction: column;
+  flex-direction: row;
   padding: 10px 40px;
+  align-items: center;
+  & .active_btn {
+    padding: 10px 30px;
+    font-size: 16px;
+    background: none;
+    color: #3867fc;
+    border: 2px solid #3867fc;
+    border-radius: 8px;
+  }
 `;
 
 const Buttons = styled.div`
@@ -124,9 +133,11 @@ const Count = styled.span`
   font-weight: bold;
 `;
 
+
 const Meme: React.FC<Props> = ({ className, meme, textileInstance }) => {
   const authContext = useContext(AuthContext);
   const [memesLike, setMemesLike] = useState(meme.likes);
+  const [memesActive, setMemesActive] = useState(meme.active);
   const uiContext = useContext<UIContextType>(UIContext);
 
   const { openModal } = uiContext;
@@ -148,18 +159,19 @@ const Meme: React.FC<Props> = ({ className, meme, textileInstance }) => {
               "\n\nWould you like to vote for this Meme?"
           )
         ) {
-
+           
+          // Note : Check owner memes 
           
+          if(torusObject.account === meme.owner ){
+            window.alert("Vote cannot be added on your meme");
+            return
+          }
           const isValid = await textileInstance.updateMemeVotes(
             torusObject.account,
             meme._id,
             true,
             true
           );
-          
-
-          
-      
           if (isValid) {
             if (meme.likes) {
               setMemesLike( meme.likes + 1);
@@ -167,9 +179,33 @@ const Meme: React.FC<Props> = ({ className, meme, textileInstance }) => {
               setMemesLike(1);
             }
           } else {
-            window.alert("Vote cannot be added twice");
+              window.alert("Vote cannot be added twice");
           }
         }
+      }else{
+        window.alert("Please login first!");
+      }
+    }else{
+      window.alert("Please login first!");
+    }
+  };
+
+
+  const active = async () => {
+    if (torusObject) {
+      if (torusObject.account) {
+          // Note : Check owner memes 
+          const isValid = await textileInstance.updateMemeActive(
+            meme._id,
+            memesActive
+          );
+          if (isValid) {
+              if(memesActive){
+                setMemesActive(false);
+              }else{
+                setMemesActive(true);
+              }
+          }
       }
     } 
   };
@@ -213,6 +249,8 @@ const Meme: React.FC<Props> = ({ className, meme, textileInstance }) => {
               </MintedOn>
             </Details>
           </Owner>
+  
+         
         </Top>
         <Name>
           {meme.name.length > 40
@@ -228,7 +266,14 @@ const Meme: React.FC<Props> = ({ className, meme, textileInstance }) => {
             <Count>{memesLike}</Count>
           </Button>
         </Buttons>
+        {meme.owner === torusObject.account? 
+          <div>
+              <button className="active_btn" onClick={async () => await active()}>{memesActive ? "Active": "De-Active"}</button>
+          </div>
+          : ""}
       </Meta>
+             {/* Note : Active Deactive Memes */}
+             
     </Main>
   );
 };

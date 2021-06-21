@@ -68,6 +68,8 @@ const MyMemes: React.FC<{}> = () => {
       console.log(torusObject.account);
 
       const memes = await textile.getUserMemes(torusObject.account);
+
+      console.log(memes);
       // const memes = await textile.getUserMemes(connectedAccount[0]);
 
       setMemeMetadata(memes);
