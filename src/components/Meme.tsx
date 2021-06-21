@@ -268,7 +268,7 @@ const Meme: React.FC<Props> = ({ className, meme, textileInstance }) => {
         </Buttons>
         {meme.owner === torusObject.account? 
           <div>
-              <button className="active_btn" onClick={async () => await active()}>{memesActive ? "Active": "De-Active"}</button>
+              <button className="active_btn" onClick={async () => await active()}>{memesActive ? "Un-Publish": "Publish"}</button>
           </div>
           : ""}
       </Meta>
