@@ -185,7 +185,11 @@
         {
           "internalType": "bool",
           "name": "",
-        "absolutePath": "/C/Users/sound/Desktop/MOTD/meme-repo-copy/src/contracts/src/ECRecover.sol",
+          "type": "bool"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
     },
     {
       "inputs": [
@@ -310,7 +314,7 @@
       "type": "function"
     }
   ],
-  "metadata": "{\"compiler\":{\"version\":\"0.8.0+commit.c7dfd78e\"},\"language\":\"Solidity\",\"output\":{\"abi\":[{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"address\",\"name\":\"account\",\"type\":\"address\"},{\"indexed\":true,\"internalType\":\"address\",\"name\":\"operator\",\"type\":\"address\"},{\"indexed\":false,\"internalType\":\"bool\",\"name\":\"approved\",\"type\":\"bool\"}],\"name\":\"ApprovalForAll\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"address\",\"name\":\"operator\",\"type\":\"address\"},{\"indexed\":true,\"internalType\":\"address\",\"name\":\"from\",\"type\":\"address\"},{\"indexed\":true,\"internalType\":\"address\",\"name\":\"to\",\"type\":\"address\"},{\"indexed\":false,\"internalType\":\"uint256[]\",\"name\":\"ids\",\"type\":\"uint256[]\"},{\"indexed\":false,\"internalType\":\"uint256[]\",\"name\":\"values\",\"type\":\"uint256[]\"}],\"name\":\"TransferBatch\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"address\",\"name\":\"operator\",\"type\":\"address\"},{\"indexed\":true,\"internalType\":\"address\",\"name\":\"from\",\"type\":\"address\"},{\"indexed\":true,\"internalType\":\"address\",\"name\":\"to\",\"type\":\"address\"},{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"id\",\"type\":\"uint256\"},{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"value\",\"type\":\"uint256\"}],\"name\":\"TransferSingle\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":false,\"internalType\":\"string\",\"name\":\"value\",\"type\":\"string\"},{\"indexed\":true,\"internalType\":\"uint256\",\"name\":\"id\",\"type\":\"uint256\"}],\"name\":\"URI\",\"type\":\"event\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"account\",\"type\":\"address\"},{\"internalType\":\"uint256\",\"name\":\"id\",\"type\":\"uint256\"}],\"name\":\"balanceOf\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address[]\",\"name\":\"accounts\",\"type\":\"address[]\"},{\"internalType\":\"uint256[]\",\"name\":\"ids\",\"type\":\"uint256[]\"}],\"name\":\"balanceOfBatch\",\"outputs\":[{\"internalType\":\"uint256[]\",\"name\":\"\",\"type\":\"uint256[]\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"account\",\"type\":\"address\"},{\"internalType\":\"address\",\"name\":\"operator\",\"type\":\"address\"}],\"name\":\"isApprovedForAll\",\"outputs\":[{\"internalType\":\"bool\",\"name\":\"\",\"type\":\"bool\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"from\",\"type\":\"address\"},{\"internalType\":\"address\",\"name\":\"to\",\"type\":\"address\"},{\"internalType\":\"uint256[]\",\"name\":\"ids\",\"type\":\"uint256[]\"},{\"internalType\":\"uint256[]\",\"name\":\"amounts\",\"type\":\"uint256[]\"},{\"internalType\":\"bytes\",\"name\":\"data\",\"type\":\"bytes\"}],\"name\":\"safeBatchTransferFrom\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"from\",\"type\":\"address\"},{\"internalType\":\"address\",\"name\":\"to\",\"type\":\"address\"},{\"internalType\":\"uint256\",\"name\":\"id\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"amount\",\"type\":\"uint256\"},{\"internalType\":\"bytes\",\"name\":\"data\",\"type\":\"bytes\"}],\"name\":\"safeTransferFrom\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"operator\",\"type\":\"address\"},{\"internalType\":\"bool\",\"name\":\"approved\",\"type\":\"bool\"}],\"name\":\"setApprovalForAll\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"bytes4\",\"name\":\"interfaceId\",\"type\":\"bytes4\"}],\"name\":\"supportsInterface\",\"outputs\":[{\"internalType\":\"bool\",\"name\":\"\",\"type\":\"bool\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"id\",\"type\":\"uint256\"}],\"name\":\"uri\",\"outputs\":[{\"internalType\":\"string\",\"name\":\"\",\"type\":\"string\"}],\"stateMutability\":\"view\",\"type\":\"function\"}],\"devdoc\":{\"details\":\"Interface of the optional ERC1155MetadataExtension interface, as defined in the https://eips.ethereum.org/EIPS/eip-1155#metadata-extensions[EIP]. _Available since v3.1._\",\"kind\":\"dev\",\"methods\":{\"balanceOf(address,uint256)\":{\"details\":\"Returns the amount of tokens of token type `id` owned by `account`. Requirements: - `account` cannot be the zero address.\"},\"balanceOfBatch(address[],uint256[])\":{\"details\":\"xref:ROOT:erc1155.adoc#batch-operations[Batched] version of {balanceOf}. Requirements: - `accounts` and `ids` must have the same length.\"},\"isApprovedForAll(address,address)\":{\"details\":\"Returns true if `operator` is approved to transfer ``account``'s tokens. See {setApprovalForAll}.\"},\"safeBatchTransferFrom(address,address,uint256[],uint256[],bytes)\":{\"details\":\"xref:ROOT:erc1155.adoc#batch-operations[Batched] version of {safeTransferFrom}. Emits a {TransferBatch} event. Requirements: - `ids` and `amounts` must have the same length. - If `to` refers to a smart contract, it must implement {IERC1155Receiver-onERC1155BatchReceived} and return the acceptance magic value.\"},\"safeTransferFrom(address,address,uint256,uint256,bytes)\":{\"details\":\"Transfers `amount` tokens of token type `id` from `from` to `to`. Emits a {TransferSingle} event. Requirements: - `to` cannot be the zero address. - If the caller is not `from`, it must be have been approved to spend ``from``'s tokens via {setApprovalForAll}. - `from` must have a balance of tokens of type `id` of at least `amount`. - If `to` refers to a smart contract, it must implement {IERC1155Receiver-onERC1155Received} and return the acceptance magic value.\"},\"setApprovalForAll(address,bool)\":{\"details\":\"Grants or revokes permission to `operator` to transfer the caller's tokens, according to `approved`, Emits an {ApprovalForAll} event. Requirements: - `operator` cannot be the caller.\"},\"supportsInterface(bytes4)\":{\"details\":\"Returns true if this contract implements the interface defined by `interfaceId`. See the corresponding https://eips.ethereum.org/EIPS/eip-165#how-interfaces-are-identified[EIP section] to learn more about how these ids are created. This function call must use less than 30 000 gas.\"},\"uri(uint256)\":{\"details\":\"Returns the URI for token type `id`. If the `\\\\{id\\\\}` substring is present in the URI, it must be replaced by clients with the actual token type ID.\"}},\"version\":1},\"userdoc\":{\"kind\":\"user\",\"methods\":{},\"version\":1}},\"settings\":{\"compilationTarget\":{\"/C/Users/sound/Desktop/MOTD/meme-repo-copy/node_modules/@openzeppelin/contracts-upgradeable/token/ERC1155/extensions/IERC1155MetadataURIUpgradeable.sol\":\"IERC1155MetadataURIUpgradeable\"},\"evmVersion\":\"istanbul\",\"libraries\":{},\"metadata\":{\"bytecodeHash\":\"ipfs\"},\"optimizer\":{\"enabled\":false,\"runs\":200},\"remappings\":[]},\"sources\":{\"/C/Users/sound/Desktop/MOTD/meme-repo-copy/node_modules/@openzeppelin/contracts-upgradeable/token/ERC1155/IERC1155Upgradeable.sol\":{\"keccak256\":\"0xa22cd3d499a04af4dbcc1b15877b69b611004ff02a2ab121e42226a6b6a88ab9\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://47b5420b49ecc4983f2810d413749289c357c58d2b0f3431b5b99cd3242ce17a\",\"dweb:/ipfs/QmUA8ydnDvHSdbXgkPhL3xSBitYj8vcC8XbWRFvKkCtJzH\"]},\"/C/Users/sound/Desktop/MOTD/meme-repo-copy/node_modules/@openzeppelin/contracts-upgradeable/token/ERC1155/extensions/IERC1155MetadataURIUpgradeable.sol\":{\"keccak256\":\"0x6d0b5e3282b9f7683eb822a01bd5351d01bd9225cd8153e366c9a54e89213165\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://180ac522b70db433d333f1e3998c9ad334d755bfa009ad7d08021bb446f28819\",\"dweb:/ipfs/QmT34uLFrzTEpDgm1SVrFibWcGTBdg8DbSKGNUH7vMRgVi\"]},\"/C/Users/sound/Desktop/MOTD/meme-repo-copy/node_modules/@openzeppelin/contracts-upgradeable/utils/introspection/IERC165Upgradeable.sol\":{\"keccak256\":\"0x1c4860acd323e34a67b3e97faab9aaa55fe8e92b1dcf08b5f47f3468d58ce75c\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://3c2746f8ebb4bfb6b8e8a768296c7f85f11b36f4873daabb91933c3602f00590\",\"dweb:/ipfs/QmdumDez8WEdk9FDuP7Jp5pDSJiQeFtFSJw3B5CEHJL4KU\"]}},\"version\":1}",
+  "metadata": "{\"compiler\":{\"version\":\"0.8.0+commit.c7dfd78e\"},\"language\":\"Solidity\",\"output\":{\"abi\":[{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"address\",\"name\":\"account\",\"type\":\"address\"},{\"indexed\":true,\"internalType\":\"address\",\"name\":\"operator\",\"type\":\"address\"},{\"indexed\":false,\"internalType\":\"bool\",\"name\":\"approved\",\"type\":\"bool\"}],\"name\":\"ApprovalForAll\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"address\",\"name\":\"operator\",\"type\":\"address\"},{\"indexed\":true,\"internalType\":\"address\",\"name\":\"from\",\"type\":\"address\"},{\"indexed\":true,\"internalType\":\"address\",\"name\":\"to\",\"type\":\"address\"},{\"indexed\":false,\"internalType\":\"uint256[]\",\"name\":\"ids\",\"type\":\"uint256[]\"},{\"indexed\":false,\"internalType\":\"uint256[]\",\"name\":\"values\",\"type\":\"uint256[]\"}],\"name\":\"TransferBatch\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"address\",\"name\":\"operator\",\"type\":\"address\"},{\"indexed\":true,\"internalType\":\"address\",\"name\":\"from\",\"type\":\"address\"},{\"indexed\":true,\"internalType\":\"address\",\"name\":\"to\",\"type\":\"address\"},{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"id\",\"type\":\"uint256\"},{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"value\",\"type\":\"uint256\"}],\"name\":\"TransferSingle\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":false,\"internalType\":\"string\",\"name\":\"value\",\"type\":\"string\"},{\"indexed\":true,\"internalType\":\"uint256\",\"name\":\"id\",\"type\":\"uint256\"}],\"name\":\"URI\",\"type\":\"event\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"account\",\"type\":\"address\"},{\"internalType\":\"uint256\",\"name\":\"id\",\"type\":\"uint256\"}],\"name\":\"balanceOf\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address[]\",\"name\":\"accounts\",\"type\":\"address[]\"},{\"internalType\":\"uint256[]\",\"name\":\"ids\",\"type\":\"uint256[]\"}],\"name\":\"balanceOfBatch\",\"outputs\":[{\"internalType\":\"uint256[]\",\"name\":\"\",\"type\":\"uint256[]\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"account\",\"type\":\"address\"},{\"internalType\":\"address\",\"name\":\"operator\",\"type\":\"address\"}],\"name\":\"isApprovedForAll\",\"outputs\":[{\"internalType\":\"bool\",\"name\":\"\",\"type\":\"bool\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"from\",\"type\":\"address\"},{\"internalType\":\"address\",\"name\":\"to\",\"type\":\"address\"},{\"internalType\":\"uint256[]\",\"name\":\"ids\",\"type\":\"uint256[]\"},{\"internalType\":\"uint256[]\",\"name\":\"amounts\",\"type\":\"uint256[]\"},{\"internalType\":\"bytes\",\"name\":\"data\",\"type\":\"bytes\"}],\"name\":\"safeBatchTransferFrom\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"from\",\"type\":\"address\"},{\"internalType\":\"address\",\"name\":\"to\",\"type\":\"address\"},{\"internalType\":\"uint256\",\"name\":\"id\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"amount\",\"type\":\"uint256\"},{\"internalType\":\"bytes\",\"name\":\"data\",\"type\":\"bytes\"}],\"name\":\"safeTransferFrom\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"operator\",\"type\":\"address\"},{\"internalType\":\"bool\",\"name\":\"approved\",\"type\":\"bool\"}],\"name\":\"setApprovalForAll\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"bytes4\",\"name\":\"interfaceId\",\"type\":\"bytes4\"}],\"name\":\"supportsInterface\",\"outputs\":[{\"internalType\":\"bool\",\"name\":\"\",\"type\":\"bool\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"id\",\"type\":\"uint256\"}],\"name\":\"uri\",\"outputs\":[{\"internalType\":\"string\",\"name\":\"\",\"type\":\"string\"}],\"stateMutability\":\"view\",\"type\":\"function\"}],\"devdoc\":{\"details\":\"Interface of the optional ERC1155MetadataExtension interface, as defined in the https://eips.ethereum.org/EIPS/eip-1155#metadata-extensions[EIP]. _Available since v3.1._\",\"kind\":\"dev\",\"methods\":{\"balanceOf(address,uint256)\":{\"details\":\"Returns the amount of tokens of token type `id` owned by `account`. Requirements: - `account` cannot be the zero address.\"},\"balanceOfBatch(address[],uint256[])\":{\"details\":\"xref:ROOT:erc1155.adoc#batch-operations[Batched] version of {balanceOf}. Requirements: - `accounts` and `ids` must have the same length.\"},\"isApprovedForAll(address,address)\":{\"details\":\"Returns true if `operator` is approved to transfer ``account``'s tokens. See {setApprovalForAll}.\"},\"safeBatchTransferFrom(address,address,uint256[],uint256[],bytes)\":{\"details\":\"xref:ROOT:erc1155.adoc#batch-operations[Batched] version of {safeTransferFrom}. Emits a {TransferBatch} event. Requirements: - `ids` and `amounts` must have the same length. - If `to` refers to a smart contract, it must implement {IERC1155Receiver-onERC1155BatchReceived} and return the acceptance magic value.\"},\"safeTransferFrom(address,address,uint256,uint256,bytes)\":{\"details\":\"Transfers `amount` tokens of token type `id` from `from` to `to`. Emits a {TransferSingle} event. Requirements: - `to` cannot be the zero address. - If the caller is not `from`, it must be have been approved to spend ``from``'s tokens via {setApprovalForAll}. - `from` must have a balance of tokens of type `id` of at least `amount`. - If `to` refers to a smart contract, it must implement {IERC1155Receiver-onERC1155Received} and return the acceptance magic value.\"},\"setApprovalForAll(address,bool)\":{\"details\":\"Grants or revokes permission to `operator` to transfer the caller's tokens, according to `approved`, Emits an {ApprovalForAll} event. Requirements: - `operator` cannot be the caller.\"},\"supportsInterface(bytes4)\":{\"details\":\"Returns true if this contract implements the interface defined by `interfaceId`. See the corresponding https://eips.ethereum.org/EIPS/eip-165#how-interfaces-are-identified[EIP section] to learn more about how these ids are created. This function call must use less than 30 000 gas.\"},\"uri(uint256)\":{\"details\":\"Returns the URI for token type `id`. If the `\\\\{id\\\\}` substring is present in the URI, it must be replaced by clients with the actual token type ID.\"}},\"version\":1},\"userdoc\":{\"kind\":\"user\",\"methods\":{},\"version\":1}},\"settings\":{\"compilationTarget\":{\"/home/gobhi/Desktop/meme-of-the-day/node_modules/@openzeppelin/contracts-upgradeable/token/ERC1155/extensions/IERC1155MetadataURIUpgradeable.sol\":\"IERC1155MetadataURIUpgradeable\"},\"evmVersion\":\"istanbul\",\"libraries\":{},\"metadata\":{\"bytecodeHash\":\"ipfs\"},\"optimizer\":{\"enabled\":false,\"runs\":200},\"remappings\":[]},\"sources\":{\"/home/gobhi/Desktop/meme-of-the-day/node_modules/@openzeppelin/contracts-upgradeable/token/ERC1155/IERC1155Upgradeable.sol\":{\"keccak256\":\"0xa22cd3d499a04af4dbcc1b15877b69b611004ff02a2ab121e42226a6b6a88ab9\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://47b5420b49ecc4983f2810d413749289c357c58d2b0f3431b5b99cd3242ce17a\",\"dweb:/ipfs/QmUA8ydnDvHSdbXgkPhL3xSBitYj8vcC8XbWRFvKkCtJzH\"]},\"/home/gobhi/Desktop/meme-of-the-day/node_modules/@openzeppelin/contracts-upgradeable/token/ERC1155/extensions/IERC1155MetadataURIUpgradeable.sol\":{\"keccak256\":\"0x6d0b5e3282b9f7683eb822a01bd5351d01bd9225cd8153e366c9a54e89213165\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://180ac522b70db433d333f1e3998c9ad334d755bfa009ad7d08021bb446f28819\",\"dweb:/ipfs/QmT34uLFrzTEpDgm1SVrFibWcGTBdg8DbSKGNUH7vMRgVi\"]},\"/home/gobhi/Desktop/meme-of-the-day/node_modules/@openzeppelin/contracts-upgradeable/utils/introspection/IERC165Upgradeable.sol\":{\"keccak256\":\"0x1c4860acd323e34a67b3e97faab9aaa55fe8e92b1dcf08b5f47f3468d58ce75c\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://3c2746f8ebb4bfb6b8e8a768296c7f85f11b36f4873daabb91933c3602f00590\",\"dweb:/ipfs/QmdumDez8WEdk9FDuP7Jp5pDSJiQeFtFSJw3B5CEHJL4KU\"]}},\"version\":1}",
   "bytecode": "0x",
   "deployedBytecode": "0x",
   "immutableReferences": {},
@@ -319,26 +323,26 @@
   "sourceMap": "",
   "deployedSourceMap": "",
   "source": "// SPDX-License-Identifier: MIT\n\npragma solidity ^0.8.0;\n\nimport \"../IERC1155Upgradeable.sol\";\n\n/**\n * @dev Interface of the optional ERC1155MetadataExtension interface, as defined\n * in the https://eips.ethereum.org/EIPS/eip-1155#metadata-extensions[EIP].\n *\n * _Available since v3.1._\n */\ninterface IERC1155MetadataURIUpgradeable is IERC1155Upgradeable {\n    /**\n     * @dev Returns the URI for token type `id`.\n     *\n     * If the `\\{id\\}` substring is present in the URI, it must be replaced by\n     * clients with the actual token type ID.\n     */\n    function uri(uint256 id) external view returns (string memory);\n}\n",
-  "sourcePath": "C:\\Users\\sound\\Desktop\\MOTD\\meme-repo-copy\\node_modules\\@openzeppelin\\contracts-upgradeable\\token\\ERC1155\\extensions\\IERC1155MetadataURIUpgradeable.sol",
+  "sourcePath": "/home/gobhi/Desktop/meme-of-the-day/node_modules/@openzeppelin/contracts-upgradeable/token/ERC1155/extensions/IERC1155MetadataURIUpgradeable.sol",
   "ast": {
-    "absolutePath": "/C/Users/sound/Desktop/MOTD/meme-repo-copy/node_modules/@openzeppelin/contracts-upgradeable/token/ERC1155/extensions/IERC1155MetadataURIUpgradeable.sol",
+    "absolutePath": "/home/gobhi/Desktop/meme-of-the-day/node_modules/@openzeppelin/contracts-upgradeable/token/ERC1155/extensions/IERC1155MetadataURIUpgradeable.sol",
     "exportedSymbols": {
       "IERC1155MetadataURIUpgradeable": [
-        1586
+        1585
       ],
       "IERC1155Upgradeable": [
-        1571
+        1570
       ],
       "IERC165Upgradeable": [
-        1933
+        1932
       ]
     },
-    "id": 1587,
+    "id": 1586,
     "license": "MIT",
     "nodeType": "SourceUnit",
     "nodes": [
       {
-        "id": 1573,
+        "id": 1572,
         "literals": [
           "solidity",
           "^",
@@ -349,12 +353,12 @@
         "src": "33:23:7"
       },
       {
-        "absolutePath": "/C/Users/sound/Desktop/MOTD/meme-repo-copy/node_modules/@openzeppelin/contracts-upgradeable/token/ERC1155/IERC1155Upgradeable.sol",
+        "absolutePath": "/home/gobhi/Desktop/meme-of-the-day/node_modules/@openzeppelin/contracts-upgradeable/token/ERC1155/IERC1155Upgradeable.sol",
         "file": "../IERC1155Upgradeable.sol",
-        "id": 1574,
+        "id": 1573,
         "nodeType": "ImportDirective",
-        "scope": 1587,
-        "sourceUnit": 1572,
+        "scope": 1586,
+        "sourceUnit": 1571,
         "src": "58:36:7",
         "symbolAliases": [],
         "unitAlias": ""
@@ -364,63 +368,63 @@
         "baseContracts": [
           {
             "baseName": {
-              "id": 1576,
+              "id": 1575,
               "name": "IERC1155Upgradeable",
               "nodeType": "IdentifierPath",
-              "referencedDeclaration": 1571,
+              "referencedDeclaration": 1570,
               "src": "335:19:7"
             },
-            "id": 1577,
+            "id": 1576,
             "nodeType": "InheritanceSpecifier",
             "src": "335:19:7"
           }
         ],
         "contractDependencies": [
-          1571,
-          1933
+          1570,
+          1932
         ],
         "contractKind": "interface",
         "documentation": {
-          "id": 1575,
+          "id": 1574,
           "nodeType": "StructuredDocumentation",
           "src": "96:194:7",
           "text": " @dev Interface of the optional ERC1155MetadataExtension interface, as defined\n in the https://eips.ethereum.org/EIPS/eip-1155#metadata-extensions[EIP].\n _Available since v3.1._"
         },
         "fullyImplemented": false,
-        "id": 1586,
+        "id": 1585,
         "linearizedBaseContracts": [
-          1586,
-          1571,
-          1933
+          1585,
+          1570,
+          1932
         ],
         "name": "IERC1155MetadataURIUpgradeable",
         "nodeType": "ContractDefinition",
         "nodes": [
           {
             "documentation": {
-              "id": 1578,
+              "id": 1577,
               "nodeType": "StructuredDocumentation",
               "src": "361:192:7",
               "text": " @dev Returns the URI for token type `id`.\n If the `\\{id\\}` substring is present in the URI, it must be replaced by\n clients with the actual token type ID."
             },
             "functionSelector": "0e89341c",
-            "id": 1585,
+            "id": 1584,
             "implemented": false,
             "kind": "function",
             "modifiers": [],
             "name": "uri",
             "nodeType": "FunctionDefinition",
             "parameters": {
-              "id": 1581,
+              "id": 1580,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 1580,
+                  "id": 1579,
                   "mutability": "mutable",
                   "name": "id",
                   "nodeType": "VariableDeclaration",
-                  "scope": 1585,
+                  "scope": 1584,
                   "src": "571:10:7",
                   "stateVariable": false,
                   "storageLocation": "default",
@@ -429,7 +433,7 @@
                     "typeString": "uint256"
                   },
                   "typeName": {
-                    "id": 1579,
+                    "id": 1578,
                     "name": "uint256",
                     "nodeType": "ElementaryTypeName",
                     "src": "571:7:7",
@@ -444,16 +448,16 @@
               "src": "570:12:7"
             },
             "returnParameters": {
-              "id": 1584,
+              "id": 1583,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 1583,
+                  "id": 1582,
                   "mutability": "mutable",
                   "name": "",
                   "nodeType": "VariableDeclaration",
-                  "scope": 1585,
+                  "scope": 1584,
                   "src": "606:13:7",
                   "stateVariable": false,
                   "storageLocation": "memory",
@@ -462,7 +466,7 @@
                     "typeString": "string"
                   },
                   "typeName": {
-                    "id": 1582,
+                    "id": 1581,
                     "name": "string",
                     "nodeType": "ElementaryTypeName",
                     "src": "606:6:7",
@@ -476,38 +480,38 @@
               ],
               "src": "605:15:7"
             },
-            "scope": 1586,
+            "scope": 1585,
             "src": "558:63:7",
             "stateMutability": "view",
             "virtual": false,
             "visibility": "external"
           }
         ],
-        "scope": 1587,
+        "scope": 1586,
         "src": "291:332:7"
       }
     ],
     "src": "33:591:7"
   },
   "legacyAST": {
-    "absolutePath": "/C/Users/sound/Desktop/MOTD/meme-repo-copy/node_modules/@openzeppelin/contracts-upgradeable/token/ERC1155/extensions/IERC1155MetadataURIUpgradeable.sol",
+    "absolutePath": "/home/gobhi/Desktop/meme-of-the-day/node_modules/@openzeppelin/contracts-upgradeable/token/ERC1155/extensions/IERC1155MetadataURIUpgradeable.sol",
     "exportedSymbols": {
       "IERC1155MetadataURIUpgradeable": [
-        1586
+        1585
       ],
       "IERC1155Upgradeable": [
-        1571
+        1570
       ],
       "IERC165Upgradeable": [
-        1933
+        1932
       ]
     },
-    "id": 1587,
+    "id": 1586,
     "license": "MIT",
     "nodeType": "SourceUnit",
     "nodes": [
       {
-        "id": 1573,
+        "id": 1572,
         "literals": [
           "solidity",
           "^",
@@ -518,12 +522,12 @@
         "src": "33:23:7"
       },
       {
-        "absolutePath": "/C/Users/sound/Desktop/MOTD/meme-repo-copy/node_modules/@openzeppelin/contracts-upgradeable/token/ERC1155/IERC1155Upgradeable.sol",
+        "absolutePath": "/home/gobhi/Desktop/meme-of-the-day/node_modules/@openzeppelin/contracts-upgradeable/token/ERC1155/IERC1155Upgradeable.sol",
         "file": "../IERC1155Upgradeable.sol",
-        "id": 1574,
+        "id": 1573,
         "nodeType": "ImportDirective",
-        "scope": 1587,
-        "sourceUnit": 1572,
+        "scope": 1586,
+        "sourceUnit": 1571,
         "src": "58:36:7",
         "symbolAliases": [],
         "unitAlias": ""
@@ -533,63 +537,63 @@
         "baseContracts": [
           {
             "baseName": {
-              "id": 1576,
+              "id": 1575,
               "name": "IERC1155Upgradeable",
               "nodeType": "IdentifierPath",
-              "referencedDeclaration": 1571,
+              "referencedDeclaration": 1570,
               "src": "335:19:7"
             },
-            "id": 1577,
+            "id": 1576,
             "nodeType": "InheritanceSpecifier",
             "src": "335:19:7"
           }
         ],
         "contractDependencies": [
-          1571,
-          1933
+          1570,
+          1932
         ],
         "contractKind": "interface",
         "documentation": {
-          "id": 1575,
+          "id": 1574,
           "nodeType": "StructuredDocumentation",
           "src": "96:194:7",
           "text": " @dev Interface of the optional ERC1155MetadataExtension interface, as defined\n in the https://eips.ethereum.org/EIPS/eip-1155#metadata-extensions[EIP].\n _Available since v3.1._"
         },
         "fullyImplemented": false,
-        "id": 1586,
+        "id": 1585,
         "linearizedBaseContracts": [
-          1586,
-          1571,
-          1933
+          1585,
+          1570,
+          1932
         ],
         "name": "IERC1155MetadataURIUpgradeable",
         "nodeType": "ContractDefinition",
         "nodes": [
           {
             "documentation": {
-              "id": 1578,
+              "id": 1577,
               "nodeType": "StructuredDocumentation",
               "src": "361:192:7",
               "text": " @dev Returns the URI for token type `id`.\n If the `\\{id\\}` substring is present in the URI, it must be replaced by\n clients with the actual token type ID."
             },
             "functionSelector": "0e89341c",
-            "id": 1585,
+            "id": 1584,
             "implemented": false,
             "kind": "function",
             "modifiers": [],
             "name": "uri",
             "nodeType": "FunctionDefinition",
             "parameters": {
-              "id": 1581,
+              "id": 1580,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 1580,
+                  "id": 1579,
                   "mutability": "mutable",
                   "name": "id",
                   "nodeType": "VariableDeclaration",
-                  "scope": 1585,
+                  "scope": 1584,
                   "src": "571:10:7",
                   "stateVariable": false,
                   "storageLocation": "default",
@@ -598,7 +602,7 @@
                     "typeString": "uint256"
                   },
                   "typeName": {
-                    "id": 1579,
+                    "id": 1578,
                     "name": "uint256",
                     "nodeType": "ElementaryTypeName",
                     "src": "571:7:7",
@@ -613,16 +617,16 @@
               "src": "570:12:7"
             },
             "returnParameters": {
-              "id": 1584,
+              "id": 1583,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 1583,
+                  "id": 1582,
                   "mutability": "mutable",
                   "name": "",
                   "nodeType": "VariableDeclaration",
-                  "scope": 1585,
+                  "scope": 1584,
                   "src": "606:13:7",
                   "stateVariable": false,
                   "storageLocation": "memory",
@@ -631,7 +635,7 @@
                     "typeString": "string"
                   },
                   "typeName": {
-                    "id": 1582,
+                    "id": 1581,
                     "name": "string",
                     "nodeType": "ElementaryTypeName",
                     "src": "606:6:7",
@@ -645,14 +649,14 @@
               ],
               "src": "605:15:7"
             },
-            "scope": 1586,
+            "scope": 1585,
             "src": "558:63:7",
             "stateMutability": "view",
             "virtual": false,
             "visibility": "external"
           }
         ],
-        "scope": 1587,
+        "scope": 1586,
         "src": "291:332:7"
       }
     ],
@@ -664,7 +668,7 @@
   },
   "networks": {},
   "schemaVersion": "3.4.1",
-  "updatedAt": "2021-05-08T07:27:59.190Z",
+  "updatedAt": "2021-07-16T12:54:38.898Z",
   "devdoc": {
     "details": "Interface of the optional ERC1155MetadataExtension interface, as defined in the https://eips.ethereum.org/EIPS/eip-1155#metadata-extensions[EIP]. _Available since v3.1._",
     "kind": "dev",
@@ -701,382 +705,4 @@
     "methods": {},
     "version": 1
   }
-}                                "id": 2034,
-                                "isConstant": false,
-                                "isLValue": false,
-                                "isPure": false,
-                                "kind": "typeConversion",
-                                "lValueRequested": false,
-                                "names": [],
-                                "nodeType": "FunctionCall",
-                                "src": "2221:14:13",
-                                "tryCall": false,
-                                "typeDescriptions": {
-                                  "typeIdentifier": "t_bytes_memory_ptr",
-                                  "typeString": "bytes memory"
-                                }
-                              }
-                            ],
-                            "expression": {
-                              "argumentTypes": [
-                                {
-                                  "typeIdentifier": "t_bytes_memory_ptr",
-                                  "typeString": "bytes memory"
-                                }
-                              ],
-                              "id": 2030,
-                              "name": "keccak256",
-                              "nodeType": "Identifier",
-                              "overloadedDeclarations": [],
-                              "referencedDeclaration": 4294967288,
-                              "src": "2211:9:13",
-                              "typeDescriptions": {
-                                "typeIdentifier": "t_function_keccak256_pure$_t_bytes_memory_ptr_$returns$_t_bytes32_$",
-                                "typeString": "function (bytes memory) pure returns (bytes32)"
-                              }
-                            },
-                            "id": 2035,
-                            "isConstant": false,
-                            "isLValue": false,
-                            "isPure": false,
-                            "kind": "functionCall",
-                            "lValueRequested": false,
-                            "names": [],
-                            "nodeType": "FunctionCall",
-                            "src": "2211:25:13",
-                            "tryCall": false,
-                            "typeDescriptions": {
-                              "typeIdentifier": "t_bytes32",
-                              "typeString": "bytes32"
-                            }
-                          },
-                          {
-                            "arguments": [
-                              {
-                                "id": 2038,
-                                "name": "chainId",
-                                "nodeType": "Identifier",
-                                "overloadedDeclarations": [],
-                                "referencedDeclaration": 2017,
-                                "src": "2267:7:13",
-                                "typeDescriptions": {
-                                  "typeIdentifier": "t_uint256",
-                                  "typeString": "uint256"
-                                }
-                              }
-                            ],
-                            "expression": {
-                              "argumentTypes": [
-                                {
-                                  "typeIdentifier": "t_uint256",
-                                  "typeString": "uint256"
-                                }
-                              ],
-                              "id": 2037,
-                              "isConstant": false,
-                              "isLValue": false,
-                              "isPure": true,
-                              "lValueRequested": false,
-                              "nodeType": "ElementaryTypeNameExpression",
-                              "src": "2259:7:13",
-                              "typeDescriptions": {
-                                "typeIdentifier": "t_type$_t_bytes32_$",
-                                "typeString": "type(bytes32)"
-                              },
-                              "typeName": {
-                                "id": 2036,
-                                "name": "bytes32",
-                                "nodeType": "ElementaryTypeName",
-                                "src": "2259:7:13",
-                                "typeDescriptions": {}
-                              }
-                            },
-                            "id": 2039,
-                            "isConstant": false,
-                            "isLValue": false,
-                            "isPure": false,
-                            "kind": "typeConversion",
-                            "lValueRequested": false,
-                            "names": [],
-                            "nodeType": "FunctionCall",
-                            "src": "2259:16:13",
-                            "tryCall": false,
-                            "typeDescriptions": {
-                              "typeIdentifier": "t_bytes32",
-                              "typeString": "bytes32"
-                            }
-                          },
-                          {
-                            "arguments": [
-                              {
-                                "id": 2042,
-                                "name": "this",
-                                "nodeType": "Identifier",
-                                "overloadedDeclarations": [],
-                                "referencedDeclaration": 4294967268,
-                                "src": "2306:4:13",
-                                "typeDescriptions": {
-                                  "typeIdentifier": "t_contract$_EIP712_$2087",
-                                  "typeString": "library EIP712"
-                                }
-                                  "typeIdentifier": "t_contract$_EIP712_$2087",
-                                  "typeString": "library EIP712"
-                                }
-                              ],
-                              "id": 2041,
-                              "nodeType": "ElementaryTypeNameExpression",
-                              "src": "2298:7:13",
-                              "typeDescriptions": {
-                                "typeIdentifier": "t_type$_t_address_$",
-                                "typeString": "type(address)"
-                              },
-                              "typeName": {
-                                "id": 2040,
-                                "name": "address",
-                                "nodeType": "ElementaryTypeName",
-                                "src": "2298:7:13",
-                                "typeDescriptions": {}
-        "base64-js": "^1.3.1",
-        "ieee754": "^1.1.13"
-      }
-    },
-    "buffer-alloc": {
-      "version": "1.2.0",
-      "resolved": "https://registry.npmjs.org/buffer-alloc/-/buffer-alloc-1.2.0.tgz",
-      "integrity": "sha512-CFsHQgjtW1UChdXgbyJGtnm+O/uLQeZdtbDo8mfUgYXCHSM1wgrVxXm6bSyrUuErEb+4sYVGCzASBRot7zyrow==",
-      "requires": {
-        "buffer-alloc-unsafe": "^1.1.0",
-        "buffer-fill": "^1.0.0"
-      }
-    },
-    "buffer-alloc-unsafe": {
-      "version": "1.1.0",
-      "resolved": "https://registry.npmjs.org/buffer-alloc-unsafe/-/buffer-alloc-unsafe-1.1.0.tgz",
-      "integrity": "sha512-TEM2iMIEQdJ2yjPJoSIsldnleVaAk1oW3DBVUykyOLsEsFmEc9kn+SFFPz+gl54KQNxlDnAwCXosOS9Okx2xAg=="
-    },
-    "buffer-compare": {
-      "version": "1.1.1",
-      "resolved": "https://registry.npmjs.org/buffer-compare/-/buffer-compare-1.1.1.tgz",
-      "integrity": "sha1-W+e+hTr4kZjR9N3AkNHWakiu9ZY=",
-      "dev": true,
-      "optional": true
-    },
-    "buffer-crc32": {
-      "version": "0.2.13",
-      "resolved": "https://registry.npmjs.org/buffer-crc32/-/buffer-crc32-0.2.13.tgz",
-      "integrity": "sha1-DTM+PwDqxQqhRUq9MO+MKl2ackI="
-    },
-    "buffer-fill": {
-      "version": "1.0.0",
-      "resolved": "https://registry.npmjs.org/buffer-fill/-/buffer-fill-1.0.0.tgz",
-      "integrity": "sha1-+PeLdniYiO858gXNY39o5wISKyw="
-    },
-    "buffer-from": {
-      "version": "1.1.1",
-      "resolved": "https://registry.npmjs.org/buffer-from/-/buffer-from-1.1.1.tgz",
-      "integrity": "sha512-MQcXEUbCKtEo7bhqEs6560Hyd4XaovZlO/k9V3hjVUF/zwW7KBVdSK4gIt/bzwS9MbR5qob+F5jusZsb0YQK2A=="
-    },
-    "buffer-indexof": {
-      "version": "1.1.1",
-      "resolved": "https://registry.npmjs.org/buffer-indexof/-/buffer-indexof-1.1.1.tgz",
-      "integrity": "sha512-4/rOEg86jivtPTeOUUT61jJO1Ya1TrR/OkqCSZDyq84WJh3LuuiphBYJN+fm5xufIk4XAFcEwte/8WzC8If/1g=="
-    },
-    "buffer-pipe": {
-      "version": "0.0.3",
-      "resolved": "https://registry.npmjs.org/buffer-pipe/-/buffer-pipe-0.0.3.tgz",
-      "integrity": "sha512-GlxfuD/NrKvCNs0Ut+7b1IHjylfdegMBxQIlZHj7bObKVQBxB5S84gtm2yu1mQ8/sSggceWBDPY0cPXgvX2MuA==",
-      "dev": true,
-      "optional": true,
-      "requires": {
-        "safe-buffer": "^5.1.2"
-      }
-    },
-    "buffer-to-arraybuffer": {
-      "version": "0.0.5",
-      "resolved": "https://registry.npmjs.org/buffer-to-arraybuffer/-/buffer-to-arraybuffer-0.0.5.tgz",
-      "integrity": "sha1-YGSkD6dutDxyOrqe+PbhIW0QURo="
-    },
-    "buffer-xor": {
-      "version": "1.0.3",
-      "resolved": "https://registry.npmjs.org/buffer-xor/-/buffer-xor-1.0.3.tgz",
-      "integrity": "sha1-JuYe0UIvtw3ULm42cp7VHYVf6Nk="
-    },
-    "bufferutil": {
-      "version": "4.0.3",
-      "resolved": "https://registry.npmjs.org/bufferutil/-/bufferutil-4.0.3.tgz",
-      "integrity": "sha512-yEYTwGndELGvfXsImMBLop58eaGW+YdONi1fNjTINSY98tmMmFijBG6WXgdkfuLNt4imzQNtIE+eBp1PVpMCSw==",
-      "requires": {
-        "node-gyp-build": "^4.2.0"
-      }
-    },
-    "builtin-status-codes": {
-      "version": "3.0.0",
-      "resolved": "https://registry.npmjs.org/builtin-status-codes/-/builtin-status-codes-3.0.0.tgz",
-      "integrity": "sha1-hZgoeOIbmOHGZCXgPQF0eI9Wnug="
-    },
-    "busboy": {
-      "version": "0.3.1",
-      "resolved": "https://registry.npmjs.org/busboy/-/busboy-0.3.1.tgz",
-      "integrity": "sha512-y7tTxhGKXcyBxRKAni+awqx8uqaJKrSFSNFSeRG5CsWNdmy2BIK+6VGWEW7TZnIO/533mtMEA4rOevQV815YJw==",
-      "dev": true,
-      "optional": true,
-      "requires": {
-        "dicer": "0.3.0"
-      }
-    },
-    "bytebuffer": {
-      "version": "5.0.1",
-      "resolved": "https://registry.npmjs.org/bytebuffer/-/bytebuffer-5.0.1.tgz",
-      "integrity": "sha1-WC7qSxqHO20CCkjVjfhfC7ps/d0=",
-      "optional": true,
-      "requires": {
-        "long": "~3"
-      }
-    },
-    "bytes": {
-      "version": "3.0.0",
-      "resolved": "https://registry.npmjs.org/bytes/-/bytes-3.0.0.tgz",
-      "integrity": "sha1-0ygVQE1olpn4Wk6k+odV3ROpYEg="
-    },
-    "cacache": {
-      "version": "13.0.1",
-      "resolved": "https://registry.npmjs.org/cacache/-/cacache-13.0.1.tgz",
-      "integrity": "sha512-5ZvAxd05HDDU+y9BVvcqYu2LLXmPnQ0hW62h32g4xBTgL/MppR4/04NHfj/ycM2y6lmTnbw6HVi+1eN0Psba6w==",
-      "requires": {
-        "chownr": "^1.1.2",
-        "figgy-pudding": "^3.5.1",
-        "fs-minipass": "^2.0.0",
-        "glob": "^7.1.4",
-        "graceful-fs": "^4.2.2",
-        "infer-owner": "^1.0.4",
-        "lru-cache": "^5.1.1",
-        "minipass": "^3.0.0",
-        "minipass-collect": "^1.0.2",
-        "minipass-flush": "^1.0.5",
-        "minipass-pipeline": "^1.2.2",
-        "mkdirp": "^0.5.1",
-        "move-concurrently": "^1.0.1",
-        "p-map": "^3.0.0",
-        "promise-inflight": "^1.0.1",
-        "rimraf": "^2.7.1",
-        "ssri": "^7.0.0",
-        "unique-filename": "^1.1.1"
-      },
-      "dependencies": {
-        "lru-cache": {
-          "version": "5.1.1",
-          "resolved": "https://registry.npmjs.org/lru-cache/-/lru-cache-5.1.1.tgz",
-          "integrity": "sha512-KpNARQA3Iwv+jTA0utUVVbrh+Jlrr1Fv0e56GGzAFOXN7dk/FviaDW8LHmK52DlcH4WP2n6gI8vN1aesBFgo9w==",
-          "requires": {
-            "yallist": "^3.0.2"
-          }
-        },
-        "rimraf": {
-          "version": "2.7.1",
-          "resolved": "https://registry.npmjs.org/rimraf/-/rimraf-2.7.1.tgz",
-          "integrity": "sha512-uWjbaKIK3T1OSVptzX7Nl6PvQ3qAGtKEtVRjRuazjfL3Bx5eI409VZSqgND+4UNnmzLVdPj9FqFJNPqBZFve4w==",
-          "requires": {
-            "glob": "^7.1.3"
-          }
-        },
-        "yallist": {
-          "version": "3.1.1",
-          "resolved": "https://registry.npmjs.org/yallist/-/yallist-3.1.1.tgz",
-          "integrity": "sha512-a4UGQaWPH59mOXUYnAG2ewncQS4i4F43Tv3JoAM+s2VDAmS9NsK8GpDMLrCHPksFT7h3K6TOoUNn2pb7RoXx4g=="
-        }
-      }
-    },
-    "cache-base": {
-      "version": "1.0.1",
-      "resolved": "https://registry.npmjs.org/cache-base/-/cache-base-1.0.1.tgz",
-      "integrity": "sha512-AKcdTnFSWATd5/GCPRxr2ChwIJ85CeyrEyjRHlKxQ56d4XJMGym0uAiKn0xbLOGOl3+yRpOTi484dVCEc5AUzQ==",
-      "requires": {
-        "collection-visit": "^1.0.0",
-        "component-emitter": "^1.2.1",
-        "get-value": "^2.0.6",
-        "has-value": "^1.0.0",
-        "isobject": "^3.0.1",
-        "set-value": "^2.0.0",
-        "to-object-path": "^0.3.0",
-        "union-value": "^1.0.0",
-        "unset-value": "^1.0.0"
-      }
-    },
-    "cacheable-request": {
-      "version": "6.1.0",
-      "resolved": "https://registry.npmjs.org/cacheable-request/-/cacheable-request-6.1.0.tgz",
-      "integrity": "sha512-Oj3cAGPCqOZX7Rz64Uny2GYAZNliQSqfbePrgAQ1wKAihYmCUnraBtJtKcGR4xz7wF+LoJC+ssFZvv5BgF9Igg==",
-      "requires": {
-        "clone-response": "^1.0.2",
-        "get-stream": "^5.1.0",
-        "http-cache-semantics": "^4.0.0",
-        "keyv": "^3.0.0",
-        "lowercase-keys": "^2.0.0",
-        "normalize-url": "^4.1.0",
-        "responselike": "^1.0.2"
-    "confusing-browser-globals": {
-      "version": "1.0.10",
-      "resolved": "https://registry.npmjs.org/confusing-browser-globals/-/confusing-browser-globals-1.0.10.tgz",
-      "integrity": "sha512-gNld/3lySHwuhaVluJUKLePYirM3QNCKzVxqAdhJII9/WXKVX5PURzMVJspS1jTslSqjeuG4KMVTSouit5YPHA=="
-    },
-    "connect-history-api-fallback": {
-      "version": "1.6.0",
-      "resolved": "https://registry.npmjs.org/connect-history-api-fallback/-/connect-history-api-fallback-1.6.0.tgz",
-      "integrity": "sha512-e54B99q/OUoH64zYYRf3HBP5z24G38h5D3qXu23JGRoigpX5Ss4r9ZnDk3g0Z8uQC2x2lPaJ+UlWBc1ZWBWdLg=="
-    "cookiejar": {
-    "cross-var": {
-      "version": "1.1.0",
-      "resolved": "https://registry.npmjs.org/cross-var/-/cross-var-1.1.0.tgz",
-      "integrity": "sha1-8PDUuyNdlRONGlOYQtKQ8A23HNY=",
-      "dev": true,
-    "eth-lib": {
-      "version": "0.1.29",
-      "resolved": "https://registry.npmjs.org/eth-lib/-/eth-lib-0.1.29.tgz",
-      "integrity": "sha512-bfttrr3/7gG4E02HoWTDUcDDslN003OlOoBxk9virpAZQ1ja/jDgwkWB8QfJF7ojuEowrqy+lzp9VcJG7/k5bQ==",
-    "ethereum-cryptography": {
-      "version": "0.1.3",
-      "resolved": "https://registry.npmjs.org/ethereum-cryptography/-/ethereum-cryptography-0.1.3.tgz",
-      "integrity": "sha512-w8/4x1SGGzc+tO97TASLja6SLd3fRIK2tLVcV2Gx4IB21hE19atll5Cq9o3d0ZmAYC/8aw0ipieTSiekAea4SQ==",
-    "ethereumjs-vm": {
-      "version": "2.6.0",
-      "resolved": "https://registry.npmjs.org/ethereumjs-vm/-/ethereumjs-vm-2.6.0.tgz",
-      "integrity": "sha512-r/XIUik/ynGbxS3y+mvGnbOKnuLo40V5Mj1J25+HEO63aWYREIqvWeRO/hnROlMBE5WoniQmPmhiaN0ctiHaXw==",
-    "faker": {
-      "version": "5.5.3",
-      "resolved": "https://registry.npmjs.org/faker/-/faker-5.5.3.tgz",
-      "integrity": "sha512-wLTv2a28wjUyWkbnX7u/ABZBkUkIF2fCd73V6P2oFqEGEktDfzWx4UxrSqtPRw0xPRAcjeAOIiJWqZm3pP4u3g==",
-      "dev": true
-    "flush-write-stream": {
-      "version": "1.1.1",
-      "resolved": "https://registry.npmjs.org/flush-write-stream/-/flush-write-stream-1.1.1.tgz",
-      "integrity": "sha512-3Z4XhFZ3992uIq0XOqb9AreonueSYphE6oYbpt5+3u06JWklbsPkNv3ZKkP9Bz/r+1MWCaMoSQ28P85+1Yc77w==",
-    "jest-get-type": {
-      "version": "26.3.0",
-      "resolved": "https://registry.npmjs.org/jest-get-type/-/jest-get-type-26.3.0.tgz",
-      "integrity": "sha512-TpfaviN1R2pQWkIihlfEanwOXK0zcxrKEE4MlU6Tn7keoXdN6/3gK/xl0yEh8DOunn5pOVGKf8hB4R9gVh04ig=="
-    "jest-jasmine2": {
-      "version": "26.6.3",
-      "resolved": "https://registry.npmjs.org/jest-jasmine2/-/jest-jasmine2-26.6.3.tgz",
-      "integrity": "sha512-kPKUrQtc8aYwBV7CqBg5pu+tmYXlvFlSFYn18ev4gPFtrRzB15N2gW/Roew3187q2w2eHuu0MU9TJz6w0/nPEg==",
-    "jest-playwright-preset": {
-      "version": "1.5.2",
-      "resolved": "https://registry.npmjs.org/jest-playwright-preset/-/jest-playwright-preset-1.5.2.tgz",
-      "integrity": "sha512-L7a5poZUR1vbmVNF4te1Ic3rMDBEU0KmIdjuLfGkdGpLgPdfhr6Xh//blbvmpfMj3TMnuuLlf37QkDtJnVa5gA==",
-      "requires": {
-        "expect-playwright": "^0.3.4",
-        "jest-circus": "^26.6.3",
-        "jest-environment-node": "^26.6.2",
-        "jest-process-manager": "^0.3.1",
-        "jest-runner": "^26.6.3",
-        "nyc": "^15.1.0",
-        "playwright-core": ">=1.2.0",
-        "rimraf": "^3.0.2",
-        "uuid": "^8.3.2"
-      },
-      "dependencies": {
-        "expect-playwright": {
-          "version": "0.3.4",
-          "resolved": "https://registry.npmjs.org/expect-playwright/-/expect-playwright-0.3.4.tgz",
-          "integrity": "sha512-JulhMkc5lVvpF18ImWLqviHZpo4qzT9FfpF+lP4D+U9guGUnYOCFpS/5Qk1c3zKhYHJL1JBEfiiGfcRUuzsnEg=="
-        }
-      }
+}

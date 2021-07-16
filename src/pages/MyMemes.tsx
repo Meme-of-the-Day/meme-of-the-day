@@ -60,13 +60,14 @@ const MyMemes: React.FC<{}> = () => {
       const textile = await Textile.getInstance();
 
       // Ask the user to connect their wallet
-      let web3 = new Web3(Web3.givenProvider || "ws://localhost:8545");
-      await web3.eth.requestAccounts();
+      // let web3 = new Web3(Web3.givenProvider || "ws://localhost:8545");
+      // await web3.eth.requestAccounts();
 
-      const connectedAccount = await web3.eth.getAccounts();
-      console.log(connectedAccount);
+      // const connectedAccount = await web3.eth.getAccounts();
+      // console.log(connectedAccount);
       console.log(torusObject.account);
-
+     
+      debugger
       const memes = await textile.getUserMemes(torusObject.account);
 
       console.log(memes);

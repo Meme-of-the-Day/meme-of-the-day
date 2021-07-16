@@ -3,6 +3,8 @@ import web3Obj from './helper';
 import { Torus } from "../utils/torus";
 import { UserMetadata } from "../utils/torusTypes";
 
+
+
 export var torusObject = {
     account: "",
     balance: '',
@@ -43,7 +45,7 @@ export const getUserInfo = async () => {
 }
 
 export const changeProvider = async () => {
-    const provider = await web3Obj.torus.setProvider({ host: 'ropsten' })
+    const provider = await web3Obj.torus.setProvider({ host: 'mumbai' })
     torusObject.provider = provider
 }
 

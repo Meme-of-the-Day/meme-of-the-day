@@ -24,10 +24,9 @@ string[] public hashes;
     event MemeMinted(address creator, uint256 tokenId);
 
     function initialize() public initializer {
-        __ERC1155_init("https://hub.textile.io/ipfs/bafybeiaz4sqwracygsux7moam3tcd7zng53f6gh4khzhsrlhkto473c5rq/tokenmetadata/{id}.json");
+        __ERC1155_init("https://hub.textile.io/ipfs/{id}");
         __ERC165_init();
         __Ownable_init();
-        __Pausable_init();
     }
     /**
      * @notice Changes the URI to fetch NFTs info from

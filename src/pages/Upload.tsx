@@ -14,6 +14,7 @@ import {
 } from "../utils/Contracts";
 import { AuthProvider } from "../utils/UserAuth";
 import UploadModal from "../components/UploadModal";
+import web3Obj from '../helper/helper';
 
 const MemeSale = require("../contracts/abis/MemeSaleV3PauseReentrancy.json");
 const MemesHandler = require("../contracts/abis/MemeOfTheDayV3Pause.json");
@@ -268,6 +269,7 @@ const Upload: React.FC<{}> = () => {
   };
 
   const signMessage = function (meme: MemeMetadata): Promise<string> {
+    console.log("signnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnn");
     const sellerSetPriceTypedData = JSON.stringify({
       types: {
         EIP712Domain: [
@@ -295,6 +297,7 @@ const Upload: React.FC<{}> = () => {
     });
 
     return new Promise((resolve, reject) => {
+      debugger
       if (authContext && authContext.authProvider) {
         const from = authContext.authProvider?.account;
         const params = [from, sellerSetPriceTypedData];
@@ -308,6 +311,7 @@ const Upload: React.FC<{}> = () => {
             from
           },
           async (err: any, result: any) => {
+            console.log("Herrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrr")
             console.log(result.result);
 
             const abi = MemeSale.abi;
@@ -375,18 +379,15 @@ const Upload: React.FC<{}> = () => {
 
   const uploadMeme = async (event: React.FormEvent) => {
     event.preventDefault();
-    // Check torus wallet_ID  exsit
-    // if (!authContext.authProvider) {
+
     if (!torusObject.account) { 
       window.alert("Please login before uploading");
       return;
     }
 
-    
-
     setSubmitEnabled(false);
     setUploadStatus(UploadStatus.IN_PROGRESS);
-    
+
     (window as any).onbeforeunload = function () {
       return "Are you sure you want to navigate away?";
     };
@@ -398,13 +399,13 @@ const Upload: React.FC<{}> = () => {
       price: { value: price }
     } = event.target as HTMLFormElement;
     const form = event.target;
-    
+
     let memePrice: number = parseInt(price);
 
     if (isNaN(memePrice)) {
       memePrice = 0;
     }
-    
+
     if (!memeName) {
       alert("Please enter a name for your meme");
       setUploadStatus(UploadStatus.NOT_STARTED);
@@ -418,17 +419,15 @@ const Upload: React.FC<{}> = () => {
       setSubmitEnabled(true);
       return;
     }
-    
-    // Note: Close NFT Model
-    // setShowUploadModal(true);
+
+    setShowUploadModal(true);
 
     const textile = await Textile.getInstance();
-    
-    const meme = imageFile && (await textile.uploadMeme(imageFile, memeName, description));
-    
-    // change authprovider with torus   
-    // if (meme && authContext.authProvider) {
-        if (meme && torusObject.account) {
+
+    const meme =
+      imageFile && (await textile.uploadMeme(imageFile, memeName, description));
+
+    if (meme && torusObject.account) {
       console.log("Meme cid:", meme.cid);
       setTxDetails({ ipfsHash: meme.cid });
 
@@ -437,22 +436,21 @@ const Upload: React.FC<{}> = () => {
       //let web3 = new Web3(Web3.givenProvider || "ws://localhost:8545");
       //const accounts = await uiContext.authProvider.web3.eth.requestAccounts();
       console.log(
-        "Using account in Metamask: " + authContext.authProvider?.account
+        "Using account in Tours Object: " + torusObject.account
       );
       console.log(
-        "Meme will be stored with account: " + authContext.authProvider?.account
+        "Meme will be stored with account: " + torusObject.account
       );
 
       let contractAddress: string;
       let blockExplorerURL: string;
 
-      // Note : Closing NFT  
       // if (networkId === 137) {
       //   contractAddress = NetworkIDToAddress[137];
       //   blockExplorerURL = NetworkIDToExplorer[137];
       // } else if (networkId === 80001) {
-      //   contractAddress = NetworkIDToAddress[80001];
-      //   blockExplorerURL = NetworkIDToExplorer[80001];
+        contractAddress = NetworkIDToAddress[80001];
+        blockExplorerURL = NetworkIDToExplorer[80001];
       // } else if (networkId === 3431) {
       //   contractAddress = NetworkIDToAddress[3431];
       // } else {
@@ -460,18 +458,53 @@ const Upload: React.FC<{}> = () => {
       // }
 
       const abi = MemesHandler.abi;
+      
+      // const contract = new authContext.authProvider.web3.eth.Contract(
+      //   abi,
+      //   contractAddress
+      // );
 
+      const contract = new web3Obj.web3.eth.Contract(
+        abi,
+        contractAddress
+      );
+
+      contract.methods
+        //second paramenter is creator fee, using 0% for now
+        .mint(meme.cid, 0)
+        .send({ from: torusObject.account})
+        .on("error", async function (error: any) {
+          console.log(error);
+          await textile.deleteMemeFromBucket(meme);
+        })
+        .then(async function (receipt: TransactionReceipt) {
+          console.log("Mint tx:", receipt);
+
+          setTxDetails({
+            ...txDetails,
+            "IPFS Hash": meme.cid,
+            "Transaction Hash": {
+              isLink: true,
+              link: `${blockExplorerURL}tx/${receipt.transactionHash}`,
+              text: receipt.transactionHash
+            }
+          });
+
+          contract.methods
+            //second paramenter is creator fee, using 0% for now
+            .getTokenID(meme.cid)
+            .call({ from: torusObject.account })
+            .then(async function (result: any) {
               let memeUpdated: MemeMetadata = {
                 ...meme,
-                txHash: "receipt.transactionHash",
+                txHash: receipt.transactionHash,
                 owner: torusObject.account,
-                tokenID: "result",
+                tokenID: result,
                 name: memeName,
                 description: description,
                 onSale: onSale,
                 price: memePrice,
-                walletid: torusObject.account,
-                active : true
+                walletid: torusObject.account
               };
 
               setMeme(memeUpdated);
@@ -484,96 +517,35 @@ const Upload: React.FC<{}> = () => {
               await textile.uploadTokenMetadata(memeUpdated);
 
               await textile.uploadMemeMetadata(memeUpdated);
+
+
+
               setUploadStatus(UploadStatus.COMPLETED);
               (form as HTMLFormElement).reset();
               setImage("");
+            })
+            .catch("error", async function (error: any) {
+              console.log(error);
+              await textile.deleteMemeFromBucket(meme);
+              alert("Something went wrong! Please try again");
+              setUploadStatus(UploadStatus.NOT_STARTED);
+              setUploadStep(1);
+              setShowUploadModal(false);
+            });
 
-            
-      //Note : Contract Integration 
-
-      // const contract = new authContext.authProvider.web3.eth.Contract(
-      //   abi,
-      //   contractAddress
-      // );
-
-      // contract.methods
-      //   //second paramenter is creator fee, using 0% for now
-      //   .mint(meme.cid, 0)
-      //   .send({ from: authContext.authProvider?.account })
-      //   .on("error", async function (error: any) {
-      //     console.log(error);
-      //     await textile.deleteMemeFromBucket(meme);
-      //   })
-      //   .then(async function (receipt: TransactionReceipt) {
-      //     console.log("Mint tx:", receipt);
-
-      //     setTxDetails({
-      //       ...txDetails,
-      //       "IPFS Hash": meme.cid,
-      //       "Transaction Hash": {
-      //         isLink: true,
-      //         link: `${blockExplorerURL}tx/${receipt.transactionHash}`,
-      //         text: receipt.transactionHash
-      //       }
-      //     });
-
-      //     contract.methods
-      //       //second paramenter is creator fee, using 0% for now
-      //       .getTokenID(meme.cid)
-      //       .call({ from: authContext.authProvider?.account })
-      //       .then(async function (result: any) {
-      //         let memeUpdated: MemeMetadata = {
-      //           ...meme,
-      //           txHash: receipt.transactionHash,
-      //           owner: authContext.authProvider?.account,
-      //           tokenID: result,
-      //           name: memeName,
-      //           description: description,
-      //           onSale: onSale,
-      //           price: memePrice,
-      //           walletid: torusObject.account
-      //         };
-
-      //         setMeme(memeUpdated);
-      //         if (onSale) {
-      //           setUploadStep(uploadStep + 1);
-      //         } else {
-      //           setUploadStep(4);
-      //         }
-
-      //         await textile.uploadTokenMetadata(memeUpdated);
-
-      //         await textile.uploadMemeMetadata(memeUpdated);
-
-
-
-      //         setUploadStatus(UploadStatus.COMPLETED);
-      //         (form as HTMLFormElement).reset();
-      //         setImage("");
-      //       })
-      //       .catch("error", async function (error: any) {
-      //         console.log(error);
-      //         await textile.deleteMemeFromBucket(meme);
-      //         alert("Something went wrong! Please try again");
-      //         setUploadStatus(UploadStatus.NOT_STARTED);
-      //         setUploadStep(1);
-      //         setShowUploadModal(false);
-      //       });
-
-      //     (window as any).onbeforeunload = function () { };
-      //   })
-      //   .catch(async (error: any) => {
-      //     console.log(error);
-      //     setUploadStatus(UploadStatus.NOT_STARTED);
-      //     setUploadStep(1);
-      //     setShowUploadModal(false);
-      //     alert("Something went wrong! Please try again");
-      //     await textile.deleteMemeFromBucket(meme);
-      //     (window as any).onbeforeunload = function () { };
-      //   });
+          (window as any).onbeforeunload = function () { };
+        })
+        .catch(async (error: any) => {
+          console.log(error);
+          setUploadStatus(UploadStatus.NOT_STARTED);
+          setUploadStep(1);
+          setShowUploadModal(false);
+          alert("Something went wrong! Please try again");
+          await textile.deleteMemeFromBucket(meme);
+          (window as any).onbeforeunload = function () { };
+        });
     }
   };
-
   const deleteMeme = async () => {
     const textile = await Textile.getInstance();
     await textile.deleteMemeFromBucket(meme as MemeMetadata);
@@ -582,7 +554,7 @@ const Upload: React.FC<{}> = () => {
   useEffect(() => {
     (async () => {
       const networkId = await authContext.authProvider?.web3.eth.net.getId();
-      setNetworkId(networkId);
+      // setNetworkId(networkId);
       console.log("Metamask is connected to: " + networkId);
     })();
 
